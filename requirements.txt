@@ -1,0 +1,14 @@
+# ── Core graph theory ──────────────────────────────────────────────────────
+networkx>=3.3
+
+# ── SAT/SMT falsification ─────────────────────────────────────────────────
+z3-solver>=4.13.0
+
+# ── LLM integration (Anthropic) ───────────────────────────────────────────
+anthropic>=0.28.0
+
+# ── Numerical / scientific ────────────────────────────────────────────────
+numpy>=1.26
+
+# ── Standard library supplements ─────────────────────────────────────────
+# (no additional deps needed — itertools, subprocess, etc. are built-in)
