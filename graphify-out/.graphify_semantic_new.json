@@ -1,0 +1,616 @@
+{
+  "nodes": [
+    {
+      "id": "config_CONFIG",
+      "label": "CONFIG singleton",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "conjecture_Conjecture",
+      "label": "Conjecture (data model)",
+      "file_type": "code",
+      "source_file": "conjecture.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "conjecture_Inequality",
+      "label": "Inequality (structured conjecture)",
+      "file_type": "code",
+      "source_file": "conjecture.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "conjecture_Counterexample",
+      "label": "Counterexample (data model)",
+      "file_type": "code",
+      "source_file": "conjecture.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "graphs_database_GraphDatabase",
+      "label": "GraphDatabase",
+      "file_type": "code",
+      "source_file": "graphs/database.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "graphs_database_GraphEntry",
+      "label": "GraphEntry",
+      "file_type": "code",
+      "source_file": "graphs/database.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "graphs_generators_named_graphs",
+      "label": "named_graphs (generators)",
+      "file_type": "code",
+      "source_file": "graphs/generators.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "graphs_generators_generate_random_batch",
+      "label": "generate_random_batch",
+      "file_type": "code",
+      "source_file": "graphs/generators.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "graphs_invariants_evaluate_all",
+      "label": "evaluate_all (invariant evaluator)",
+      "file_type": "code",
+      "source_file": "graphs/invariants.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "graphs_invariants_REGISTRIES",
+      "label": "INVARIANTS / FAST_INVARIANTS / BOOLEANS",
+      "file_type": "code",
+      "source_file": "graphs/invariants.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_hypothesis_gen_TxGraffitiGenerator",
+      "label": "TxGraffitiGenerator",
+      "file_type": "code",
+      "source_file": "pipeline/hypothesis_gen.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_hypothesis_gen_FunSearchGenerator",
+      "label": "FunSearchGenerator",
+      "file_type": "code",
+      "source_file": "pipeline/hypothesis_gen.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_falsification_Z3Falsifier",
+      "label": "Z3Falsifier",
+      "file_type": "code",
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_falsification_MCTSFalsifier",
+      "label": "MCTSFalsifier",
+      "file_type": "code",
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_falsification_VNSFalsifier",
+      "label": "VNSFalsifier",
+      "file_type": "code",
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_falsification_CrossEntropyFalsifier",
+      "label": "CrossEntropyFalsifier",
+      "file_type": "code",
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_falsification_FalsificationOrchestrator",
+      "label": "FalsificationOrchestrator",
+      "file_type": "code",
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_autoformalization_GraphOfThoughtFormalizer",
+      "label": "GraphOfThoughtFormalizer",
+      "file_type": "code",
+      "source_file": "pipeline/autoformalization.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_theorem_prover_NeuralProverClient",
+      "label": "NeuralProverClient (ensemble)",
+      "file_type": "code",
+      "source_file": "pipeline/theorem_prover.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "theorem_prover_GoedelProver",
+      "label": "GoedelProver",
+      "file_type": "code",
+      "source_file": "pipeline/theorem_prover.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "theorem_prover_DeepSeekProverV2",
+      "label": "DeepSeek-Prover-V2",
+      "file_type": "code",
+      "source_file": "pipeline/theorem_prover.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "theorem_prover_LeanSubprocessProver",
+      "label": "LeanSubprocessProver",
+      "file_type": "code",
+      "source_file": "pipeline/theorem_prover.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pipeline_orchestrator_ConjecturePipeline",
+      "label": "ConjecturePipeline (orchestrator)",
+      "file_type": "code",
+      "source_file": "pipeline/orchestrator.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "main_main",
+      "label": "main() CLI entrypoint",
+      "file_type": "code",
+      "source_file": "main.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rationale_Dalmatian_heuristic",
+      "label": "Dalmatian heuristic (dominance filter)",
+      "file_type": "rationale",
+      "source_file": "PIPELINE_DESCRIPTION.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rationale_Graph_of_Thought",
+      "label": "Graph-of-Thought autoformalization",
+      "file_type": "rationale",
+      "source_file": "PIPELINE_DESCRIPTION.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "rationale_FunSearch",
+      "label": "FunSearch (LLM program-evolution)",
+      "file_type": "rationale",
+      "source_file": "PIPELINE_DESCRIPTION.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "pipeline_orchestrator_ConjecturePipeline",
+      "target": "graphs_database_GraphDatabase",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/orchestrator.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_orchestrator_ConjecturePipeline",
+      "target": "pipeline_hypothesis_gen_TxGraffitiGenerator",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/orchestrator.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_orchestrator_ConjecturePipeline",
+      "target": "pipeline_hypothesis_gen_FunSearchGenerator",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/orchestrator.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_orchestrator_ConjecturePipeline",
+      "target": "pipeline_falsification_FalsificationOrchestrator",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/orchestrator.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_orchestrator_ConjecturePipeline",
+      "target": "pipeline_autoformalization_GraphOfThoughtFormalizer",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/orchestrator.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_orchestrator_ConjecturePipeline",
+      "target": "pipeline_theorem_prover_NeuralProverClient",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/orchestrator.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "main_main",
+      "target": "pipeline_orchestrator_ConjecturePipeline",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "main.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "graphs_database_GraphDatabase",
+      "target": "graphs_generators_named_graphs",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphs/database.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "graphs_database_GraphDatabase",
+      "target": "graphs_generators_generate_random_batch",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphs/database.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "graphs_database_GraphDatabase",
+      "target": "graphs_invariants_evaluate_all",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "graphs/database.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_hypothesis_gen_TxGraffitiGenerator",
+      "target": "graphs_invariants_REGISTRIES",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/hypothesis_gen.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_hypothesis_gen_TxGraffitiGenerator",
+      "target": "graphs_database_GraphDatabase",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/hypothesis_gen.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_hypothesis_gen_FunSearchGenerator",
+      "target": "graphs_database_GraphDatabase",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/hypothesis_gen.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_hypothesis_gen_FunSearchGenerator",
+      "target": "rationale_FunSearch",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/hypothesis_gen.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_hypothesis_gen_TxGraffitiGenerator",
+      "target": "rationale_Dalmatian_heuristic",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/hypothesis_gen.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_falsification_FalsificationOrchestrator",
+      "target": "pipeline_falsification_Z3Falsifier",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_falsification_FalsificationOrchestrator",
+      "target": "pipeline_falsification_MCTSFalsifier",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_falsification_FalsificationOrchestrator",
+      "target": "pipeline_falsification_VNSFalsifier",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_falsification_FalsificationOrchestrator",
+      "target": "pipeline_falsification_CrossEntropyFalsifier",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_autoformalization_GraphOfThoughtFormalizer",
+      "target": "rationale_Graph_of_Thought",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/autoformalization.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_autoformalization_GraphOfThoughtFormalizer",
+      "target": "graphs_invariants_REGISTRIES",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/autoformalization.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_theorem_prover_NeuralProverClient",
+      "target": "theorem_prover_LeanSubprocessProver",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/theorem_prover.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_theorem_prover_NeuralProverClient",
+      "target": "theorem_prover_GoedelProver",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/theorem_prover.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_theorem_prover_NeuralProverClient",
+      "target": "theorem_prover_DeepSeekProverV2",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/theorem_prover.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_falsification_MCTSFalsifier",
+      "target": "pipeline_falsification_VNSFalsifier",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_falsification_MCTSFalsifier",
+      "target": "pipeline_falsification_CrossEntropyFalsifier",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "pipeline/falsification.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_orchestrator_ConjecturePipeline",
+      "target": "pipeline_hypothesis_gen_TxGraffitiGenerator",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/orchestrator.py",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "pipeline_orchestrator_ConjecturePipeline",
+      "target": "pipeline_hypothesis_gen_FunSearchGenerator",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/orchestrator.py",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "falsification_strategies",
+      "label": "Falsification Strategies",
+      "nodes": [
+        "pipeline_falsification_Z3Falsifier",
+        "pipeline_falsification_MCTSFalsifier",
+        "pipeline_falsification_VNSFalsifier",
+        "pipeline_falsification_CrossEntropyFalsifier"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/falsification.py"
+    },
+    {
+      "id": "pipeline_stage_group",
+      "label": "Pipeline Stages (generation→falsify→formalize→prove)",
+      "nodes": [
+        "pipeline_hypothesis_gen_TxGraffitiGenerator",
+        "pipeline_hypothesis_gen_FunSearchGenerator",
+        "pipeline_falsification_FalsificationOrchestrator",
+        "pipeline_autoformalization_GraphOfThoughtFormalizer",
+        "pipeline_theorem_prover_NeuralProverClient"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pipeline/orchestrator.py"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

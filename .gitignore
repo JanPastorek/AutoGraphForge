@@ -25,6 +25,13 @@ env/
 results/
 *.log
 
+# Build artifacts (compiled nauty geng, downloaded source)
+.build/
+
+# Generated graph database
+database/
+graphs/minimally_rigid_graphs/*.zip
+
 # OS
 .DS_Store
 Thumbs.db

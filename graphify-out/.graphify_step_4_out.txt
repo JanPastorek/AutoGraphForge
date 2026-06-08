@@ -1,0 +1,1 @@
+﻿Graph: 299 nodes, 763 edges, 15 communities
