@@ -43,6 +43,13 @@ def build_parser() -> argparse.ArgumentParser:
                      help="Disable FunSearch LLM generation (useful without API key)")
     gen.add_argument("--funsearch-n", type=int, default=5,
                      help="FunSearch: conjectures per LLM call (default: 5)")
+    gen.add_argument("--no-conditioning", action="store_true",
+                     help="Disable graph-class-conditioned bounds (e.g. 'for regular G: …')")
+    gen.add_argument("--no-multivariable", action="store_true",
+                     help="Disable multivariable RHS bounds (f ≤ a·g + b·h + c)")
+    gen.add_argument("--keep-known", action="store_true",
+                     help="Keep conjectures that rediscover classical theorems "
+                          "(default: filter them out, keeping only novel ones)")
 
     # Database
     db = p.add_argument_group("Graph database")
@@ -52,11 +59,18 @@ def build_parser() -> argparse.ArgumentParser:
                     help="Max vertex count for random database graphs (default: 12)")
     db.add_argument("--db-seed", type=int, default=42,
                     help="Random seed for database construction (default: 42)")
+    db.add_argument("--db-csv", action="append", default=None, metavar="PATH",
+                    help="Load this invariant CSV as the dataset (repeatable). "
+                         "Default: enriched HoG dataset + n≤9 census.")
+    db.add_argument("--synthetic-db", action="store_true",
+                    help="Ignore the persistent datasets; build a small synthetic DB")
 
     # Falsification
     fal = p.add_argument_group("Falsification")
     fal.add_argument("--no-z3", action="store_true",
                      help="Disable Z3 falsification (fallback to MCTS/VNS/CE)")
+    fal.add_argument("--no-adversarial", action="store_true",
+                     help="Disable the structure-targeted adversarial falsifier")
     fal.add_argument("--mcts-iter", type=int, default=800,
                      help="MCTS iterations per conjecture (default: 800)")
     fal.add_argument("--vns-iter", type=int, default=600,
@@ -116,12 +130,19 @@ def main(argv=None) -> int:
         anthropic_api_key=args.api_key or os.environ.get("ANTHROPIC_API_KEY", ""),
         model=args.model,
         txgraffiti_max_conjectures=args.n_conjectures,
+        txgraffiti_condition_on_classes=not args.no_conditioning,
+        txgraffiti_multivariable=not args.no_multivariable,
+        txgraffiti_filter_known=not args.keep_known,
         funsearch_conjectures=args.funsearch_n,
         use_funsearch=not args.no_funsearch,
         db_random_graphs=args.db_random,
         db_max_vertices=args.db_max_n,
         db_random_seed=args.db_seed,
         z3_enabled=not args.no_z3,
+        adversarial_enabled=not args.no_adversarial,
+        db_csv_paths=(tuple(args.db_csv) if args.db_csv
+                      else () if args.synthetic_db
+                      else Config().db_csv_paths),
         mcts_iterations=args.mcts_iter,
         vns_iterations=args.vns_iter,
         falsification_rounds=args.falsify_rounds,
@@ -155,6 +176,8 @@ def main(argv=None) -> int:
     if not args.quiet:
         _print_conjecture_table(report.conjectures)
 
+    _print_new_conjectures(report.conjectures)
+
     print(f"\nFull report → {out_path}")
     return 0
 
@@ -185,13 +208,49 @@ def _print_conjecture_table(conjectures) -> None:
     }
 
     print("\n  Conjecture summary:")
-    print(f"  {'ID':8s}  {'Gen':10s}  {'Status':12s}  Statement")
-    print("  " + "-" * 75)
+    print(f"  {'ID':8s}  {'Gen':10s}  {'Novelty':8s}  {'Status':12s}  Statement")
+    print("  " + "-" * 86)
     for c in conjectures:
         icon = status_icon.get(c.status, "?")
+        novelty = c.metadata.get("novelty", "-")
         stmt = c.statement[:55] + ("…" if len(c.statement) > 55 else "")
-        print(f"  {c.id:8s}  {c.generation_method:10s}  "
+        print(f"  {c.id:8s}  {c.generation_method:10s}  {novelty:8s}  "
               f"{icon} {c.status.value:10s}  {stmt}")
+
+
+def _print_new_conjectures(conjectures) -> None:
+    """Highlight the novel conjectures that survived falsification."""
+    from conjecture import ConjectureStatus
+
+    def is_survivor(c):
+        return c.status in (
+            ConjectureStatus.SURVIVED,
+            ConjectureStatus.FORMALIZED,
+            ConjectureStatus.PROVEN,
+        )
+
+    novel = [c for c in conjectures
+             if c.metadata.get("novelty") == "novel" and is_survivor(c)]
+    known = [c for c in conjectures if c.metadata.get("novelty") == "known"]
+
+    novel.sort(key=lambda c: c.score, reverse=True)
+
+    print("\n" + "=" * 70)
+    print("  NEW / INTERESTING CONJECTURES")
+    print("  (survived falsification, not implied by any known theorem)")
+    print("=" * 70)
+    if not novel:
+        print("  (none — every surviving conjecture matched a known theorem)")
+    for c in novel:
+        cls = c.inequality.hypothesis if c.inequality else None
+        scope = f"for {cls} graphs" if cls else "all graphs"
+        n_tight = len(c.tightness_witnesses)
+        print(f"  • {c.statement}")
+        print(f"      score={c.score:.2f}  scope={scope}  tight on {n_tight} graph(s)")
+
+    if known:
+        print(f"\n  ({len(known)} further conjecture(s) hidden as known-theorem "
+              f"rediscoveries — pass --keep-known to show them.)")
 
 
 # ---------------------------------------------------------------------------

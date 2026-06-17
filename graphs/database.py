@@ -34,12 +34,60 @@ class GraphDatabase:
         logger.info("Database built: %d graphs", len(db))
         return db
 
-    def add(self, G, name=None, is_counterexample=False, quiet=False):
+    @classmethod
+    def from_csv(cls, paths, verbose=True):
+        """Load one or more invariant CSVs (e.g. the enriched HoG dataset + the
+        n≤9 census) into a database of invariant vectors.
+
+        Only the invariant columns are read; a placeholder graph is stored since
+        hypothesis generation works on the invariant vectors and the falsifiers
+        synthesise their own graphs. Missing values are simply absent (handled by
+        the generator's finite-mask). ``paths`` may be a str or an iterable.
+        """
+        import csv as _csv
+        import os as _os
+        import sys as _sys
+        import networkx as _nx
+        from graphs.invariants import INVARIANTS, BOOLEANS
+
+        _csv.field_size_limit(_sys.maxsize)
+        if isinstance(paths, str):
+            paths = [paths]
+        keys = list(INVARIANTS.keys()) + list(BOOLEANS.keys())
+        db = cls()
+        for path in paths:
+            if not _os.path.isfile(path):
+                logger.warning("Database CSV not found: %s", path)
+                continue
+            count = 0
+            with open(path, newline="") as fh:
+                for row in _csv.DictReader(fh):
+                    inv = {}
+                    for k in keys:
+                        v = row.get(k, "")
+                        if v not in ("", None):
+                            try:
+                                inv[k] = float(v)
+                            except ValueError:
+                                pass
+                    if not inv:
+                        continue
+                    name = f"{_os.path.basename(path)}:{row.get('name') or count}"
+                    entry = GraphEntry(name, _nx.Graph(), inv)
+                    db._name_index[name] = len(db._entries)
+                    db._entries.append(entry)
+                    count += 1
+            if verbose:
+                logger.info("Loaded %d graphs from %s", count, path)
+        logger.info("Database loaded: %d graphs from %d source(s)", len(db), len(paths))
+        return db
+
+    def add(self, G, name=None, invariants=None, is_counterexample=False, quiet=False):
         if name is None:
             name = f"G_{len(self._entries)}"
         if name in self._name_index:
             return self._entries[self._name_index[name]]
-        inv = evaluate_all(G, self._inv_set)
+        inv = invariants if invariants is not None else evaluate_all(G, self._inv_set)
         entry = GraphEntry(name, G, inv, is_counterexample)
         idx = len(self._entries)
         self._entries.append(entry)
@@ -48,8 +96,39 @@ class GraphDatabase:
             logger.debug("Added %s (n=%d)", name, G.number_of_nodes())
         return entry
 
-    def add_counterexample(self, G, name=None):
-        return self.add(G, name or f"CEX_{len(self._entries)}", is_counterexample=True)
+    def add_counterexample(self, G, name=None, persist_path=None):
+        entry = self.add(G, name or f"CEX_{len(self._entries)}", is_counterexample=True)
+        if persist_path:
+            self.persist_counterexample(G, persist_path, entry.name)
+        return entry
+
+    @staticmethod
+    def persist_counterexample(G, path, name):
+        """Append a found counterexample (with its computed invariants) to a CSV
+        so the dataset learns permanently. Header matches the loader's schema."""
+        import csv as _csv
+        import os as _os
+        import networkx as _nx
+        from graphs.invariants import INVARIANTS, BOOLEANS, evaluate_all
+
+        keys = list(INVARIANTS.keys()) + list(BOOLEANS.keys())
+        try:
+            inv = evaluate_all(G)
+            g6 = _nx.to_graph6_bytes(
+                _nx.convert_node_labels_to_integers(G), header=False
+            ).strip().decode("ascii")
+        except Exception as exc:
+            logger.warning("Could not persist counterexample: %s", exc)
+            return
+        _os.makedirs(_os.path.dirname(path) or ".", exist_ok=True)
+        new = not _os.path.isfile(path)
+        with open(path, "a", newline="") as fh:
+            w = _csv.writer(fh)
+            if new:
+                w.writerow(["name", "n", "m", "g6"] + keys)
+            w.writerow([name, G.number_of_nodes(), G.number_of_edges(), g6]
+                       + [inv.get(k, "") for k in keys])
+        logger.info("Counterexample persisted → %s", path)
 
     def get(self, name):
         idx = self._name_index.get(name)
@@ -60,6 +139,12 @@ class GraphDatabase:
 
     def __iter__(self):
         return iter(self._entries)
+
+    def invariant_names(self):
+        names = set()
+        for entry in self._entries:
+            names.update(entry.invariants.keys())
+        return sorted(names)
 
     def invariant_matrix(self, invariant_names=None):
         names_out, rows = [], []

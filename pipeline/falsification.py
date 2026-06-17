@@ -26,7 +26,7 @@ import numpy as np
 
 from config import Config, CONFIG
 from conjecture import Conjecture, Counterexample
-from graphs.invariants import evaluate_all, evaluate_fast, INVARIANTS
+from graphs.invariants import evaluate_all, evaluate_fast, evaluate_named, INVARIANTS
 
 logger = logging.getLogger(__name__)
 
@@ -72,7 +72,10 @@ def _evaluate_conjecture(
     """
     if conjecture.inequality is None:
         return None, None
-    inv = evaluate_fast(G)
+    # Evaluate exactly the invariants this conjecture reads — including the
+    # hypothesis boolean and any multivariable RHS terms, which the fast subset
+    # would otherwise omit (leaving the conjecture untestable).
+    inv = evaluate_named(G, conjecture.inequality.referenced_invariants())
     holds = conjecture.inequality.evaluate(inv)
     slack = conjecture.inequality.slack(inv)
     return holds, slack
@@ -127,6 +130,12 @@ class Z3Falsifier:
         if conjecture.inequality is None:
             return None
         ineq = conjecture.inequality
+        if ineq.extra_terms or ineq.hypothesis:
+            # The SMT encoding below only models a single inv_a ≤ c·inv_b + off
+            # bound; multivariable / class-conditioned conjectures are left to
+            # the search-based falsifiers (MCTS / VNS / CE).
+            logger.debug("[Z3] Multivariable/conditioned conjecture — skipping")
+            return None
         if ineq.inv_a not in self.SUPPORTED or ineq.inv_b not in self.SUPPORTED:
             logger.debug("[Z3] Unsupported invariant pair (%s, %s) — skipping", ineq.inv_a, ineq.inv_b)
             return None
@@ -670,17 +679,54 @@ class CrossEntropyFalsifier:
 
 
 # ---------------------------------------------------------------------------
-# Orchestrator for all four strategies
+# Adversarial Falsifier (structure-targeted pool)
 # ---------------------------------------------------------------------------
 
-class FalsificationOrchestrator:
+class AdversarialFalsifier:
     """
-    Run Z3 → MCTS → VNS → Cross-Entropy in sequence until one succeeds.
-    On success, the counterexample graph is returned for database re-ingestion.
+    Test the conjecture against a fixed pool of structure-targeted graphs with
+    exact invariant values (barbells, clique+tail, spiders, class generators, …).
+    Refutes loose database-only bounds (δ ≤ λ+5, χ ≤ avg_deg+3) instantly.
+
+    Returns None when disabled or when the conjecture uses an invariant the pool
+    cannot certify (those fall through to the search-based falsifiers).
     """
 
     def __init__(self, cfg: Config = CONFIG):
         self.cfg = cfg
+
+    def falsify(self, conjecture: Conjecture) -> Optional[FalsificationResult]:
+        if not getattr(self.cfg, "adversarial_enabled", True):
+            return None
+        if conjecture.inequality is None:
+            return None
+        from pipeline.adversarial import AdversarialPool
+        t0 = time.time()
+        pool = AdversarialPool.shared(self.cfg)
+        G = pool.refute(conjecture.inequality)
+        if G is None:
+            return None
+        res = _result_from_graph(G, conjecture, "adversarial", time.time() - t0)
+        if res:
+            logger.info("[Adversarial] counterexample found (n=%d)", G.number_of_nodes())
+        return res
+
+
+# ---------------------------------------------------------------------------
+# Orchestrator for all strategies
+# ---------------------------------------------------------------------------
+
+class FalsificationOrchestrator:
+    """
+    Run Adversarial → Z3 → MCTS → VNS → Cross-Entropy in sequence until one
+    succeeds. On success, the counterexample graph is returned for database
+    re-ingestion. The adversarial pool runs first: it is cheap and catches the
+    structural artifacts the search heuristics tend to miss.
+    """
+
+    def __init__(self, cfg: Config = CONFIG):
+        self.cfg = cfg
+        self.adversarial = AdversarialFalsifier(cfg)
         self.z3      = Z3Falsifier(cfg)
         self.mcts    = MCTSFalsifier(cfg)
         self.vns     = VNSFalsifier(cfg)
@@ -692,6 +738,7 @@ class FalsificationOrchestrator:
         Updates conjecture.status in place.
         """
         strategies = [
+            ("Adversarial",  self.adversarial.falsify),
             ("Z3",           self.z3.falsify),
             ("MCTS",         self.mcts.falsify),
             ("VNS",          self.vns.falsify),

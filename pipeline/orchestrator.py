@@ -127,12 +127,19 @@ class ConjecturePipeline:
 
     @classmethod
     def build(cls, cfg: Config = CONFIG) -> "ConjecturePipeline":
+        import os
         logger.info("Building graph database…")
-        db = GraphDatabase.build(
-            random_count=cfg.db_random_graphs,
-            seed=cfg.db_random_seed,
-            verbose=cfg.verbose,
-        )
+        paths = [p for p in (cfg.db_csv_paths or ()) if os.path.isfile(p)]
+        if paths:
+            logger.info("Loading persistent dataset(s): %s", ", ".join(paths))
+            db = GraphDatabase.from_csv(paths, verbose=cfg.verbose)
+        else:
+            logger.info("No persistent dataset found — building synthetic database.")
+            db = GraphDatabase.build(
+                random_count=cfg.db_random_graphs,
+                seed=cfg.db_random_seed,
+                verbose=cfg.verbose,
+            )
         logger.info("%s", db.summary())
         return cls(
             db=db,
@@ -179,10 +186,14 @@ class ConjecturePipeline:
             for c in active:
                 result = self.falsifier.test(c)
                 if result.falsified and result.counterexample_graph is not None:
-                    self.db.add_counterexample(result.counterexample_graph)
+                    self.db.add_counterexample(
+                        result.counterexample_graph,
+                        persist_path=getattr(self.cfg, "counterexample_csv", None),
+                    )
                     report.counterexamples_fed_back += 1
                     logger.info(
-                        "    ✗ [%s] FALSIFIED — counterexample added to db", c.id
+                        "    ✗ [%s] FALSIFIED by %s — counterexample saved to db",
+                        c.id, result.strategy_used,
                     )
                 else:
                     logger.info(

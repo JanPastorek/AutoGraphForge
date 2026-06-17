@@ -154,8 +154,12 @@ def chromatic_number(G: nx.Graph) -> int:
         return 0
     if G.number_of_edges() == 0:
         return 1
+    # Exact, fast short-circuit: a graph with an edge is 2-chromatic iff bipartite
+    # (covers trees, forests, even cycles, …). This is exact at any size.
+    if nx.is_bipartite(G):
+        return 2
 
-    if n > 15:
+    if n > 24:
         # Greedy upper bound only (exact search too slow for large n).
         # NB: compute greedy *directly* — do not call clique_number first, as
         # find_cliques can blow up on large dense graphs.
@@ -392,6 +396,209 @@ BOOLEANS: Dict[str, callable] = {
 
 
 # ---------------------------------------------------------------------------
+# Additional computed graph classes (cheap on small graphs; used as hypotheses)
+# ---------------------------------------------------------------------------
+
+def is_triangle_free(G: nx.Graph) -> bool:
+    return number_of_triangles(G) == 0
+
+
+def is_cubic(G: nx.Graph) -> bool:
+    return G.number_of_nodes() > 0 and all(d == 3 for _, d in G.degree())
+
+
+def is_claw_free(G: nx.Graph) -> bool:
+    """No induced K_{1,3}: every vertex's neighbourhood has independence ≤ 2."""
+    for v in G:
+        nbrs = list(G.neighbors(v))
+        if len(nbrs) >= 3:
+            H = G.subgraph(nbrs)
+            # a claw centred at v ⟺ 3 pairwise non-adjacent neighbours
+            comp = nx.complement(H)
+            try:
+                if max((len(c) for c in nx.find_cliques(comp)), default=0) >= 3:
+                    return False
+            except Exception:
+                return False
+    return True
+
+
+def is_cograph(G: nx.Graph) -> bool:
+    """P4-free (no induced path on 4 vertices)."""
+    nodes = list(G)
+    for quad in itertools.combinations(nodes, 4):
+        H = G.subgraph(quad)
+        degs = sorted(d for _, d in H.degree())
+        if degs == [1, 1, 2, 2] and nx.is_connected(H):
+            return False   # induced P4
+    return True
+
+
+def is_split(G: nx.Graph) -> bool:
+    """Vertices partition into a clique and an independent set (chordal + co-chordal)."""
+    try:
+        return nx.is_chordal(G) and nx.is_chordal(nx.complement(G))
+    except Exception:
+        return False
+
+
+def is_outerplanar(G: nx.Graph) -> bool:
+    """G is outerplanar ⟺ G plus a universal vertex is planar."""
+    H = G.copy()
+    u = ("apex",)
+    H.add_node(u)
+    H.add_edges_from((u, v) for v in G)
+    try:
+        return nx.check_planarity(H, counterexample=False)[0]
+    except Exception:
+        return False
+
+
+def is_self_complementary(G: nx.Graph) -> bool:
+    n = G.number_of_nodes()
+    if (n * (n - 1) // 2) % 2 != 0:
+        return False               # needs an even number of edge slots
+    if G.number_of_edges() != n * (n - 1) // 4:
+        return False
+    return nx.is_isomorphic(G, nx.complement(G))
+
+
+def is_hamiltonian(G: nx.Graph) -> bool:
+    n = G.number_of_nodes()
+    if n < 3 or not nx.is_connected(G):
+        return False
+    if min((d for _, d in G.degree()), default=0) < 2:
+        return False
+    nodes = list(G)
+    start = nodes[0]
+    adj = {v: set(G.neighbors(v)) for v in nodes}
+    target = n
+
+    def extend(v, visited):
+        if len(visited) == target:
+            return start in adj[v]
+        for w in adj[v]:
+            if w not in visited:
+                visited.add(w)
+                if extend(w, visited):
+                    return True
+                visited.discard(w)
+        return False
+
+    return extend(start, {start})
+
+
+def is_well_covered(G: nx.Graph) -> bool:
+    """Every maximal independent set has the same size (so γ = i(G) = α).
+
+    Maximal independent sets of G are exactly the maximal cliques of the
+    complement, so the class holds iff those all share one size.
+    """
+    try:
+        first = None
+        for clique in nx.find_cliques(nx.complement(G)):
+            if first is None:
+                first = len(clique)
+            elif len(clique) != first:
+                return False
+        return True
+    except Exception:
+        return False
+
+
+for _name, _fn in [
+    ("triangle_free", is_triangle_free), ("cubic", is_cubic),
+    ("claw_free", is_claw_free), ("cograph", is_cograph), ("split", is_split),
+    ("outerplanar", is_outerplanar), ("self_compl", is_self_complementary),
+    ("hamiltonian", is_hamiltonian), ("well_covered", is_well_covered),
+]:
+    BOOLEANS.setdefault(_name, _fn)
+
+
+# ---------------------------------------------------------------------------
+# Externally-sourced invariants
+# ---------------------------------------------------------------------------
+# Values for these are loaded from the House of Graphs export
+# (graphs/hog_invariant_values_all.txt via graphs.loaders.load_hog_invariants);
+# they are NOT computed on the fly here. They are registered so hypothesis
+# generation sweeps them like any other invariant. The placeholder compute
+# function returns None, so evaluate_all / falsification simply skip them on
+# graphs whose value was not supplied from the database.
+
+def _data_only(_G):  # pragma: no cover - intentionally returns nothing
+    return None
+
+
+#: HoG invariant name → (short key, "num" | "bool").  Keys that coincide with an
+#: existing INVARIANT/BOOLEAN reuse that key; the rest are new.
+HOG_INVARIANT_MAP: Dict[str, tuple] = {
+    # existing numeric
+    "Number of Vertices": ("n", "num"),
+    "Number of Edges": ("m", "num"),
+    "Chromatic Number": ("chi", "num"),
+    "Independence Number": ("alpha", "num"),
+    "Clique Number": ("omega", "num"),
+    "Domination Number": ("gamma", "num"),
+    "Matching Number": ("nu", "num"),
+    "Maximum Degree": ("Delta", "num"),
+    "Minimum Degree": ("delta", "num"),
+    "Vertex Connectivity": ("kappa", "num"),
+    "Edge Connectivity": ("lambda", "num"),
+    "Diameter": ("diam", "num"),
+    "Radius": ("rad", "num"),
+    "Algebraic Connectivity": ("alg", "num"),
+    "Number of Triangles": ("tri", "num"),
+    # existing boolean
+    "Bipartite": ("bipartite", "bool"),
+    "Planar": ("planar", "bool"),
+    "Regular": ("regular", "bool"),
+    "Eulerian": ("eulerian", "bool"),
+    # new numeric
+    "Average Degree": ("avg_deg", "num"),
+    "Chromatic Index": ("chi_e", "num"),
+    "Circumference": ("circumference", "num"),
+    "Degeneracy": ("degeneracy", "num"),
+    "Density": ("density", "num"),
+    "Feedback Vertex Set Number": ("fvs", "num"),
+    "Genus": ("genus", "num"),
+    "Girth": ("girth", "num"),
+    "Group Size": ("aut_group", "num"),
+    "Independent Domination Number": ("ind_dom", "num"),
+    "Index": ("spectral_radius", "num"),
+    "Laplacian Largest Eigenvalue": ("lap_max", "num"),
+    "Length of Longest Induced Cycle": ("longest_induced_cycle", "num"),
+    "Length of Longest Induced Path": ("longest_induced_path", "num"),
+    "Length of Longest Path": ("longest_path", "num"),
+    "Number of Arc Orbits": ("arc_orbits", "num"),
+    "Number of Components": ("components", "num"),
+    "Number of Edge Orbits": ("edge_orbits", "num"),
+    "Number of Spanning Trees": ("spanning_trees", "num"),
+    "Number of Vertex Orbits": ("vertex_orbits", "num"),
+    "Number of Zero Eigenvalues": ("zero_eigenvalues", "num"),
+    "Second Largest Eigenvalue": ("eig2", "num"),
+    "Smallest Eigenvalue": ("eig_min", "num"),
+    "Treewidth": ("treewidth", "num"),
+    "Vertex Cover Number": ("vertex_cover", "num"),
+    # new boolean
+    "Acyclic": ("acyclic", "bool"),
+    "Claw-Free": ("claw_free", "bool"),
+    "Connected": ("connected", "bool"),
+    "Hamiltonian": ("hamiltonian", "bool"),
+    "Hypohamiltonian": ("hypohamiltonian", "bool"),
+    "Hypotraceable": ("hypotraceable", "bool"),
+    "Traceable": ("traceable", "bool"),
+    "Twin-Free": ("twin_free", "bool"),
+}
+
+# Register the externally-sourced keys so generation treats them as invariants.
+for _name, (_key, _kind) in HOG_INVARIANT_MAP.items():
+    if _kind == "num":
+        INVARIANTS.setdefault(_key, _data_only)
+    else:
+        BOOLEANS.setdefault(_key, _data_only)
+
+
+# ---------------------------------------------------------------------------
 # Evaluation helper
 # ---------------------------------------------------------------------------
 
@@ -415,3 +622,13 @@ def evaluate_all(G: nx.Graph, invariant_set=None) -> Dict[str, float]:
 def evaluate_fast(G: nx.Graph) -> Dict[str, float]:
     """Evaluate only the fast invariant subset."""
     return evaluate_all(G, invariant_set=FAST_INVARIANTS)
+
+
+#: Combined registry of every numeric invariant and boolean property.
+ALL_INVARIANTS: Dict[str, callable] = {**INVARIANTS, **BOOLEANS}
+
+
+def evaluate_named(G: nx.Graph, names) -> Dict[str, float]:
+    """Evaluate exactly the named invariants/booleans on G (skips unknown names)."""
+    subset = {k: ALL_INVARIANTS[k] for k in names if k in ALL_INVARIANTS}
+    return evaluate_all(G, subset)

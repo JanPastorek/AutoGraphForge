@@ -23,14 +23,57 @@ env/
 
 # Pipeline outputs
 results/
+runs/
 *.log
+*.bak
+
+# Generated analysis output (graphify skill)
+graphify-out/
+**/graphify-out/
+
+# Vendored upstream clone (lives in the graphconj repo's sage/ now)
+_conjecturing_pkg/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+2026_ITAT_paper/itat_pipeline.pdf
+2026_ITAT_paper/build/
 
 # Build artifacts (compiled nauty geng, downloaded source)
 .build/
 
 # Generated graph database
 database/
-graphs/minimally_rigid_graphs/*.zip
+
+# Large graph corpora (data, not code — downloadable / regenerable).
+# Keep the loaders and invariant code under graphs/, drop the bulk data.
+graphs/**/*.g6
+graphs/**/*.g6.gz
+graphs/**/*.gz
+graphs/**/*.bz2
+graphs/**/*.zip
+graphs/**/*.txt
+graphs/cages/
+graphs/srg_spence/
+graphs/minimally_rigid_graphs/
+graphs/minimal_ramsey/
+graphs/minimal_cayley/
+graphs/cographs/
+graphs/generated_nauty/
+
+# Editor / assistant local state
+.claude/
+.history/
+
+# Paper backups
+2026_ITAT_paper/OLD/
 
 # OS
 .DS_Store

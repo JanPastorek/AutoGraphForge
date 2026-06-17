@@ -38,9 +38,15 @@ class ConjectureStatus(Enum):
 @dataclass
 class Inequality:
     """
-    Represents:  coeff_a · inv_a(G)  ≤  coeff_b · inv_b(G)  +  offset
+    Represents:  coeff_a · inv_a(G)  ≤  coeff_b · inv_b(G) [+ Σ cᵢ·invᵢ(G)]  +  offset
 
-    Both inv_a and inv_b are keys from graphs.invariants.INVARIANTS.
+    optionally restricted to a graph class (``hypothesis``):
+
+        for all G with  hypothesis(G):  coeff_a · inv_a(G)  ≤  rhs(G)
+
+    ``inv_a``/``inv_b`` and the names in ``extra_terms`` are keys from
+    graphs.invariants.INVARIANTS; ``hypothesis`` is a key from
+    graphs.invariants.BOOLEANS (or None for an unconditioned bound).
     """
 
     inv_a: str
@@ -49,17 +55,46 @@ class Inequality:
     coeff_b: float = 1.0
     offset: float = 0.0
 
+    # Additional RHS terms for multivariable bounds: each (coeff, inv_name).
+    extra_terms: List[tuple] = field(default_factory=list)
+    # Graph-class condition (a boolean-invariant name) or None. When set, the
+    # inequality is asserted only for graphs where this property holds.
+    hypothesis: Optional[str] = None
+
     # ---------------------------------------------------------------- API --
 
+    def referenced_invariants(self) -> set:
+        """Every invariant name this inequality reads (incl. the hypothesis)."""
+        names = {self.inv_a, self.inv_b}
+        names.update(name for _, name in self.extra_terms)
+        if self.hypothesis:
+            names.add(self.hypothesis)
+        return names
+
     def evaluate(self, vals: Dict[str, float]) -> Optional[bool]:
-        """Return True if the inequality holds, False if violated, None if data missing."""
+        """Return True if the inequality holds, False if violated, None if data missing.
+
+        A graph outside the hypothesis class satisfies the conjecture vacuously
+        (returns True), so it is never reported as a counterexample.
+        """
+        app = self._applicable(vals)
+        if app is None:
+            return None
+        if app is False:
+            return True
         lhs, rhs = self._lhs_rhs(vals)
         if lhs is None:
             return None
         return lhs <= rhs
 
     def slack(self, vals: Dict[str, float]) -> Optional[float]:
-        """rhs − lhs.  Negative → violated; zero → tight; positive → slack."""
+        """rhs − lhs.  Negative → violated; zero → tight; positive → slack.
+
+        Returns None when the graph is outside the hypothesis class (the bound
+        does not apply there) or when an invariant value is missing.
+        """
+        if not self._applicable(vals):  # None or False
+            return None
         lhs, rhs = self._lhs_rhs(vals)
         if lhs is None:
             return None
@@ -71,11 +106,23 @@ class Inequality:
 
     # ----------------------------------------------------------- internals --
 
+    def _applicable(self, vals) -> Optional[bool]:
+        """True if the hypothesis holds, False if it fails, None if unknown."""
+        if self.hypothesis is None:
+            return True
+        h = vals.get(self.hypothesis)
+        if h is None:
+            return None
+        return h >= 0.5
+
     def _lhs_rhs(self, vals):
-        if self.inv_a not in vals or self.inv_b not in vals:
+        needed = [self.inv_a, self.inv_b] + [name for _, name in self.extra_terms]
+        if any(k not in vals for k in needed):
             return None, None
         lhs = self.coeff_a * vals[self.inv_a]
         rhs = self.coeff_b * vals[self.inv_b] + self.offset
+        for coeff, name in self.extra_terms:
+            rhs += coeff * vals[name]
         return lhs, rhs
 
     def __str__(self) -> str:
@@ -86,10 +133,15 @@ class Inequality:
 
         lhs = _fmt(self.coeff_a, self.inv_a)
         rhs = _fmt(self.coeff_b, self.inv_b)
-        if self.offset == 0.0:
-            return f"{lhs} ≤ {rhs}"
-        sign = "+" if self.offset > 0 else "-"
-        return f"{lhs} ≤ {rhs} {sign} {abs(self.offset):g}"
+        for coeff, name in self.extra_terms:
+            rhs += f" + {_fmt(coeff, name)}"
+        if self.offset != 0.0:
+            sign = "+" if self.offset > 0 else "-"
+            rhs += f" {sign} {abs(self.offset):g}"
+        s = f"{lhs} ≤ {rhs}"
+        if self.hypothesis:
+            s = f"{s}  (for {self.hypothesis} graphs)"
+        return s
 
     def to_dict(self) -> dict:
         return {
@@ -98,6 +150,8 @@ class Inequality:
             "coeff_a": self.coeff_a,
             "coeff_b": self.coeff_b,
             "offset": self.offset,
+            "extra_terms": [[coeff, name] for coeff, name in self.extra_terms],
+            "hypothesis": self.hypothesis,
             "latex": str(self),
         }
 

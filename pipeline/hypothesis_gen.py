@@ -13,14 +13,17 @@ import itertools
 import logging
 import math
 import re
+from collections import defaultdict
 from typing import Dict, List, Optional, Tuple
 
 import anthropic
+import numpy as np
 
 from config import Config, CONFIG
 from conjecture import Conjecture, ConjectureStatus, Inequality
 from graphs.database import GraphDatabase
 from graphs.invariants import INVARIANTS, BOOLEANS
+from pipeline.novelty import annotate
 
 logger = logging.getLogger(__name__)
 
@@ -33,18 +36,31 @@ class TxGraffitiGenerator:
     """
     Generate linear-inequality conjectures by the method of TxGraffiti:
 
-    1. For every ordered pair (inv_a, inv_b) of graph invariants and every
-       candidate coefficient `coeff`, find the minimal `offset` such that
-         coeff_a · inv_a(G)  ≤  coeff · inv_b(G) + offset
-       holds for all graphs in the database.
+    1. For every ordered LHS invariant inv_a and RHS invariant tuple
+       (inv_b[, inv_c …]) and every candidate coefficient combination, find the
+       minimal `offset` such that
+         inv_a(G)  ≤  Σ coeffᵢ · invᵢ(G)  +  offset
+       holds for all graphs in the (optionally class-restricted) database.
 
-    2. Keep only conjectures that are *tight* on at least one graph
-       (equality achieved) — this is the fundamental non-triviality criterion.
+    2. **Graph-class conditioning** — in addition to the unconditioned sweep,
+       repeat the fit over each graph class P (bipartite, regular, planar, …),
+       yielding conjectures of the form "for all G with P(G): inv_a(G) ≤ …".
+       Boolean properties are used *only* as such hypotheses, never as numeric
+       terms in the linear fit.
 
-    3. Apply the **Dalmatian heuristic**: discard conjecture Q if there exists
-       another valid conjecture Q' that is weakly stronger everywhere and
-       strictly stronger on at least one graph.  Retains the Pareto frontier.
+    3. **Multivariable bounds** — the RHS may be a sum of several invariants
+       (controlled by ``cfg.txgraffiti_max_rhs_terms``), not just one.
+
+    4. Keep only conjectures that are *tight* on at least one graph (the
+       non-triviality criterion) and, unless disabled, are not an equality
+       across the whole class (within-class identities are discarded).
+
+    5. Apply the **Dalmatian heuristic** (per comparable bucket): discard
+       conjecture Q if another conjecture over the same LHS / RHS-set / class is
+       weakly stronger everywhere and strictly stronger somewhere.
     """
+
+    _TOL = 1e-6
 
     def __init__(self, db: GraphDatabase, cfg: Config = CONFIG):
         self.db = db
@@ -58,125 +74,214 @@ class TxGraffitiGenerator:
         logger.info("[TxGraffiti] %d raw candidates before Dalmatian filter", len(candidates))
         survived = self._dalmatian_filter(candidates)
         logger.info("[TxGraffiti] %d conjectures after Dalmatian filter", len(survived))
+
+        # Known-theorem novelty filter: tag each conjecture, optionally hiding
+        # rediscoveries of classical results so only novel bounds remain.
+        novel, known = annotate(survived)
+        if known:
+            logger.info(
+                "[Novelty] %d/%d conjectures rediscover known theorems "
+                "(e.g. %s)",
+                len(known), len(survived),
+                known[0].metadata.get("matched_theorem", "?"),
+            )
+        if self.cfg.txgraffiti_filter_known:
+            survived = novel
+            logger.info("[Novelty] %d novel conjectures retained", len(survived))
+
         return survived[: self.cfg.txgraffiti_max_conjectures]
+
+    # --------------------------------------------------------- data loading --
+
+    def _load_arrays(self):
+        """Vectorise the database into per-invariant numpy arrays (NaN = missing)."""
+        entries = list(self.db)
+        names = [e.name for e in entries]
+        inv_names = list(self.db.invariant_names()) if hasattr(self.db, "invariant_names") \
+            else list(INVARIANTS.keys())
+        numeric = [k for k in inv_names if k in INVARIANTS]
+        bool_props = [k for k in inv_names if k in BOOLEANS]
+        vals = {
+            inv: np.array([e.invariants.get(inv, np.nan) for e in entries], dtype=float)
+            for inv in numeric
+        }
+        bvals = {
+            b: np.array([e.invariants.get(b, np.nan) for e in entries], dtype=float)
+            for b in bool_props
+        }
+        return names, numeric, bool_props, vals, bvals
+
+    def _contexts(self, bool_props, bvals, n_graphs):
+        """Yield (hypothesis, boolean-mask) pairs: unconditioned + each class."""
+        contexts = [(None, np.ones(n_graphs, dtype=bool))]
+        if self.cfg.txgraffiti_condition_on_classes:
+            for b in bool_props:
+                mask = bvals[b] >= 0.5
+                if int(mask.sum()) >= self.cfg.txgraffiti_min_support:
+                    contexts.append((b, mask))
+        return contexts
 
     # ---------------------------------------------------------------- steps --
 
-    def _enumerate_candidates(self) -> List[Tuple[Conjecture, List[float]]]:
-        """Return (Conjecture, slack_vector) pairs for valid, tight inequalities."""
-        inv_names = list(INVARIANTS.keys())
-        candidates: List[Tuple[Conjecture, List[float]]] = []
-        seen_stmts: set = set()
+    def _enumerate_candidates(self):
+        """Return (Conjecture, slack_vector, bucket_key) tuples for valid fits."""
+        names, numeric, bool_props, vals, bvals = self._load_arrays()
+        n_graphs = len(names)
+        if n_graphs == 0 or len(numeric) < 2:
+            return []
 
-        for inv_a, inv_b in itertools.permutations(inv_names, 2):
-            # Gather data points
-            data = []
-            for entry in self.db.graphs_with_invariants(inv_a, inv_b):
-                a_val = entry.invariants[inv_a]
-                b_val = entry.invariants[inv_b]
-                if not (math.isfinite(a_val) and math.isfinite(b_val)):
+        finite = {inv: np.isfinite(vals[inv]) for inv in numeric}
+        coeffs = tuple(self.cfg.txgraffiti_coefficients)
+        candidates: List[Tuple[Conjecture, np.ndarray, tuple]] = []
+        seen: set = set()
+
+        for hyp, cmask in self._contexts(bool_props, bvals, n_graphs):
+            # --- two-variable bounds: inv_a ≤ coeff·inv_b + offset ---
+            for inv_a, inv_b in itertools.permutations(numeric, 2):
+                valid = cmask & finite[inv_a] & finite[inv_b]
+                if int(valid.sum()) < self.cfg.txgraffiti_min_support:
                     continue
-                data.append((a_val, b_val))
-
-            if len(data) < 3:
-                continue
-
-            for coeff in self.cfg.txgraffiti_coefficients:
-                # Minimal offset satisfying all data points
-                offset = max(
-                    0.0,
-                    max(a - coeff * b for a, b in data),
+                self._fit(
+                    candidates, seen, names, valid, hyp, inv_a,
+                    vals[inv_a][valid], [(inv_b, vals[inv_b][valid])], coeffs,
                 )
 
-                # Reject trivially large offsets
-                if offset > self.cfg.txgraffiti_max_offset:
-                    continue
-
-                # Compute slack vector
-                slacks = [coeff * b + offset - a for a, b in data]
-
-                # Must be tight on at least one graph (Dalmatian pre-condition)
-                if min(slacks) > 1e-6:
-                    continue
-
-                # Skip if we've seen an identical statement string
-                stmt = str(Inequality(inv_a, inv_b, 1.0, coeff, offset))
-                if stmt in seen_stmts:
-                    continue
-                seen_stmts.add(stmt)
-
-                ineq = Inequality(inv_a, inv_b, 1.0, coeff, round(offset, 4))
-                tightness = [
-                    entry.name
-                    for entry in self.db.graphs_with_invariants(inv_a, inv_b)
-                    if abs(
-                        coeff * entry.invariants[inv_b] + offset
-                        - entry.invariants[inv_a]
-                    ) < 1e-6
-                ]
-
-                c = Conjecture(
-                    statement=stmt,
-                    inequality=ineq,
-                    generation_method="txgraffiti",
-                    tightness_witnesses=tightness,
-                    score=self._score(slacks, tightness),
-                )
-                candidates.append((c, slacks))
+            # --- multivariable bounds: inv_a ≤ c_b·inv_b + c_c·inv_c + offset ---
+            if self.cfg.txgraffiti_multivariable and self.cfg.txgraffiti_max_rhs_terms >= 2:
+                for inv_a in numeric:
+                    rest = [x for x in numeric if x != inv_a]
+                    for inv_b, inv_c in itertools.combinations(rest, 2):
+                        valid = cmask & finite[inv_a] & finite[inv_b] & finite[inv_c]
+                        if int(valid.sum()) < self.cfg.txgraffiti_min_support:
+                            continue
+                        # A term that is constant across this class only shifts
+                        # the offset — it adds no real multivariable structure
+                        # (e.g. tri ≡ 0 on bipartite graphs). Skip such terms.
+                        if (np.ptp(vals[inv_b][valid]) < 1e-9
+                                or np.ptp(vals[inv_c][valid]) < 1e-9):
+                            continue
+                        self._fit(
+                            candidates, seen, names, valid, hyp, inv_a,
+                            vals[inv_a][valid],
+                            [(inv_b, vals[inv_b][valid]), (inv_c, vals[inv_c][valid])],
+                            coeffs,
+                        )
 
         return candidates
 
-    def _dalmatian_filter(
-        self, candidates: List[Tuple[Conjecture, List[float]]]
-    ) -> List[Conjecture]:
+    def _fit(self, candidates, seen, names, valid_mask, hyp, inv_a, a, rhs_terms, coeffs):
+        """Fit minimal-offset bounds over every coefficient combination for rhs_terms.
+
+        ``rhs_terms`` is a list of (inv_name, value_array) aligned with ``a``.
+        Appends accepted (Conjecture, slack_vector, bucket_key) tuples.
         """
-        Retain conjecture Q unless there exists Q' such that:
+        tol = self._TOL
+        max_off = self.cfg.txgraffiti_max_offset
+        valid_idx = np.nonzero(valid_mask)[0]
+        bucket_key = (hyp, inv_a, frozenset(name for name, _ in rhs_terms))
+
+        # Skip degenerate bounds: a constant LHS within the class is just a
+        # threshold ("c ≤ …"), and an all-constant RHS reduces to "f ≤ const" —
+        # both are class artifacts (e.g. κ = λ = 1 on trees), not relations.
+        if np.ptp(a) < 1e-9:
+            return
+        if all(np.ptp(arr) < 1e-9 for _, arr in rhs_terms):
+            return
+
+        for combo in itertools.product(coeffs, repeat=len(rhs_terms)):
+            rhs = np.zeros_like(a)
+            for coeff, (_, arr) in zip(combo, rhs_terms):
+                rhs += coeff * arr
+            offset = max(0.0, float(np.max(a - rhs)))
+            if offset > max_off:
+                continue
+
+            slacks = rhs + offset - a
+            smin = float(slacks.min())
+            smax = float(slacks.max())
+            if smin > tol:                       # not tight anywhere → not a frontier bound
+                continue
+            if self.cfg.txgraffiti_drop_identities and smax < tol:
+                continue                          # equality on the whole class → identity
+
+            extra = [(combo[k], rhs_terms[k][0]) for k in range(1, len(rhs_terms))]
+            ineq = Inequality(
+                inv_a, rhs_terms[0][0], 1.0, combo[0], round(offset, 4),
+                extra_terms=extra, hypothesis=hyp,
+            )
+            stmt = str(ineq)
+            if stmt in seen:
+                continue
+            seen.add(stmt)
+
+            tight_local = np.nonzero(np.abs(slacks) < tol)[0]
+            tightness = [names[valid_idx[i]] for i in tight_local]
+            c = Conjecture(
+                statement=stmt,
+                inequality=ineq,
+                generation_method="txgraffiti",
+                tightness_witnesses=tightness,
+                score=self._score(slacks, tightness, hyp),
+                metadata={"hypothesis": hyp, "context_size": int(valid_mask.sum())},
+            )
+            candidates.append((c, slacks, bucket_key))
+
+    def _dalmatian_filter(self, candidates) -> List[Conjecture]:
+        """
+        Retain conjecture Q unless there exists Q' (same LHS invariant, same RHS
+        invariant-set, same graph class) such that:
           slack(Q', G) ≤ slack(Q, G) for all G   (Q' at least as strong)
           slack(Q', G) < slack(Q, G) for some G   (Q' strictly stronger somewhere)
 
-        A conjecture with smaller slack is *stronger* (tighter bound).
+        Smaller slack ⇒ stronger (tighter) bound. Candidates are bucketed by the
+        comparison key first, so dominance is only checked within comparable sets.
         """
-        n = len(candidates)
-        dominated = [False] * n
+        buckets: Dict[tuple, list] = defaultdict(list)
+        for item in candidates:
+            buckets[item[2]].append(item)
 
-        for i in range(n):
-            if dominated[i]:
-                continue
-            c_i, sv_i = candidates[i]
-            for j in range(n):
-                if i == j or dominated[j]:
-                    continue
-                c_j, sv_j = candidates[j]
-                # Skip pairs involving different invariants
-                if (
-                    c_i.inequality is None
-                    or c_j.inequality is None
-                    or c_i.inequality.inv_a != c_j.inequality.inv_a
-                    or c_i.inequality.inv_b != c_j.inequality.inv_b
-                ):
-                    continue
-                # Can only compare if same length (same data points)
-                if len(sv_i) != len(sv_j):
-                    continue
-                # Does j dominate i?
-                if all(sv_j[k] <= sv_i[k] for k in range(len(sv_i))) and any(
-                    sv_j[k] < sv_i[k] for k in range(len(sv_i))
-                ):
-                    dominated[i] = True
-                    break
+        survived: List[Conjecture] = []
+        for items in buckets.values():
+            # Collapse coefficient variants that yield an identical slack vector
+            # (e.g. different multiples of a class-constant term) to one bound.
+            unique: Dict[tuple, tuple] = {}
+            for it in items:
+                sig = tuple(np.round(it[1], 6))
+                if sig not in unique or it[0].score > unique[sig][0].score:
+                    unique[sig] = it
+            items = list(unique.values())
 
-        survived = [c for (c, _), dom in zip(candidates, dominated) if not dom]
-        # Sort by score descending
+            k = len(items)
+            svs = [it[1] for it in items]
+            dominated = [False] * k
+            for i in range(k):
+                if dominated[i]:
+                    continue
+                for j in range(k):
+                    if i == j or dominated[j]:
+                        continue
+                    if len(svs[i]) != len(svs[j]):
+                        continue
+                    if np.all(svs[j] <= svs[i] + 1e-12) and np.any(svs[j] < svs[i] - 1e-12):
+                        dominated[i] = True
+                        break
+            for (c, _, _), dom in zip(items, dominated):
+                if not dom:
+                    survived.append(c)
+
         survived.sort(key=lambda c: c.score, reverse=True)
         return survived
 
     @staticmethod
-    def _score(slacks: List[float], tightness: List[str]) -> float:
-        """Higher score = more interesting (tight on many graphs, small slack variance)."""
-        tightness_ratio = len(tightness) / max(1, len(slacks))
-        avg_slack = sum(slacks) / max(1, len(slacks))
-        # Prefer conjectures that are tight often and have small average slack
-        return tightness_ratio * 2.0 - avg_slack * 0.1
+    def _score(slacks, tightness, hyp=None) -> float:
+        """Higher score = more interesting (tight on many graphs, small avg slack)."""
+        n = len(slacks)
+        tightness_ratio = len(tightness) / max(1, n)
+        avg_slack = float(np.mean(slacks)) if n else 0.0
+        score = tightness_ratio * 2.0 - avg_slack * 0.1
+        if hyp is not None:
+            score += 0.25   # nudge class-conditioned results up — likelier to be novel
+        return score
 
 
 # ---------------------------------------------------------------------------

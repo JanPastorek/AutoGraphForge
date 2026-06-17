@@ -22,11 +22,42 @@ class Config:
     db_max_vertices: int = 14
     db_random_graphs: int = 15      # extra ER graphs to add beyond named ones
     db_random_seed: int = 42
+    # Persistent invariant databases loaded by default (HoG rich invariants +
+    # the SRG / minimal-Ramsey / Cayley / cages / cographs / nauty / rigid
+    # families in graph_database_enriched.csv, plus the exhaustive n≤9 census).
+    # Empty ⇒ auto-resolve to whichever of these exist; falls back to a small
+    # synthetic build only if none are found.
+    db_csv_paths: tuple = (
+        "database/graph_database_enriched.csv",
+        "database/census_le9.csv",
+        "database/counterexamples.csv",   # graphs found by the falsifiers (grows)
+    )
+    # Counterexamples discovered during a run are appended here so the dataset
+    # learns permanently (this file is also one of the db_csv_paths above).
+    counterexample_csv: str = "database/counterexamples.csv"
+
+    # ----------------------------------------------------- Adversarial filter --
+    adversarial_enabled: bool = True   # permanent counterexample-search stage
+    adversarial_max_n: int = 18        # max order of pool graphs (exact invariants)
+    adversarial_seed: int = 2025
 
     # ----------------------------------------------- Hypothesis generation --
     txgraffiti_max_conjectures: int = 30
     txgraffiti_max_offset: float = 5.0
     txgraffiti_coefficients: tuple = (0.5, 1.0, 1.5, 2.0, 3.0)
+    # Generate bounds conditioned on graph classes (bipartite, regular, …),
+    # i.e. "for all G with property P: f(G) ≤ …".
+    txgraffiti_condition_on_classes: bool = True
+    # Allow multivariable right-hand sides:  f(G) ≤ a·g(G) + b·h(G) + c.
+    txgraffiti_multivariable: bool = True
+    txgraffiti_max_rhs_terms: int = 2   # 2 ⇒ permit one extra RHS invariant
+    txgraffiti_min_support: int = 5     # min graphs in a context before fitting
+    # Drop bounds that are an equality across the whole class (identities /
+    # within-class tautologies such as Δ = δ on regular graphs).
+    txgraffiti_drop_identities: bool = True
+    # Hide conjectures that merely rediscover a classical/trivial theorem
+    # (Whitney, Brooks, ω ≤ χ, ν ≤ n/2, …) so only novel bounds are kept.
+    txgraffiti_filter_known: bool = True
     funsearch_conjectures: int = 5   # LLM-generated conjectures per call
     use_funsearch: bool = True
 

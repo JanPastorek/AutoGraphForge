@@ -27,8 +27,9 @@ import gzip
 import logging
 import os
 import random
+import re
 import zipfile
-from typing import Iterable, Iterator, List, Optional, Tuple
+from typing import Dict, Iterable, Iterator, List, Optional, Tuple
 
 import networkx as nx
 
@@ -302,8 +303,95 @@ def load_nauty(
             yield (f"nauty:{n}v_{kind}#{i}", g)
 
 
+# ---------------------------------------------------------------------------
+# House of Graphs invariant export  (graphs/hog_invariant_values_all.txt)
+# ---------------------------------------------------------------------------
+# Each graph is one record: an adjacency-list block (``i: n1 n2 …`` per vertex,
+# 1-indexed) followed by ``Invariant Name: value`` lines, records separated by
+# blank lines. Non-numeric markers (``undefined``, ``infinity``,
+# ``Computation time out``, ``Computing``) are treated as missing.
+
+HOG_INVARIANTS_FILE = os.path.join(GRAPHS_DIR, "hog_invariant_values_all.txt")
+
+_ADJ_RE = re.compile(r"^\d+\s*:")
+
+
+def _hog_g6(G: nx.Graph) -> str:
+    """graph6 string with vertices relabelled 0..n-1 (matches build_database)."""
+    H = nx.convert_node_labels_to_integers(G)
+    return nx.to_graph6_bytes(H, header=False).strip().decode("ascii")
+
+
+def _hog_num(v: str) -> Optional[float]:
+    try:
+        return float(v.strip())
+    except ValueError:
+        return None  # undefined / infinity / Computation time out / Computing
+
+
+def _hog_bool(v: str) -> Optional[float]:
+    v = v.strip()
+    return 1.0 if v == "Yes" else 0.0 if v == "No" else None
+
+
+def _hog_finish(adj: List[str], inv: Dict[str, float]) -> Tuple[nx.Graph, str, Dict[str, float]]:
+    """Build the graph from its adjacency block and derive `tree` / `chordal`."""
+    G = nx.Graph()
+    for line in adj:
+        head, _, rest = line.partition(":")
+        u = int(head)
+        G.add_node(u)
+        for w in rest.split():
+            G.add_edge(u, int(w))
+    # `tree` is not a HoG field but follows from acyclic ∧ connected.
+    if "acyclic" in inv and "connected" in inv:
+        inv["tree"] = 1.0 if inv["acyclic"] >= 0.5 and inv["connected"] >= 0.5 else 0.0
+    # `chordal` is absent from the export; fill it (cheap) so class-conditioning
+    # on chordal graphs keeps working.
+    try:
+        inv["chordal"] = 1.0 if nx.is_chordal(G) else 0.0
+    except Exception:
+        pass
+    return G, _hog_g6(G), inv
+
+
+def load_hog_invariants(
+    path: str = HOG_INVARIANTS_FILE,
+) -> Iterator[Tuple[nx.Graph, str, Dict[str, float]]]:
+    """Stream (graph, g6, invariants) records from a House of Graphs export.
+
+    Invariant names are mapped to the short keys used across the pipeline via
+    ``graphs.invariants.HOG_INVARIANT_MAP``; unmapped fields are ignored.
+    """
+    from graphs.invariants import HOG_INVARIANT_MAP
+
+    adj: List[str] = []
+    inv: Dict[str, float] = {}
+    with open(path, "r", encoding="utf-8", errors="replace") as fh:
+        for raw in fh:
+            line = raw.rstrip("\n")
+            if not line.strip():
+                continue
+            if _ADJ_RE.match(line):
+                if inv:                      # adjacency after invariants ⇒ new record
+                    yield _hog_finish(adj, inv)
+                    adj, inv = [], {}
+                adj.append(line)
+            else:
+                name, _, val = line.partition(":")
+                mapped = HOG_INVARIANT_MAP.get(name.strip())
+                if mapped is None:
+                    continue
+                key, kind = mapped
+                parsed = _hog_bool(val) if kind == "bool" else _hog_num(val)
+                if parsed is not None:
+                    inv[key] = parsed
+    if inv:
+        yield _hog_finish(adj, inv)
+
+
 __all__ = [
     "load_cographs", "load_minimal_cayley", "load_cages", "load_minimal_ramsey",
     "load_srg", "load_minimally_rigid", "load_hog", "load_nauty",
-    "load_g6_file", "load_srg_file", "load_zip_g6",
+    "load_g6_file", "load_srg_file", "load_zip_g6", "load_hog_invariants",
 ]

@@ -9,6 +9,7 @@ anthropic>=0.28.0
 
 # ── Numerical / scientific ────────────────────────────────────────────────
 numpy>=1.26
+scipy>=1.11          # LP feasibility test in the known-theorem novelty filter
 
 # ── Standard library supplements ─────────────────────────────────────────
 # (no additional deps needed — itertools, subprocess, etc. are built-in)
