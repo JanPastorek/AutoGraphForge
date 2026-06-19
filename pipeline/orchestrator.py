@@ -256,7 +256,7 @@ class ConjecturePipeline:
         report.save(out)
         # Also write a plain-text summary
         txt_path = out.with_suffix(".txt")
-        txt_path.write_text(report.summary_str() + "\n\n" + self._conj_detail(report))
+        txt_path.write_text(report.summary_str() + "\n\n" + self._conj_detail(report), encoding="utf-8")
         logger.info("Plain-text summary → %s", txt_path)
         return out
 

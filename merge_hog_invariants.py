@@ -26,7 +26,10 @@ import time
 from graphs.invariants import INVARIANTS, BOOLEANS
 from graphs.loaders import load_hog_invariants, HOG_INVARIANTS_FILE
 
-csv.field_size_limit(sys.maxsize)
+try:
+    csv.field_size_limit(sys.maxsize)
+except OverflowError:
+    csv.field_size_limit(2147483647)
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger("merge_hog")
 

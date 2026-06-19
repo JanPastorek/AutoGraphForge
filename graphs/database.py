@@ -50,7 +50,10 @@ class GraphDatabase:
         import networkx as _nx
         from graphs.invariants import INVARIANTS, BOOLEANS
 
-        _csv.field_size_limit(_sys.maxsize)
+        try:
+            _csv.field_size_limit(_sys.maxsize)
+        except OverflowError:
+            _csv.field_size_limit(2147483647)
         if isinstance(paths, str):
             paths = [paths]
         keys = list(INVARIANTS.keys()) + list(BOOLEANS.keys())

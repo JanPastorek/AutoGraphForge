@@ -17,7 +17,10 @@ import sys
 import numpy as np
 import networkx as nx
 
-csv.field_size_limit(sys.maxsize)
+try:
+    csv.field_size_limit(sys.maxsize)
+except OverflowError:
+    csv.field_size_limit(2147483647)
 logging.basicConfig(level=logging.WARNING, format="%(message)s")
 
 import graphs.invariants as I
@@ -129,11 +132,11 @@ for i, c in enumerate(cands, 1):
     res = falsifier.test(c)   # real graph search; updates c.status
     if res.falsified:
         g = res.counterexample_graph
-        print(f"    FALSIFICATION: ✗ counterexample found by {res.strategy_used} "
+        print(f"    FALSIFICATION: x counterexample found by {res.strategy_used} "
               f"(n={g.number_of_nodes()}, m={g.number_of_edges()}, "
               f"violation={res.violation:.3f}) — was a finite-DB artifact")
         continue
-    print("    FALSIFICATION: ✓ survived Z3/MCTS/VNS/CE search")
+    print("    FALSIFICATION: v survived Z3/MCTS/VNS/CE search")
 
     lean = formalizer.formalize(c)
     if c.status == ConjectureStatus.FORMALIZED and lean:
@@ -141,7 +144,7 @@ for i, c in enumerate(cands, 1):
         for ln in lean.splitlines():
             print(f"        {ln}")
         resp = prover.prove(c)
-        verdict = "✓ proved" if resp.success else f"✗ not proved ({(resp.error or 'stub')[:50]})"
+        verdict = "v proved" if resp.success else f"x not proved ({(resp.error or 'stub')[:50]})"
         print(f"    PROVER ({getattr(resp, 'model_name', 'stub')}): {verdict}")
     else:
         print("    LEAN 4: — not auto-formalizable (invariants outside the heuristic map)")

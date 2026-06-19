@@ -13,12 +13,20 @@ import csv
 import logging
 import random
 import sys
+if sys.stdout.encoding.lower() != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
 from collections import defaultdict
 
 import numpy as np
 import networkx as nx
 
-csv.field_size_limit(sys.maxsize)
+try:
+    csv.field_size_limit(sys.maxsize)
+except OverflowError:
+    csv.field_size_limit(2147483647)
 logging.basicConfig(level=logging.WARNING, format="%(message)s")
 
 import graphs.invariants as I
@@ -140,16 +148,16 @@ for cls in PUSH_CLASSES:
     res = falsifier.test(c)
     if res.falsified:
         g = res.counterexample_graph
-        print(f"    FALSIFICATION: ✗ counterexample by {res.strategy_used} "
+        print(f"    FALSIFICATION: x counterexample by {res.strategy_used} "
               f"(n={g.number_of_nodes()}, m={g.number_of_edges()})")
         continue
-    print("    FALSIFICATION: ✓ survived (note: random search rarely hits rare classes)")
+    print("    FALSIFICATION: v survived (note: random search rarely hits rare classes)")
     lean = formalizer.formalize(c)
     if c.status == ConjectureStatus.FORMALIZED and lean:
         print("    LEAN 4:")
         for ln in lean.splitlines():
             print(f"        {ln}")
         resp = prover.prove(c)
-        print(f"    PROVER: {'✓ proved' if resp.success else '✗ not proved (stub)'}")
+        print(f"    PROVER: {'v proved' if resp.success else 'x not proved (stub)'}")
     else:
         print("    LEAN 4: — not auto-formalizable")

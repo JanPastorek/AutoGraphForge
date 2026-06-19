@@ -23,14 +23,22 @@
 
 \tnotemark[1]
 \tnotetext[1]{All code, databases, and verification scripts described here are
-  reproducible from the artefacts accompanying this paper.}
+  reproducible from the artefacts accompanying this paper and are available at
+  \url{https://github.com/JanPastorek/GraphConjecturing}.}
 
-\author[1]{Author One}[%
-email=author.one@example.org,
-orcid=0000-0000-0000-0000,
+\author[1]{J\'an Pastorek}[%
+email=jan.pastorek@fmph.uniba.sk,
+orcid=0000-0001-8237-1275,
 ]
 \cormark[1]
-\address[1]{Affiliation, City, Country}
+\author[1]{Samuel Varchol}[%
+email=varchol3@uniba.sk,
+]
+\author[1]{Vladim\'ir Jan\v{c}\'ar}[%
+email=jancar12@uniba.sk,
+]
+\address[1]{Department of Applied Informatics, Comenius University in
+  Bratislava, Bratislava, Slovakia}
 
 \cortext[1]{Corresponding author.}
 
@@ -60,7 +68,7 @@ orcid=0000-0000-0000-0000,
   heuristic that searches over \emph{expression trees} rather than fixed linear
   templates---so that the generator's hypothesis language extends to sums,
   products, ratios, powers, and roots of invariants, with known bounds injected
-  as a \emph{theory} so that only strictly more significant statements survive. This allows us to quantify the complexity of the hypothesis language and to tune the coefficients of a nonlinear feature map to fit the tightest valid bound over the data. We then use recent autoformalization methods to translate surviving conjectures into Lean and we report on the first successful formalization of a nontrivial graph-theoretic inequality in Lean which are attempted by automated theorem provers.
+  as a \emph{theory} so that only strictly more significant statements survive. This allows us to quantify the complexity of the hypothesis language and to tune the coefficients of a nonlinear feature map to fit the tightest valid bound over the data. Finally, we use recent autoformalization methods to translate surviving conjectures into Lean~4 statement skeletons, a first step towards closing the loop with automated theorem provers, which we are currently implementing.
 \end{abstract}
 
 \begin{keywords}
@@ -79,7 +87,7 @@ orcid=0000-0000-0000-0000,
 Computer-assisted discovery of mathematical results and conjectures has a long history and with the advent of artificial intelligence and high-performance computing, it
 is increasingly recognized as valuable in the mathematical community.
 
-Computer-assistance in this area can be roughly classified into three areas based on the research stage it assists: (i) \emph{conjecturing}, which generates new statements that are hypothetised to be true based on a finite database (of graphs); (ii) \emph{refuting}, which searches for counterexamples to conjectures; and (iii) \emph{formalizing and proving}, which translates conjectures into a formal language and attempts to prove them using automated theorem provers.
+Computer-assistance in this area can be roughly classified into three areas based on the research stage it assists: (i) \emph{conjecturing}, which generates new statements that are hypothesised to be true based on a finite database (of graphs); (ii) \emph{refuting}, which searches for counterexamples to conjectures; and (iii) \emph{formalizing and proving}, which translates conjectures into a formal language and attempts to prove them using automated theorem provers.
 
 Automated conjecturing in graph theory has a forty-year history, from
 Fajtlowicz's \textsc{Graffiti}~\cite{fajtlowicz1988conjectures,wiki2026graffiti,larson2002intelligent} and
@@ -97,7 +105,7 @@ those that hold with equality on at least one graph. Many resulting statements
 have become theorems; some have been refuted by hand or by machine
 search, see for instance~\cite{brewster1995computational,larson2017automated,jooken2025computer}.
 
-A practitioner who reimplements such a system quickly meets four possible failures.
+A practitioner who reimplements such a system quickly meets five possible failures.
 First, a candidate can hold on every graph in a finite database yet be
 \emph{false in general}: the database simply lacks the structure that breaks
 it. Second, the system can produce a candidate that is \emph{true but known} ending up in an encyclopedia of mathematical facts. Third, the system can produce a candidate that is \emph{true but trivial} resulting in an ``avalanche of triviality''. Fourth is the \emph{monster conjecture}: a single
@@ -111,14 +119,14 @@ verified ``counterexample'' are each only as good as the data and invariant comp
 
 Computational methods for searching for (counter)examples of graphs have been recently summarised in a review article of Jorik Jooken~\cite{jooken2025computer}. Among others, the methods include exhaustive search with branch and bound, randomised search, and heuristic search. Quite recently, deep reinforcement learning has been applied to counterexample search \cite{wagner2021constructions}. 
 
-Lastly, there is a growing body of work on autoformalization and automated theorem proving in graph theory, see for instance \cite{gonthier2013formal,blanchette2020hammer,li2021graph,li2022graph,li2023graph}. However, altough we recently found in \cite{davila2026graffiti3} a certain hints in this direction, to the best of our knowledge, there is no existing system that integrates automated conjecturing, refuting, formalizing, and proving in a closed loop for graph theory. 
+Lastly, there is a growing body of work on autoformalization and automated theorem proving, including for graph theory, see for instance \cite{wu2022autoformalization,mavani2026chipfiring,nader2026gtbench,kalfus2026ramsey,zhang2026leanmarathon,deepseek2025prover}. However, although we recently found in \cite{davila2026graffiti3} certain hints in this direction, to the best of our knowledge there is no existing system that integrates automated conjecturing, refuting, formalizing, and proving in a closed loop for graph theory.
 
-In this paper, we describe and report on the development of a computational pipeline that aims to combine (i)-(iii) in a closed loop. The system \emph{autograph} iteratively refines conjectures by  generating and filtering conjectures and trying to refute them in a loop, and formalizes the surviving candidates into a proof assistant for automated theorem proving.
+In this paper, we describe and report on the development of a computational pipeline that aims to combine (i)-(iii) in a closed loop. The system \textsf{graphconj} iteratively refines conjectures by generating and filtering conjectures and trying to refute them in a loop, and formalizes the surviving candidates into a proof assistant for automated theorem proving.
 
 Our current contributions are:
 
 \begin{enumerate}
-  \item We build the first version of the computational pipeline \emph{autograph} and run it on a high-performance computing cluster. 
+  \item We build the first version of the computational pipeline \textsf{graphconj} and run it on a high-performance computing cluster.
   \item We build a database of $348{,}207$ graphs and $61$ invariants, combining among others the complete House of Graphs (HoG) export, and many other extremal graph families, including the strongly-regular, minimal-Ramsey,
   Cayley, cage, cograph, and minimally-rigid families.
   \item A novelty filter of $203$ classical or trivial theorems
@@ -135,19 +143,18 @@ Our current contributions are:
   first in the falsification loop and persists found counterexamples back into
   the dataset.
 \item A validated counterexample-search engine
-  (\S\ref{sec:engine}) that includes among others recent state-of-the-art methods such deep cross-entropy reinforcement learning or Monte Carlo methods. To validate it we reproduced the refutation of a number of conjectures and exhaustively verified a
+  (\S\ref{sec:engine}) that includes among others recent state-of-the-art methods such as deep cross-entropy reinforcement learning or Monte Carlo methods. To validate it we reproduced the refutation of a number of conjectures and exhaustively verified a
   range of open conjectures (\S\ref{sec:open}).
 \item An integration of the \textsc{Conjecturing} package
   (\S\ref{sec:expr}), which lifts generation from fixed linear/product
   templates to a Dalmatian search over expression trees, with curated known
   bounds supplied as a theory so that surviving conjectures are strictly more
   significant than the classical record.
-  pipeline produced and how verification rejected it.
 \end{enumerate}
 
 \section{Background and related work}
 
-We note that our system is not build from scratch but is built upon existing packages, frameworks and methodologies present in the state-of-the-art literature on each of the three areas of conjecturing, refuting, and formalizing and proving. In particular, the conjecture generation are built on top of TxGraffiti and Conjecturing; the counterexample search engine is built upon recent state-of-the-art methods such deep cross-entropy reinforcement learning or Monte Carlo methods; and the formalization and proving layer is built upon recent autoformalization methods and automated theorem provers.
+We note that our system is not built from scratch but is built upon existing packages, frameworks and methodologies present in the state-of-the-art literature on each of the three areas of conjecturing, refuting, and formalizing and proving. In particular, the conjecture generation is built on top of TxGraffiti and Conjecturing; the counterexample search engine is built upon recent state-of-the-art methods such as deep cross-entropy reinforcement learning or Monte Carlo methods; and the formalization and proving layer is built upon recent autoformalization methods and automated theorem provers.
 
 \label{sec:related}
 
@@ -495,7 +502,8 @@ that survives novelty and selection enters the falsification loop.
 \label{sec:adv}
 A finite database cannot certify a universally-quantified statement. We make
 this concrete: the bound $\delta(G)\le\lambda(G)+5$ holds on all $347{,}855$
-graphs of the combined corpus, yet is false---the barbell $K_{10}\!-\!K_{10}$
+graphs of the combined corpus on which $\lambda$ is defined, yet is
+false---the barbell $K_{10}\!-\!K_{10}$
 has $\delta=9,\lambda=1$. The combined corpus simply contains no graph with
 $\delta-\lambda>5$.
 
@@ -677,7 +685,7 @@ refuted were the ones already known to be false.
 \end{table}
 
 The exhaustive checks are themselves a small contribution: six Graffiti.pc/%
-TxGraffiti conjectures are now computationally confirmed on all $273{,}191$
+TxGraffiti conjectures are now computationally confirmed on all $273{,}192$
 connected graphs of order at most nine.
 
 \subsection{The discipline of rejecting one's own discoveries}
@@ -720,7 +728,7 @@ database.
 \section*{Declaration on Generative AI}
 During the preparation of this work, the author(s) used a large language model
 as a coding and experimentation assistant to implement the pipeline, run the
-experiments, and help with the draft of the manuscript. All computational results were verified against authoritative data source -- House of Graphs and exact recomputation; the
+experiments, and help with the draft of the manuscript. All computational results were verified against authoritative data sources -- House of Graphs and exact recomputation; the
 author(s) reviewed and edited all content and take full responsibility for the
 publication's content.
 

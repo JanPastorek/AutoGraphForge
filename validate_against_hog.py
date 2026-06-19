@@ -11,13 +11,21 @@ graphs) on an authoritative reference.
 import csv
 import random
 import sys
+if sys.stdout.encoding.lower() != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
 from collections import defaultdict
 
 import networkx as nx
 
 import graphs.invariants as I
 
-csv.field_size_limit(sys.maxsize)
+try:
+    csv.field_size_limit(sys.maxsize)
+except OverflowError:
+    csv.field_size_limit(2147483647)
 SAMPLE = int(sys.argv[1]) if len(sys.argv) > 1 else 2500
 MAX_N = int(sys.argv[2]) if len(sys.argv) > 2 else 13
 
@@ -43,7 +51,7 @@ with open("database/graph_database_enriched.csv") as fh:
                 pass
 rng.shuffle(hog_rows)
 hog_rows = hog_rows[:SAMPLE]
-print(f"Validating {len(hog_rows)} HoG graphs (n ≤ {MAX_N}) against our code\n")
+print(f"Validating {len(hog_rows)} HoG graphs (n <= {MAX_N}) against our code\n")
 
 mism = defaultdict(int)
 examples = defaultdict(list)

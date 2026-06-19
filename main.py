@@ -17,6 +17,14 @@ Usage
 
 from __future__ import annotations
 
+import sys
+# Ensure stdout can handle utf-8 on Windows
+if sys.stdout.encoding.lower() != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 import argparse
 import logging
 import os
@@ -188,10 +196,10 @@ def main(argv=None) -> int:
 
 def banner() -> str:
     return r"""
- ╔══════════════════════════════════════════════════════════╗
- ║   Autonomous Graph Theory Conjecture Pipeline            ║
- ║   Stages: TxGraffiti → Falsification → Lean4 → Prover   ║
- ╚══════════════════════════════════════════════════════════╝
+ +----------------------------------------------------------+
+ |   Autonomous Graph Theory Conjecture Pipeline            |
+ |   Stages: TxGraffiti -> Falsification -> Lean4 -> Prover |
+ +----------------------------------------------------------+
 """
 
 
@@ -199,11 +207,11 @@ def _print_conjecture_table(conjectures) -> None:
     from conjecture import ConjectureStatus
 
     status_icon = {
-        ConjectureStatus.PROPOSED:    "○",
-        ConjectureStatus.FALSIFIED:   "✗",
+        ConjectureStatus.PROPOSED:    "o",
+        ConjectureStatus.FALSIFIED:   "x",
         ConjectureStatus.SURVIVED:    "~",
-        ConjectureStatus.FORMALIZED:  "◆",
-        ConjectureStatus.PROVEN:      "✓",
+        ConjectureStatus.FORMALIZED:  "*",
+        ConjectureStatus.PROVEN:      "v",
         ConjectureStatus.PROOF_FAILED:"!",
     }
 
@@ -245,7 +253,7 @@ def _print_new_conjectures(conjectures) -> None:
         cls = c.inequality.hypothesis if c.inequality else None
         scope = f"for {cls} graphs" if cls else "all graphs"
         n_tight = len(c.tightness_witnesses)
-        print(f"  • {c.statement}")
+        print(f"  - {c.statement}")
         print(f"      score={c.score:.2f}  scope={scope}  tight on {n_tight} graph(s)")
 
     if known:

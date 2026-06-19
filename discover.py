@@ -167,7 +167,10 @@ def adversarial_ok(slack, need):
 
 # ── propose on the exact census (sampled for the product sweep) ───────────
 import csv, sys
-csv.field_size_limit(sys.maxsize)
+try:
+    csv.field_size_limit(sys.maxsize)
+except OverflowError:
+    csv.field_size_limit(2147483647)
 CENSUS = "database/census_le9.csv"
 CORE = ["alpha", "omega", "chi", "gamma", "nu", "kappa", "lambda", "delta",
         "Delta", "rad", "diam", "ind_dom"]

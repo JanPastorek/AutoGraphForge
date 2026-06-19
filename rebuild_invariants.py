@@ -23,7 +23,10 @@ from networkx.algorithms.clique import max_weight_clique
 
 import graphs.invariants as I
 
-csv.field_size_limit(sys.maxsize)
+try:
+    csv.field_size_limit(sys.maxsize)
+except OverflowError:
+    csv.field_size_limit(2147483647)
 SRC = "database/graph_database_enriched.csv"
 BAK = SRC + ".bak"
 
