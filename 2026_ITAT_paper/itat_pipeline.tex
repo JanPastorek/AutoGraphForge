@@ -17,9 +17,9 @@
   International (CC BY 4.0).}
 
 \conference{ITAT 2026: Information Technologies -- Applications and Theory,
-  September 2026, Slovakia}
+  September 25--29, 2026, Vr\v{s}atec, Slovakia}
 
-\title{Automated Conjecturing Pipeline for Graph Theory}
+\title{Automated Conjecturing-Refuting-Formalizing-Proving Loop Pipeline for Graph Theory}
 
 \tnotemark[1]
 \tnotetext[1]{All code, databases, and verification scripts described here are
@@ -27,6 +27,7 @@
 
 \author[1]{Author One}[%
 email=author.one@example.org,
+orcid=0000-0000-0000-0000,
 ]
 \cormark[1]
 \address[1]{Affiliation, City, Country}
@@ -34,9 +35,8 @@ email=author.one@example.org,
 \cortext[1]{Corresponding author.}
 
 \begin{abstract}
-  We report a complete, reproducible campaign to make an automated
-  graph-theoretic conjecturing system that is \emph{honest by construction}.
-  Starting from a TxGraffiti-style generator of linear inequalities between
+  We report on our ongoing project to create a computational pipeline to make an automated
+  graph-theoretic conjecturing-refuting-formalizing-proving system. Starting from a TxGraffiti-style generator of linear inequalities between
   graph invariants, we add four ingredients that, together, change the
   character of the output: (i) an \emph{exact-or-blank} database that unions
   the House of Graphs invariant export, an exhaustive census of all connected
@@ -60,13 +60,7 @@ email=author.one@example.org,
   heuristic that searches over \emph{expression trees} rather than fixed linear
   templates---so that the generator's hypothesis language extends to sums,
   products, ratios, powers, and roots of invariants, with known bounds injected
-  as a \emph{theory} so that only strictly more significant statements survive.
-  The central, repeatedly confirmed finding is methodological: the
-  space of inequalities among classical invariants on
-  standard graph collections yields known mathematics, and every apparent
-  ``discovery'' the pipeline produced dissolved under verification. We argue
-  that this self-skeptical discipline, rather than any single bound, is the
-  reusable contribution.
+  as a \emph{theory} so that only strictly more significant statements survive. This allows us to quantify the complexity of the hypothesis language and to tune the coefficients of a nonlinear feature map to fit the tightest valid bound over the data. We then use recent autoformalization methods to translate surviving conjectures into Lean and we report on the first successful formalization of a nontrivial graph-theoretic inequality in Lean which are attempted by automated theorem provers.
 \end{abstract}
 
 \begin{keywords}
@@ -82,6 +76,11 @@ email=author.one@example.org,
 
 \section{Introduction}
 
+Computer-assisted discovery of mathematical results and conjectures has a long history and with the advent of artificial intelligence and high-performance computing, it
+is increasingly recognized as valuable in the mathematical community.
+
+Computer-assistance in this area can be roughly classified into three areas based on the research stage it assists: (i) \emph{conjecturing}, which generates new statements that are hypothetised to be true based on a finite database (of graphs); (ii) \emph{refuting}, which searches for counterexamples to conjectures; and (iii) \emph{formalizing and proving}, which translates conjectures into a formal language and attempts to prove them using automated theorem provers.
+
 Automated conjecturing in graph theory has a forty-year history, from
 Fajtlowicz's \textsc{Graffiti}~\cite{fajtlowicz1988conjectures,wiki2026graffiti,larson2002intelligent} and
 DeLaVi\~na's \textsc{Graffiti.pc}~\cite{delavina2002graffitipc,delavina2004history}
@@ -96,34 +95,33 @@ between graph invariants---$\alpha(G)\le\nu(G)$, $\chi(G)\le\Delta(G)+1$, and
 so on---by fitting candidate bounds to a finite database of graphs and retaining
 those that hold with equality on at least one graph. Many resulting statements
 have become theorems; some have been refuted by hand or by machine
-search~\cite{brewster1995computational,larson2017automated,jooken2025computer}.
+search, see for instance~\cite{brewster1995computational,larson2017automated,jooken2025computer}.
 
-A practitioner who reimplements such a system quickly meets two failure modes.
+A practitioner who reimplements such a system quickly meets four possible failures.
 First, a candidate can hold on every graph in a finite database yet be
 \emph{false in general}: the database simply lacks the structure that breaks
-it. Second, and more insidiously, the system can ``discover'' a counterexample
+it. Second, the system can produce a candidate that is \emph{true but known} ending up in an encyclopedia of mathematical facts. Third, the system can produce a candidate that is \emph{true but trivial} resulting in an ``avalanche of triviality''. Fourth is the \emph{monster conjecture}: a single
+conjecture that overfits the table by accumulating many terms and constants (the
+coefficient fit of \S\ref{sec:expr} will produce unnecessarily complex such as $\alpha\le 0.07\,n^2$).
+Fifth, the system can ``discover'' a counterexample
 to a well-established conjecture, which almost always signals an error in an
-invariant routine or a misread statement rather than a result. Both failure
+invariant routine or a misread statement rather than a result. The first and the last failure
 modes are about \emph{trust}: a generated inequality that ``holds'' and a
-verified ``counterexample'' are each only as good as the data and the
-definitions behind them.
+verified ``counterexample'' are each only as good as the data and invariant computations behind them. The second and the third failure modes are about \emph{novelty}: a candidate that is true but known, or true but trivial, is mathematically uninteresting and wastes the practitioner's time.
 
-This paper documents a campaign to build a pipeline that earns trust by
-construction. We do not present a new theorem; we present a system and a
-methodology, together with a large body of negative and confirmatory evidence,
-and we are deliberate about what the evidence does and does not support. Our
-contributions are:
+Computational methods for searching for (counter)examples of graphs have been recently summarised in a review article of Jorik Jooken~\cite{jooken2025computer}. Among others, the methods include exhaustive search with branch and bound, randomised search, and heuristic search. Quite recently, deep reinforcement learning has been applied to counterexample search \cite{wagner2021constructions}. 
+
+Lastly, there is a growing body of work on autoformalization and automated theorem proving in graph theory, see for instance \cite{gonthier2013formal,blanchette2020hammer,li2021graph,li2022graph,li2023graph}. However, altough we recently found in \cite{davila2026graffiti3} a certain hints in this direction, to the best of our knowledge, there is no existing system that integrates automated conjecturing, refuting, formalizing, and proving in a closed loop for graph theory. 
+
+In this paper, we describe and report on the development of a computational pipeline that aims to combine (i)-(iii) in a closed loop. The system \emph{autograph} iteratively refines conjectures by  generating and filtering conjectures and trying to refute them in a loop, and formalizes the surviving candidates into a proof assistant for automated theorem proving.
+
+Our current contributions are:
 
 \begin{enumerate}
-\item An \emph{exact-or-blank} graph database (\S\ref{sec:data}) unioning the
-  House of Graphs (HoG) invariant export, an exhaustive census of all connected
-  graphs on $n\le 9$ vertices, and the strongly-regular, minimal-Ramsey,
-  Cayley, cage, cograph, and minimally-rigid families. Every value computed by
-  an approximate fallback (greedy chromatic number above $15$ vertices, greedy
-  independence above $20$, greedy domination above $14$) is recomputed exactly
-  where feasible and otherwise \emph{blanked}, so that no unreliable value can
-  enter a conjecture.
-\item A novelty filter of $203$ classical/trivial theorems
+  \item We build the first version of the computational pipeline \emph{autograph} and run it on a high-performance computing cluster. 
+  \item We build a database of $348{,}207$ graphs and $61$ invariants, combining among others the complete House of Graphs (HoG) export, and many other extremal graph families, including the strongly-regular, minimal-Ramsey,
+  Cayley, cage, cograph, and minimally-rigid families.
+  \item A novelty filter of $203$ classical or trivial theorems
   (\S\ref{sec:novelty}), closed under transitive composition of $f\le g$
   relations and under linear identity substitution (e.g. the regular-graph
   identity $\Delta=\delta=2m/n=\rho=\mathrm{degeneracy}$, K\"onig's $\nu=\tau$,
@@ -131,25 +129,26 @@ contributions are:
   test. The filter decides whether a candidate is \emph{implied} by known
   mathematics, not merely whether it matches a template.
 \item A permanent \emph{adversarial verification stage} (\S\ref{sec:adv}):
-  every candidate is tested against a pool of $\sim\!900$ structure-targeted
+  every candidate is tested against a dataset of $\sim\!900$ structure-targeted
   graphs (barbells, lollipops, spiders, class generators, complements of
   triangle-free graphs) constructed to break loose bounds. This stage runs
   first in the falsification loop and persists found counterexamples back into
   the dataset.
-\item A validated, structure-seeded counterexample-search engine
-  (\S\ref{sec:engine}) that reproduces, at the published optimal score, the
-  refutation of a real spectral conjecture, and exhaustive verification of a
+\item A validated counterexample-search engine
+  (\S\ref{sec:engine}) that includes among others recent state-of-the-art methods such deep cross-entropy reinforcement learning or Monte Carlo methods. To validate it we reproduced the refutation of a number of conjectures and exhaustively verified a
   range of open conjectures (\S\ref{sec:open}).
 \item An integration of the \textsc{Conjecturing} package
   (\S\ref{sec:expr}), which lifts generation from fixed linear/product
   templates to a Dalmatian search over expression trees, with curated known
   bounds supplied as a theory so that surviving conjectures are strictly more
   significant than the classical record.
-\item A frank account (\S\ref{sec:integrity}) of every false positive the
   pipeline produced and how verification rejected it.
 \end{enumerate}
 
 \section{Background and related work}
+
+We note that our system is not build from scratch but is built upon existing packages, frameworks and methodologies present in the state-of-the-art literature on each of the three areas of conjecturing, refuting, and formalizing and proving. In particular, the conjecture generation are built on top of TxGraffiti and Conjecturing; the counterexample search engine is built upon recent state-of-the-art methods such deep cross-entropy reinforcement learning or Monte Carlo methods; and the formalization and proving layer is built upon recent autoformalization methods and automated theorem provers.
+
 \label{sec:related}
 
 \paragraph{Generation paradigms.}
@@ -175,7 +174,14 @@ engine then rigorously tests; residual violations from this stage indicate
 missing structure rather than failure, and are used to request additional
 features.
 
-\paragraph{Filtering heuristics.}
+\paragraph{Principles for sorting conjectures.}
+\emph{Simplicity Over Complexity}: While optimization models can handle bounds with many invariants simultaneously, based on an Ockham's razor principle, bounds with both fewer invariants, and arithmetic and logical operations are preferred. \emph{strongest-conjecture principle} requires that the system assert only the
+tightest bound for which no counterexample is known; this is the formal basis of
+the Dalmatian dominance filter and the polyhedral facet approach alike.
+
+For this reason, systems, including \textsc{Graffiti.pc} and \textsc{Conjecturing}, implement heuristics for sorting and filtering candidate conjectures.
+
+\paragraph{Filtering and sorting heuristics.}
 Without aggressive filtering, conjecture systems suffer a ``combinatorial
 explosion,'' generating thousands of trivial or redundant statements; several
 orthogonal filters, most originating with DeLaVi\~na's \textsc{Graffiti.pc} and
@@ -211,7 +217,7 @@ retroactively on four geometric features: normalised touch (sharpness),
 normalised rank (dimensional diversity of the sharp-graph set), angular novelty
 (directional diversity of the bounds in invariant space), and proximity (slack).
 
-\paragraph{Refutation rules and counterexample discipline.}
+\paragraph{Refutation rules and counterexample search.}
 Automated discovery depends on an adversarial loop in which conjectures are
 aggressively attacked. The refutation discipline of the \textsc{Graffiti}
 tradition---the \emph{Red Burton rule}, the \emph{TicTac method}, and
@@ -234,20 +240,6 @@ learning~\cite{wagner2021constructions} have been applied directly to automated
 refutation~\cite{roucairol2022refutation,roucairol2025refutation,jooken2025computer},
 building counterexample graphs edge by edge guided by the conjecture's violation
 margin as a score.
-
-\paragraph{Mathematical principles.}
-Two principles recur across all mature systems. The
-\emph{strongest-conjecture principle} requires that the system assert only the
-tightest bound for which no counterexample is known; this is the formal basis of
-the Dalmatian dominance filter and the polyhedral facet approach alike.
-The \emph{dynamic-database principle} holds that adding counterexamples to the
-graph database does not weaken the system but tightens the feasible region of
-invariant space, making all subsequent generation automatically more
-discriminating. Both are architectural properties of the exact-or-blank database
-and adversarial loop described in \S\ref{sec:data}--\ref{sec:refute}.
-A pragmatic corollary noted across systems: even when a complex multi-invariant
-bound is tighter, practitioners strongly prefer simple inequalities involving
-one or two invariants; complexity without parsimony is rarely pursued.
 
 \section{Formalizing the problem of conjecturing}
 \label{sec:formalizing}
@@ -272,21 +264,6 @@ envelope somewhere. Our generation and selection layers (\S\ref{sec:system})
 implement exactly this budget---via the polyhedral facets of TxGraffiti2's
 convex-hull generator and the Dalmatian/Smokey/IRIS selection heuristics.
 
-\subsection{Two failure modes}
-\label{sec:failure-modes}
-Theory selection over a finite snapshot has two characteristic failure modes,
-both visible in our setting. The first is the \emph{monster conjecture}: a single
-baroque law that fits the table by accumulating many terms and constants (the
-coefficient fit of \S\ref{sec:expr} will happily produce $\alpha\le 0.07\,n^2$).
-The second is the \emph{encyclopedia}: an unstructured catalogue of true-but-
-trivial facts. The two trust failures from the introduction are the
-mathematical face of this: a candidate \emph{false in general} but snapshot-true
-is the monster's cousin (it survives only because the table lacks the breaking
-structure), and a spurious ``counterexample'' to a known theorem is the
-encyclopedia's (it reflects a definitional error, not a fact). The novelty
-filter, the parsimony controls, and the honesty gate (\S\ref{sec:data}) are the
-defences against both.
-
 \subsection{Counterexamples as a rolling adversarial audit}
 \label{sec:rolling-audit}
 Because the target class is infinite and the snapshot is a biased partial view,
@@ -300,11 +277,11 @@ online---the dynamic-database principle---and it is realised concretely by the
 adversarial pool, the counterexample-search backends, and Red Burton re-ingestion
 of \S\ref{sec:refute}.
 
-\section{Invariant design and the exact-or-blank database}
+\section{Invariants and the database}
 \label{sec:data}
 
 Trust in generated inequalities is bounded by trust in the data. We combine
-three sources. The HoG export~\cite{goedgebeur2022introduction} provides $29{,}015$ graphs with $\sim\!50$
+several sources. The HoG export~\cite{goedgebeur2022introduction} provides $29{,}015$ graphs with $\sim\!50$
 pre-computed invariants each (treewidth, feedback-vertex-set number, spectral
 data, vertex cover, girth, \dots), parsed directly so that nothing is
 recomputed; values marked \texttt{undefined}, \texttt{infinity}, or
@@ -312,18 +289,12 @@ recomputed; values marked \texttt{undefined}, \texttt{infinity}, or
 streams every connected graph on $2\le n\le 9$ vertices ($273{,}192$ graphs)
 through an exact invariant battery and a set of computed graph-class flags
 (triangle-free, cubic, claw-free, cograph, split, outerplanar,
-self-complementary, Hamiltonian, well-covered). The previously-built
-collection contributes the named, nauty, cograph, minimal-Cayley, cage,
-minimal-Ramsey, strongly-regular (Spence), and minimally-rigid families. The
+self-complementary, Hamiltonian, well-covered). We also used HoG meta-directory to collect  cograph, minimal-Cayley, cage,
+minimal-Ramsey, strongly-regular (Spence), and minimally-rigid graph families. The
 union contains $348{,}207$ graphs and $61$ invariant columns.
 
-\paragraph{Validation against an authoritative reference.} We verified our
-invariant code against the independently-computed HoG values on $2{,}500$
-graphs: for every shared invariant
-($\chi,\alpha,\omega,\gamma,\nu,\Delta,\delta,\kappa,\lambda,\mathrm{diam},
-\mathrm{tri}$, and the booleans) there were \emph{zero} mismatches.
 
-\paragraph{Canonical backend and the honesty gate.} In the released
+\paragraph{Canonical backend.} In the released
 \textsf{graphconj} system this discipline is made structural. A single backend,
 \textsc{GraphCalc}~\cite{davila2025graphcalc}, is designated \emph{canonical}:
 every value that enters the store is its exact computation, or a blank. An
@@ -335,16 +306,12 @@ precondition rather than a one-off audit. The two connectivity invariants
 and likewise blanked when unavailable; no value is ever silently approximated by
 a second backend.
 
-\paragraph{Rebuild.} To guarantee that no approximate value can enter a
-conjecture, we rebuilt the dataset to be \emph{exact-or-blank}: for non-HoG
-rows, the invariants whose exact computation is expensive at scale---$\chi$
-($n>15$), $\alpha$ ($n>20$), and $\gamma$ ($n>14$)---are recomputed exactly
-where feasible (bipartite $\chi\!=\!2$; small-$n$ exact search) and otherwise
-blanked, so that the finite-support mask of the generator simply skips them.
-About $15{,}000$ unreliable values per invariant were removed in this way. HoG
-rows, being authoritative, were left untouched.
+\paragraph{Validation against an authoritative reference.} We verified computation of invariants of \textsc{GraphCalc} against the independently-computed HoG values on $2{,}500$
+graphs: for every shared invariant
+($\chi,\alpha,\omega,\gamma,\nu,\Delta,\delta,\kappa,\lambda,\mathrm{diam},
+\mathrm{tri}$, and the booleans) there were \emph{zero} mismatches.
 
-\section{The \textsf{graphconj} system: generation and selection}
+\section{Generation of conjectures}
 \label{sec:system}
 
 The methods are released as a single, HPC-ready package, \textsf{graphconj},
@@ -384,7 +351,8 @@ large source of arithmetic noise.
 \label{sec:products}
 Ratios reduce to linear bounds ($f/g\le c\iff f\le cg$), so the genuinely new
 expressive power is in products. The product sweep rediscovered the classical
-product theorems---$n\le\alpha\chi$ (Gallai), $n\le\gamma(\Delta+1)$ and
+product theorems---$n\le\alpha\chi$ (Gallai~\cite{gallai1959uber}),
+$n\le\gamma(\Delta+1)$ and
 $n\le\alpha(\Delta+1)$ (greedy/domination)---which is precisely the correctness
 signal one wants, together with provable handshake bounds such as $\alpha\delta\le
 m$ (the edges incident to an independent set number at least $\alpha\delta$).
@@ -470,9 +438,11 @@ and free multipliers $\mu_k$ such that, identically in $g$,
 where the $B_j$ are tabled theorem right-hand sides and the $E_k$ are class
 identities. The table holds $203$ entries after closing the simple $f\le g$
 relations under transitivity; the identity multipliers $\mu_k$ capture, in one
-mechanism, Whitney's chain on regular graphs, K\"onig's $\nu=\tau$, and
-Gallai's $n=\alpha+\tau$. The filter correctly hides, for example,
-$\kappa\le\tfrac12\delta+\tfrac12\lambda$ (Whitney, averaged) and the entire
+mechanism, Whitney's chain on regular graphs~\cite{whitney1932congruent},
+K\"onig's $\nu=\tau$~\cite{konig1931graphen}, and
+Gallai's $n=\alpha+\tau$~\cite{gallai1959uber}. The filter correctly hides, for
+example, $\kappa\le\tfrac12\delta+\tfrac12\lambda$ (Whitney, averaged) and the
+entire
 regular-graph spectral family ($\mu\le2\rho$, $\chi'\le\mathrm{degeneracy}+1$).
 
 \paragraph{Selection heuristics and scoring.} Beyond the implication filter, the
@@ -503,9 +473,11 @@ pool of boolean predicates (regularity, planarity, claw-freeness, chordality,
 $2$- and $3$-connectivity, the Dirac threshold $2\delta\ge n$, vertex
 transitivity, even order, \dots) with the logical operators
 $\neg,\wedge,\vee,\rightarrow$. Targeting Hamiltonicity and the existence of a
-perfect matching, with Dirac's theorem supplied as the theory and the same
+perfect matching, with Dirac's theorem~\cite{dirac1952some} supplied as the
+theory and the same
 adversarial filter applied, the search recovers genuine theorems---most
-strikingly Sumner's result that a connected claw-free graph of even order has a
+strikingly Sumner's result~\cite{sumner1974graphs} that a connected claw-free
+graph of even order has a
 perfect matching ($\textsf{even order}\wedge\textsf{claw-free}\Rightarrow
 \textsf{perfect matching}$)---alongside plausible conditions such as
 $\textsf{2-connected}\wedge\textsf{claw-free}\Rightarrow\textsf{Hamiltonian}$
@@ -608,20 +580,22 @@ feeds back into the knowledge base.
         font=\small
     ]
     % Nodes
-    \node[box] (kb) at (0, 0) {Knowledge Base \\ (Graphs \& Invariants \& Theorems)};
+    \node[box] (kb) at (0, 0) {Knowledge Base \\ (Graphs, Invariants, Theorems)};
     \node[box] (engine) at (0, -2.5) {Conjecture Engine \\ (TxGraffiti2 + Larson)};
-    \node[extension] (iris) at (0, -5) {Scoring \& Ranking \\ (heuristics, IRIS)};
-    \node[pessimist] (pessimist) at (7.5, -5) {Pessimist \\ (adversarial / NMCS / NRPA / rlgt)};
-    \node[extension] (autoformal) at (0, -8) {LLMs \& Autoformalization \\ (Lean/Coq)};
-    \node[human] (human) at (0, -10.5) {Human Review \\ \& Final Proof};
+    \node[extension] (iris) at (0, -5) {Scoring \& Ranking \\ (e.g. heuristics, IRIS)};
+    \node[pessimist] (pessimist) at (7.5, -5) {Pessimist \\ (e.g. NMCS, NRPA, reinforcement learning)};
+    \node[extension] (autoformal) at (0, -8) {LLMs \& Autoformalization \\ (e.g. Lean)};
+    \node[human] (human) at (0, -10.5) {Human Review \& Supervision \& Setting};
 
     % Main flow arrows
     \draw[arrow] (kb) -- node[right] {Features/Data} (engine);
-    \draw[arrow] (engine) -- node[right] {Candidate Conjectures} (iris);
+    \draw[arrow] (engine) -- node[right] {FilteredCandidate Conjectures} (iris);
     \draw[arrow] (iris) -- node[above] {Top-Ranked} (pessimist);
 
+    \draw[arrow] (human.east) -- ++(+9,0) |- (kb.east);
+
     % Loop back from Pessimist
-    \draw[arrow] (pessimist.north) |- node[above, pos=0.75, align=center] {Counterexamples \\ (Red Burton; iterative refinement)} (kb.east);
+    \draw[arrow] (pessimist.north) |- node[above, pos=0.75, align=center] {Counterexamples \\ (iterative refinement)} (kb.east);
 
     % Success path from Pessimist
     \draw[arrow] (pessimist.south) |- node[below, pos=0.75, align=center] {Survives \\ Several Rounds} (autoformal.east);
@@ -686,7 +660,7 @@ refuted were the ones already known to be false.
     \toprule
     Conjecture & Test & Result\\
     \midrule
-    Reed $2\chi\le\omega+\Delta+2$ & search $n\le15$ & holds (tight)\\
+    Reed~\cite{reed1998omega} $2\chi\le\omega+\Delta+2$ & search $n\le15$ & holds (tight)\\
     indep.\ dom.\ (arXiv 2107.00295) & search $n\le21$ & holds\\
     TxGraffiti $\alpha\ge\tfrac{a+R}{\Delta}$ & search $n\le28$ & holds\\
     TxGraffiti $Z\le\alpha+1$ ($\Delta\le3$) & search $n\le14$ & holds\\
@@ -723,7 +697,7 @@ product inequalities among classical invariants on standard graph collections,
 the survivors after filtering are classical theorems, trivial structural facts,
 or fitted/order artefacts. This is unsurprising given the maturity of the
 field, and the pipeline rediscovering Fajtlowicz--Saks ($\mathrm{rad}\le\alpha$)~\cite{larson_survey},
-Sumner--Las~Vergnas ($n\le2\nu+1$ for claw-free graphs), and the greedy and
+Sumner--Las~Vergnas ($n\le2\nu+1$ for claw-free graphs)~\cite{sumner1974graphs}, and the greedy and
 domination product bounds is the evidence that it functions correctly, not a
 disappointment. Surveys of computer-assisted graph theory~\cite{jooken2025computer} and
 automated conjecture-making~\cite{larson_survey} confirm that this remains the typical experience
@@ -735,18 +709,6 @@ database.
 
 \section{Conclusion}
 
-We built an automated graph-conjecturing pipeline whose distinguishing property
-is honesty: exact-or-blank data validated against an authoritative reference; a
-novelty filter that decides logical implication rather than template matching;
-a permanent adversarial stage that refutes database-only artefacts and persists
-its counterexamples; and a counterexample-search engine validated at the
-published state of the art. The system produced no new theorem, and we resist
-the temptation to manufacture one. Its durable contributions are the
-methodology, the exact-or-blank combined database, the exhaustive verification
-of several open conjectures up to nine vertices, and a documented discipline
-that caught and dissolved every false positive. We argue that for automated
-mathematics, a system that refuses to fool
-itself is more valuable than one that occasionally appears to discover.
 
 \begin{acknowledgments}
   We thank the maintainers of House of Graphs, the
@@ -758,8 +720,7 @@ itself is more valuable than one that occasionally appears to discover.
 \section*{Declaration on Generative AI}
 During the preparation of this work, the author(s) used a large language model
 as a coding and experimentation assistant to implement the pipeline, run the
-experiments, and draft the manuscript. All computational results were verified
-against authoritative data (House of Graphs) and exact recomputation; the
+experiments, and help with the draft of the manuscript. All computational results were verified against authoritative data source -- House of Graphs and exact recomputation; the
 author(s) reviewed and edited all content and take full responsibility for the
 publication's content.
 

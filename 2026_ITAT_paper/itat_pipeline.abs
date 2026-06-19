@@ -1,6 +1,5 @@
-We report a complete, reproducible campaign to make an automated
-  graph-theoretic conjecturing system that is \emph{honest by construction}.
-  Starting from a TxGraffiti-style generator of linear inequalities between
+We report on our ongoing project to create a computational pipeline to make an automated
+  graph-theoretic conjecturing-refuting-formalizing-proving system. Starting from a TxGraffiti-style generator of linear inequalities between
   graph invariants, we add four ingredients that, together, change the
   character of the output: (i) an \emph{exact-or-blank} database that unions
   the House of Graphs invariant export, an exhaustive census of all connected
@@ -24,10 +23,4 @@ We report a complete, reproducible campaign to make an automated
   heuristic that searches over \emph{expression trees} rather than fixed linear
   templates---so that the generator's hypothesis language extends to sums,
   products, ratios, powers, and roots of invariants, with known bounds injected
-  as a \emph{theory} so that only strictly more significant statements survive.
-  The central, repeatedly confirmed finding is methodological: the
-  space of inequalities among classical invariants on
-  standard graph collections yields known mathematics, and every apparent
-  ``discovery'' the pipeline produced dissolved under verification. We argue
-  that this self-skeptical discipline, rather than any single bound, is the
-  reusable contribution.
+  as a \emph{theory} so that only strictly more significant statements survive. This allows us to quantify the complexity of the hypothesis language and to tune the coefficients of a nonlinear feature map to fit the tightest valid bound over the data. We then use recent autoformalization methods to translate surviving conjectures into Lean and we report on the first successful formalization of a nontrivial graph-theoretic inequality in Lean which are attempted by automated theorem provers.
