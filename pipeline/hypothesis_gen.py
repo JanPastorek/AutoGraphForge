@@ -65,6 +65,11 @@ class TxGraffitiGenerator:
     def __init__(self, db: GraphDatabase, cfg: Config = CONFIG):
         self.db = db
         self.cfg = cfg
+        # Restrict the LHS (target) invariants of the sweep to this subset, for
+        # parallel sharding. None ⇒ all numeric invariants. The Dalmatian filter
+        # buckets by LHS invariant, so different LHS shards are independent.
+        self.lhs_subset: Optional[set] = None
+        self._arrays = None  # memoised (names, numeric, bool_props, vals, bvals)
 
     # ----------------------------------------------------------------- API --
 
@@ -95,6 +100,8 @@ class TxGraffitiGenerator:
 
     def _load_arrays(self):
         """Vectorise the database into per-invariant numpy arrays (NaN = missing)."""
+        if self._arrays is not None:
+            return self._arrays
         entries = list(self.db)
         names = [e.name for e in entries]
         inv_names = list(self.db.invariant_names()) if hasattr(self.db, "invariant_names") \
@@ -109,7 +116,8 @@ class TxGraffitiGenerator:
             b: np.array([e.invariants.get(b, np.nan) for e in entries], dtype=float)
             for b in bool_props
         }
-        return names, numeric, bool_props, vals, bvals
+        self._arrays = (names, numeric, bool_props, vals, bvals)
+        return self._arrays
 
     def _contexts(self, bool_props, bvals, n_graphs):
         """Yield (hypothesis, boolean-mask) pairs: unconditioned + each class."""
@@ -135,9 +143,14 @@ class TxGraffitiGenerator:
         candidates: List[Tuple[Conjecture, np.ndarray, tuple]] = []
         seen: set = set()
 
+        lhs_targets = [a for a in numeric if (self.lhs_subset is None
+                                              or a in self.lhs_subset)]
+
         for hyp, cmask in self._contexts(bool_props, bvals, n_graphs):
             # --- two-variable bounds: inv_a ≤ coeff·inv_b + offset ---
-            for inv_a, inv_b in itertools.permutations(numeric, 2):
+            for inv_a, inv_b in itertools.product(lhs_targets, numeric):
+                if inv_a == inv_b:
+                    continue
                 valid = cmask & finite[inv_a] & finite[inv_b]
                 if int(valid.sum()) < self.cfg.txgraffiti_min_support:
                     continue
@@ -148,7 +161,7 @@ class TxGraffitiGenerator:
 
             # --- multivariable bounds: inv_a ≤ c_b·inv_b + c_c·inv_c + offset ---
             if self.cfg.txgraffiti_multivariable and self.cfg.txgraffiti_max_rhs_terms >= 2:
-                for inv_a in numeric:
+                for inv_a in lhs_targets:
                     rest = [x for x in numeric if x != inv_a]
                     for inv_b, inv_c in itertools.combinations(rest, 2):
                         valid = cmask & finite[inv_a] & finite[inv_b] & finite[inv_c]

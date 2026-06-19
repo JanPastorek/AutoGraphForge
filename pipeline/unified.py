@@ -205,7 +205,7 @@ class UnifiedPipeline:
         logger.info("  TOTAL candidates: %d", len(cands))
 
         logger.info("[2] Novelty filter (linear forms)")
-        known, novel = annotate([c for c in cands if c.inequality is not None])
+        novel, known = annotate([c for c in cands if c.inequality is not None])
         known_ids = {id(c) for c in known}
         for c in cands:
             c.metadata["novel"] = (id(c) not in known_ids)
