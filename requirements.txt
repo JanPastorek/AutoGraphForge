@@ -1,6 +1,11 @@
 # ── Core graph theory ──────────────────────────────────────────────────────
 networkx>=3.3
 
+# ── TxGraffiti: conjecture generation engine (convex_hull / ratios generators,
+#    Dalmatian + Morgan dominance filters, Conjecture/Inequality logic model).
+#    The pipeline drives this package directly rather than re-implementing it.
+txgraffiti>=0.4.1    # pulls in pandas + graphcalc
+
 # ── SAT/SMT falsification ─────────────────────────────────────────────────
 z3-solver>=4.13.0
 

@@ -204,6 +204,22 @@ def make_margin(statement: str) -> Callable[[nx.Graph], float]:
     return _bound_margin(statement)
 
 
+def make_value(expr: str) -> Callable[[nx.Graph], float]:
+    """Compile a single Sage-style invariant expression (one side or one term of
+    a bound, e.g. ``maximum(alpha(x), min_degree(x))``) into a function returning
+    its float value on a graph. Used by the coefficient-tuning LP."""
+    needed = set(_INV_CALL.findall(expr))
+    code = compile(_INV_CALL.sub(r"V['\1']", expr).replace("^", "**").strip(),
+                   "<expr>", "eval")
+
+    def value(G: nx.Graph) -> float:
+        V = {nm: SAGE_INV[nm](G) for nm in needed}
+        ns = dict(_SAFE_NS); ns["V"] = V
+        return float(eval(code, {"__builtins__": {}}, ns))
+
+    return value
+
+
 def _bound_margin(statement: str) -> Callable[[nx.Graph], float]:
     if "<=" in statement:
         lhs_s, rhs_s = statement.split("<=", 1); upper = True

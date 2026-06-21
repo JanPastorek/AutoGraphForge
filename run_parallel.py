@@ -17,6 +17,12 @@ Each round:
 Conjectures already resolved (refuted or survived) in an earlier round are not
 re-attacked; only conjectures that newly appear after the database grew are.
 
+Incremental re-sweep: round 1 sweeps every LHS (target) invariant. A later
+round only re-sweeps the LHS invariants whose bounds the previous round's
+counterexamples actually broke (``dirty_lhs``) — the only targets whose
+relevant values changed. When nothing is broken, the loop has converged and
+stops early, instead of re-running the full sweep for no new conjectures.
+
 Memory: the 348k-graph DB and arrays load once in the parent and are shared
 copy-on-write by forked workers. Each generation shard peaks ~12-16 GB, so
 generation concurrency is bounded by --gen-workers (default 3).
@@ -40,7 +46,35 @@ import networkx as nx
 from config import CONFIG
 from conjecture import ConjectureStatus
 from pipeline.novelty import annotate
+from pipeline.reporting import annotate_complexity, print_conjectures
 from pipeline.unified import UnifiedPipeline, _lean_skeleton
+
+
+def _gen_expression_stages(cfg):
+    """Nonlinear / expression-tree conjectures: Graffiti3 (native Python) and,
+    optionally, the Sage Conjecturing stage with optimal-coefficient tuning."""
+    out = []
+    if getattr(cfg, "graffiti3_enabled", True):
+        try:
+            from pipeline.graffiti3_stage import Graffiti3Generator
+            g3 = Graffiti3Generator(cfg=cfg).generate_candidates()
+            log.info("[expr] Graffiti3: %d conjectures", len(g3))
+            out += g3
+        except Exception as e:
+            log.warning("[expr] Graffiti3 stage failed: %s", e)
+    if getattr(cfg, "sage_enabled", True):
+        try:
+            sage = PIPE._gen_sage(run_sage=False, max_geng=7, t=8)
+            if getattr(cfg, "sage_tune_coefficients", False) and sage:
+                from pipeline.tuning import tune_sage_conjectures
+                sage = tune_sage_conjectures(sage)
+                log.info("[expr] Sage: %d conjectures (coefficient-tuned)", len(sage))
+            else:
+                log.info("[expr] Sage: %d conjectures", len(sage))
+            out += sage
+        except Exception as e:
+            log.warning("[expr] Sage stage failed: %s", e)
+    return out
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s | %(message)s", datefmt="%H:%M:%S")
@@ -58,8 +92,7 @@ def gen_worker(lhs: str):
     """Enumerate + Dalmatian-filter + novelty-filter one LHS-invariant shard."""
     g = PIPE.txg
     g.lhs_subset = {lhs}
-    cands = g._enumerate_candidates()
-    survived = g._dalmatian_filter(cands)
+    survived = g.generate_candidates()           # txgraffiti generators + Dalmatian/Morgan
     novel, known = annotate(survived)            # annotate returns (novel, known)
     novel.sort(key=lambda c: c.score, reverse=True)
     keep = novel[:KEEP_PER_LHS]
@@ -78,13 +111,17 @@ def attack_worker(c):
 
 # --------------------------------------------------------------- stages --
 
-def generate_round(numeric, gen_workers, max_conj, ctx):
-    """Parallel sharded TxGraffiti generation over the current database."""
-    PIPE.txg._arrays = None                       # rebuild from the grown DB
+def generate_round(lhs_targets, gen_workers, max_conj, ctx):
+    """Parallel sharded TxGraffiti generation over the current database.
+
+    Only the LHS (target) invariants in ``lhs_targets`` are swept; the RHS still
+    ranges over all invariants inside each shard.
+    """
+    PIPE.txg.invalidate()                         # rebuild from the grown DB
     PIPE.txg._load_arrays()                       # preload once in parent (COW)
     txg = []
     with ctx.Pool(gen_workers, maxtasksperchild=1) as pool:
-        for lhs, nraw, nsurv, nknown, keep in pool.imap_unordered(gen_worker, numeric):
+        for lhs, nraw, nsurv, nknown, keep in pool.imap_unordered(gen_worker, lhs_targets):
             log.info("    LHS=%-14s raw=%7d dalmatian=%6d known=%5d novel_kept=%d",
                      lhs, nraw, nsurv, nknown, len(keep))
             txg.extend(keep)
@@ -96,18 +133,27 @@ def generate_round(numeric, gen_workers, max_conj, ctx):
 
 
 def attack_round(active, attack_workers, ctx):
-    """Parallel counterexample attack; persist every refuting graph into the DB."""
+    """Parallel counterexample attack; persist every refuting graph into the DB.
+
+    Returns (refuted_count, dirty_lhs) where dirty_lhs is the set of LHS
+    invariants whose bounds the newly-added counterexamples actually broke —
+    i.e. the only LHS targets whose values changed enough to need re-sweeping.
+    """
     byid = {c.id: c for c in active}
     refuted = 0
+    dirty_lhs: set = set()
     with ctx.Pool(attack_workers, maxtasksperchild=25) as pool:
         for cid, edges, nn in pool.imap_unordered(attack_worker, active):
             if edges is not None:
                 G = nx.Graph()
                 G.add_nodes_from(range(nn))
                 G.add_edges_from(edges)
-                PIPE._persist(byid[cid], G)       # marks falsified + grows DB
+                c = byid[cid]
+                PIPE._persist(c, G)               # marks falsified + grows DB
                 refuted += 1
-    return refuted
+                if c.inequality is not None:
+                    dirty_lhs.add(c.inequality.inv_a)
+    return refuted, dirty_lhs
 
 
 # ------------------------------------------------------------------ main --
@@ -142,19 +188,27 @@ def main(argv=None):
     all_cands: list = []        # every distinct conjecture ever produced
     sage_added = False
     total_refuted = 0
+    # LHS invariants to sweep this round. Round 1 sweeps all; later rounds sweep
+    # only the LHS whose bounds the previous round's counterexamples broke.
+    lhs_targets = list(numeric)
 
     for rnd in range(1, args.rounds + 1):
         db0 = len(PIPE.db)
         log.info("=" * 60)
         log.info("[ROUND %d/%d]  database = %d graphs", rnd, args.rounds, db0)
+        if not lhs_targets:
+            log.info("  no LHS invariant values changed last round — converged")
+            break
 
         # ---- generation (on the current, possibly augmented, DB) ----------
-        log.info("  [gen] parallel TxGraffiti — %d shards, %d workers",
-                 len(numeric), args.gen_workers)
-        txg = generate_round(numeric, args.gen_workers, args.max_conjectures, ctx)
+        log.info("  [gen] parallel TxGraffiti — %d/%d LHS shards (%s), %d workers",
+                 len(lhs_targets), len(numeric),
+                 "all" if len(lhs_targets) == len(numeric) else ",".join(sorted(lhs_targets)),
+                 args.gen_workers)
+        txg = generate_round(lhs_targets, args.gen_workers, args.max_conjectures, ctx)
         round_cands = list(txg)
         if not sage_added:
-            round_cands += PIPE._gen_sage(run_sage=False, max_geng=7, t=8)
+            round_cands += _gen_expression_stages(PIPE.cfg)
             sage_added = True
 
         # ---- dedup against everything seen before -------------------------
@@ -184,10 +238,14 @@ def main(argv=None):
 
         # ---- parallel counterexample attack -------------------------------
         log.info("  [attack] %d conjectures, %d workers", len(active), args.attack_workers)
-        refuted = attack_round(active, args.attack_workers, ctx)
+        refuted, dirty_lhs = attack_round(active, args.attack_workers, ctx)
         total_refuted += refuted
-        log.info("  [attack] refuted %d; database grew %d → %d graphs",
-                 refuted, db0, len(PIPE.db))
+        # next round re-sweeps only the LHS invariants whose values changed
+        lhs_targets = [a for a in numeric if a in dirty_lhs]
+        log.info("  [attack] refuted %d; database grew %d → %d graphs; "
+                 "next round re-sweeps %d LHS (%s)",
+                 refuted, db0, len(PIPE.db), len(lhs_targets),
+                 ",".join(sorted(lhs_targets)) or "none")
 
     # ---- finalise: survivors = novel/nonlinear never refuted --------------
     survivors = [c for c in all_cands
@@ -212,6 +270,7 @@ def main(argv=None):
     log.info("[final] formalized %d/%d", formalized, len(survivors))
 
     # ---- report ----------------------------------------------------------
+    annotate_complexity(all_cands)                       # store op-count metric
     rep = PIPE._report(all_cands, survivors, total_refuted, time.time() - t0)
     rep["rounds"] = args.rounds
     rep["final_db_graphs"] = len(PIPE.db)
@@ -227,11 +286,8 @@ def main(argv=None):
     print(f"  survivors      : {rep['survivors']}  (novel: {rep['novel_survivors']})")
     print(f"  final DB       : {rep['final_db_graphs']} graphs")
     print(f"  elapsed        : {rep['elapsed_s']}s")
-    print("=" * 64)
-    print("  Survivors:")
-    for r in rep["results"][:120]:
-        tag = "NOVEL" if r["novel"] else "known"
-        print(f"   [{tag:5s}] ({r['method']}) {r['statement']}")
+    print_conjectures(survivors, sort_by=getattr(cfg, "report_sort_by", "score"),
+                      top=120, show_lean=False, title="SURVIVORS")
     print(f"\n  report -> {outdir/'parallel_report.json'}")
 
 

@@ -12,12 +12,29 @@ from __future__ import annotations
 import itertools
 import logging
 import math
+import os
 import re
 from collections import defaultdict
+from fractions import Fraction
 from typing import Dict, List, Optional, Tuple
 
 import anthropic
 import numpy as np
+import pandas as pd
+
+# The real TxGraffiti package: we drive its generators (convex_hull / ratios /
+# linear_programming) and its Dalmatian/Morgan dominance filters instead of the
+# in-house reimplementation, then translate its native Conjecture objects back
+# into this pipeline's Conjecture/Inequality model so every downstream stage
+# (novelty filter, adversarial refutation, parallel loop) is preserved.
+from txgraffiti.logic import Property, Predicate, TRUE
+from txgraffiti.logic import Inequality as TxInequality
+from txgraffiti.generators import convex_hull, ratios, linear_programming
+from txgraffiti.processing import (
+    remove_duplicates,
+    filter_with_dalmatian,
+    filter_with_morgan,
+)
 
 from config import Config, CONFIG
 from conjecture import Conjecture, ConjectureStatus, Inequality
@@ -27,6 +44,46 @@ from pipeline.novelty import annotate
 
 logger = logging.getLogger(__name__)
 
+# TxGraffiti's @safe_generator logs an ERROR for every degenerate hull / missing
+# LP solver; over a full invariant sweep that is hundreds of thousands of benign
+# messages, so silence that generator-level logger.
+logging.getLogger("txgraffiti.generators").setLevel(logging.CRITICAL)
+
+
+def _ensure_lp_solver() -> bool:
+    """Make an LP solver discoverable for txgraffiti's `linear_programming`.
+
+    TxGraffiti only looks for a ``cbc``/``glpsol`` executable on PATH, but the
+    ``pulp`` dependency already ships a CBC binary. Put that binary's directory
+    on PATH so ``shutil.which('cbc')`` finds it — no system install required.
+    Returns True if a solver is available.
+    """
+    import shutil
+    if shutil.which("cbc") or shutil.which("glpsol"):
+        return True
+    try:
+        import pulp
+        cbc = pulp.PULP_CBC_CMD(msg=0).path
+        if cbc:
+            cbc = os.path.realpath(cbc)          # pulp's path has an unresolved '..'
+            if os.path.isfile(cbc) and os.access(cbc, os.X_OK):
+                os.environ["PATH"] = (os.path.dirname(cbc) + os.pathsep
+                                      + os.environ.get("PATH", ""))
+                return shutil.which("cbc") is not None
+    except Exception:
+        pass
+    return False
+
+
+# convex_hull + ratios give the optimal-coefficient upper/lower/ratio bounds;
+# linear_programming (sum-of-slacks LP) is added when a CBC/GLPK solver is found.
+_TX_GENERATORS = [convex_hull, ratios]
+if _ensure_lp_solver():
+    _TX_GENERATORS.append(linear_programming)
+else:  # pragma: no cover
+    logger.warning("[TxGraffiti] no LP solver found — linear_programming disabled")
+_TX_GENERATORS = tuple(_TX_GENERATORS)
+
 
 # ---------------------------------------------------------------------------
 # TxGraffiti-style generator
@@ -34,93 +91,301 @@ logger = logging.getLogger(__name__)
 
 class TxGraffitiGenerator:
     """
-    Generate linear-inequality conjectures by the method of TxGraffiti:
+    Linear-inequality conjecture generator backed by the **TxGraffiti package**.
 
-    1. For every ordered LHS invariant inv_a and RHS invariant tuple
-       (inv_b[, inv_c …]) and every candidate coefficient combination, find the
-       minimal `offset` such that
-         inv_a(G)  ≤  Σ coeffᵢ · invᵢ(G)  +  offset
-       holds for all graphs in the (optionally class-restricted) database.
+    The bound-fitting (``convex_hull`` and ``ratios`` generators) and the
+    dominance filtering (``filter_with_dalmatian`` / ``filter_with_morgan``) are
+    the real ``txgraffiti`` implementations — this class no longer reimplements
+    them. On top of the package it keeps this pipeline's own extensions:
 
-    2. **Graph-class conditioning** — in addition to the unconditioned sweep,
-       repeat the fit over each graph class P (bipartite, regular, planar, …),
-       yielding conjectures of the form "for all G with P(G): inv_a(G) ≤ …".
-       Boolean properties are used *only* as such hypotheses, never as numeric
-       terms in the linear fit.
-
-    3. **Multivariable bounds** — the RHS may be a sum of several invariants
-       (controlled by ``cfg.txgraffiti_max_rhs_terms``), not just one.
-
-    4. Keep only conjectures that are *tight* on at least one graph (the
-       non-triviality criterion) and, unless disabled, are not an equality
-       across the whole class (within-class identities are discarded).
-
-    5. Apply the **Dalmatian heuristic** (per comparable bucket): discard
-       conjecture Q if another conjecture over the same LHS / RHS-set / class is
-       weakly stronger everywhere and strictly stronger somewhere.
+    * **Graph-class conditioning** — every boolean invariant becomes a TxGraffiti
+      hypothesis predicate, giving "for all G with P(G): …" bounds.
+    * **Multivariable right-hand sides** — feature tuples of size up to
+      ``cfg.txgraffiti_max_rhs_terms`` (``cfg.txgraffiti_multivariable``).
+    * **Exact-or-blank masking** — every (target, features, class) generator call
+      runs only on rows whose values are present (our data has blanks), which the
+      bundled ``txgraffiti2``/``ConjecturePlayground`` drivers do not handle.
+    * **LHS sharding** (``lhs_subset``) for the parallel driver.
+    * **Translation** of each surviving native ``txgraffiti`` ``Conjecture`` back
+      into this pipeline's ``Conjecture``/``Inequality`` (recovering rational RHS
+      coefficients), so the novelty filter, the adversarial refutation pool and
+      the dynamic-database loop are all preserved unchanged.
     """
-
-    _TOL = 1e-6
 
     def __init__(self, db: GraphDatabase, cfg: Config = CONFIG):
         self.db = db
         self.cfg = cfg
         # Restrict the LHS (target) invariants of the sweep to this subset, for
-        # parallel sharding. None ⇒ all numeric invariants. The Dalmatian filter
-        # buckets by LHS invariant, so different LHS shards are independent.
+        # parallel sharding. None ⇒ all numeric invariants. Dominance is per
+        # target, so different LHS shards are independent.
         self.lhs_subset: Optional[set] = None
-        self._arrays = None  # memoised (names, numeric, bool_props, vals, bvals)
+        self._arrays = None   # (names, numeric, bools, vals, bvals) — driver shim
+        self._frame = None    # (df, names, numeric, bools, bool_masks)
+        self._meta: dict = {} # id(native conj) -> (hyp_col, feature_list, sub_df)
 
-    # ----------------------------------------------------------------- API --
+    # --------------------------------------------------------- frame caches --
 
-    def generate(self) -> List[Conjecture]:
-        logger.info("[TxGraffiti] Generating candidate conjectures…")
-        candidates = self._enumerate_candidates()
-        logger.info("[TxGraffiti] %d raw candidates before Dalmatian filter", len(candidates))
-        survived = self._dalmatian_filter(candidates)
-        logger.info("[TxGraffiti] %d conjectures after Dalmatian filter", len(survived))
+    def invalidate(self) -> None:
+        """Drop cached frame/arrays so the next call rebuilds from the DB."""
+        self._arrays = None
+        self._frame = None
 
-        # Known-theorem novelty filter: tag each conjecture, optionally hiding
-        # rediscoveries of classical results so only novel bounds remain.
-        novel, known = annotate(survived)
-        if known:
-            logger.info(
-                "[Novelty] %d/%d conjectures rediscover known theorems "
-                "(e.g. %s)",
-                len(known), len(survived),
-                known[0].metadata.get("matched_theorem", "?"),
-            )
-        if self.cfg.txgraffiti_filter_known:
-            survived = novel
-            logger.info("[Novelty] %d novel conjectures retained", len(survived))
-
-        return survived[: self.cfg.txgraffiti_max_conjectures]
-
-    # --------------------------------------------------------- data loading --
-
-    def _load_arrays(self):
-        """Vectorise the database into per-invariant numpy arrays (NaN = missing)."""
-        if self._arrays is not None:
-            return self._arrays
+    def _build_frame(self):
         entries = list(self.db)
         names = [e.name for e in entries]
         inv_names = list(self.db.invariant_names()) if hasattr(self.db, "invariant_names") \
             else list(INVARIANTS.keys())
         numeric = [k for k in inv_names if k in INVARIANTS]
-        bool_props = [k for k in inv_names if k in BOOLEANS]
-        vals = {
-            inv: np.array([e.invariants.get(inv, np.nan) for e in entries], dtype=float)
-            for inv in numeric
-        }
-        bvals = {
-            b: np.array([e.invariants.get(b, np.nan) for e in entries], dtype=float)
-            for b in bool_props
-        }
-        self._arrays = (names, numeric, bool_props, vals, bvals)
+        bools = [k for k in inv_names if k in BOOLEANS]
+        cols = {k: np.array([e.invariants.get(k, np.nan) for e in entries], dtype=float)
+                for k in numeric}
+        bmask = {b: np.array([e.invariants.get(b, np.nan) for e in entries], dtype=float) >= 0.5
+                 for b in bools}
+        df = pd.DataFrame(cols)
+        for b in bools:                      # bool column; missing class flag → False
+            df[b] = bmask[b]
+        self._frame = (df, names, numeric, bools, bmask)
+        self._arrays = (names, numeric, bools,
+                        {k: cols[k] for k in numeric},
+                        {b: bmask[b].astype(float) for b in bools})
+        return self._frame
+
+    def _ensure_frame(self):
+        if self._frame is None:
+            self._build_frame()
+        return self._frame
+
+    def _load_arrays(self):
+        """Compat shim for the parallel driver's copy-on-write preload."""
+        if self._arrays is None:
+            self._build_frame()
         return self._arrays
 
-    def _contexts(self, bool_props, bvals, n_graphs):
-        """Yield (hypothesis, boolean-mask) pairs: unconditioned + each class."""
+    # ----------------------------------------------------------------- API --
+
+    def generate(self) -> List[Conjecture]:
+        logger.info("[TxGraffiti] generating via the txgraffiti package…")
+        cands = self.generate_candidates()
+        logger.info("[TxGraffiti] %d candidates after Dalmatian/Morgan", len(cands))
+        novel, known = annotate(cands)
+        if known:
+            logger.info("[Novelty] %d/%d conjectures rediscover known theorems",
+                        len(known), len(cands))
+        survived = novel if self.cfg.txgraffiti_filter_known else cands
+        survived.sort(key=lambda c: c.score, reverse=True)
+        return survived[: self.cfg.txgraffiti_max_conjectures]
+
+    def generate_candidates(self) -> List[Conjecture]:
+        """Generate candidate conjectures for the (sharded) target invariants.
+
+        Dispatches on ``cfg.txgraffiti_engine``: the txgraffiti package
+        (optimal-coefficient convex-hull/ratio/LP fitting), the fast in-house
+        vectorised grid fit, or both (deduplicated)."""
+        engine = getattr(self.cfg, "txgraffiti_engine", "txgraffiti")
+        out: List[Conjecture] = []
+        if engine in ("txgraffiti", "both"):
+            out += self._generate_txgraffiti()
+        if engine in ("numpy", "both"):
+            out += self._generate_numpy()
+        if engine == "both":                       # drop cross-engine duplicates
+            seen, uniq = set(), []
+            for c in out:
+                if c.statement not in seen:
+                    seen.add(c.statement)
+                    uniq.append(c)
+            out = uniq
+        return out
+
+    # ----------------------------------------------- engine: txgraffiti pkg --
+
+    def _generate_txgraffiti(self) -> List[Conjecture]:
+        """Run the txgraffiti generators + dominance filters over the (sharded)
+        target invariants and return this pipeline's Conjecture objects."""
+        df, names, numeric, bools, bmask = self._ensure_frame()
+        if len(df) == 0 or len(numeric) < 2:
+            return []
+        minsup = self.cfg.txgraffiti_min_support
+        finite = {k: np.isfinite(df[k].to_numpy(dtype=float)) for k in numeric}
+
+        contexts = [(None, np.ones(len(df), dtype=bool))]
+        if self.cfg.txgraffiti_condition_on_classes:
+            for b in bools:
+                if int(bmask[b].sum()) >= minsup:
+                    contexts.append((b, bmask[b]))
+
+        sizes = [1]
+        if self.cfg.txgraffiti_multivariable and self.cfg.txgraffiti_max_rhs_terms >= 2:
+            sizes.append(2)
+
+        targets = [t for t in numeric
+                   if self.lhs_subset is None or t in self.lhs_subset]
+
+        out: List[Conjecture] = []
+        for tgt in targets:
+            self._meta = {}
+            native = self._generate_for_target(df, tgt, numeric, contexts,
+                                               finite, sizes, minsup)
+            native = self._dominance_filter(native, df, tgt)
+            for nc in native:
+                conv = self._convert(nc, names)
+                if conv is not None:
+                    out.append(conv)
+        return out
+
+    def _generate_for_target(self, df, tgt, numeric, contexts, finite, sizes, minsup):
+        tprop = Property(tgt, lambda d, c=tgt: d[c])
+        feats = [f for f in numeric if f != tgt]
+        native = []
+        for size in sizes:
+            for combo in itertools.combinations(feats, size):
+                fmask = finite[tgt].copy()
+                for f in combo:
+                    fmask &= finite[f]
+                if int(fmask.sum()) < minsup:
+                    continue
+                fprops = [Property(f, lambda d, c=f: d[c]) for f in combo]
+                for hname, hmask in contexts:
+                    m = fmask & hmask
+                    if int(m.sum()) < minsup:
+                        continue
+                    cols = [tgt] + list(combo) + ([hname] if hname else [])
+                    sub = df.loc[m, cols]
+                    hp = TRUE if hname is None else Predicate(hname, lambda d, c=hname: d[c])
+                    for gen in _TX_GENERATORS:
+                        try:
+                            for nc in gen(sub, features=fprops, target=tprop,
+                                          hypothesis=hp):
+                                self._meta[id(nc)] = (hname, list(combo), sub)
+                                native.append(nc)
+                        except Exception:
+                            continue
+        return native
+
+    def _dominance_filter(self, native, df, tgt):
+        """Apply TxGraffiti's own Dalmatian + Morgan filters on a common
+        complete-case frame for this target."""
+        if not native:
+            return native
+        native = remove_duplicates(native, df)
+        cols = {tgt}
+        for nc in native:
+            hname, feats, _ = self._meta[id(nc)]
+            cols.update(feats)
+            if hname:
+                cols.add(hname)
+        num_cols = [c for c in cols if c in INVARIANTS]
+        cmp_df = df[list(cols)].dropna(subset=num_cols)
+        if len(cmp_df) >= self.cfg.txgraffiti_min_support:
+            try:
+                native = filter_with_dalmatian(native, cmp_df)
+                native = filter_with_morgan(native, cmp_df)
+            except Exception:
+                pass
+        return native
+
+    def _convert(self, nc, names) -> Optional[Conjecture]:
+        """Translate a native txgraffiti Conjecture into our Conjecture, recovering
+        rational RHS coefficients by least squares (the RHS is exactly linear)."""
+        ineq = nc.conclusion
+        if not isinstance(ineq, TxInequality):
+            return None
+        if ineq.op in ("<", "<="):
+            op = "<="
+        elif ineq.op in (">", ">="):
+            op = ">="
+        else:
+            return None                     # skip "==" / "!="
+        tgt = ineq.lhs.name
+        if tgt not in INVARIANTS:            # LHS must be a bare target invariant
+            return None
+        hname, feats, sub = self._meta.get(id(nc), (None, [], None))
+        if sub is None:
+            return None
+
+        rhs_vals = np.asarray(ineq.rhs(sub), dtype=float)
+        if feats:
+            M = np.column_stack([np.asarray(sub[f], dtype=float) for f in feats]
+                                + [np.ones(len(sub))])
+            sol, *_ = np.linalg.lstsq(M, rhs_vals, rcond=None)
+            coeffs, const = sol[:-1], float(sol[-1])
+        else:
+            coeffs = []
+            const = float(np.nanmean(rhs_vals)) if len(rhs_vals) else 0.0
+
+        def clean(x):
+            return float(Fraction(float(x)).limit_denominator(1000))
+
+        terms = [(clean(coeffs[i]), feats[i])
+                 for i in range(len(feats)) if abs(coeffs[i]) > 1e-7]
+        const = clean(const)
+        if terms:
+            inv_b, coeff_b, extra = terms[0][1], terms[0][0], terms[1:]
+        else:
+            inv_b, coeff_b, extra = (feats[0] if feats else tgt), 0.0, []
+        my = Inequality(tgt, inv_b, 1.0, coeff_b, const,
+                        op=op, extra_terms=extra, hypothesis=hname)
+
+        slack = np.asarray(ineq.slack(sub), dtype=float)
+        tight = np.nonzero(np.abs(slack) < 1e-9)[0]
+        witnesses = ([names[i] for i in np.asarray(sub.index)[tight]]
+                     if len(tight) else [])
+        return Conjecture(
+            statement=str(my), inequality=my, generation_method="txgraffiti",
+            tightness_witnesses=witnesses,
+            score=self._score(slack, witnesses, hname),
+            metadata={"hypothesis": hname, "context_size": int(len(sub)), "op": op},
+        )
+
+    # ------------------------------------------ engine: vectorised numpy fit --
+
+    def _generate_numpy(self) -> List[Conjecture]:
+        """Fast in-house alternative to the txgraffiti generators.
+
+        Instead of computing the optimal real coefficients per facet (convex
+        hull) or via an LP, this fits the tightest *offset* for each coefficient
+        combination drawn from the fixed grid ``cfg.txgraffiti_coefficients`` in
+        a single vectorised numpy pass over all rows. It is far cheaper per
+        (target, features, class) — no Qhull/LP, no per-row DataFrame objects —
+        at the cost of only trying grid coefficients (so it can miss the optimal
+        ones the convex hull would find). Produces upper bounds (LHS ≤ RHS)."""
+        names, numeric, bool_props, vals, bvals = self._load_arrays()
+        n_graphs = len(names)
+        if n_graphs == 0 or len(numeric) < 2:
+            return []
+        finite = {inv: np.isfinite(vals[inv]) for inv in numeric}
+        coeffs = tuple(self.cfg.txgraffiti_coefficients)
+        candidates: List[Tuple[Conjecture, np.ndarray, tuple]] = []
+        seen: set = set()
+        lhs_targets = [a for a in numeric
+                       if self.lhs_subset is None or a in self.lhs_subset]
+
+        for hyp, cmask in self._contexts_numpy(bool_props, bvals, n_graphs):
+            for inv_a, inv_b in itertools.product(lhs_targets, numeric):
+                if inv_a == inv_b:
+                    continue
+                valid = cmask & finite[inv_a] & finite[inv_b]
+                if int(valid.sum()) < self.cfg.txgraffiti_min_support:
+                    continue
+                self._fit(candidates, seen, names, valid, hyp, inv_a,
+                          vals[inv_a][valid], [(inv_b, vals[inv_b][valid])], coeffs)
+
+            if self.cfg.txgraffiti_multivariable and self.cfg.txgraffiti_max_rhs_terms >= 2:
+                for inv_a in lhs_targets:
+                    rest = [x for x in numeric if x != inv_a]
+                    for inv_b, inv_c in itertools.combinations(rest, 2):
+                        valid = cmask & finite[inv_a] & finite[inv_b] & finite[inv_c]
+                        if int(valid.sum()) < self.cfg.txgraffiti_min_support:
+                            continue
+                        if (np.ptp(vals[inv_b][valid]) < 1e-9
+                                or np.ptp(vals[inv_c][valid]) < 1e-9):
+                            continue
+                        self._fit(candidates, seen, names, valid, hyp, inv_a,
+                                  vals[inv_a][valid],
+                                  [(inv_b, vals[inv_b][valid]),
+                                   (inv_c, vals[inv_c][valid])], coeffs)
+        return self._dalmatian_filter(candidates)
+
+    def _contexts_numpy(self, bool_props, bvals, n_graphs):
         contexts = [(None, np.ones(n_graphs, dtype=bool))]
         if self.cfg.txgraffiti_condition_on_classes:
             for b in bool_props:
@@ -129,78 +394,16 @@ class TxGraffitiGenerator:
                     contexts.append((b, mask))
         return contexts
 
-    # ---------------------------------------------------------------- steps --
-
-    def _enumerate_candidates(self):
-        """Return (Conjecture, slack_vector, bucket_key) tuples for valid fits."""
-        names, numeric, bool_props, vals, bvals = self._load_arrays()
-        n_graphs = len(names)
-        if n_graphs == 0 or len(numeric) < 2:
-            return []
-
-        finite = {inv: np.isfinite(vals[inv]) for inv in numeric}
-        coeffs = tuple(self.cfg.txgraffiti_coefficients)
-        candidates: List[Tuple[Conjecture, np.ndarray, tuple]] = []
-        seen: set = set()
-
-        lhs_targets = [a for a in numeric if (self.lhs_subset is None
-                                              or a in self.lhs_subset)]
-
-        for hyp, cmask in self._contexts(bool_props, bvals, n_graphs):
-            # --- two-variable bounds: inv_a ≤ coeff·inv_b + offset ---
-            for inv_a, inv_b in itertools.product(lhs_targets, numeric):
-                if inv_a == inv_b:
-                    continue
-                valid = cmask & finite[inv_a] & finite[inv_b]
-                if int(valid.sum()) < self.cfg.txgraffiti_min_support:
-                    continue
-                self._fit(
-                    candidates, seen, names, valid, hyp, inv_a,
-                    vals[inv_a][valid], [(inv_b, vals[inv_b][valid])], coeffs,
-                )
-
-            # --- multivariable bounds: inv_a ≤ c_b·inv_b + c_c·inv_c + offset ---
-            if self.cfg.txgraffiti_multivariable and self.cfg.txgraffiti_max_rhs_terms >= 2:
-                for inv_a in lhs_targets:
-                    rest = [x for x in numeric if x != inv_a]
-                    for inv_b, inv_c in itertools.combinations(rest, 2):
-                        valid = cmask & finite[inv_a] & finite[inv_b] & finite[inv_c]
-                        if int(valid.sum()) < self.cfg.txgraffiti_min_support:
-                            continue
-                        # A term that is constant across this class only shifts
-                        # the offset — it adds no real multivariable structure
-                        # (e.g. tri ≡ 0 on bipartite graphs). Skip such terms.
-                        if (np.ptp(vals[inv_b][valid]) < 1e-9
-                                or np.ptp(vals[inv_c][valid]) < 1e-9):
-                            continue
-                        self._fit(
-                            candidates, seen, names, valid, hyp, inv_a,
-                            vals[inv_a][valid],
-                            [(inv_b, vals[inv_b][valid]), (inv_c, vals[inv_c][valid])],
-                            coeffs,
-                        )
-
-        return candidates
-
     def _fit(self, candidates, seen, names, valid_mask, hyp, inv_a, a, rhs_terms, coeffs):
-        """Fit minimal-offset bounds over every coefficient combination for rhs_terms.
-
-        ``rhs_terms`` is a list of (inv_name, value_array) aligned with ``a``.
-        Appends accepted (Conjecture, slack_vector, bucket_key) tuples.
-        """
-        tol = self._TOL
+        """Fit minimal-offset upper bounds over every coefficient combination."""
+        tol = 1e-6
         max_off = self.cfg.txgraffiti_max_offset
         valid_idx = np.nonzero(valid_mask)[0]
         bucket_key = (hyp, inv_a, frozenset(name for name, _ in rhs_terms))
-
-        # Skip degenerate bounds: a constant LHS within the class is just a
-        # threshold ("c ≤ …"), and an all-constant RHS reduces to "f ≤ const" —
-        # both are class artifacts (e.g. κ = λ = 1 on trees), not relations.
         if np.ptp(a) < 1e-9:
             return
         if all(np.ptp(arr) < 1e-9 for _, arr in rhs_terms):
             return
-
         for combo in itertools.product(coeffs, repeat=len(rhs_terms)):
             rhs = np.zeros_like(a)
             for coeff, (_, arr) in zip(combo, rhs_terms):
@@ -208,62 +411,41 @@ class TxGraffitiGenerator:
             offset = max(0.0, float(np.max(a - rhs)))
             if offset > max_off:
                 continue
-
             slacks = rhs + offset - a
-            smin = float(slacks.min())
-            smax = float(slacks.max())
-            if smin > tol:                       # not tight anywhere → not a frontier bound
+            if float(slacks.min()) > tol:            # not tight anywhere
                 continue
-            if self.cfg.txgraffiti_drop_identities and smax < tol:
-                continue                          # equality on the whole class → identity
-
+            if self.cfg.txgraffiti_drop_identities and float(slacks.max()) < tol:
+                continue                              # identity across the class
             extra = [(combo[k], rhs_terms[k][0]) for k in range(1, len(rhs_terms))]
-            ineq = Inequality(
-                inv_a, rhs_terms[0][0], 1.0, combo[0], round(offset, 4),
-                extra_terms=extra, hypothesis=hyp,
-            )
+            ineq = Inequality(inv_a, rhs_terms[0][0], 1.0, combo[0], round(offset, 4),
+                              op="<=", extra_terms=extra, hypothesis=hyp)
             stmt = str(ineq)
             if stmt in seen:
                 continue
             seen.add(stmt)
-
             tight_local = np.nonzero(np.abs(slacks) < tol)[0]
             tightness = [names[valid_idx[i]] for i in tight_local]
-            c = Conjecture(
-                statement=stmt,
-                inequality=ineq,
-                generation_method="txgraffiti",
-                tightness_witnesses=tightness,
-                score=self._score(slacks, tightness, hyp),
-                metadata={"hypothesis": hyp, "context_size": int(valid_mask.sum())},
-            )
+            c = Conjecture(statement=stmt, inequality=ineq, generation_method="txgraffiti",
+                           tightness_witnesses=tightness,
+                           score=self._score(slacks, tightness, hyp),
+                           metadata={"hypothesis": hyp, "context_size": int(valid_mask.sum()),
+                                     "op": "<="})
             candidates.append((c, slacks, bucket_key))
 
     def _dalmatian_filter(self, candidates) -> List[Conjecture]:
-        """
-        Retain conjecture Q unless there exists Q' (same LHS invariant, same RHS
-        invariant-set, same graph class) such that:
-          slack(Q', G) ≤ slack(Q, G) for all G   (Q' at least as strong)
-          slack(Q', G) < slack(Q, G) for some G   (Q' strictly stronger somewhere)
-
-        Smaller slack ⇒ stronger (tighter) bound. Candidates are bucketed by the
-        comparison key first, so dominance is only checked within comparable sets.
-        """
+        """In-house Dalmatian dominance filter for the numpy engine (operates on
+        the cached slack vectors; buckets by LHS / RHS-set / class)."""
         buckets: Dict[tuple, list] = defaultdict(list)
         for item in candidates:
             buckets[item[2]].append(item)
-
         survived: List[Conjecture] = []
         for items in buckets.values():
-            # Collapse coefficient variants that yield an identical slack vector
-            # (e.g. different multiples of a class-constant term) to one bound.
             unique: Dict[tuple, tuple] = {}
             for it in items:
                 sig = tuple(np.round(it[1], 6))
                 if sig not in unique or it[0].score > unique[sig][0].score:
                     unique[sig] = it
             items = list(unique.values())
-
             k = len(items)
             svs = [it[1] for it in items]
             dominated = [False] * k
@@ -281,7 +463,6 @@ class TxGraffitiGenerator:
             for (c, _, _), dom in zip(items, dominated):
                 if not dom:
                     survived.append(c)
-
         survived.sort(key=lambda c: c.score, reverse=True)
         return survived
 
@@ -290,8 +471,8 @@ class TxGraffitiGenerator:
         """Higher score = more interesting (tight on many graphs, small avg slack)."""
         n = len(slacks)
         tightness_ratio = len(tightness) / max(1, n)
-        avg_slack = float(np.mean(slacks)) if n else 0.0
-        score = tightness_ratio * 2.0 - avg_slack * 0.1
+        avg_slack = float(np.nanmean(slacks)) if n else 0.0
+        score = tightness_ratio * 2.0 - abs(avg_slack) * 0.1
         if hyp is not None:
             score += 0.25   # nudge class-conditioned results up — likelier to be novel
         return score

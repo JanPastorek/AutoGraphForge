@@ -30,6 +30,8 @@ class Config:
     db_csv_paths: tuple = (
         "database/graph_database_enriched.csv",
         "database/census_le9.csv",
+        "database/txgraffiti_data.csv",    # graph datasets bundled with TxGraffiti
+                                            # (sync_txgraffiti_data.py)
         "database/counterexamples.csv",   # graphs found by the falsifiers (grows)
     )
     # Counterexamples discovered during a run are appended here so the dataset
@@ -40,11 +42,23 @@ class Config:
     adversarial_enabled: bool = True   # permanent counterexample-search stage
     adversarial_max_n: int = 18        # max order of pool graphs (exact invariants)
     adversarial_seed: int = 2025
+    # Also fold class-aware random models (random regular / G(n,p) / trees /
+    # bipartite …, several orders) into the adversarial pool, so refutation
+    # probes the typical interior of each class, not just structured witnesses.
+    adversarial_random_models: bool = True
+    adversarial_random_per: int = 4    # random graphs per (class, order)
 
     # ----------------------------------------------- Hypothesis generation --
     txgraffiti_max_conjectures: int = 30
     txgraffiti_max_offset: float = 5.0
     txgraffiti_coefficients: tuple = (0.5, 1.0, 1.5, 2.0, 3.0)
+    # Generation engine:
+    #   "txgraffiti" — the txgraffiti package (convex_hull/ratios/LP); finds the
+    #                  optimal real coefficients per facet (slower per call).
+    #   "numpy"      — the in-house vectorised fit over a fixed coefficient grid
+    #                  (txgraffiti_coefficients); much faster, coarser.
+    #   "both"       — union of the two (deduplicated by statement).
+    txgraffiti_engine: str = "txgraffiti"
     # Generate bounds conditioned on graph classes (bipartite, regular, …),
     # i.e. "for all G with property P: f(G) ≤ …".
     txgraffiti_condition_on_classes: bool = True
@@ -60,6 +74,27 @@ class Config:
     txgraffiti_filter_known: bool = True
     funsearch_conjectures: int = 5   # LLM-generated conjectures per call
     use_funsearch: bool = True
+
+    # --------------------------------------------- Graffiti3 (native expr) --
+    # txgraffiti's Graffiti3 system: native-Python nonlinear conjecturing
+    # (ratio/LP/poly/products/sqrt/log + Sophie sufficient-conditions + Lean
+    # export). Runs on a SMALL exact corpus (the graph atlas, n ≤ max_n), since
+    # its STANDARD/DEEP runners are far too slow on large data.
+    graffiti3_enabled: bool = True
+    graffiti3_mode: str = "fast"     # "fast" (cheap) | "standard" | "deep"
+    graffiti3_max_n: int = 7         # corpus = connected atlas graphs up to this
+    graffiti3_sophie: bool = True    # also mine Sophie sufficient-conditions
+    graffiti3_refute_random: bool = True   # refute against random models too
+    graffiti3_max_per_target: int = 40     # keep top-N (by touches) per target
+                                           # before the (per-candidate) refutation
+
+    # Sage Conjecturing stage: kept as an option; tune its grid coefficients to
+    # the optimal real values by LP (pipeline.tuning) when enabled.
+    sage_enabled: bool = True
+    sage_tune_coefficients: bool = True
+    # Ranking used when printing the final survivors: "score" | "complexity"
+    # (simplest first) | "touches".
+    report_sort_by: str = "score"
 
     # --------------------------------------------------- Falsification loop --
     falsification_rounds: int = 2    # retry passes after db augmentation
@@ -81,7 +116,12 @@ class Config:
     lean_timeout_s: int = 60
     lean_project_root: str = ""     # directory with a Lean/mathlib project
 
-    # ------------------------------------------------------- Prover stubs --
+    # ------------------------------------------------------- Provers --------
+    # Ordered ensemble of prover backends tried per conjecture (first success
+    # wins). Registered names: "lean" (local Lean tactics), "claude" (Anthropic
+    # API, kernel-verified when a Lean binary is present), "goedel"/"deepseek"
+    # (HTTP stubs — point prover_api_url at a self-hosted GPU endpoint to enable).
+    prover_backends: tuple = ("lean", "claude", "goedel", "deepseek")
     prover_api_url: str = ""        # e.g. "https://goedel-prover.example.com/v1"
     prover_api_key: str = field(
         default_factory=lambda: os.environ.get("PROVER_API_KEY", "")

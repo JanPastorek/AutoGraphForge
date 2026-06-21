@@ -54,6 +54,9 @@ class Inequality:
     coeff_a: float = 1.0
     coeff_b: float = 1.0
     offset: float = 0.0
+    # Direction of the bound: "<=" (upper bound on the LHS) or ">=" (lower
+    # bound). TxGraffiti's convex-hull/ratio generators produce both.
+    op: str = "<="
 
     # Additional RHS terms for multivariable bounds: each (coeff, inv_name).
     extra_terms: List[tuple] = field(default_factory=list)
@@ -85,7 +88,7 @@ class Inequality:
         lhs, rhs = self._lhs_rhs(vals)
         if lhs is None:
             return None
-        return lhs <= rhs
+        return lhs >= rhs if self.op == ">=" else lhs <= rhs
 
     def slack(self, vals: Dict[str, float]) -> Optional[float]:
         """rhs − lhs.  Negative → violated; zero → tight; positive → slack.
@@ -98,7 +101,8 @@ class Inequality:
         lhs, rhs = self._lhs_rhs(vals)
         if lhs is None:
             return None
-        return rhs - lhs
+        # signed so that negative slack always means "violated"
+        return (lhs - rhs) if self.op == ">=" else (rhs - lhs)
 
     def is_tight(self, vals: Dict[str, float], tol: float = 1e-9) -> bool:
         s = self.slack(vals)
@@ -138,7 +142,8 @@ class Inequality:
         if self.offset != 0.0:
             sign = "+" if self.offset > 0 else "-"
             rhs += f" {sign} {abs(self.offset):g}"
-        s = f"{lhs} ≤ {rhs}"
+        sym = "≥" if self.op == ">=" else "≤"
+        s = f"{lhs} {sym} {rhs}"
         if self.hypothesis:
             s = f"{s}  (for {self.hypothesis} graphs)"
         return s
@@ -150,6 +155,7 @@ class Inequality:
             "coeff_a": self.coeff_a,
             "coeff_b": self.coeff_b,
             "offset": self.offset,
+            "op": self.op,
             "extra_terms": [[coeff, name] for coeff, name in self.extra_terms],
             "hypothesis": self.hypothesis,
             "latex": str(self),

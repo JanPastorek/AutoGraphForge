@@ -198,7 +198,28 @@ class AdversarialPool:
                 continue
             seen.add(h)
             self.entries.append((G, inv_exact(G)))
-        logger.info("[Adversarial] pool of %d structure-targeted graphs", len(self.entries))
+        n_structured = len(self.entries)
+        # class-aware random models (random regular / G(n,p) / trees / bipartite,
+        # several orders) — probe the typical interior of each class
+        if getattr(cfg, "adversarial_random_models", False):
+            from pipeline.random_models import sample_graphs
+            orders = tuple(o for o in (6, 8, 10, 12, 14, 16) if o <= cfg.adversarial_max_n)
+            for cls in (None, "regular", "bipartite", "tree", "triangle_free",
+                        "cubic", "planar"):
+                for G in sample_graphs(cls, orders=orders,
+                                       per=getattr(cfg, "adversarial_random_per", 4)):
+                    if not (2 <= G.number_of_nodes() <= cfg.adversarial_max_n):
+                        continue
+                    h = nx.weisfeiler_lehman_graph_hash(G)
+                    if h in seen:
+                        continue
+                    seen.add(h)
+                    try:
+                        self.entries.append((G, inv_exact(G)))
+                    except Exception:
+                        pass
+        logger.info("[Adversarial] pool of %d graphs (%d structured + %d random models)",
+                    len(self.entries), n_structured, len(self.entries) - n_structured)
 
     @classmethod
     def shared(cls, cfg: Config = CONFIG) -> "AdversarialPool":

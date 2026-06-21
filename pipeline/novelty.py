@@ -481,6 +481,12 @@ def annotate(conjectures: List[Conjecture]) -> Tuple[List[Conjecture], List[Conj
     novel: List[Conjecture] = []
     known: List[Conjecture] = []
     for c in conjectures:
+        # The known-theorem table is expressed as upper bounds (LHS ≤ RHS); a
+        # lower-bound (≥) conjecture is not comparable to it, so treat as novel.
+        if c.inequality is not None and getattr(c.inequality, "op", "<=") != "<=":
+            c.metadata["novelty"] = "novel"
+            novel.append(c)
+            continue
         is_known, matched = classify(c)
         c.metadata["novelty"] = "known" if is_known else "novel"
         if matched:

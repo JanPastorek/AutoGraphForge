@@ -327,24 +327,182 @@ class LeanSubprocessProver(BaseProver):
 
 
 # ---------------------------------------------------------------------------
-# Ensemble prover: try multiple provers in sequence
+# Claude prover (Anthropic API) — default neural backend
 # ---------------------------------------------------------------------------
+
+class ClaudeProver(BaseProver):
+    """
+    Prove Lean 4 ``sorry`` goals with an LLM (Anthropic Claude).
+
+    Claude is prompted with the theorem statement and asked to return a complete
+    Lean 4 proof. Crucially, the LLM's output is only a *candidate*: when a Lean
+    binary is available it is **kernel-verified** (compiled against mathlib) and
+    accepted only if it type-checks — so a `success` here is a real proof, not an
+    LLM assertion. Without a Lean binary the candidate is returned but
+    ``success=False`` (honestly unverified).
+
+    This is the default neural backend: it needs no GPU, only ``ANTHROPIC_API_KEY``.
+    For maximal automation on hard goals, swap in a local GPU prover (see
+    ``LocalEndpointProver`` and the registry below) — e.g. DeepSeek-Prover-V2
+    or Goedel-Prover-V2 served over HTTP.
+    """
+
+    name = "claude-prover"
+
+    _SYSTEM = (
+        "You are an expert Lean 4 / mathlib4 theorem prover. You are given a "
+        "theorem with `sorry`. Return ONLY the full theorem with `sorry` replaced "
+        "by a complete, compiling Lean 4 proof, inside a single ```lean code block. "
+        "Use mathlib lemmas and tactics (simp, omega, gcongr, nlinarith, exact?, "
+        "aesop). Do not invent definitions. If unprovable, return the statement "
+        "with `sorry` unchanged."
+    )
+
+    def __init__(self, cfg: Config = CONFIG):
+        self.cfg = cfg
+        self._client = None
+        if cfg.anthropic_api_key:
+            try:
+                import anthropic
+                self._client = anthropic.Anthropic(api_key=cfg.anthropic_api_key)
+            except Exception as e:                       # pragma: no cover
+                logger.warning("[ClaudeProver] anthropic unavailable: %s", e)
+        # reuse the Lean subprocess wrapper purely for kernel verification
+        self._lean = LeanSubprocessProver(cfg)
+
+    def prove(self, conjecture: Conjecture) -> ProverResponse:
+        if conjecture.lean_statement is None:
+            return ProverResponse(success=False, error="No Lean 4 statement",
+                                  model_name=self.name)
+        if self._client is None:
+            return ProverResponse(success=False, _stub=True, model_name=self.name,
+                                  error="ANTHROPIC_API_KEY not set (claude-prover unavailable)")
+        t0 = time.time()
+        candidate = self._ask_claude(conjecture)
+        elapsed = time.time() - t0
+        if not candidate or "sorry" in candidate:
+            return ProverResponse(success=False, model_name=self.name, elapsed_s=elapsed,
+                                  error="Claude produced no complete proof")
+        # Kernel-verify when possible; never claim success on an unchecked proof.
+        if self._lean._available:
+            ok, log = self._lean._run_lean("import Mathlib\n\n" + candidate)
+            return ProverResponse(
+                success=ok,
+                proof_tactics=candidate if ok else None,
+                proof_text=candidate,
+                model_name=self.name, elapsed_s=elapsed,
+                error=None if ok else f"failed Lean kernel check: {log[:200]}",
+            )
+        return ProverResponse(
+            success=False, proof_text=candidate, model_name=self.name, elapsed_s=elapsed,
+            error="unverified: no Lean binary to kernel-check the candidate",
+        )
+
+    def _ask_claude(self, conjecture: Conjecture) -> Optional[str]:
+        prompt = (
+            f"Prove this Lean 4 theorem (informal statement: "
+            f"{conjecture.statement!r}).\n\n```lean\n{conjecture.lean_statement}\n```"
+        )
+        try:
+            msg = self._client.messages.create(
+                model=self.cfg.model, max_tokens=self.cfg.llm_max_tokens,
+                system=self._SYSTEM,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            return self._extract_lean(msg.content[0].text)
+        except Exception as e:
+            logger.error("[ClaudeProver] API call failed: %s", e)
+            return None
+
+    @staticmethod
+    def _extract_lean(text: str) -> Optional[str]:
+        import re
+        m = re.search(r"```(?:lean4?)?\s*(.*?)```", text, re.DOTALL)
+        return (m.group(1) if m else text).strip() or None
+
+
+# ---------------------------------------------------------------------------
+# Generic local/HTTP endpoint prover — the seam for GPU provers
+# ---------------------------------------------------------------------------
+
+class LocalEndpointProver(BaseProver):
+    """
+    Documented seam for plugging in a self-hosted GPU prover served over HTTP
+    (DeepSeek-Prover-V2, Goedel-Prover-V2, Kimina-Prover, …).
+
+    Set ``cfg.prover_api_url`` to the endpoint and uncomment the HTTP block. The
+    request sends the Lean statement; the response is expected to carry a
+    ``proof`` string which, if present, is kernel-verified locally when a Lean
+    binary is available.
+    """
+
+    name = "local-endpoint"
+
+    def __init__(self, cfg: Config = CONFIG, name: Optional[str] = None):
+        self.cfg = cfg
+        if name:
+            self.name = name
+        self._lean = LeanSubprocessProver(cfg)
+
+    def prove(self, conjecture: Conjecture) -> ProverResponse:
+        if conjecture.lean_statement is None:
+            return ProverResponse(success=False, error="No statement", model_name=self.name)
+        if not self.cfg.prover_api_url:
+            return ProverResponse(success=False, _stub=True, model_name=self.name,
+                                  error=f"{self.name}: prover_api_url not configured")
+        # import requests
+        # resp = requests.post(self.cfg.prover_api_url,
+        #     json={"statement": conjecture.lean_statement, "context": "import Mathlib",
+        #           "timeout_s": self.cfg.prover_timeout_s},
+        #     headers={"Authorization": f"Bearer {self.cfg.prover_api_key}"},
+        #     timeout=self.cfg.prover_timeout_s + 10)
+        # proof = resp.json().get("proof")
+        # if proof and self._lean._available:
+        #     ok, log = self._lean._run_lean("import Mathlib\n\n" + proof)
+        #     return ProverResponse(success=ok, proof_tactics=proof if ok else None,
+        #                           proof_text=proof, model_name=self.name)
+        return ProverResponse(success=False, _stub=True, model_name=self.name,
+                              error=f"{self.name}: HTTP call not enabled (see source)")
+
+
+# ---------------------------------------------------------------------------
+# Backend registry + ensemble
+# ---------------------------------------------------------------------------
+
+# name → factory. Add a GPU prover by registering a LocalEndpointProver here
+# (or a bespoke class) and listing its name in cfg.prover_backends.
+PROVER_REGISTRY = {
+    "lean":     lambda cfg: LeanSubprocessProver(cfg),
+    "claude":   lambda cfg: ClaudeProver(cfg),
+    "goedel":   lambda cfg: GoedelProver(cfg),
+    "deepseek": lambda cfg: DeepSeekProverV2(cfg),
+    "endpoint": lambda cfg: LocalEndpointProver(cfg),
+}
+
 
 class NeuralProverClient(BaseProver):
     """
-    Ensemble: try LeanSubprocess → GoedelProver → DeepSeekProver-V2.
-    Returns the first successful result; updates conjecture status in place.
+    Ensemble of prover backends (order from ``cfg.prover_backends``); returns the
+    first verified success and updates conjecture status in place.
+
+    Default order: local Lean tactics → Claude (kernel-verified) → Goedel /
+    DeepSeek HTTP stubs. The stubs remain available; point ``cfg.prover_api_url``
+    at a served GPU model (or add a backend to ``PROVER_REGISTRY``) to enable
+    DeepSeek-Prover-V2 / Goedel-Prover-V2 / other local provers.
     """
 
     name = "ensemble"
 
     def __init__(self, cfg: Config = CONFIG):
         self.cfg = cfg
-        self._provers: List[BaseProver] = [
-            LeanSubprocessProver(cfg),
-            GoedelProver(cfg),
-            DeepSeekProverV2(cfg),
-        ]
+        backends = getattr(cfg, "prover_backends", None) or ("lean", "claude", "goedel", "deepseek")
+        self._provers: List[BaseProver] = []
+        for b in backends:
+            factory = PROVER_REGISTRY.get(b)
+            if factory is None:
+                logger.warning("[NeuralProver] unknown prover backend %r — skipped", b)
+                continue
+            self._provers.append(factory(cfg))
 
     def prove(self, conjecture: Conjecture) -> ProverResponse:
         if conjecture.lean_statement is None:
