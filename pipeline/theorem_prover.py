@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import shutil
 import subprocess
 import tempfile
@@ -220,26 +221,16 @@ class DeepSeekProverV2(BaseProver):
             return ProverResponse(
                 success=False, error="No Lean 4 statement available", model_name=self.name
             )
-        t0 = time.time()
         if not self.cfg.prover_api_url:
-            return self._stub_response(conjecture, time.time() - t0)
-        return self._call_prover_api(conjecture, time.time() - t0)
-
-    def _call_prover_api(self, conjecture: Conjecture, elapsed: float) -> ProverResponse:
-        # TODO: real HTTP call — see GoedelProver._call_prover_api for skeleton
-        return self._stub_response(conjecture, elapsed)
-
-    def _stub_response(self, conjecture: Conjecture, elapsed: float) -> ProverResponse:
-        logger.info(
-            "[DeepSeekProver] STUB — would call endpoint for conjecture %s", conjecture.id
-        )
-        return ProverResponse(
-            success=False,
-            error="DeepSeek-Prover-V2 API not configured (stub mode)",
-            model_name=self.name,
-            elapsed_s=elapsed,
-            _stub=True,
-        )
+            return ProverResponse(
+                success=False, _stub=True, model_name=self.name,
+                error="DeepSeek-Prover-V2 API not configured "
+                      "(set cfg.prover_api_url to a Colab/GPU endpoint — see colab/)",
+            )
+        # Real, kernel-verified HTTP call via the generic endpoint client.
+        client = LocalEndpointProver(self.cfg, name=self.name,
+                                     endpoint_path=self._ENDPOINT_PATH)
+        return client.prove(conjecture)
 
 
 # ---------------------------------------------------------------------------
@@ -308,16 +299,34 @@ class LeanSubprocessProver(BaseProver):
         return proof_attempt if ok else None
 
     def _run_lean(self, code: str) -> tuple[bool, str]:
-        with tempfile.NamedTemporaryFile(
-            suffix=".lean", mode="w", delete=False
-        ) as f:
-            f.write(code)
-            fname = f.name
+        root = getattr(self.cfg, "lean_project_root", "") or ""
+        # When a mathlib-backed lake project is configured, compile the snippet
+        # *inside* it so the mathlib search path is set and `import Mathlib`
+        # resolves (kernel-verified). Otherwise fall back to bare `lean`.
+        if root and os.path.isdir(root):
+            with tempfile.NamedTemporaryFile(
+                suffix=".lean", mode="w", delete=False, dir=root,
+            ) as f:
+                f.write(code)
+                fname = f.name
+            lake = getattr(self.cfg, "lake_binary", "lake")
+            cmd, cwd = [lake, "env", "lean", fname], root
+        else:
+            with tempfile.NamedTemporaryFile(
+                suffix=".lean", mode="w", delete=False,
+            ) as f:
+                f.write(code)
+                fname = f.name
+            cmd, cwd = [self.cfg.lean_binary, fname], None
+        # ensure elan's bin is on PATH for `lake`/`lean` resolution
+        env = dict(os.environ)
+        elan_bin = os.path.expanduser("~/.elan/bin")
+        if os.path.isdir(elan_bin) and elan_bin not in env.get("PATH", ""):
+            env["PATH"] = elan_bin + os.pathsep + env.get("PATH", "")
         try:
             result = subprocess.run(
-                [self.cfg.lean_binary, fname],
-                capture_output=True, text=True,
-                timeout=self.cfg.lean_timeout_s,
+                cmd, capture_output=True, text=True,
+                timeout=self.cfg.lean_timeout_s, cwd=cwd, env=env,
             )
             return result.returncode == 0, (result.stderr + result.stdout)[:2000]
         except (subprocess.TimeoutExpired, FileNotFoundError) as e:
@@ -438,10 +447,17 @@ class LocalEndpointProver(BaseProver):
 
     name = "local-endpoint"
 
-    def __init__(self, cfg: Config = CONFIG, name: Optional[str] = None):
+    # request/response payload — keep generous response-key fallbacks so the
+    # same client works against most community prover servers (the Colab server
+    # we ship returns {"proof": ..., "model": ...}).
+    _PROOF_KEYS = ("proof", "proof_tactics", "lean_proof", "output", "completion")
+
+    def __init__(self, cfg: Config = CONFIG, name: Optional[str] = None,
+                 endpoint_path: str = ""):
         self.cfg = cfg
         if name:
             self.name = name
+        self._endpoint_path = endpoint_path
         self._lean = LeanSubprocessProver(cfg)
 
     def prove(self, conjecture: Conjecture) -> ProverResponse:
@@ -450,19 +466,57 @@ class LocalEndpointProver(BaseProver):
         if not self.cfg.prover_api_url:
             return ProverResponse(success=False, _stub=True, model_name=self.name,
                                   error=f"{self.name}: prover_api_url not configured")
-        # import requests
-        # resp = requests.post(self.cfg.prover_api_url,
-        #     json={"statement": conjecture.lean_statement, "context": "import Mathlib",
-        #           "timeout_s": self.cfg.prover_timeout_s},
-        #     headers={"Authorization": f"Bearer {self.cfg.prover_api_key}"},
-        #     timeout=self.cfg.prover_timeout_s + 10)
-        # proof = resp.json().get("proof")
-        # if proof and self._lean._available:
-        #     ok, log = self._lean._run_lean("import Mathlib\n\n" + proof)
-        #     return ProverResponse(success=ok, proof_tactics=proof if ok else None,
-        #                           proof_text=proof, model_name=self.name)
-        return ProverResponse(success=False, _stub=True, model_name=self.name,
-                              error=f"{self.name}: HTTP call not enabled (see source)")
+        try:
+            import requests
+        except ImportError:
+            return ProverResponse(success=False, model_name=self.name,
+                                  error=f"{self.name}: `requests` not installed")
+        t0 = time.time()
+        url = self.cfg.prover_api_url.rstrip("/") + self._endpoint_path
+        payload = {
+            "statement": conjecture.lean_statement,
+            "informal_statement": conjecture.statement,
+            "context": "import Mathlib",
+            "strategy": "subgoal_decomposition",
+            "timeout_s": self.cfg.prover_timeout_s,
+        }
+        headers = {}
+        if self.cfg.prover_api_key:
+            headers["Authorization"] = f"Bearer {self.cfg.prover_api_key}"
+        try:
+            resp = requests.post(url, json=payload, headers=headers,
+                                 timeout=self.cfg.prover_timeout_s + 30)
+            resp.raise_for_status()
+            data = resp.json()
+        except Exception as e:                                # network / server
+            return ProverResponse(success=False, model_name=self.name,
+                                  elapsed_s=time.time() - t0,
+                                  error=f"{self.name}: endpoint call failed: {e}")
+        proof = next((data[k] for k in self._PROOF_KEYS if data.get(k)), None)
+        elapsed = time.time() - t0
+        if not proof:
+            return ProverResponse(success=False, model_name=self.name, elapsed_s=elapsed,
+                                  error=f"{self.name}: no proof returned "
+                                        f"({data.get('error', 'empty response')})")
+        # The remote model's own success flag is advisory ONLY — we never trust a
+        # proof we did not kernel-check ourselves against our pinned mathlib.
+        code = proof if proof.lstrip().startswith("import") else "import Mathlib\n\n" + proof
+        if self._lean._available:
+            ok, log = self._lean._run_lean(code)
+            return ProverResponse(
+                success=ok,
+                proof_tactics=proof if ok else None,
+                proof_text=proof,
+                model_name=data.get("model", self.name),
+                tokens_used=int(data.get("num_tokens", 0) or 0),
+                elapsed_s=elapsed,
+                error=None if ok else f"failed Lean kernel check: {log[:200]}",
+            )
+        return ProverResponse(
+            success=False, proof_text=proof, model_name=data.get("model", self.name),
+            elapsed_s=elapsed,
+            error="unverified: no Lean binary to kernel-check the remote proof",
+        )
 
 
 # ---------------------------------------------------------------------------

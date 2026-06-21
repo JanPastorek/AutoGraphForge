@@ -78,3 +78,10 @@ graphs/generated_nauty/
 # OS
 .DS_Store
 Thumbs.db
+
+# Lean 4 / lake build artifacts and downloaded mathlib (regenerate with
+# `lake exe cache get` inside lean_project/). Keep the project config files.
+lean_project/.lake/
+lean_project/lake-packages/
+**/*.olean
+**/*.olean.tmp

@@ -165,6 +165,8 @@ def main(argv=None):
     ap.add_argument("--gen-workers", type=int, default=3)
     ap.add_argument("--attack-workers", type=int, default=12)
     ap.add_argument("--search-n", type=int, default=12)
+    ap.add_argument("--prove-top", type=int, default=30,
+                    help="autoprove the N simplest formalized survivors")
     args = ap.parse_args(argv)
 
     global PIPE, SEARCH_N
@@ -259,6 +261,11 @@ def main(argv=None):
 
     # ---- autoformalization ----------------------------------------------
     for c in survivors:
+        if c.lean_statement:                 # graffiti3 already exported Lean
+            from conjecture import ConjectureStatus as _CS
+            if c.status == _CS.PROPOSED or c.status == _CS.SURVIVED:
+                c.status = _CS.FORMALIZED
+            continue
         try:
             if c.inequality is not None:
                 PIPE.formalizer.formalize(c)
@@ -266,14 +273,33 @@ def main(argv=None):
                 c.mark_formalized(_lean_skeleton(c))
         except Exception as e:
             log.debug("formalize failed %s: %s", c.id, e)
-    formalized = sum(1 for c in survivors if c.lean_statement)
-    log.info("[final] formalized %d/%d", formalized, len(survivors))
+    formalized = [c for c in survivors if c.lean_statement]
+    log.info("[final] formalized %d/%d", len(formalized), len(survivors))
+
+    # ---- autoprove (Lean kernel via Claude / local provers / stubs) ------
+    from pipeline.reporting import sort_conjectures
+    from pipeline.theorem_prover import NeuralProverClient
+    prover = NeuralProverClient(cfg)
+    # prove the simplest formalized survivors first; cap to keep API/GPU use bounded
+    to_prove = sort_conjectures(formalized, by="complexity")[: args.prove_top]
+    proven = 0
+    for c in to_prove:
+        try:
+            if prover.prove(c).success:
+                proven += 1
+        except Exception as e:
+            log.debug("prove failed %s: %s", c.id, e)
+    log.info("[final] proved %d/%d attempted (backends: %s)", proven, len(to_prove),
+             ",".join(p.name for p in prover._provers))
 
     # ---- report ----------------------------------------------------------
     annotate_complexity(all_cands)                       # store op-count metric
     rep = PIPE._report(all_cands, survivors, total_refuted, time.time() - t0)
     rep["rounds"] = args.rounds
     rep["final_db_graphs"] = len(PIPE.db)
+    rep["formalized"] = len(formalized)
+    rep["proved"] = proven
+    rep["prove_attempted"] = len(to_prove)
     outdir = Path(cfg.output_dir)
     (outdir / "parallel_report.json").write_text(json.dumps(rep, indent=2))
 
@@ -284,6 +310,8 @@ def main(argv=None):
     print(f"  generated      : {rep['generated_total']}  {rep['generated_by_method']}")
     print(f"  refuted (loop) : {rep['refuted']}")
     print(f"  survivors      : {rep['survivors']}  (novel: {rep['novel_survivors']})")
+    print(f"  formalized     : {rep['formalized']}  (Lean 4)")
+    print(f"  proved         : {rep['proved']}/{rep['prove_attempted']} attempted")
     print(f"  final DB       : {rep['final_db_graphs']} graphs")
     print(f"  elapsed        : {rep['elapsed_s']}s")
     print_conjectures(survivors, sort_by=getattr(cfg, "report_sort_by", "score"),

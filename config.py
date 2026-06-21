@@ -112,9 +112,29 @@ class Config:
     ce_n_vertices: int = 10
 
     # ---------------------------------------------- Autoformalization stub --
-    lean_binary: str = "lean"       # path to Lean 4 binary (or "lean")
-    lean_timeout_s: int = 60
-    lean_project_root: str = ""     # directory with a Lean/mathlib project
+    # Lean 4 + mathlib kernel-checking. `lean_binary` is resolved via PATH or an
+    # absolute elan path; when `lean_project_root` points at a mathlib-backed
+    # lake project, proofs are compiled with `lake env lean` (so the mathlib
+    # search path + `import Mathlib` are available and kernel-verified).
+    lean_binary: str = field(
+        default_factory=lambda: (
+            os.path.expanduser("~/.elan/bin/lean")
+            if os.path.exists(os.path.expanduser("~/.elan/bin/lean")) else "lean"
+        )
+    )
+    lake_binary: str = field(
+        default_factory=lambda: (
+            os.path.expanduser("~/.elan/bin/lake")
+            if os.path.exists(os.path.expanduser("~/.elan/bin/lake")) else "lake"
+        )
+    )
+    lean_timeout_s: int = 180        # mathlib import + elaboration can be slow
+    lean_project_root: str = field(
+        default_factory=lambda: (
+            p if os.path.isdir(p := os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "lean_project")) else ""
+        )
+    )
 
     # ------------------------------------------------------- Provers --------
     # Ordered ensemble of prover backends tried per conjecture (first success
