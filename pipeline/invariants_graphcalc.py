@@ -1,0 +1,227 @@
+"""
+pipeline/invariants_graphcalc.py — the invariant battery for CEGIS.
+
+Single source of truth for "all invariants in graphcalc": wraps
+``graphcalc.graphs.all_properties`` (59 numeric + boolean columns in graphcalc
+2.0) into a robust, NaN-tolerant table builder, plus a best-effort metadata
+registry (category / notation / display-name) read from each invariant's
+``@invariant_metadata`` decorator.
+
+Design choices (see docs/CEGIS_PLAN.md):
+  * Per-graph computation with a wall-clock cap, so one slow/huge graph (the NP-
+    hard ILP invariants blow up past n≈18) never stalls a build — it just
+    contributes a partial / empty row. **Incomplete tables are expected and OK**;
+    refutation is NaN-aware.
+  * The union of all rows' keys defines the columns; missing cells are NaN.
+"""
+from __future__ import annotations
+
+import logging
+import os
+import signal
+from functools import lru_cache
+from typing import Dict, List, Optional, Sequence
+
+import networkx as nx
+import numpy as np
+import pandas as pd
+
+logger = logging.getLogger(__name__)
+
+# graphcalc's full-battery entry point (accepts plain networkx graphs)
+from graphcalc.graphs import all_properties as _all_properties
+
+
+# --------------------------------------------------------------------------- #
+# per-graph timeout
+# --------------------------------------------------------------------------- #
+class _Timeout(Exception):
+    pass
+
+
+def _on_alarm(signum, frame):           # pragma: no cover - signal handler
+    raise _Timeout()
+
+
+def _battery_one(G: nx.Graph, cap_s: int) -> Dict[str, float]:
+    """Full graphcalc battery for one graph, or {} on timeout/error."""
+    have_alarm = hasattr(signal, "SIGALRM")
+    if have_alarm:
+        old = signal.signal(signal.SIGALRM, _on_alarm)
+        signal.alarm(int(cap_s))
+    try:
+        df = _all_properties([G])
+        return df.iloc[0].to_dict()
+    except _Timeout:
+        logger.warning("[battery] timeout (%ds) on graph n=%d — partial row",
+                       cap_s, G.number_of_nodes())
+        return {}
+    except Exception as e:                                       # ILP / numeric
+        logger.debug("[battery] error on graph n=%d: %s", G.number_of_nodes(), e)
+        return {}
+    finally:
+        if have_alarm:
+            signal.alarm(0)
+            signal.signal(signal.SIGALRM, old)
+
+
+# --------------------------------------------------------------------------- #
+# public table builder
+# --------------------------------------------------------------------------- #
+def compute_battery(graphs: Sequence[nx.Graph], *, cap_s: int = 90,
+                    max_n: Optional[int] = None,
+                    names: Optional[Sequence[str]] = None) -> pd.DataFrame:
+    """
+    Full graphcalc battery over ``graphs`` as a DataFrame (one row per graph).
+
+    cap_s   per-graph wall-clock cap (skip → empty/partial row).
+    max_n   skip graphs larger than this (avoid the ILP blow-up); their row is
+            left empty.  None ⇒ no size filter.
+    names   optional row labels (stored in the ``graph_name`` column).
+    """
+    rows: List[Dict[str, float]] = []
+    for i, G in enumerate(graphs):
+        if max_n is not None and G.number_of_nodes() > max_n:
+            rows.append({})
+            continue
+        rows.append(_battery_one(G, cap_s))
+    df = pd.DataFrame(rows)
+    df = _coerce(df)
+    # ensure a stable order column even if graphcalc names it differently
+    if "order" not in df.columns:
+        df["order"] = [g.number_of_nodes() for g in graphs]
+    if names is not None:
+        df.insert(0, "graph_name", list(names))
+    n_full = int((df.notna().sum(axis=1) > 1).sum())
+    logger.info("[battery] %d graphs → %d cols (%d rows with data)",
+                len(graphs), df.shape[1], n_full)
+    return df
+
+
+def _coerce(df: pd.DataFrame) -> pd.DataFrame:
+    """Make numeric columns true float (None → NaN) and keep booleans as bool.
+
+    graphcalc returns ``None`` for undefined invariants (e.g. the diameter of a
+    disconnected graph), which leaves an *object*-dtype column that breaks
+    downstream ``np.isclose``/arithmetic. We coerce: a column whose non-null
+    values are all bool becomes ``bool`` (NaN→False); everything else becomes
+    numeric with None→NaN.
+    """
+    for c in df.columns:
+        if c == "graph_name":
+            continue
+        s = df[c]
+        if s.dtype == bool:
+            continue
+        non_null = s.dropna()
+        if len(non_null) and non_null.map(lambda v: isinstance(v, (bool,))).all():
+            df[c] = s.fillna(False).astype(bool)
+        else:
+            df[c] = pd.to_numeric(s, errors="coerce")
+    return df
+
+
+def cached_battery(graphs: Sequence[nx.Graph], ids: Sequence[str], *,
+                   cache_path: str, cap_s: int = 90,
+                   max_n: Optional[int] = None) -> pd.DataFrame:
+    """Battery for ``graphs`` (index = ``ids``), persisted graph6-keyed to
+    ``cache_path``. Only graphs absent from the cache are recomputed."""
+    cache = pd.DataFrame()
+    if os.path.exists(cache_path):
+        try:
+            cache = pd.read_parquet(cache_path)
+        except Exception as e:
+            logger.warning("[battery] cache read failed (%s): %s", cache_path, e)
+    miss = [(i, g) for i, g in zip(ids, graphs)
+            if cache.empty or i not in cache.index]
+    if miss:
+        logger.info("[battery] %d new graph(s) → %s", len(miss),
+                    os.path.basename(cache_path))
+        new = compute_battery([g for _, g in miss], cap_s=cap_s, max_n=max_n)
+        new.index = [i for i, _ in miss]
+        cache = new if cache.empty else pd.concat([cache, new])
+        cache = cache[~cache.index.duplicated(keep="last")]
+        os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+        try:
+            cache.to_parquet(cache_path)
+        except Exception as e:
+            logger.warning("[battery] cache write failed: %s", e)
+    want = [i for i in ids if i in cache.index]
+    return _coerce(cache.loc[want].copy())
+
+
+def numeric_invariants(df: pd.DataFrame) -> List[str]:
+    """Numeric invariant columns (exclude booleans / labels)."""
+    out = []
+    for c in df.columns:
+        if c == "graph_name":
+            continue
+        s = df[c]
+        if s.dtype == bool:
+            continue
+        if pd.api.types.is_numeric_dtype(s):
+            out.append(c)
+    return out
+
+
+def boolean_properties(df: pd.DataFrame) -> List[str]:
+    """Boolean (graph-class) columns usable as hypotheses."""
+    return [c for c in df.columns if df[c].dtype == bool]
+
+
+# --------------------------------------------------------------------------- #
+# metadata registry (category / notation / display name)  — best effort
+# --------------------------------------------------------------------------- #
+@lru_cache(maxsize=1)
+def _metadata_registry() -> Dict[str, dict]:
+    """Map invariant function-name → {display_name, notation, category}."""
+    import inspect
+    import pkgutil
+    import graphcalc
+    from graphcalc.metadata import get_graphcalc_metadata
+
+    reg: Dict[str, dict] = {}
+    for m in pkgutil.walk_packages(graphcalc.__path__, "graphcalc."):
+        if ".graphs.invariants" not in m.name and ".graphs." not in m.name:
+            continue
+        try:
+            mod = __import__(m.name, fromlist=["x"])
+        except Exception:
+            continue
+        for fn_name, fn in inspect.getmembers(mod, inspect.isfunction):
+            md = None
+            try:
+                md = get_graphcalc_metadata(fn)
+            except Exception:
+                md = None
+            if not md:
+                continue
+            d = md if isinstance(md, dict) else getattr(md, "__dict__", {}) or {}
+            reg[fn_name] = {
+                "display_name": d.get("display_name", fn_name),
+                "notation": d.get("notation"),
+                "category": d.get("category"),
+            }
+    logger.debug("[battery] metadata registry: %d invariants", len(reg))
+    return reg
+
+
+def metadata(name: str) -> dict:
+    """Metadata for an invariant column (display_name/notation/category)."""
+    return _metadata_registry().get(
+        name, {"display_name": name, "notation": None, "category": None}
+    )
+
+
+def categories(names: Sequence[str]) -> Dict[str, List[str]]:
+    """Group invariant names by graphcalc category (None → 'other')."""
+    out: Dict[str, List[str]] = {}
+    for n in names:
+        cat = metadata(n).get("category") or "other"
+        out.setdefault(cat, []).append(n)
+    return out
+
+
+def notation(name: str) -> str:
+    """Short math notation for an invariant (falls back to its name)."""
+    return metadata(name).get("notation") or name

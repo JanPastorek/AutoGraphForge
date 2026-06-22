@@ -13,8 +13,16 @@ z3-solver>=4.13.0
 anthropic>=0.28.0
 
 # ── Numerical / scientific ────────────────────────────────────────────────
-numpy>=1.26
+numpy>=2.1           # rlgt[agents] requires the numpy 2.x ABI
 scipy>=1.11          # LP feasibility test in the known-theorem novelty filter
+pyarrow>=14          # parquet caches for the graphcalc invariant batteries
+
+# ── CEGIS: invariant battery + counterexample search ──────────────────────
+graphcalc>=2.0       # full graph-invariant battery (all_properties); exact ILP
+# RL counterexample search (Wagner deep cross-entropy / REINFORCE / PPO).
+# Heavy (pulls torch + CUDA). Optional: the pipeline import-guards it and falls
+# back to simulated annealing + pool refutation when absent.
+rlgt[agents]>=1.0    # https://github.com/Ivan-Damnjanovic/rlgt  (brings torch)
 
 # ── Standard library supplements ─────────────────────────────────────────
 # (no additional deps needed — itertools, subprocess, etc. are built-in)

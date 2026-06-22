@@ -1,0 +1,244 @@
+"""
+pipeline/cegis.py — the counterexample-guided conjecturing loop.
+
+    generate on the seed  →  refute (tiers + active search)  →  add witnesses
+    to the seed  →  regenerate … until a round refutes nothing (fixed point).
+
+Generation is graffiti3 (FAST) over the seed's full graphcalc battery. Refutation
+is the tiered NaN-aware `Refuter` followed, for pool-survivors, by active
+counterexample search (SA + rlgt deep-CE/REINFORCE). Witnesses grow the seed
+(and are persisted), so each round's conjectures are tighter and validated
+against strictly more graphs. Survivors of a fixed-point round hold on everything
+tried.
+"""
+from __future__ import annotations
+
+import logging
+import time
+from dataclasses import dataclass, field
+from typing import List, Optional, Tuple
+
+import networkx as nx
+
+from config import Config, CONFIG
+from pipeline.seed_corpus import SeedCorpus
+from pipeline.refute_matrix import Refuter
+from pipeline.search import find_counterexample
+
+from txgraffiti.graffiti3.graffiti3 import Graffiti3, Mode
+from txgraffiti.graffiti3.heuristics.dalmatian import dalmatian_filter
+from txgraffiti.graffiti3.heuristics.morgan import morgan_filter
+
+logger = logging.getLogger(__name__)
+
+# Shared handles for forked refute/search workers. Populated in-place before each
+# pool is created, so the children inherit the current candidates + refuter via
+# copy-on-write (the graffiti3 conjectures carry unpicklable lambda predicates —
+# fork avoids ever pickling them; only integer indices cross the boundary).
+_W: dict = {}
+
+
+def _refute_worker(idx: int):
+    try:
+        ref, wits, tier = _W["refuter"].refute(_W["cands"][idx])
+        return idx, bool(ref), tier, [w for w in wits if w is not None]
+    except Exception:
+        return idx, False, None, []
+
+
+def _search_worker(idx: int):
+    try:
+        g = find_counterexample(_W["cands"][idx], _W["allcols"], _W["cfg"], seed=idx)
+        return idx, g
+    except Exception:
+        return idx, None
+
+
+@dataclass
+class CegisResult:
+    survivors: List = field(default_factory=list)       # native graffiti3 conjectures
+    touches: List[int] = field(default_factory=list)
+    g3: Optional[Graffiti3] = None                      # for Lean export of survivors
+    seed: Optional[SeedCorpus] = None
+    rounds_run: int = 0
+    fixed_point: bool = False
+    history: List[dict] = field(default_factory=list)
+
+
+class CEGIS:
+    def __init__(self, cfg: Config = CONFIG):
+        self.cfg = cfg
+        logger.info("[cegis] loading seed (TxGraffiti expressive graphs + battery)…")
+        self.seed = SeedCorpus.from_txgraffiti(cfg)
+        logger.info("[cegis] building refutation tiers…")
+        self.refuter = Refuter(cfg)
+
+    # ---------------------------------------------------------- generation --
+    def _targets(self) -> List[str]:
+        nums = self.seed.numeric_targets()
+        if self.cfg.cegis_targets:
+            nums = [t for t in nums if t in set(self.cfg.cegis_targets)]
+        if self.cfg.cegis_max_targets:
+            nums = nums[: self.cfg.cegis_max_targets]
+        return nums
+
+    def _generate(self) -> Tuple[list, Graffiti3]:
+        frame = self.seed.frame
+        targets = self._targets()
+        lean_label = {c: f"{c} G" for c in frame.columns}
+        g3 = Graffiti3(frame, lean_label=lean_label)
+        res = g3.conjecture(targets, mode=Mode.FAST,
+                            enable_sophie=self.cfg.graffiti3_sophie)
+        # Inequality conjectures (have .relation/.condition) and Sophie
+        # sufficient-conditions (a different type) are handled separately: the
+        # Dalmatian/Morgan filters only understand inequality Conjectures.
+        ineqs = list(res.conjectures)
+        sophie = list(getattr(res, "sophie_conditions", [])) \
+            if self.cfg.graffiti3_sophie else []
+        n_raw = len(ineqs)
+        n_sophie_raw = len(sophie)
+        # Sophie conditions can't go through Dalmatian/Morgan (no numeric bound);
+        # rank them by significance (support of the hypothesis) and keep the top-N.
+        if sophie and self.cfg.cegis_max_sophie and \
+           len(sophie) > self.cfg.cegis_max_sophie:
+            sophie.sort(key=lambda s: getattr(s, "support_h", 0), reverse=True)
+            sophie = sophie[: self.cfg.cegis_max_sophie]
+
+        # Freeze each conjecture's hypothesis on the SEED frame. graffiti3's
+        # check() otherwise re-derives an "auto-base" (always-True booleans) from
+        # whatever frame it sees, so a bound that holds on the seed would be
+        # re-judged under a *different* hypothesis on the refutation pool and
+        # spuriously "refuted". Freezing makes the hypothesis part of the
+        # conjecture, consistent across seed / pools / search.
+        for c in ineqs:
+            try:
+                if getattr(c, "condition", None) is None and hasattr(c, "_auto_base"):
+                    c.condition = c._auto_base(frame)
+            except Exception:
+                pass
+
+        # Dalmatian significance filter on the seed: keep only conjectures that
+        # are the tightest bound for at least one seed graph (per target /
+        # direction / hypothesis). This makes the full graphcalc battery
+        # tractable — graffiti3's product features generate ~10^5 raw candidates,
+        # the Dalmatian envelope is typically a few hundred. Runs *after* the
+        # condition freeze (it groups by condition).
+        if self.cfg.cegis_dalmatian:
+            try:
+                ineqs = dalmatian_filter(frame, ineqs)
+            except Exception as e:
+                logger.warning("[cegis] dalmatian_filter failed (%s) — keeping raw", e)
+        n_dal = len(ineqs)
+        # Morgan: drop a bound asserted on a smaller class when the *same* bound
+        # holds on a larger class (hypothesis-maximality).
+        if self.cfg.cegis_morgan:
+            try:
+                ineqs = morgan_filter(frame, ineqs)
+            except Exception as e:
+                logger.warning("[cegis] morgan_filter failed (%s) — skipping", e)
+
+        # dedup by pretty(); re-append the (separately handled) Sophie conditions
+        seen, uniq = set(), []
+        for c in ineqs + sophie:
+            try:
+                key = c.pretty()
+            except Exception:
+                key = repr(c)
+            if key not in seen:
+                seen.add(key); uniq.append(c)
+        logger.info("[cegis] candidates: %d ineq raw → %d Dalmatian → %d Morgan "
+                    "(+%d/%d sophie kept) → %d total",
+                    n_raw, n_dal, len(ineqs), len(sophie), n_sophie_raw, len(uniq))
+        return uniq, g3
+
+    # ----------------------------------------------- refute + search (||) --
+    def _refute_and_search(self, cands, all_cols, do_search):
+        """Two embarrassingly-parallel phases over candidates:
+        (A) tiered pool refutation on all; (B) active search on the capped pool
+        survivors. Returns (survivors, witnesses, refuted_pool, refuted_search)."""
+        import multiprocessing as mp
+        n = len(cands)
+        workers = max(1, int(self.cfg.cegis_workers))
+        _W.clear()
+        _W.update({"refuter": self.refuter, "cands": cands,
+                   "allcols": all_cols, "cfg": self.cfg})
+        ctx = mp.get_context("fork")
+
+        def _run(fn, items, chunk):
+            if workers > 1 and len(items) > 1:
+                with ctx.Pool(workers) as pool:
+                    return pool.map(fn, items, chunksize=max(1, chunk))
+            return [fn(i) for i in items]
+
+        # Phase A — pool refutation on every candidate
+        witnesses: List[nx.Graph] = []
+        refuted_pool = 0
+        survivor_idx: List[int] = []
+        for idx, ref, _tier, wits in _run(_refute_worker, range(n), n // (workers * 4)):
+            if ref:
+                refuted_pool += 1
+                witnesses += wits
+            else:
+                survivor_idx.append(idx)
+
+        # Phase B — active search on the (capped) pool survivors
+        refuted_search = 0
+        survivors: List = []
+        to_search = survivor_idx[: self.cfg.cegis_max_search] if do_search else []
+        kept = survivor_idx[len(to_search):]
+        for idx, g in _run(_search_worker, to_search, 1):
+            if g is not None:
+                refuted_search += 1
+                witnesses.append(g)
+            else:
+                survivors.append(cands[idx])
+        survivors += [cands[i] for i in kept]
+        return survivors, witnesses, refuted_pool, refuted_search
+
+    # ---------------------------------------------------------------- loop --
+    def run(self) -> CegisResult:
+        all_cols = self.seed.numeric_targets() + self.seed.booleans()
+        do_search = any(k in ("sa", "rl") for k in self.cfg.cegis_searchers)
+        result = CegisResult(seed=self.seed)
+        survivors, g3 = [], None
+
+        for rnd in range(1, self.cfg.cegis_rounds + 1):
+            t0 = time.time()
+            cands, g3 = self._generate()
+            logger.info("[cegis][round %d] seed=%d graphs → %d candidate conjectures",
+                        rnd, len(self.seed.graphs), len(cands))
+
+            survivors, witnesses, refuted_pool, refuted_search = \
+                self._refute_and_search(cands, all_cols, do_search)
+
+            added = self.seed.add(witnesses) if witnesses else []
+            if added:
+                self.seed.persist_witnesses(added)
+
+            stat = {
+                "round": rnd, "candidates": len(cands), "survivors": len(survivors),
+                "refuted_pool": refuted_pool, "refuted_search": refuted_search,
+                "witnesses_added": len(added), "seed_size": len(self.seed.graphs),
+                "seconds": round(time.time() - t0, 1),
+            }
+            result.history.append(stat)
+            logger.info("[cegis][round %d] survivors=%d refuted(pool=%d,search=%d) "
+                        "+%d witnesses → seed=%d  (%.1fs)",
+                        rnd, len(survivors), refuted_pool, refuted_search,
+                        len(added), len(self.seed.graphs), stat["seconds"])
+
+            result.rounds_run = rnd
+            if (refuted_pool + refuted_search) == 0:
+                result.fixed_point = True
+                logger.info("[cegis] fixed point reached at round %d", rnd)
+                break
+            if not added:
+                # refuted some, but couldn't recover structures to learn from →
+                # regenerating would repeat; stop to avoid an infinite loop.
+                logger.info("[cegis] refuted without new witnesses — stopping")
+                break
+
+        result.survivors = survivors
+        result.g3 = g3
+        result.touches = [self.refuter.touch_count(c, self.seed.frame) for c in survivors]
+        return result

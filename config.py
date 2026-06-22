@@ -96,6 +96,63 @@ class Config:
     # (simplest first) | "touches".
     report_sort_by: str = "score"
 
+    # ============================================ CEGIS mode (run_cegis.py) ==
+    # Counterexample-guided loop: generate on a small "expressible" seed (the
+    # TxGraffiti expressive graphs, full graphcalc battery), refute against
+    # tiered pools + active search, add witnesses back to the seed, repeat to a
+    # fixed point. See docs/CEGIS_PLAN.md.
+    cegis_rounds: int = 8               # max generate→refute passes (or fixed point)
+    cegis_workers: int = 16             # parallel workers for the per-candidate
+                                        # refute + active-search phases (fork; 0/1
+                                        # = serial). The pool/SA evals are
+                                        # embarrassingly parallel across candidates.
+    cegis_targets: tuple = ()           # restrict target invariants ((), = all numeric)
+    cegis_max_targets: int = 0          # cap #targets per round (0 = no cap)
+    cegis_filter_known: bool = True     # drop classical/trivial bounds
+    cegis_dalmatian: bool = True        # Dalmatian significance filter on the seed
+                                        # (prunes graffiti3's ~10^5 raw product
+                                        #  candidates to the non-dominated envelope)
+    cegis_morgan: bool = True           # Morgan hypothesis-maximality filter
+                                        # (drops over-conditioned redundant bounds)
+    cegis_report_top: int = 40          # survivors to print/formalize/prove
+    # Seed corpus
+    exact_tier_max_n: int = 14          # graphs ≤ this get the full battery (≈1s/graph)
+    battery_cap_s: int = 90             # per-graph wall-clock cap for graphcalc
+    persist_seed: bool = True           # accumulate hard witnesses across runs
+    hard_seed_dir: str = "database/hard_seed"
+    cache_dir: str = "database/cache"
+    # Refutation tiers (cheap → expensive); each is NaN-aware + coverage-masked
+    refute_use_families: bool = True    # atlas + named families (exact battery)
+    refute_use_random: bool = True      # class-aware random models (exact battery)
+    refute_random_per: int = 6
+    refute_families_max_n: int = 12     # cap n for the (expensive) family battery
+    refute_use_bigdb: bool = True       # 348k HoG+census, columns it carries only
+    cegis_max_sophie: int = 400         # keep the top-N most significant Sophie
+                                        # sufficient-conditions (graffiti3 emits
+                                        # ~10^4; ranked by support, not arbitrary).
+                                        # Dalmatian/Morgan are inequality-only, so
+                                        # Sophie gets its own significance filter.
+    # Active counterexample search (run on survivors of pool refutation), tried
+    # cheapest-first per candidate: z3 (exact, encodable invariants) → vns → sa →
+    # cross_entropy → mcts → rl. All but z3 are black-box over the graphcalc
+    # battery. The trial budget is *order-adaptive*: the orders sweep from small
+    # to large and the per-order trial count is scaled down ∝ ref/n, so big
+    # graphs (expensive evals) get proportionally fewer trials.
+    cegis_searchers: tuple = ("z3", "cross_entropy", "vns", "sa", "rl")  # +"mcts"
+    cegis_max_search: int = 60          # max pool-survivors/round given active
+                                        # search (rest kept as pool-survivors)
+    search_orders: tuple = (              # increasing orders, incl. big graphs
+        6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 24, 28, 34, 40)
+    search_order_ref: int = 6           # reference order for trial scaling
+    search_min_trials: int = 30         # floor on per-order trials at large n
+    search_eval_cap_s: int = 3          # per-graph invariant-eval timeout
+    sa_iterations: int = 300            # base SA steps (scaled down per order)
+    sa_restarts: int = 1
+    rl_episodes: int = 40               # rlgt deep-CE / REINFORCE iterations
+    rl_candidates: int = 200            # rlgt candidates_count per iteration
+    rl_agent: str = "deep_cross_entropy"    # "deep_cross_entropy" | "reinforce"
+    rl_enabled: bool = True             # set False to skip torch/rlgt entirely
+
     # --------------------------------------------------- Falsification loop --
     falsification_rounds: int = 2    # retry passes after db augmentation
     z3_enabled: bool = True
