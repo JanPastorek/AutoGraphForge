@@ -177,5 +177,26 @@ def test_graph6_id_roundtrip():
     assert graph6_id(H) == gid and H.number_of_nodes() == 6
 
 
+# --------------------------------------------------------------------------- #
+# HoG precomputed-invariant ingestion (partial, big-graph tier)
+# --------------------------------------------------------------------------- #
+def test_hog_name_map_targets_graphcalc_names():
+    from pipeline.refute_matrix import _HOG_TO_GC
+    # mapped values must be real graphcalc battery names the conjectures use
+    assert _HOG_TO_GC["omega"] == "clique_number"
+    assert _HOG_TO_GC["Delta"] == "maximum_degree"
+    assert _HOG_TO_GC["n"] == "order" and _HOG_TO_GC["gamma"] == "domination_number"
+
+
+def test_lazy_g6_map_reconstructs_on_demand():
+    from pipeline.refute_matrix import _LazyG6Map
+    G = nx.cycle_graph(5)
+    gid = nx.to_graph6_bytes(G, header=False).strip().decode()
+    m = _LazyG6Map([gid])
+    assert gid in m
+    H = m[gid]
+    assert H.number_of_nodes() == 5 and H.number_of_edges() == 5
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-v"]))

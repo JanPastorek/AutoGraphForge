@@ -85,6 +85,44 @@ def _parametric_families(max_n: int) -> List[nx.Graph]:
 # --------------------------------------------------------------------------- #
 # tier
 # --------------------------------------------------------------------------- #
+# Precomputed-invariant ingestion: HoG enriched export column → graphcalc battery
+# name. Only invariants graphcalc/graffiti3 also speak about are mapped (the rest
+# are dropped). These come already computed — including for *big* graphs — so we
+# ingest them directly instead of recomputing the battery (which caps at n≤14).
+_HOG_TO_GC = {
+    "n": "order", "m": "size", "chi": "chromatic_number",
+    "alpha": "independence_number", "omega": "clique_number",
+    "gamma": "domination_number", "nu": "matching_number",
+    "Delta": "maximum_degree", "delta": "minimum_degree",
+    "diam": "diameter", "rad": "radius", "alg": "algebraic_connectivity",
+    "avg_deg": "average_degree", "ind_dom": "independent_domination_number",
+    "spectral_radius": "spectral_radius", "lap_max": "largest_laplacian_eigenvalue",
+    "vertex_cover": "vertex_cover_number",
+    "eig2": "second_largest_adjacency_eigenvalue",
+    "eig_min": "smallest_adjacency_eigenvalue",
+    "zero_eigenvalues": "zero_adjacency_eigenvalues_count",
+    "bipartite": "bipartite", "planar": "planar", "regular": "regular",
+    "eulerian": "eulerian", "chordal": "chordal", "tree": "tree",
+    "claw_free": "claw_free", "connected": "connected",
+}
+_HOG_BOOL_COLS = {"bipartite", "planar", "regular", "eulerian", "chordal",
+                  "tree", "claw_free", "connected"}
+
+
+class _LazyG6Map:
+    """graph6-id → networkx graph, reconstructed on demand (no upfront memory for
+    the whole tier; only refuting witnesses are ever built)."""
+
+    def __init__(self, ids):
+        self._ids = set(ids)
+
+    def __contains__(self, k):
+        return k in self._ids
+
+    def __getitem__(self, k):
+        return nx.from_graph6_bytes(k.encode() if isinstance(k, str) else k)
+
+
 @dataclass
 class Tier:
     name: str
@@ -132,6 +170,10 @@ class Refuter:
             t = self._tier_from_graphs("random", rnd, "battery_random.parquet", mx + 6)
             if t:
                 self.tiers.append(t)
+        if self.cfg.refute_use_hog:
+            t = self._load_hog_tier()
+            if t:
+                self.tiers.append(t)
         if self.cfg.refute_use_bigdb:
             t = self._load_bigdb_tier()
             if t:
@@ -142,6 +184,50 @@ class Refuter:
             if t.name in ("families", "random"):
                 self._symbolic_cols = list(t.frame.columns)
                 break
+
+    def _load_hog_tier(self) -> Optional[Tier]:
+        """Ingest the HoG enriched export's *already-computed* invariants as a
+        partial, NaN-aware tier — covering big graphs the n≤14 battery can't.
+        Only the mapped columns are kept; missing/partial values stay NaN, and a
+        conjecture referencing a column this tier lacks is a coverage miss (the
+        refuter falls through), never a false survival."""
+        path = self.cfg.refute_hog_csv
+        if not os.path.exists(path):
+            return None
+        try:
+            usecols = ["g6"] + [c for c in _HOG_TO_GC]
+            df = pd.read_csv(path, usecols=lambda c: c in usecols)
+        except Exception as e:
+            logger.warning("[refute] HoG tier read failed: %s", e)
+            return None
+        if "g6" not in df.columns:
+            return None
+        df = df.dropna(subset=["g6"]).copy()
+        if self.cfg.refute_hog_max_n and "n" in df.columns:
+            df = df[pd.to_numeric(df["n"], errors="coerce").fillna(1e9) <= self.cfg.refute_hog_max_n]
+        # rename to graphcalc names; coerce numerics / booleans; drop dup graphs
+        ren = {h: g for h, g in _HOG_TO_GC.items() if h in df.columns}
+        ids = df["g6"].astype(str)
+        df = df.rename(columns=ren)
+        for h in _HOG_BOOL_COLS:
+            g = _HOG_TO_GC[h]
+            if g in df.columns:
+                df[g] = df[g].map({True: True, False: False, 1: True, 0: False,
+                                   "True": True, "False": False, "1": True, "0": False})
+        for g in df.columns:
+            if g not in _HOG_BOOL_COLS and g not in _HOG_TO_GC.values():
+                continue
+            if g not in {_HOG_TO_GC[h] for h in _HOG_BOOL_COLS}:
+                df[g] = pd.to_numeric(df[g], errors="coerce")
+        frame = df.drop(columns=[c for c in ("g6",) if c in df.columns])
+        frame.index = ids.values
+        frame = frame[~frame.index.duplicated(keep="first")]
+        if frame.empty:
+            return None
+        logger.info("[refute] tier 'hog': %d graphs, %d precomputed invariants "
+                    "(incl. big graphs, partial/NaN-aware)",
+                    len(frame), frame.shape[1])
+        return Tier("hog", frame, _LazyG6Map(frame.index))
 
     def _load_bigdb_tier(self) -> Optional[Tier]:
         """Load the offline-precomputed HoG/census battery if it exists."""

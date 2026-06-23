@@ -130,7 +130,14 @@ class Config:
     refute_use_random: bool = True      # class-aware random models (exact battery)
     refute_random_per: int = 6
     refute_families_max_n: int = 12     # cap n for the (expensive) family battery
-    refute_use_bigdb: bool = True       # 348k HoG+census, columns it carries only
+    # Ingest the HoG enriched export's *already-computed* invariants directly
+    # (partial, NaN-aware) — covers BIG graphs the n≤14 battery can't, at ~zero
+    # cost (no recomputation). The mapped subset (~28 invariants) is enough to
+    # refute any conjecture phrased over them; others are coverage misses.
+    refute_use_hog: bool = True
+    refute_hog_csv: str = "database/graph_database_enriched.csv"
+    refute_hog_max_n: int = 60          # cap witness order (memory/relevance)
+    refute_use_bigdb: bool = True       # offline full-battery tier (n≤14, recomputed)
     cegis_max_sophie: int = 400         # keep the top-N most significant Sophie
                                         # sufficient-conditions (graffiti3 emits
                                         # ~10^4; ranked by support, not arbitrary).
