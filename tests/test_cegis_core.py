@@ -211,11 +211,15 @@ def test_constant_bound_filter():
         n._pretty = p
         return n
 
-    # invariant ≤/≥/= constant  → dropped
+    # UNCONDITIONED invariant ≤/≥/= constant  → dropped
     assert is_constant_bound(nat("clique_number ≤ 20"), cols)
     assert is_constant_bound(nat("9 ≤ size"), cols)
     assert is_constant_bound(nat("order = 14"), cols)
-    assert is_constant_bound(nat("(subcubic) ⇒ order ≤ 14"), cols)   # hypothesis ignored
+    assert is_constant_bound(nat("(TRUE) ⇒ order ≤ 14"), cols)       # vacuous hypothesis
+    # CONDITIONED on a real class → kept (may be a valid class theorem, e.g.
+    # (K_4_free) ⇒ clique_number ≤ 3); refutation decides
+    assert not is_constant_bound(nat("(subcubic) ⇒ order ≤ 14"), cols)
+    assert not is_constant_bound(nat("(K_4_free) ⇒ clique_number ≤ 3"), cols + ["K_4_free"])
     # two invariants (or invariant + invariant offset) → kept
     assert not is_constant_bound(nat("clique_number ≤ chromatic_number"), cols)
     assert not is_constant_bound(nat("order ≤ (size + 1)"), cols)
