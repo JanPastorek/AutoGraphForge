@@ -21,6 +21,8 @@ filtered out of the prove set rather than formalized incorrectly.
 -/
 import Mathlib
 
+open scoped Classical
+
 namespace SimpleGraph
 
 variable {V : Type*} [Fintype V] [DecidableEq V]
@@ -48,5 +50,63 @@ def IsIndependentFinset (G : SimpleGraph V) (s : Finset V) : Prop :=
 dominating set. -/
 noncomputable def independentDominationNumber (G : SimpleGraph V) : ℕ :=
   sInf { n | ∃ s : Finset V, s.card = n ∧ G.IsDominatingSet s ∧ G.IsIndependentFinset s }
+
+/- ── Degree-sequence invariants ─────────────────────────────────────────── -/
+
+/-- Degrees in non-decreasing order. -/
+noncomputable def degreesAsc (G : SimpleGraph V) [DecidableRel G.Adj] : List ℕ :=
+  (Finset.univ.val.map (fun v => G.degree v)).sort (· ≤ ·)
+
+/-- Degrees in non-increasing order. -/
+noncomputable def degreesDesc (G : SimpleGraph V) [DecidableRel G.Adj] : List ℕ :=
+  (Finset.univ.val.map (fun v => G.degree v)).sort (· ≥ ·)
+
+/-- Annihilation number `a(G)`: the largest `k ≤ n` such that the `k` smallest
+degrees sum to at most the number of edges. -/
+noncomputable def annihilationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sSup { k | k ≤ Fintype.card V ∧ ((G.degreesAsc).take k).sum ≤ G.size }
+
+/-- Slater number `sl(G)`: the least `t` with `t + (sum of the t largest degrees) ≥ n`.
+A classical lower bound on the domination number. -/
+noncomputable def slaterNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sInf { t | (Fintype.card V) ≤ t + ((G.degreesDesc).take t).sum }
+
+/- ── Zero forcing family ───────────────────────────────────────────────── -/
+
+/-- One zero-forcing colour-change step: a blue vertex with a unique white
+neighbour forces it blue. -/
+noncomputable def forcingStep (G : SimpleGraph V) [DecidableRel G.Adj]
+    (S : Finset V) : Finset V :=
+  S ∪ Finset.univ.filter (fun w => w ∉ S ∧ ∃ v ∈ S, G.neighborFinset v \ S = {w})
+
+/-- Zero-forcing closure: iterate the step `|V|` times (a fixpoint is reached, as
+each non-final step adds at least one vertex). -/
+noncomputable def forcingClosure (G : SimpleGraph V) [DecidableRel G.Adj]
+    (S : Finset V) : Finset V :=
+  (G.forcingStep)^[Fintype.card V] S
+
+/-- `S` is a zero-forcing set if its closure is everything. -/
+def IsZeroForcingSet (G : SimpleGraph V) [DecidableRel G.Adj] (S : Finset V) : Prop :=
+  G.forcingClosure S = Finset.univ
+
+/-- Zero forcing number `Z(G)`: minimum size of a zero-forcing set. -/
+noncomputable def zeroForcingNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sInf { k | ∃ S : Finset V, S.card = k ∧ G.IsZeroForcingSet S }
+
+/-- A total zero-forcing set: zero-forcing and inducing no isolated vertex. -/
+def IsTotalZeroForcingSet (G : SimpleGraph V) [DecidableRel G.Adj] (S : Finset V) : Prop :=
+  G.IsZeroForcingSet S ∧ ∀ v ∈ S, ∃ w ∈ S, G.Adj v w
+
+/-- Total zero forcing number `Z_t(G)`. -/
+noncomputable def totalZeroForcingNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sInf { k | ∃ S : Finset V, S.card = k ∧ G.IsTotalZeroForcingSet S }
+
+/-- A connected zero-forcing set: zero-forcing and inducing a connected subgraph. -/
+def IsConnectedZeroForcingSet (G : SimpleGraph V) [DecidableRel G.Adj] (S : Finset V) : Prop :=
+  G.IsZeroForcingSet S ∧ (G.induce (↑S)).Connected
+
+/-- Connected zero forcing number `Z_c(G)`. -/
+noncomputable def connectedZeroForcingNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  sInf { k | ∃ S : Finset V, S.card = k ∧ G.IsConnectedZeroForcingSet S }
 
 end SimpleGraph

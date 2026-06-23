@@ -31,6 +31,11 @@ SUPPORTED: Dict[str, str] = {
     "independence_number":           "G.indepNum",
     "domination_number":             "G.dominationNumber",
     "independent_domination_number": "G.independentDominationNumber",
+    "slater":                        "G.slaterNumber",
+    "annihilation_number":           "G.annihilationNumber",
+    "zero_forcing_number":           "G.zeroForcingNumber",
+    "total_zero_forcing_number":     "G.totalZeroForcingNumber",
+    "connected_zero_forcing_number": "G.connectedZeroForcingNumber",
 }
 
 # Injected binders: a finite vertex type with decidable adjacency, enough for

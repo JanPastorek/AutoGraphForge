@@ -25,13 +25,24 @@ _PREAMBLE_DEFS: Dict[str, str] = {
     "dominationNumber": "G.dominationNumber = sInf {n | ∃ s, #s = n ∧ G.IsDominatingSet s}",
     "independentDominationNumber":
         "G.independentDominationNumber = sInf {n | ∃ s, #s = n ∧ G.IsDominatingSet s ∧ G.IsIndependentFinset s}",
+    "slaterNumber": "G.slaterNumber = sInf {t | Fintype.card V ≤ t + ((G.degreesDesc).take t).sum}",
+    "annihilationNumber":
+        "G.annihilationNumber = sSup {k | k ≤ Fintype.card V ∧ ((G.degreesAsc).take k).sum ≤ G.size}",
+    "zeroForcingNumber":
+        "G.zeroForcingNumber = sInf {k | ∃ S, #S = k ∧ G.IsZeroForcingSet S}; IsZeroForcingSet S ↔ G.forcingClosure S = univ",
+    "totalZeroForcingNumber":
+        "G.totalZeroForcingNumber = sInf {k | ∃ S, #S = k ∧ G.IsTotalZeroForcingSet S}; total = ZF set with no induced isolated vertex",
+    "connectedZeroForcingNumber":
+        "G.connectedZeroForcingNumber = sInf {k | ∃ S, #S = k ∧ G.IsConnectedZeroForcingSet S}; connected = ZF set inducing a connected subgraph",
 }
 
 # Lean invariant symbols we care about (preamble + mathlib), used to tokenise goals.
 _KNOWN_SYMBOLS = [
     "cliqueNum", "indepNum", "minDegree", "maxDegree", "chromaticNumber",
     "order", "size", "dominationNumber", "independentDominationNumber",
-    "edgeFinset", "degree",
+    "slaterNumber", "annihilationNumber", "zeroForcingNumber",
+    "totalZeroForcingNumber", "connectedZeroForcingNumber",
+    "degreesAsc", "degreesDesc", "forcingClosure", "edgeFinset", "degree",
 ]
 
 _DECL_RE = re.compile(r"^\s*(?:@\[[^\]]*\]\s*)?(?:protected\s+|private\s+|noncomputable\s+)?"

@@ -123,11 +123,21 @@ def test_lean_export_supported_and_header():
     assert "[Fintype V]" in finished and "[DecidableRel G.Adj]" in finished
 
 
-def test_lean_export_rejects_unsupported_invariant():
+def test_lean_export_supports_extended_invariants():
+    # zero-forcing / Slater / annihilation are now in the preamble → supported
     from pipeline import lean_export as le
-    nat = FakeNative("zero_forcing_number ≤ order", "zero_forcing_number", "<=",
-                     rhs_col="order")
-    assert not le.is_supported(nat, ["zero_forcing_number", "order"])
+    for col, other in [("zero_forcing_number", "connected_zero_forcing_number"),
+                       ("slater", "domination_number"),
+                       ("annihilation_number", "matching_number")]:
+        assert col in le.SUPPORTED
+        nat = FakeNative(f"{col} ≤ {other}", col, "<=", rhs_col=other)
+        assert le.is_supported(nat, [col, other])
+
+
+def test_lean_export_rejects_truly_unsupported_invariant():
+    from pipeline import lean_export as le
+    nat = FakeNative("residue ≤ order", "residue", "<=", rhs_col="order")
+    assert not le.is_supported(nat, ["residue", "order"])
 
 
 def test_lean_export_rejects_conditioned():
