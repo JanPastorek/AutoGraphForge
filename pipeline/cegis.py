@@ -152,6 +152,17 @@ class CEGIS:
             except Exception:
                 pass
 
+        # Drop degenerate invariant-vs-constant bounds (clique_number ≤ 20, 9 ≤
+        # size, …): seed-specific or trivial, not real conjectures. Sophie
+        # sufficient-conditions are a separate list and are NOT filtered.
+        if self.cfg.cegis_drop_constant_bounds:
+            from pipeline.candidate_filters import drop_constant_bounds
+            before = len(ineqs)
+            ineqs = drop_constant_bounds(ineqs, list(frame.columns))
+            if before != len(ineqs):
+                logger.info("[cegis] dropped %d invariant-vs-constant bounds "
+                            "(%d → %d)", before - len(ineqs), before, len(ineqs))
+
         # Dalmatian significance filter on the seed: keep only conjectures that
         # are the tightest bound for at least one seed graph (per target /
         # direction / hypothesis). This makes the full graphcalc battery

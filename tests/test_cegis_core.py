@@ -198,5 +198,29 @@ def test_lazy_g6_map_reconstructs_on_demand():
     assert H.number_of_nodes() == 5 and H.number_of_edges() == 5
 
 
+# --------------------------------------------------------------------------- #
+# constant-bound filter
+# --------------------------------------------------------------------------- #
+def test_constant_bound_filter():
+    from pipeline.candidate_filters import is_constant_bound
+    cols = ["clique_number", "order", "size", "minimum_degree", "chromatic_number",
+            "connected", "subcubic"]
+
+    def nat(p):
+        n = FakeNative(p, "clique_number", "<=")  # only .pretty() matters here
+        n._pretty = p
+        return n
+
+    # invariant ≤/≥/= constant  → dropped
+    assert is_constant_bound(nat("clique_number ≤ 20"), cols)
+    assert is_constant_bound(nat("9 ≤ size"), cols)
+    assert is_constant_bound(nat("order = 14"), cols)
+    assert is_constant_bound(nat("(subcubic) ⇒ order ≤ 14"), cols)   # hypothesis ignored
+    # two invariants (or invariant + invariant offset) → kept
+    assert not is_constant_bound(nat("clique_number ≤ chromatic_number"), cols)
+    assert not is_constant_bound(nat("order ≤ (size + 1)"), cols)
+    assert not is_constant_bound(nat("minimum_degree ≤ order"), cols)
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-v"]))

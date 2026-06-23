@@ -114,6 +114,9 @@ class Config:
                                         #  candidates to the non-dominated envelope)
     cegis_morgan: bool = True           # Morgan hypothesis-maximality filter
                                         # (drops over-conditioned redundant bounds)
+    cegis_drop_constant_bounds: bool = True   # drop degenerate invariant-vs-constant
+                                        # bounds (clique_number ≤ 20, 9 ≤ size, …);
+                                        # Sophie sufficient-conditions are exempt
     cegis_report_top: int = 40          # survivors to print/formalize/prove
     # Seed corpus
     exact_tier_max_n: int = 14          # graphs ≤ this get the full battery (≈1s/graph)
