@@ -128,7 +128,7 @@ def test_lean_export_supports_extended_invariants():
     from pipeline import lean_export as le
     for col, other in [("zero_forcing_number", "connected_zero_forcing_number"),
                        ("slater", "domination_number"),
-                       ("annihilation_number", "matching_number")]:
+                       ("annihilation_number", "order")]:
         assert col in le.SUPPORTED
         nat = FakeNative(f"{col} ≤ {other}", col, "<=", rhs_col=other)
         assert le.is_supported(nat, [col, other])
