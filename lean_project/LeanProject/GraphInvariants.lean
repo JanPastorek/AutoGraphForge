@@ -109,4 +109,25 @@ def IsConnectedZeroForcingSet (G : SimpleGraph V) [DecidableRel G.Adj] (S : Fins
 noncomputable def connectedZeroForcingNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
   sInf { k | ∃ S : Finset V, S.card = k ∧ G.IsConnectedZeroForcingSet S }
 
+/- ── Graph-class predicates (hypotheses for conditioned conjectures) ──────── -/
+
+/-- `G` is regular (every vertex the same degree). -/
+def IsRegularClass (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
+  ∃ d, G.IsRegularOfDegree d
+/-- `G` is cubic (3-regular). -/
+def IsCubicClass (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
+  G.IsRegularOfDegree 3
+/-- `G` is subcubic (maximum degree ≤ 3). -/
+def IsSubcubicClass (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
+  G.maxDegree ≤ 3
+/-- `G` is triangle-free. -/
+def IsTriangleFreeClass (G : SimpleGraph V) : Prop := G.CliqueFree 3
+/-- `G` is `K₄`-free. -/
+def IsK4FreeClass (G : SimpleGraph V) : Prop := G.CliqueFree 4
+/-- `G` is bipartite (2-colourable). -/
+def IsBipartiteClass (G : SimpleGraph V) : Prop := G.Colorable 2
+/-- `G` is Eulerian-degree (every vertex has even degree). -/
+def IsEulerianClass (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
+  ∀ v, Even (G.degree v)
+
 end SimpleGraph

@@ -140,11 +140,24 @@ def test_lean_export_rejects_truly_unsupported_invariant():
     assert not le.is_supported(nat, ["residue", "order"])
 
 
-def test_lean_export_rejects_conditioned():
+def test_lean_export_conditioned_supported_class():
+    # conditioned on a SUPPORTED class (regular/triangle_free/…) → exportable
     from pipeline import lean_export as le
-    nat = FakeNative("(regular) ⇒ clique_number ≤ order", "clique_number", "<=",
+    cols = ["clique_number", "order", "regular", "slater", "domination_number"]
+    nat = FakeNative("(regular) ⇒ slater ≤ domination_number", "slater", "<=",
+                     rhs_col="domination_number")
+    assert le.is_supported(nat, cols)
+    thm = le.render_conditioned(nat, cols)
+    assert thm and "IsRegularClass" in thm and "slaterNumber" in thm
+
+
+def test_lean_export_conditioned_unsupported_class():
+    # conditioned on cograph (not formalized) → not exportable
+    from pipeline import lean_export as le
+    cols = ["clique_number", "order", "cograph"]
+    nat = FakeNative("(cograph) ⇒ clique_number ≤ order", "clique_number", "<=",
                      rhs_col="order")
-    assert not le.is_supported(nat, ["clique_number", "order", "regular"])
+    assert not le.is_supported(nat, cols)
 
 
 # --------------------------------------------------------------------------- #

@@ -47,6 +47,59 @@ _PREAMBLE = "import Mathlib\nimport LeanProject.GraphInvariants\n\nopen SimpleGr
 
 _SIG_RE = re.compile(r"theorem\s+(\w+)\s*\(G\s*:\s*SimpleGraph\s+V\)")
 
+# graph-class column → preamble predicate (the tractable classes; cograph /
+# chordal / claw_free / planar are not formalized, so conjectures conditioned on
+# them stay unexportable).
+CLASS_PREDICATES = {
+    "regular": "IsRegularClass", "cubic": "IsCubicClass",
+    "subcubic": "IsSubcubicClass", "triangle_free": "IsTriangleFreeClass",
+    "K_4_free": "IsK4FreeClass", "bipartite": "IsBipartiteClass",
+    "eulerian": "IsEulerianClass",
+}
+_REL_LEAN = {"≤": "≤", "≥": "≥", "<=": "≤", ">=": "≥", "=": "="}
+
+
+def _condition_classes(cond: str, columns) -> List[str]:
+    return [c for c in columns if re.search(r"\b" + re.escape(c) + r"\b", cond)]
+
+
+def _bare_invariant(side: str, columns) -> Optional[str]:
+    """A side that is exactly one supported invariant (no coefficient/offset/
+    product), else None."""
+    invs = [c for c in columns if re.search(r"\b" + re.escape(c) + r"\b", side)]
+    if len(invs) != 1 or invs[0] not in SUPPORTED:
+        return None
+    leftover = re.sub(r"\b" + re.escape(invs[0]) + r"\b", " ", side)
+    leftover = re.sub(r"[()\s]", "", leftover)        # parens/space ok
+    return invs[0] if not leftover else None           # any coeff/const → reject
+
+
+def render_conditioned(native, columns) -> Optional[str]:
+    """Self-rendered theorem for a class-conditioned conjecture with a simple
+    ``invariant REL invariant`` body, else None. The hypothesis is the conjunction
+    of supported class predicates."""
+    try:
+        pretty = native.pretty()
+    except Exception:
+        return None
+    if "⇒" not in pretty:
+        return None
+    cond, body = pretty.split("⇒", 1)
+    classes = _condition_classes(cond, columns)
+    if not classes or any(c not in CLASS_PREDICATES for c in classes):
+        return None                                    # unsupported class (cograph, …)
+    rel = next((r for r in _REL_LEAN if r in body), None)
+    if rel is None:
+        return None
+    lhs, rhs = body.split(rel, 1)
+    li, ri = _bare_invariant(lhs, columns), _bare_invariant(rhs, columns)
+    if not li or not ri:
+        return None
+    hyps = " ".join(f"(_h{i} : G.{CLASS_PREDICATES[c]})" for i, c in enumerate(classes))
+    body_lean = f"({SUPPORTED[li]} : ℝ) {_REL_LEAN[rel]} ({SUPPORTED[ri]} : ℝ)"
+    thm = (f"theorem CEGIS_1 {_HEADER_BINDERS}\n    {hyps}\n  : {body_lean} :=\nsorry")
+    return _PREAMBLE + "\n" + thm
+
 
 def make_lean_label(columns) -> Dict[str, str]:
     """lean_label for Graffiti3: supported columns → preamble Lean names.
@@ -63,16 +116,16 @@ def _columns_used(native, columns) -> List[str]:
 
 
 def is_supported(native, columns) -> bool:
-    """True iff every invariant the conjecture references is in ``SUPPORTED`` and
-    the conjecture is unconditioned (no graph-class hypothesis we can't yet
-    formalize). Non-inequality survivors (e.g. SophieCondition, no ``pretty``)
-    are unsupported."""
+    """True iff the conjecture is kernel-checkable: either unconditioned with all
+    invariants in ``SUPPORTED``, or class-conditioned with a simple body and all
+    classes in ``CLASS_PREDICATES`` (see ``render_conditioned``). Non-inequality
+    survivors (e.g. SophieCondition, no ``pretty``) are unsupported."""
     try:
         pretty = native.pretty()
     except Exception:
         return False                              # SophieCondition / non-inequality
-    if "⇒" in pretty or "=>" in pretty:          # conditioned on a graph class
-        return False
+    if "⇒" in pretty or "=>" in pretty:          # conditioned → needs a class theorem
+        return render_conditioned(native, columns) is not None
     used = _columns_used(native, columns)
     return bool(used) and all(c in SUPPORTED for c in used)
 
@@ -96,6 +149,14 @@ def export_supported(g3, natives, columns) -> List[Optional[str]]:
     ``make_lean_label``)."""
     out: List[Optional[str]] = []
     for nc in natives:
+        try:
+            pretty = nc.pretty()
+        except Exception:
+            out.append(None)
+            continue
+        if "⇒" in pretty or "=>" in pretty:           # conditioned → class theorem
+            out.append(render_conditioned(nc, columns))
+            continue
         if not is_supported(nc, columns):
             out.append(None)
             continue
