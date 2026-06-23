@@ -16,6 +16,7 @@ anthropic>=0.28.0
 numpy>=2.1           # rlgt[agents] requires the numpy 2.x ABI
 scipy>=1.11          # LP feasibility test in the known-theorem novelty filter
 pyarrow>=14          # parquet caches for the graphcalc invariant batteries
+dill>=0.3            # serialize graffiti3 candidates (closures) for the gen cache
 
 # ── CEGIS: invariant battery + counterexample search ──────────────────────
 graphcalc>=2.0       # full graph-invariant battery (all_properties); exact ILP
@@ -23,6 +24,13 @@ graphcalc>=2.0       # full graph-invariant battery (all_properties); exact ILP
 # Heavy (pulls torch + CUDA). Optional: the pipeline import-guards it and falls
 # back to simulated annealing + pool refutation when absent.
 rlgt[agents]>=1.0    # https://github.com/Ivan-Damnjanovic/rlgt  (brings torch)
+
+# ── Local neural theorem prover (DeepSeek-Prover-V2 via 🤗 transformers) ────
+# In-process GPU proving with no API tokens; kernel-verified against mathlib +
+# the LeanProject.GraphInvariants preamble. Import-guarded — the pipeline runs
+# without it (other prover backends remain available).
+transformers>=4.44   # AutoModelForCausalLM / AutoTokenizer for DeepSeek-Prover-V2
+accelerate>=0.30     # device_map="auto" sharding across the local GPUs
 
 # ── Standard library supplements ─────────────────────────────────────────
 # (no additional deps needed — itertools, subprocess, etc. are built-in)

@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "graphconj"
+version = "0.2.0"
+description = "CEGIS graph-theory conjecturing pipeline: generate on a small expressible seed, refute against tiered pools + active search to a fixed point, then export to Lean 4 and kernel-verify with a local DeepSeek-Prover-V2."
+readme = "PIPELINE_DESCRIPTION.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "networkx>=3.3",
+    "txgraffiti>=0.4.1",
+    "z3-solver>=4.13.0",
+    "numpy>=2.1",
+    "scipy>=1.11",
+    "pyarrow>=14",
+    "dill>=0.3",
+    "graphcalc>=2.0",
+]
+
+[project.optional-dependencies]
+# Heavy / optional capabilities — the pipeline import-guards each.
+rl = ["rlgt[agents]>=1.0"]                         # RL counterexample search (torch)
+prover = ["transformers>=4.44", "accelerate>=0.30"]  # local DeepSeek-Prover-V2
+llm = ["anthropic>=0.28.0"]                       # FunSearch generation / Claude prover
+dev = ["pytest>=7", "ruff>=0.5"]
+
+[project.scripts]
+graphconj = "graphconj_cli:main"
+
+[tool.setuptools]
+# Flat layout: the pipeline lives in top-level modules + the `pipeline` package.
+py-modules = ["config", "conjecture", "graphconj_cli", "run_cegis"]
+packages = ["pipeline", "pipeline.search", "graphs"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# Keep it light: real bugs, not style noise (the code is research code).
+select = ["E", "F", "W", "B", "I"]
+ignore = ["E501", "E741"]   # long lines + ambiguous names (math: l, I, O) are fine here
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

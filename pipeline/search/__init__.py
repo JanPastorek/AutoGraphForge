@@ -35,47 +35,48 @@ logger = logging.getLogger(__name__)
 def find_counterexample(native, all_cols: List[str], cfg: Config = CONFIG,
                         hypothesis_class: Optional[str] = None,
                         seed: int = 0) -> Optional[nx.Graph]:
-    """Run the configured active searchers; return the first counterexample."""
+    """Run the configured active searchers; return the first counterexample.
+
+    A per-candidate wall-clock budget (``search_time_budget_s``) bounds total
+    search time regardless of how expensive the conjecture's invariants are, so
+    big graph orders can be probed safely — a slow candidate simply runs out of
+    budget rather than stalling the round."""
+    import time
     problem = GraphSearchProblem(native, all_cols, hypothesis_class,
                                  eval_cap_s=cfg.search_eval_cap_s)
     orders = tuple(cfg.search_orders)
     ref, floor = cfg.search_order_ref, cfg.search_min_trials
+    deadline = time.time() + cfg.search_time_budget_s
 
     for kind in cfg.cegis_searchers:
+        if kind == "rl":
+            continue                       # RL is a bounded post-phase (see cegis.py)
+        if time.time() > deadline:
+            break
         try:
             if kind == "z3":
                 g = z3_search(native, all_cols, cfg,
                               verify=problem.is_counterexample)
             elif kind == "vns":
                 g = vns(problem, orders=orders, k_max=cfg.vns_k_max,
-                        iterations=min(cfg.vns_iterations, 200),
-                        seed=seed, ref=ref, floor=floor)
+                        iterations=min(cfg.vns_iterations, 80),
+                        seed=seed, ref=ref, floor=floor, deadline=deadline)
             elif kind == "sa":
                 g = simulated_annealing(problem, orders=orders,
                                         iterations=cfg.sa_iterations,
                                         restarts=cfg.sa_restarts, seed=seed,
-                                        ref=ref, floor=floor)
+                                        ref=ref, floor=floor, deadline=deadline)
             elif kind == "cross_entropy":
                 g = cross_entropy(problem, orders=orders,
-                                  population=min(cfg.ce_population, 40),
+                                  population=min(cfg.ce_population, 30),
                                   elite_frac=cfg.ce_elite_frac,
-                                  iterations=min(cfg.ce_iterations, 30),
-                                  seed=seed, ref=ref, floor=max(10, floor // 2))
+                                  iterations=min(cfg.ce_iterations, 12),
+                                  seed=seed, ref=ref, floor=max(6, floor // 2),
+                                  deadline=deadline)
             elif kind == "mcts":
                 g = mcts(problem, orders=orders,
                          iterations=min(cfg.mcts_iterations, 200), c=cfg.mcts_c,
-                         seed=seed, ref=ref, floor=floor)
-            elif kind == "rl":
-                if not cfg.rl_enabled:
-                    continue
-                # RL is the heaviest searcher (a torch agent per order); run it
-                # last on a *small* subset of orders with a modest episode budget
-                # so it stays a viable last resort rather than a per-round sink.
-                rl_orders = tuple(o for o in orders if o <= 20)[:3] or orders[:3]
-                g = rl_search(problem, orders=rl_orders,
-                              episodes=min(cfg.rl_episodes, 12),
-                              candidates=min(cfg.rl_candidates, 80),
-                              agent_kind=cfg.rl_agent, seed=seed)
+                         seed=seed, ref=ref, floor=floor, deadline=deadline)
             else:
                 continue
         except Exception as e:

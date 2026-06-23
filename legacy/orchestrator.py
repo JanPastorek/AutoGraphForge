@@ -20,9 +20,9 @@ from typing import List, Optional
 from config import Config, CONFIG
 from conjecture import Conjecture, ConjectureStatus
 from graphs.database import GraphDatabase
-from pipeline.autoformalization import GraphOfThoughtFormalizer
+from legacy.autoformalization import GraphOfThoughtFormalizer
 from pipeline.falsification import FalsificationOrchestrator
-from pipeline.hypothesis_gen import FunSearchGenerator, TxGraffitiGenerator
+from legacy.hypothesis_gen import FunSearchGenerator, TxGraffitiGenerator
 from pipeline.theorem_prover import NeuralProverClient
 
 logger = logging.getLogger(__name__)

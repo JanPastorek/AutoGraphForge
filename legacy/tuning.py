@@ -21,7 +21,7 @@ import networkx as nx
 import numpy as np
 
 from conjecture import Conjecture
-from pipeline.expr_bridge import make_value
+from legacy.expr_bridge import make_value
 
 logger = logging.getLogger(__name__)
 

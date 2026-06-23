@@ -41,11 +41,11 @@ from config import Config, CONFIG
 from conjecture import Conjecture, ConjectureStatus, Counterexample
 from graphs.database import GraphDatabase
 from graphs.invariants import evaluate_named
-from pipeline.expr_bridge import make_margin
-from pipeline.hypothesis_gen import TxGraffitiGenerator
+from legacy.expr_bridge import make_margin
+from legacy.hypothesis_gen import TxGraffitiGenerator
 from pipeline.novelty import annotate
 from pipeline.adversarial import AdversarialPool
-from pipeline.autoformalization import GraphOfThoughtFormalizer
+from legacy.autoformalization import GraphOfThoughtFormalizer
 
 import counterexample_search as ces
 

@@ -98,6 +98,7 @@ class Refuter:
     def __init__(self, cfg: Config = CONFIG):
         self.cfg = cfg
         self.tiers: List[Tier] = []
+        self._symbolic_cols: Optional[List[str]] = None   # set lazily on first refute
         self._build_tiers()
 
     # ----------------------------------------------------------- build tiers --
@@ -135,6 +136,12 @@ class Refuter:
             t = self._load_bigdb_tier()
             if t:
                 self.tiers.append(t)
+        # Column vocabulary for the symbolic tier = the graphcalc battery names
+        # carried by a structured (non-bigdb) tier.
+        for t in self.tiers:
+            if t.name in ("families", "random"):
+                self._symbolic_cols = list(t.frame.columns)
+                break
 
     def _load_bigdb_tier(self) -> Optional[Tier]:
         """Load the offline-precomputed HoG/census battery if it exists."""
@@ -168,6 +175,18 @@ class Refuter:
         hypothesis condition is respected (failures = applicable ∧ violated).
         witness_graphs are recoverable structures of the failing rows.
         """
+        # Tier 0 — constructive: refute constant/degree bounds by building an
+        # extremal witness, independent of pool size (catches `order ≤ 14` etc.
+        # that a bounded-order active search misses). Only engages for cheap
+        # invariants; otherwise returns None and we fall through to the pools.
+        if self.cfg.refute_symbolic and self._symbolic_cols:
+            try:
+                from pipeline.symbolic_refute import symbolic_refute
+                g = symbolic_refute(native, self._symbolic_cols)
+                if g is not None:
+                    return True, [g], "symbolic"
+            except Exception:
+                pass
         for tier in self.tiers:
             try:
                 _applicable, _holds, failures = native.check(tier.frame)
@@ -180,11 +199,23 @@ class Refuter:
         return False, [], None
 
     def touch_count(self, native, seed_frame: pd.DataFrame) -> int:
-        try:
-            return int(native.touch_count(seed_frame))
-        except Exception:
+        # Tight graphs (slack ≈ 0) on the *current* seed frame. graffiti3 exposes
+        # slack via the conjecture's relation, not the conjecture itself.
+        rel = getattr(native, "relation", None)
+        if rel is not None and hasattr(rel, "slack"):
             try:
-                s = pd.Series(native.slack(seed_frame))
-                return int((np.abs(s.values) < 1e-9).sum())
+                s = np.asarray(pd.Series(rel.slack(seed_frame)).values, dtype=float)
+                return int((np.abs(s) < 1e-9).sum())
             except Exception:
-                return 0
+                pass
+        # Fall back to the touch count precomputed at generation. Note ``.touch_count``
+        # is an *attribute* (int) on a native graffiti3 Conjecture, not a method.
+        tc = getattr(native, "touch_count", None)
+        if isinstance(tc, (int, np.integer)):
+            return int(tc)
+        if callable(tc):
+            try:
+                return int(tc(seed_frame))
+            except Exception:
+                pass
+        return 0

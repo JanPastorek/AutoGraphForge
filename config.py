@@ -122,6 +122,10 @@ class Config:
     hard_seed_dir: str = "database/hard_seed"
     cache_dir: str = "database/cache"
     # Refutation tiers (cheap → expensive); each is NaN-aware + coverage-masked
+    refute_symbolic: bool = True        # tier 0: constructively refute constant/
+                                        # degree bounds (order≤14, Δ≤3, …) by
+                                        # building an extremal witness — catches
+                                        # false bounds a bounded-order search misses
     refute_use_families: bool = True    # atlas + named families (exact battery)
     refute_use_random: bool = True      # class-aware random models (exact battery)
     refute_random_per: int = 6
@@ -138,20 +142,28 @@ class Config:
     # battery. The trial budget is *order-adaptive*: the orders sweep from small
     # to large and the per-order trial count is scaled down ∝ ref/n, so big
     # graphs (expensive evals) get proportionally fewer trials.
-    cegis_searchers: tuple = ("z3", "cross_entropy", "vns", "sa", "rl")  # +"mcts"
-    cegis_max_search: int = 60          # max pool-survivors/round given active
+    cegis_searchers: tuple = ("z3", "cross_entropy", "vns", "sa", "mcts", "rl")
+    cegis_max_search: int = 40          # max pool-survivors/round given active
                                         # search (rest kept as pool-survivors)
-    search_orders: tuple = (              # increasing orders, incl. big graphs
-        6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 24, 28, 34, 40)
+    # Per-candidate wall-clock budget across ALL its searchers; bounds round time
+    # regardless of invariant cost, so big orders below are safe to probe.
+    search_time_budget_s: int = 15
+    # Search sweeps small→large orders; big graphs cost seconds/eval (exact ILP
+    # invariants) but the per-candidate time budget above means a candidate just
+    # runs out of budget instead of stalling, so probing large orders is safe.
+    search_orders: tuple = (6, 8, 10, 12, 14, 16, 20, 24, 30, 40, 50)
     search_order_ref: int = 6           # reference order for trial scaling
-    search_min_trials: int = 30         # floor on per-order trials at large n
+    search_min_trials: int = 12         # floor on per-order trials at large n
     search_eval_cap_s: int = 3          # per-graph invariant-eval timeout
-    sa_iterations: int = 300            # base SA steps (scaled down per order)
+    sa_iterations: int = 120            # base SA steps (scaled down per order)
     sa_restarts: int = 1
     rl_episodes: int = 40               # rlgt deep-CE / REINFORCE iterations
     rl_candidates: int = 200            # rlgt candidates_count per iteration
     rl_agent: str = "deep_cross_entropy"    # "deep_cross_entropy" | "reinforce"
     rl_enabled: bool = True             # set False to skip torch/rlgt entirely
+    rl_max_search: int = 8              # RL is heavy (torch agent per conjecture),
+                                        # so it runs only as a bounded post-phase on
+                                        # the top-K pool/SA survivors per round
 
     # --------------------------------------------------- Falsification loop --
     falsification_rounds: int = 2    # retry passes after db augmentation
@@ -198,12 +210,28 @@ class Config:
     # wins). Registered names: "lean" (local Lean tactics), "claude" (Anthropic
     # API, kernel-verified when a Lean binary is present), "goedel"/"deepseek"
     # (HTTP stubs — point prover_api_url at a self-hosted GPU endpoint to enable).
-    prover_backends: tuple = ("lean", "claude", "goedel", "deepseek")
+    prover_backends: tuple = ("lean", "deepseek-local", "claude", "goedel", "deepseek")
     prover_api_url: str = ""        # e.g. "https://goedel-prover.example.com/v1"
     prover_api_key: str = field(
         default_factory=lambda: os.environ.get("PROVER_API_KEY", "")
     )
     prover_timeout_s: int = 120
+    # Local GPU prover: DeepSeek-Prover-V2 loaded in-process via 🤗 transformers
+    # (no API tokens). Heavy — pulls ~14 GB of weights and needs a CUDA GPU — so
+    # it is import/availability-guarded and only the "deepseek-local" backend
+    # activates it. The Lean theorems are kernel-verified against the pinned
+    # mathlib + the GraphInvariants preamble, exactly like the other backends.
+    deepseek_local_enabled: bool = True
+    deepseek_model_id: str = "deepseek-ai/DeepSeek-Prover-V2-7B"
+    deepseek_max_new_tokens: int = 8192
+    deepseek_dtype: str = "bfloat16"          # "bfloat16" | "float16"
+    deepseek_seed: int = 30
+    deepseek_attempts: int = 4                # pass@k sampled proof attempts
+    deepseek_temperature: float = 1.0         # sampling temperature (attempts ≥2)
+    # Lean preamble module imported by every generated theorem so the graph
+    # invariants (order/size/min-max degree/clique/independence/domination …)
+    # resolve to real mathlib-backed definitions.
+    lean_preamble_import: str = "import LeanProject.GraphInvariants"
 
     # --------------------------------------------------------------- Output --
     output_dir: str = "results"

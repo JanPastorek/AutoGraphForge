@@ -520,17 +520,215 @@ class LocalEndpointProver(BaseProver):
 
 
 # ---------------------------------------------------------------------------
+# DeepSeek-Prover-V2 — local, in-process via 🤗 transformers (no API tokens)
+# ---------------------------------------------------------------------------
+
+class DeepSeekProverLocal(BaseProver):
+    """
+    Run DeepSeek-Prover-V2 locally with 🤗 transformers (no HTTP, no API key).
+
+    The model is prompted in its native "proof plan + ```lean4``` block" format,
+    the final Lean 4 code block is extracted, and — exactly like every other
+    backend — it is **kernel-verified** with `lake env lean` against the pinned
+    mathlib + the GraphInvariants preamble. A `success` is therefore a real,
+    type-checked proof, never the model's say-so.
+
+    Heavy: loads ~14 GB of weights onto CUDA once (cached at class level and
+    shared across conjectures). Disabled cleanly when ``deepseek_local_enabled``
+    is false or torch/transformers/CUDA are unavailable.
+    """
+
+    name = "deepseek-prover-v2-local"
+
+    # Grounding cheatsheet: the preamble defs + the *exact* mathlib lemma names
+    # for the supported invariants. Without this the model invents plausible but
+    # non-existent names (`min_degree_le_degree`, `cliqueNum_le_card`) or punts
+    # with `exact?`. All names below are verified against the pinned mathlib.
+    _CHEATSHEET = (
+        "Context — the file imports `Mathlib` and `LeanProject.GraphInvariants`, "
+        "with `open SimpleGraph`. The graph invariants are:\n"
+        "  • `G.order` (def `Fintype.card V`), `G.size` (def `G.edgeFinset.card`)\n"
+        "  • `G.minDegree`, `G.maxDegree`, `G.cliqueNum`, `G.indepNum`  (mathlib, ℕ)\n"
+        "  • `G.dominationNumber`, `G.independentDominationNumber` (defs in the preamble)\n"
+        "Useful verified mathlib lemmas (use the EXACT names, do not invent or use `exact?`):\n"
+        "  • `SimpleGraph.minDegree_le_maxDegree : G.minDegree ≤ G.maxDegree`\n"
+        "  • `SimpleGraph.minDegree_le_degree (v) : G.minDegree ≤ G.degree v`\n"
+        "  • `SimpleGraph.degree_le_maxDegree (v) : G.degree v ≤ G.maxDegree`\n"
+        "  • `G.exists_isNClique_cliqueNum : ∃ s, G.IsNClique G.cliqueNum s`  (and `hs.card_eq : #s = G.cliqueNum`)\n"
+        "  • `G.exists_isNIndepSet_indepNum : ∃ s, G.IsNIndepSet G.indepNum s`  (and `hs.card_eq : #s = G.indepNum`)\n"
+        "  • `Finset.card_le_univ s : #s ≤ Fintype.card V`\n"
+        "VERIFIED pattern for `cliqueNum ≤ order` (and identically `indepNum ≤ order` "
+        "with `exists_isNIndepSet_indepNum`):\n"
+        "    have h : G.cliqueNum ≤ G.order := by\n"
+        "      obtain ⟨s, hs⟩ := G.exists_isNClique_cliqueNum\n"
+        "      rw [SimpleGraph.order, ← hs.card_eq]\n"
+        "      exact Finset.card_le_univ s\n"
+        "    exact_mod_cast h\n"
+        "Goals are over `ℝ` via casts; finish numeric steps with `exact_mod_cast`, "
+        "`gcongr`, `Nat.cast_le`, `omega`, or `nlinarith`. Handle an empty vertex "
+        "type with `rcases isEmpty_or_nonempty V`. NEVER emit `exact?`/`apply?`/`sorry` "
+        "in the final proof — they do not close goals.\n\n"
+    )
+
+    _PROMPT = (
+        "{cheatsheet}"
+        "Complete the following Lean 4 code:\n\n"
+        "```lean4\n{stmt}\n```\n\n"
+        "Before producing the Lean 4 code to formally prove the given theorem, "
+        "provide a detailed proof plan outlining the main proof steps and "
+        "strategies.\nThe plan should highlight key ideas, intermediate lemmas, "
+        "and proof structures that will guide the construction of the final "
+        "formal proof."
+    )
+
+    # class-level singletons so the weights load once per process
+    _model = None
+    _tokenizer = None
+    _load_failed = False
+
+    def __init__(self, cfg: Config = CONFIG):
+        self.cfg = cfg
+        self._lean = LeanSubprocessProver(cfg)
+
+    # -- lazy model load ----------------------------------------------------
+    @classmethod
+    def _ensure_model(cls, cfg: Config):
+        if cls._model is not None or cls._load_failed:
+            return cls._model is not None
+        try:
+            import torch
+            from transformers import AutoModelForCausalLM, PreTrainedTokenizerFast
+            if not torch.cuda.is_available():
+                raise RuntimeError("CUDA not available")
+            torch.manual_seed(cfg.deepseek_seed)
+            dtype = getattr(torch, cfg.deepseek_dtype, torch.bfloat16)
+            logger.info("[DeepSeekLocal] loading %s (%s) — first call downloads ~14GB",
+                        cfg.deepseek_model_id, cfg.deepseek_dtype)
+            # NB: load the *raw* fast tokenizer, not AutoTokenizer. The repo's
+            # tokenizer_config declares `LlamaTokenizerFast`, which makes
+            # transformers ≥5 apply Llama normalization that strips this model's
+            # byte-level BPE decoding (spaces/newlines vanish: `[Fintype V]` →
+            # `[FintypeV]`). PreTrainedTokenizerFast keeps byte-level decode and
+            # still loads the chat template + special tokens.
+            cls._tokenizer = PreTrainedTokenizerFast.from_pretrained(
+                cfg.deepseek_model_id)
+            try:                                   # transformers ≥5 renamed torch_dtype→dtype
+                cls._model = AutoModelForCausalLM.from_pretrained(
+                    cfg.deepseek_model_id, device_map="auto", dtype=dtype,
+                    trust_remote_code=True)
+            except TypeError:
+                cls._model = AutoModelForCausalLM.from_pretrained(
+                    cfg.deepseek_model_id, device_map="auto", torch_dtype=dtype,
+                    trust_remote_code=True)
+            logger.info("[DeepSeekLocal] model ready")
+            return True
+        except Exception as e:                                  # pragma: no cover
+            logger.warning("[DeepSeekLocal] model unavailable (%s) — backend disabled", e)
+            cls._load_failed = True
+            return False
+
+    def prove(self, conjecture: Conjecture) -> ProverResponse:
+        if conjecture.lean_statement is None:
+            return ProverResponse(success=False, error="No Lean 4 statement",
+                                  model_name=self.name)
+        if not self.cfg.deepseek_local_enabled:
+            return ProverResponse(success=False, _stub=True, model_name=self.name,
+                                  error="deepseek_local_enabled is false")
+        if not self._ensure_model(self.cfg):
+            return ProverResponse(success=False, _stub=True, model_name=self.name,
+                                  error="DeepSeek-Prover-V2 model/torch/CUDA unavailable")
+        if not self._lean._available:
+            return ProverResponse(success=False, model_name=self.name,
+                                  error="no Lean binary to kernel-check the proof")
+
+        t0 = time.time()
+        last_err = "model produced no complete proof"
+        # pass@k: attempt 0 greedy, the rest sampled. First kernel-verified wins.
+        for attempt in range(max(1, self.cfg.deepseek_attempts)):
+            candidate = self._generate(conjecture.lean_statement, sample=(attempt > 0))
+            if not candidate or "sorry" in candidate:
+                last_err = "model produced no complete proof"
+                continue
+            logger.info("[DeepSeekLocal] attempt %d candidate (%d chars):\n%s",
+                        attempt + 1, len(candidate), candidate[:800])
+            code = candidate if candidate.lstrip().startswith("import") \
+                else "import Mathlib\n" + self.cfg.lean_preamble_import + "\n\n" + candidate
+            ok, klog = self._lean._run_lean(code)
+            if ok:
+                return ProverResponse(
+                    success=True, proof_tactics=candidate, proof_text=candidate,
+                    model_name=self.name, elapsed_s=time.time() - t0)
+            last_err = f"failed Lean kernel check: {klog[:200]}"
+            logger.info("[DeepSeekLocal] attempt %d ✗ (%s)", attempt + 1, klog[:120].replace("\n", " "))
+        return ProverResponse(success=False, model_name=self.name,
+                              elapsed_s=time.time() - t0, error=last_err)
+
+    def _retrieved_cheatsheet(self, lean_statement: str) -> str:
+        """Per-goal grounding: mathlib lemmas retrieved for this statement's
+        invariants, prepended to the static tactic tips + verified pattern."""
+        retrieved = ""
+        try:
+            from pipeline.lemma_retrieval import cheatsheet_for
+            root = getattr(self.cfg, "lean_project_root", "") or "lean_project"
+            retrieved = cheatsheet_for(lean_statement, root)
+        except Exception:
+            pass
+        return retrieved + self._CHEATSHEET
+
+    def _generate(self, lean_statement: str, sample: bool = False) -> Optional[str]:
+        import torch
+        prompt = self._PROMPT.format(
+            cheatsheet=self._retrieved_cheatsheet(lean_statement), stmt=lean_statement)
+        chat = [{"role": "user", "content": prompt}]
+        # transformers ≥5 returns a BatchEncoding (dict-like) from
+        # apply_chat_template; older versions return a bare tensor. Handle both,
+        # and decode only the *newly generated* tokens (skip the prompt).
+        enc = self._tokenizer.apply_chat_template(
+            chat, tokenize=True, add_generation_prompt=True, return_tensors="pt")
+        if hasattr(enc, "shape"):                      # bare tensor (old API)
+            input_ids = enc.to(self._model.device)
+            gen_kwargs = {}
+        else:                                          # BatchEncoding / dict
+            enc = enc.to(self._model.device)
+            input_ids = enc["input_ids"]
+            gen_kwargs = {}
+            if enc.get("attention_mask") is not None:
+                gen_kwargs["attention_mask"] = enc["attention_mask"]
+        prompt_len = input_ids.shape[1]
+        if sample:
+            gen_kwargs.update(do_sample=True, temperature=self.cfg.deepseek_temperature,
+                              top_p=0.95)
+        with torch.no_grad():
+            out = self._model.generate(
+                input_ids, max_new_tokens=self.cfg.deepseek_max_new_tokens, **gen_kwargs)
+        text = self._tokenizer.batch_decode(
+            out[:, prompt_len:], skip_special_tokens=True)[0]
+        return self._extract_lean(text)
+
+    @staticmethod
+    def _extract_lean(text: str) -> Optional[str]:
+        import re
+        # DeepSeek emits a proof plan then the proof; take the LAST lean4 block.
+        blocks = re.findall(r"```(?:lean4?)?\s*(.*?)```", text, re.DOTALL)
+        for blk in reversed(blocks):
+            if "theorem" in blk or "lemma" in blk:
+                return blk.strip()
+        return (blocks[-1].strip() if blocks else None)
+
+
+# ---------------------------------------------------------------------------
 # Backend registry + ensemble
 # ---------------------------------------------------------------------------
 
 # name → factory. Add a GPU prover by registering a LocalEndpointProver here
 # (or a bespoke class) and listing its name in cfg.prover_backends.
 PROVER_REGISTRY = {
-    "lean":     lambda cfg: LeanSubprocessProver(cfg),
-    "claude":   lambda cfg: ClaudeProver(cfg),
-    "goedel":   lambda cfg: GoedelProver(cfg),
-    "deepseek": lambda cfg: DeepSeekProverV2(cfg),
-    "endpoint": lambda cfg: LocalEndpointProver(cfg),
+    "lean":           lambda cfg: LeanSubprocessProver(cfg),
+    "deepseek-local": lambda cfg: DeepSeekProverLocal(cfg),
+    "claude":         lambda cfg: ClaudeProver(cfg),
+    "goedel":         lambda cfg: GoedelProver(cfg),
+    "deepseek":       lambda cfg: DeepSeekProverV2(cfg),
+    "endpoint":       lambda cfg: LocalEndpointProver(cfg),
 }
 
 

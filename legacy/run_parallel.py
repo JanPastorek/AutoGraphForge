@@ -47,7 +47,7 @@ from config import CONFIG
 from conjecture import ConjectureStatus
 from pipeline.novelty import annotate
 from pipeline.reporting import annotate_complexity, print_conjectures
-from pipeline.unified import UnifiedPipeline, _lean_skeleton
+from legacy.unified import UnifiedPipeline, _lean_skeleton
 
 
 def _gen_expression_stages(cfg):
@@ -56,7 +56,7 @@ def _gen_expression_stages(cfg):
     out = []
     if getattr(cfg, "graffiti3_enabled", True):
         try:
-            from pipeline.graffiti3_stage import Graffiti3Generator
+            from legacy.graffiti3_stage import Graffiti3Generator
             g3 = Graffiti3Generator(cfg=cfg).generate_candidates()
             log.info("[expr] Graffiti3: %d conjectures", len(g3))
             out += g3
@@ -66,7 +66,7 @@ def _gen_expression_stages(cfg):
         try:
             sage = PIPE._gen_sage(run_sage=False, max_geng=7, t=8)
             if getattr(cfg, "sage_tune_coefficients", False) and sage:
-                from pipeline.tuning import tune_sage_conjectures
+                from legacy.tuning import tune_sage_conjectures
                 sage = tune_sage_conjectures(sage)
                 log.info("[expr] Sage: %d conjectures (coefficient-tuned)", len(sage))
             else:

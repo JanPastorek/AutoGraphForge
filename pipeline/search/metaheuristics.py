@@ -11,6 +11,7 @@ graphs get fewer trials. Each returns the first counterexample graph, or None.
 from __future__ import annotations
 
 import math
+import time
 from typing import Optional
 
 import networkx as nx
@@ -19,6 +20,10 @@ import numpy as np
 from pipeline.search.problem import GraphSearchProblem, per_order_trials
 
 _HIT = 1e-9
+
+
+def _expired(deadline) -> bool:
+    return bool(deadline) and time.time() > deadline
 
 
 # --------------------------------------------------------------------------- #
@@ -39,9 +44,12 @@ def _local_ascent(problem, G, rng, budget):
 
 
 def vns(problem: GraphSearchProblem, *, orders, k_max: int, iterations: int,
-        seed: int = 0, ref: int = 6, floor: int = 30) -> Optional[nx.Graph]:
+        seed: int = 0, ref: int = 6, floor: int = 30,
+        deadline: Optional[float] = None) -> Optional[nx.Graph]:
     rng = np.random.default_rng(seed)
     for n in orders:
+        if _expired(deadline):
+            return None
         budget = per_order_trials(iterations, n, ref=ref, floor=floor)
         G = problem.random_start(n, rng)
         best = problem.violation(G)
@@ -49,6 +57,8 @@ def vns(problem: GraphSearchProblem, *, orders, k_max: int, iterations: int,
             return G
         it = 0
         while it < budget:
+            if _expired(deadline):
+                return None
             k = 1
             while k <= k_max and it < budget:
                 H = problem.neighbors(G, rng, k=k)               # shake
@@ -79,16 +89,20 @@ class _Node:
 
 
 def mcts(problem: GraphSearchProblem, *, orders, iterations: int, c: float = 1.41,
-         rollout_depth: int = 6, seed: int = 0, ref: int = 6, floor: int = 30
-         ) -> Optional[nx.Graph]:
+         rollout_depth: int = 6, seed: int = 0, ref: int = 6, floor: int = 30,
+         deadline: Optional[float] = None) -> Optional[nx.Graph]:
     rng = np.random.default_rng(seed)
     for n in orders:
+        if _expired(deadline):
+            return None
         budget = per_order_trials(iterations, n, ref=ref, floor=floor)
         actions = [(i, j) for i in range(n) for j in range(i + 1, n)]
         root = _Node(problem.random_start(n, rng), None, actions)
         if problem.violation(root.G) > _HIT:
             return root.G
-        for _ in range(budget):
+        for _it in range(budget):
+            if (_it & 7) == 0 and _expired(deadline):
+                return None
             node = root
             while not node.untried and node.children:            # select (UCT)
                 node = max(node.children.values(),
@@ -123,14 +137,19 @@ def mcts(problem: GraphSearchProblem, *, orders, iterations: int, c: float = 1.4
 # --------------------------------------------------------------------------- #
 def cross_entropy(problem: GraphSearchProblem, *, orders, population: int,
                   elite_frac: float, iterations: int, seed: int = 0,
-                  ref: int = 6, floor: int = 20) -> Optional[nx.Graph]:
+                  ref: int = 6, floor: int = 20,
+                  deadline: Optional[float] = None) -> Optional[nx.Graph]:
     rng = np.random.default_rng(seed)
     for n in orders:
+        if _expired(deadline):
+            return None
         iters = per_order_trials(iterations, n, ref=ref, floor=floor)
         pairs = [(i, j) for i in range(n) for j in range(i + 1, n)]
         p = np.full(len(pairs), 0.5)
         n_elite = max(1, int(population * elite_frac))
         for _ in range(iters):
+            if _expired(deadline):
+                return None
             samples, scores = [], []
             for _s in range(population):
                 bits = rng.random(len(pairs)) < p

@@ -170,7 +170,7 @@ def main(argv=None) -> int:
         )
 
     # Build and run pipeline
-    from pipeline.orchestrator import ConjecturePipeline
+    from legacy.orchestrator import ConjecturePipeline
     logger.info("Building pipeline…")
     pipeline = ConjecturePipeline.build(cfg)
 

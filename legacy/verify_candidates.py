@@ -27,10 +27,10 @@ import graphs.invariants as I
 from config import Config
 from conjecture import ConjectureStatus
 from graphs.database import GraphDatabase, GraphEntry
-from pipeline.hypothesis_gen import TxGraffitiGenerator
+from legacy.hypothesis_gen import TxGraffitiGenerator
 from pipeline.novelty import annotate
 from pipeline.falsification import FalsificationOrchestrator
-from pipeline.autoformalization import GraphOfThoughtFormalizer
+from legacy.autoformalization import GraphOfThoughtFormalizer
 from pipeline.theorem_prover import NeuralProverClient
 
 CSV_PATH = "database/graph_database_enriched.csv"

@@ -82,19 +82,54 @@ class CEGIS:
             nums = nums[: self.cfg.cegis_max_targets]
         return nums
 
+    def _gen_cache_key(self, targets) -> str:
+        """Stable key for the (seed, targets, gen-config) → raw candidates map."""
+        import hashlib
+        ids = ",".join(sorted(self.seed.graphs.keys()))
+        sig = f"{ids}|{','.join(targets)}|sophie={self.cfg.graffiti3_sophie}|FAST"
+        return hashlib.sha1(sig.encode()).hexdigest()[:16]
+
     def _generate(self) -> Tuple[list, Graffiti3]:
+        import os
+        from pipeline.lean_export import make_lean_label
         frame = self.seed.frame
         targets = self._targets()
-        lean_label = {c: f"{c} G" for c in frame.columns}
-        g3 = Graffiti3(frame, lean_label=lean_label)
-        res = g3.conjecture(targets, mode=Mode.FAST,
-                            enable_sophie=self.cfg.graffiti3_sophie)
-        # Inequality conjectures (have .relation/.condition) and Sophie
-        # sufficient-conditions (a different type) are handled separately: the
-        # Dalmatian/Morgan filters only understand inequality Conjectures.
-        ineqs = list(res.conjectures)
-        sophie = list(getattr(res, "sophie_conditions", [])) \
-            if self.cfg.graffiti3_sophie else []
+        # Map the supported invariants to their real Lean (mathlib + preamble)
+        # names so survivor exports are kernel-checkable, not stubs over undefined
+        # symbols; unsupported columns get a placeholder and are filtered later.
+        lean_label = make_lean_label(frame.columns)
+        g3 = Graffiti3(frame, lean_label=lean_label)   # cheap; .conjecture() is not
+
+        # Generation cache: graffiti3's .conjecture() is the ~13-min cost and is
+        # deterministic in (seed, targets, config). Cache the *raw* output (via
+        # dill — the conjectures hold local closures pickle can't handle) so a
+        # repeated dataset is restored instantly instead of regenerated.
+        ckey = os.path.join(self.cfg.cache_dir, f"gen_{self._gen_cache_key(targets)}.dill")
+        ineqs = sophie = None
+        if os.path.exists(ckey):
+            try:
+                import dill
+                with open(ckey, "rb") as fh:
+                    ineqs, sophie = dill.load(fh)
+                logger.info("[cegis] generation restored from cache (%d ineq + %d sophie)",
+                            len(ineqs), len(sophie))
+            except Exception as e:
+                logger.warning("[cegis] gen cache read failed (%s) — regenerating", e)
+                ineqs = None
+        if ineqs is None:
+            res = g3.conjecture(targets, mode=Mode.FAST,
+                                enable_sophie=self.cfg.graffiti3_sophie)
+            ineqs = list(res.conjectures)
+            sophie = list(getattr(res, "sophie_conditions", [])) \
+                if self.cfg.graffiti3_sophie else []
+            try:
+                import dill
+                os.makedirs(self.cfg.cache_dir, exist_ok=True)
+                with open(ckey, "wb") as fh:
+                    dill.dump((ineqs, sophie), fh)
+                logger.info("[cegis] cached generation → %s", os.path.basename(ckey))
+            except Exception as e:
+                logger.warning("[cegis] gen cache write failed: %s", e)
         n_raw = len(ineqs)
         n_sophie_raw = len(sophie)
         # Sophie conditions can't go through Dalmatian/Morgan (no numeric bound);
@@ -171,12 +206,15 @@ class CEGIS:
             return [fn(i) for i in items]
 
         # Phase A — pool refutation on every candidate
+        from collections import Counter
+        tier_counts: Counter = Counter()
         witnesses: List[nx.Graph] = []
         refuted_pool = 0
         survivor_idx: List[int] = []
-        for idx, ref, _tier, wits in _run(_refute_worker, range(n), n // (workers * 4)):
+        for idx, ref, tier, wits in _run(_refute_worker, range(n), n // (workers * 4)):
             if ref:
                 refuted_pool += 1
+                tier_counts[tier or "?"] += 1
                 witnesses += wits
             else:
                 survivor_idx.append(idx)
@@ -193,6 +231,36 @@ class CEGIS:
             else:
                 survivors.append(cands[idx])
         survivors += [cands[i] for i in kept]
+
+        # Phase C — RL (rlgt) as a *bounded* last resort on the top-K survivors.
+        # RL spins up a torch agent per conjecture/order, far too heavy to run on
+        # every survivor, so it only attacks a small subset here.
+        if ("rl" in self.cfg.cegis_searchers and self.cfg.rl_enabled
+                and survivors and self.cfg.rl_max_search > 0):
+            from pipeline.search.problem import GraphSearchProblem
+            from pipeline.search.rlgt_adapter import rl_search
+            rl_orders = tuple(o for o in self.cfg.search_orders if o <= 16)[:2]
+            k = min(self.cfg.rl_max_search, len(survivors))
+            still = []
+            for c in survivors[:k]:
+                prob = GraphSearchProblem(c, all_cols,
+                                          eval_cap_s=self.cfg.search_eval_cap_s)
+                g = rl_search(prob, orders=rl_orders,
+                              episodes=min(self.cfg.rl_episodes, 5),
+                              candidates=min(self.cfg.rl_candidates, 40),
+                              agent_kind=self.cfg.rl_agent)
+                if g is not None:
+                    refuted_search += 1
+                    witnesses.append(g)
+                else:
+                    still.append(c)
+            survivors = still + survivors[k:]
+        if refuted_search:
+            tier_counts["search"] += refuted_search
+        if tier_counts:
+            logger.info("[cegis] refutation provenance: %s",
+                        ", ".join(f"{t}={c}" for t, c in tier_counts.most_common()))
+        self._last_tier_counts = dict(tier_counts)
         return survivors, witnesses, refuted_pool, refuted_search
 
     # ---------------------------------------------------------------- loop --
@@ -218,6 +286,7 @@ class CEGIS:
             stat = {
                 "round": rnd, "candidates": len(cands), "survivors": len(survivors),
                 "refuted_pool": refuted_pool, "refuted_search": refuted_search,
+                "refutation_by_tier": getattr(self, "_last_tier_counts", {}),
                 "witnesses_added": len(added), "seed_size": len(self.seed.graphs),
                 "seconds": round(time.time() - t0, 1),
             }
