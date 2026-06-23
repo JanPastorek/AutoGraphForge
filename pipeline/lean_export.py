@@ -60,8 +60,12 @@ def _columns_used(native, columns) -> List[str]:
 def is_supported(native, columns) -> bool:
     """True iff every invariant the conjecture references is in ``SUPPORTED`` and
     the conjecture is unconditioned (no graph-class hypothesis we can't yet
-    formalize)."""
-    pretty = native.pretty()
+    formalize). Non-inequality survivors (e.g. SophieCondition, no ``pretty``)
+    are unsupported."""
+    try:
+        pretty = native.pretty()
+    except Exception:
+        return False                              # SophieCondition / non-inequality
     if "⇒" in pretty or "=>" in pretty:          # conditioned on a graph class
         return False
     used = _columns_used(native, columns)
