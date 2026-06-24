@@ -249,5 +249,22 @@ def test_constant_bound_filter():
     assert not is_constant_bound(nat("minimum_degree ≤ order"), cols)
 
 
+# --------------------------------------------------------------------------- #
+# prover soundness: a clean exit code is not enough
+# --------------------------------------------------------------------------- #
+def test_proof_certified_rejects_uncertified_output():
+    from pipeline.theorem_prover import _proof_certified
+    # genuine clean compile → certified
+    assert _proof_certified(0, "")
+    assert _proof_certified(0, "warning: unused variable")
+    # the false-positive class: exit 0 but apply?/sorry/unsolved in output
+    assert not _proof_certified(0, "Try this:\n  [apply] refine Nat.le_antisymm ?_ ?_")
+    assert not _proof_certified(0, "warning: declaration uses 'sorry'")
+    assert not _proof_certified(0, "error: unsolved goals\n⊢ G.x = G.y")
+    assert not _proof_certified(0, "found a partial proof, but the corresponding tactic failed")
+    # real compile error
+    assert not _proof_certified(1, "error: unknown identifier")
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-v"]))

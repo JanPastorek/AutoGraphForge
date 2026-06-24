@@ -36,6 +36,21 @@ from conjecture import Conjecture, ConjectureStatus
 logger = logging.getLogger(__name__)
 
 
+# Markers in Lean's output that signal an incomplete / uncertified proof. A zero
+# exit code alone is NOT sufficient: inside a lake project `apply?`/`exact?` leave
+# "Try this" suggestions with unsolved subgoals yet `lean` may still exit 0, and
+# `sorry`/`admit` only warn. (This is the false-positive that once mis-certified a
+# false `domination = slater` theorem.)
+_BAD_PROOF_MARKERS = ("sorry", "Try this", "unsolved goals", "found a partial proof",
+                      "error:", "declaration uses")
+
+
+def _proof_certified(returncode: int, lean_output: str) -> bool:
+    """True only for a genuinely kernel-checked proof: clean (zero) exit AND no
+    marker of an incomplete/uncertified proof in Lean's output."""
+    return returncode == 0 and not any(m in lean_output for m in _BAD_PROOF_MARKERS)
+
+
 # ---------------------------------------------------------------------------
 # Prover response schema
 # ---------------------------------------------------------------------------
@@ -328,7 +343,8 @@ class LeanSubprocessProver(BaseProver):
                 cmd, capture_output=True, text=True,
                 timeout=self.cfg.lean_timeout_s, cwd=cwd, env=env,
             )
-            return result.returncode == 0, (result.stderr + result.stdout)[:2000]
+            out = (result.stderr + result.stdout)
+            return _proof_certified(result.returncode, out), out[:2000]
         except (subprocess.TimeoutExpired, FileNotFoundError) as e:
             return False, str(e)
         finally:
@@ -646,8 +662,11 @@ class DeepSeekProverLocal(BaseProver):
         # pass@k: attempt 0 greedy, the rest sampled. First kernel-verified wins.
         for attempt in range(max(1, self.cfg.deepseek_attempts)):
             candidate = self._generate(conjecture.lean_statement, sample=(attempt > 0))
-            if not candidate or "sorry" in candidate:
-                last_err = "model produced no complete proof"
+            # Reject placeholder / search tactics outright — they are not proofs
+            # and (for apply?/exact?) can otherwise slip past a 0 exit code.
+            if not candidate or any(t in candidate for t in
+                                    ("sorry", "admit", "apply?", "exact?")):
+                last_err = "model produced no complete proof (placeholder/search tactic)"
                 continue
             logger.info("[DeepSeekLocal] attempt %d candidate (%d chars):\n%s",
                         attempt + 1, len(candidate), candidate[:800])
