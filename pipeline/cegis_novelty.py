@@ -112,15 +112,82 @@ def native_to_inequality(native, cols: List[str]) -> Optional[Inequality]:
         hypothesis=hypothesis)
 
 
-def classify_native(native, cols: List[str]) -> Tuple[bool, Optional[str]]:
-    """(is_known, matched_theorem) for a graffiti3 native; (False, None) if it
-    can't be expressed as a linear bound the table speaks to."""
-    ineq = native_to_inequality(native, cols)
-    if ineq is None:
-        return False, None
-    c = Conjecture(statement=ineq.pretty() if hasattr(ineq, "pretty") else "",
-                   inequality=ineq, generation_method="cegis-graffiti3")
+# ── Conditioned-known rules (the linear table is unconditioned-only) ────────
+# Graph classes on which every graph is perfect: χ = ω and α = clique-cover
+# number hold by the perfect graph theorem / definition.
+_PERFECT_CLASSES = {"cograph", "chordal", "bipartite", "interval", "split"}
+
+
+def _body_parts(native, cols: List[str]):
+    """(classes, body_invariants, relation, constants) for a conditioned
+    conjecture, else None. ``classes`` are the boolean class columns in the
+    hypothesis; ``body_invariants`` the numeric invariants in the bounded
+    relation; ``constants`` the bare integers in the body."""
     try:
-        return novelty.classify(c)
+        pretty = native.pretty()
     except Exception:
+        return None
+    if "⇒" not in pretty and "=>" not in pretty:
+        return None
+    cond, body = re.split(r"⇒|=>", pretty, maxsplit=1)
+    classes = [c for c in cols if re.search(r"\b" + re.escape(c) + r"\b", cond)]
+    rel = next((r for r in ("≤", "≥", "<=", ">=", "=") if r in body), None)
+    if rel is None:
+        return None
+    body_invs = {c for c in cols if re.search(r"\b" + re.escape(c) + r"\b", body)}
+    consts = {int(m) for m in re.findall(r"(?<![\w.])\d+(?![\w./])", body)}
+    return classes, body_invs, _REL.get(rel, rel), consts
+
+
+def conditioned_known(native, cols: List[str]) -> Tuple[bool, Optional[str]]:
+    """Flag conditioned conjectures that restate a perfect-graph property or a
+    class definition — the classical results the unconditioned table misses."""
+    parts = _body_parts(native, cols)
+    if parts is None:
         return False, None
+    classes, invs, _rel, consts = parts
+    if not classes:
+        return False, None
+    perfect = any(c in _PERFECT_CLASSES for c in classes)
+    cls = set(classes)
+
+    # perfect-graph identities (any relation direction — equality holds)
+    if perfect and invs == {"chromatic_number", "clique_number"}:
+        return True, "perfect graph: χ = ω"
+    if perfect and invs == {"independence_number", "vertex_clique_cover_number"}:
+        return True, "perfect graph: α = θ̄ (clique cover)"
+
+    # class-definitional facts
+    deg = {"maximum_degree", "minimum_degree", "average_degree"}
+    if "regular" in cls and invs and invs <= deg and len(invs) >= 2:
+        return True, "regular: Δ = δ = 2m/n"
+    if "cubic" in cls and invs and invs <= {"maximum_degree", "minimum_degree"}:
+        return True, "cubic: Δ = δ = 3"
+    if "subcubic" in cls and invs == {"maximum_degree"} and 3 in consts:
+        return True, "subcubic: Δ ≤ 3 (definition)"
+    if "triangle_free" in cls and invs == {"clique_number"} and consts <= {2}:
+        return True, "triangle-free: ω ≤ 2 (definition)"
+    if "K_4_free" in cls and invs == {"clique_number"} and consts <= {3}:
+        return True, "K₄-free: ω ≤ 3 (definition)"
+    if "bipartite" in cls and invs == {"clique_number"} and consts <= {2}:
+        return True, "bipartite: ω ≤ 2"
+    if "bipartite" in cls and invs == {"chromatic_number"} and consts <= {2}:
+        return True, "bipartite: χ ≤ 2 (definition)"
+    return False, None
+
+
+def classify_native(native, cols: List[str]) -> Tuple[bool, Optional[str]]:
+    """(is_known, matched_theorem) for a graffiti3 native; (False, None) if not a
+    recognised classical result. Tries the unconditioned linear table first, then
+    the conditioned (perfect-graph / class-definition) rules."""
+    ineq = native_to_inequality(native, cols)
+    if ineq is not None:
+        c = Conjecture(statement="", inequality=ineq,
+                       generation_method="cegis-graffiti3")
+        try:
+            known, why = novelty.classify(c)
+            if known:
+                return True, why
+        except Exception:
+            pass
+    return conditioned_known(native, cols)

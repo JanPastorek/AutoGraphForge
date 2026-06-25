@@ -179,6 +179,43 @@ def test_novelty_keeps_genuinely_novel():
     assert classify_native(nat, ["residue", "independence_number"]) == (False, None)
 
 
+def _named(pretty):
+    n = FakeNative(pretty, "x", "<=")
+    n._pretty = pretty
+    return n
+
+
+def test_novelty_conditioned_perfect_graph():
+    # the leaks: perfect-graph properties under cograph/chordal/bipartite
+    from pipeline.cegis_novelty import classify_native
+    cols = ["chromatic_number", "clique_number", "independence_number",
+            "vertex_clique_cover_number", "cograph", "chordal", "bipartite", "planar"]
+    assert classify_native(_named("(cograph) ⇒ chromatic_number = clique_number"), cols)[0]
+    assert classify_native(_named("(chordal) ⇒ independence_number = vertex_clique_cover_number"), cols)[0]
+    # compound class still caught (still perfect)
+    assert classify_native(_named("((TRUE ∧ (chordal)) ∧ (planar)) ⇒ chromatic_number = clique_number"), cols)[0]
+
+
+def test_novelty_conditioned_class_definitions():
+    from pipeline.cegis_novelty import classify_native
+    cols = ["maximum_degree", "minimum_degree", "average_degree", "clique_number",
+            "regular", "subcubic", "cubic", "triangle_free", "K_4_free", "bipartite"]
+    assert classify_native(_named("(subcubic) ⇒ maximum_degree ≤ 3"), cols)[0]
+    assert classify_native(_named("(regular) ⇒ maximum_degree = minimum_degree"), cols)[0]
+    assert classify_native(_named("(triangle_free) ⇒ clique_number ≤ 2"), cols)[0]
+    assert classify_native(_named("(K_4_free) ⇒ clique_number ≤ 3"), cols)[0]
+
+
+def test_novelty_conditioned_keeps_novel_zero_forcing():
+    # a genuine candidate (connected vs total ZF on a class) must NOT be flagged
+    from pipeline.cegis_novelty import classify_native
+    cols = ["connected_zero_forcing_number", "total_zero_forcing_number",
+            "regular", "triangle_free"]
+    nat = _named("((TRUE ∧ (regular)) ∧ (triangle_free)) ⇒ "
+                 "connected_zero_forcing_number ≤ total_zero_forcing_number")
+    assert classify_native(nat, cols) == (False, None)
+
+
 # --------------------------------------------------------------------------- #
 # lemma_retrieval symbol extraction
 # --------------------------------------------------------------------------- #
