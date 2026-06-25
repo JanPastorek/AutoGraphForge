@@ -14,6 +14,12 @@ build/
 .venv
 venv/
 env/
+.venv-prover
+
+.history/
+.pytest_cache/
+.hf_cache/
+.hf_cache
 
 # IDE
 .vscode/

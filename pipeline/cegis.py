@@ -280,8 +280,13 @@ class CEGIS:
         do_search = any(k in ("sa", "rl") for k in self.cfg.cegis_searchers)
         result = CegisResult(seed=self.seed)
         survivors, g3 = [], None
+        t_start = time.time()
 
         for rnd in range(1, self.cfg.cegis_rounds + 1):
+            if self.cfg.cegis_time_budget_s and (time.time() - t_start) > self.cfg.cegis_time_budget_s:
+                logger.info("[cegis] wall-clock budget (%ds) reached before round %d — "
+                            "stopping with current survivors", self.cfg.cegis_time_budget_s, rnd)
+                break
             t0 = time.time()
             cands, g3 = self._generate()
             logger.info("[cegis][round %d] seed=%d graphs → %d candidate conjectures",

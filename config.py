@@ -174,6 +174,13 @@ class Config:
     rl_max_search: int = 8              # RL is heavy (torch agent per conjecture),
                                         # so it runs only as a bounded post-phase on
                                         # the top-K pool/SA survivors per round
+    # Wall-clock self-limit (0 = unlimited): lets a long depth-first run on a
+    # shared cluster bound itself to fit inside a SLURM --time allocation
+    # instead of relying on a hard kill (which would lose whatever the round/
+    # prove loop hadn't persisted yet). Checked once per round / per prove
+    # attempt; breaks cleanly and keeps whatever was already computed.
+    cegis_time_budget_s: int = 0
+    prove_time_budget_s: int = 0
 
     # --------------------------------------------------- Falsification loop --
     falsification_rounds: int = 2    # retry passes after db augmentation

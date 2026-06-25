@@ -17,6 +17,7 @@ import json
 import logging
 import os
 import sys
+import time
 
 from config import CONFIG
 from conjecture import Conjecture
@@ -137,7 +138,13 @@ def main(argv=None):
                     if c.lean_statement][: args.prove_top]
         log.info("[prove] attempting %d simplest survivors via %s",
                  len(to_prove), CONFIG.prover_backends)
+        t_prove_start = time.time()
         for c in to_prove:
+            if CONFIG.prove_time_budget_s and \
+               (time.time() - t_prove_start) > CONFIG.prove_time_budget_s:
+                log.info("[prove] wall-clock budget (%ds) reached — stopping with %d/%d attempted",
+                         CONFIG.prove_time_budget_s, proved, len(to_prove))
+                break
             try:
                 r = prover.prove(c)
                 if r.success:
