@@ -313,12 +313,57 @@ class LeanSubprocessProver(BaseProver):
         ok, _ = self._run_lean(full_code)
         return proof_attempt if ok else None
 
+    @staticmethod
+    def _compute_lean_path(root: str) -> str:
+        """LEAN_PATH covering a built lake project's oleans, derived from disk.
+
+        Returns "" unless mathlib's oleans are actually present, so callers can
+        detect an unbuilt project and avoid a guaranteed-failing check.
+        """
+        import glob
+        if not root or not os.path.isdir(root):
+            return ""
+        dirs = []
+        proj_lib = os.path.join(root, ".lake", "build", "lib", "lean")
+        if os.path.isdir(proj_lib):
+            dirs.append(proj_lib)
+        for d in sorted(glob.glob(os.path.join(
+                root, ".lake", "packages", "*", ".lake", "build", "lib", "lean"))):
+            if os.path.isdir(d):
+                dirs.append(d)
+        # Only usable if mathlib is actually built (its umbrella olean present).
+        if not any(os.path.isfile(os.path.join(d, "Mathlib.olean")) for d in dirs):
+            return ""
+        return os.pathsep.join(dirs)
+
     def _run_lean(self, code: str) -> tuple[bool, str]:
         root = getattr(self.cfg, "lean_project_root", "") or ""
-        # When a mathlib-backed lake project is configured, compile the snippet
-        # *inside* it so the mathlib search path is set and `import Mathlib`
-        # resolves (kernel-verified). Otherwise fall back to bare `lean`.
-        if root and os.path.isdir(root):
+        env = dict(os.environ)
+        elan_bin = os.path.expanduser("~/.elan/bin")
+        if os.path.isdir(elan_bin) and elan_bin not in env.get("PATH", ""):
+            env["PATH"] = elan_bin + os.pathsep + env.get("PATH", "")
+        # Prefer bare `lean` + LEAN_PATH over `lake env lean`. lake's dependency
+        # resolver requires a git checkout of mathlib; on a no-git compute node
+        # it tries to DELETE and re-clone the package dir on every invocation
+        # ("mathlib: URL has changed; deleting ... and cloning again"), which
+        # silently wipes the prebuilt mathlib oleans — corrupting the very cache
+        # the check depends on. Computing LEAN_PATH from the already-built .lake
+        # dirs and invoking lean directly never touches lake, never needs git,
+        # and never mutates the package tree. The temp file lives outside `root`
+        # so a stray tool can't disturb the project either.
+        lean_path = self._compute_lean_path(root)
+        if lean_path:
+            env["LEAN_PATH"] = (lean_path + os.pathsep + env["LEAN_PATH"]
+                                if env.get("LEAN_PATH") else lean_path)
+            with tempfile.NamedTemporaryFile(
+                suffix=".lean", mode="w", delete=False,
+            ) as f:
+                f.write(code)
+                fname = f.name
+            cmd, cwd = [self.cfg.lean_binary, fname], None
+        elif root and os.path.isdir(root):
+            # Fallback (mathlib not built / no umbrella olean): let lake resolve.
+            # Only safe where git is available (e.g. the login node).
             with tempfile.NamedTemporaryFile(
                 suffix=".lean", mode="w", delete=False, dir=root,
             ) as f:
@@ -333,11 +378,6 @@ class LeanSubprocessProver(BaseProver):
                 f.write(code)
                 fname = f.name
             cmd, cwd = [self.cfg.lean_binary, fname], None
-        # ensure elan's bin is on PATH for `lake`/`lean` resolution
-        env = dict(os.environ)
-        elan_bin = os.path.expanduser("~/.elan/bin")
-        if os.path.isdir(elan_bin) and elan_bin not in env.get("PATH", ""):
-            env["PATH"] = elan_bin + os.pathsep + env.get("PATH", "")
         try:
             result = subprocess.run(
                 cmd, capture_output=True, text=True,
@@ -727,12 +767,30 @@ class DeepSeekProverLocal(BaseProver):
     @staticmethod
     def _extract_lean(text: str) -> Optional[str]:
         import re
-        # DeepSeek emits a proof plan then the proof; take the LAST lean4 block.
+        # Thinking models (Qwen3/OProver) wrap reasoning in <think>…</think>;
+        # the proof is after it. Drop the think span so its prose can't leak in.
+        if "</think>" in text:
+            text = text.split("</think>")[-1]
+        # If the model truncated before closing the final ```lean fence (seen as
+        # "unexpected end of input"), close it so the block is still captured.
+        if text.count("```") % 2 == 1:
+            text = text + "\n```"
         blocks = re.findall(r"```(?:lean4?)?\s*(.*?)```", text, re.DOTALL)
+
+        def _clean(blk: str) -> str:
+            # Strip markdown headers ("# Proof") that the model sometimes emits
+            # inside the block — '#' starts a Lean command, so it crashes the
+            # parser ("unexpected token '#'; expected term").
+            lines = [ln for ln in blk.splitlines()
+                     if not re.match(r"\s*#{1,6}\s", ln)]
+            return "\n".join(lines).strip()
+
+        # DeepSeek emits a proof plan then the proof; take the LAST block that
+        # actually declares a theorem/lemma.
         for blk in reversed(blocks):
             if "theorem" in blk or "lemma" in blk:
-                return blk.strip()
-        return (blocks[-1].strip() if blocks else None)
+                return _clean(blk)
+        return (_clean(blocks[-1]) if blocks else None)
 
 
 # ---------------------------------------------------------------------------
@@ -748,6 +806,13 @@ PROVER_REGISTRY = {
     "goedel":         lambda cfg: GoedelProver(cfg),
     "deepseek":       lambda cfg: DeepSeekProverV2(cfg),
     "endpoint":       lambda cfg: LocalEndpointProver(cfg),
+    # DeepSeek-Prover-V2-671B served via vLLM (too large for the in-process
+    # transformers backend above) behind tools/prover_shim.py, which adapts
+    # vLLM's OpenAI API to this class's request/response schema and does its
+    # own pass@k + kernel-check loop (see DeepSeekProverLocal.prove). Point
+    # cfg.prover_api_url at the shim (e.g. http://127.0.0.1:8800).
+    "deepseek-671b":  lambda cfg: LocalEndpointProver(cfg, name="deepseek-671b",
+                                                       endpoint_path="/prove"),
 }
 
 

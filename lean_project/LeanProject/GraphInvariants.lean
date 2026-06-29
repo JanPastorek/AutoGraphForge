@@ -129,5 +129,8 @@ def IsBipartiteClass (G : SimpleGraph V) : Prop := G.Colorable 2
 /-- `G` is Eulerian-degree (every vertex has even degree). -/
 def IsEulerianClass (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
   ∀ v, Even (G.degree v)
+/-- `G` is nontrivial (at least two vertices): the graphcalc `nontrivial`
+flag, `|V(G)| ≥ 2`, i.e. `2 ≤ G.order`. -/
+def IsNontrivialClass (G : SimpleGraph V) : Prop := 2 ≤ G.order
 
 end SimpleGraph

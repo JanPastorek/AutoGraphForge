@@ -315,7 +315,7 @@ the seed's $59$-invariant \textsc{GraphCalc} list.
 
 Generation begins from the TxGraffiti \emph{expressive graphs} (a curated default dataset) and grows only by hard witnesses. The single-round figures quoted in \S\ref{sec:dynamics} come from
 an earlier one-pass run; the HPC run (\S\ref{sec:dynamics}) instead iterates for up to $25$
-generate--refute rounds, stopping early at a fixed point or at a
+generate--refute rounds, stopping early if it cannot find counterexamples to any conjectures or at a
 wall-clock budget, so that each round conjectures over a strictly larger,
 counterexample-hardened seed.
 
@@ -609,19 +609,6 @@ $(\mathrm{radius}\le\cdot)\Rightarrow\textsf{connected}$, whose hypothesis is
 only defined on connected graphs; both are exactly the failure modes of
 \S\ref{sec:integrity}.
 
-\subsection{Validation of the search engine}
-\label{sec:engine}
-The structure-seeded engine (\S\ref{sec:backends}) validates on real published conjectures. For the
-Aouchiche--Hansen conjecture $\lambda_1(G)+\mu(G)\ge\sqrt{n-1}+1$ (with the star
-as the conjectured extremal)~\cite{aouchiche2009variable}, it independently found the optimal counterexample
-at $n=18$: a subdivided double star with $\lambda_1+\mu=5.1013<\sqrt{17}+1$, a
-violation margin of $0.02181$ that matches the published optimal score of an
-adaptive Monte-Carlo refutation~\cite{roucairol2022refutation,roucairol2025refutation} to five decimals. It likewise refuted the
-\textsc{AutoGraphiX} conjecture $\lambda_1(G)\cdot\pi(G)\le n-1$
-($\pi$ proximity) at $n=11$.
-
-
-
 \subsection{Rejecting the system's own apparent discoveries}
 \label{sec:integrity}
 The pipeline produced several apparent ``discoveries.'' Every one was rejected
@@ -681,7 +668,8 @@ single pass to a multi-round, cluster-partitioned iteration budget (up to $25$ r
 fixed point or a wall-clock cap) whose survivors feed the scaled $671$B proving pass; a \emph{Devil's
 Advocate} filter that
 assumes each surviving conjecture true and feeds it back as a constraint on subsequent generation
-machine-generated survivor. Furthermore, we have not yet fully analysed the thousands of surviving conjectures, and a comprehensive manual review of these remaining candidates is left as future work. Additionally, replacing the static generator with an LLM-guided evolutionary search is left for future system iterations; for the present version, the static generator (\textsc{TxGraffiti2}) was strictly preferred for its determinism, speed, and exactness.
+(the dashed path in Figure~\ref{fig:pipeline}), and the end-to-end formal proof of a
+machine-generated survivor. Additionally, replacing the static generator with an LLM-guided evolutionary search is left for future system iterations; for the present version, the static generator (\textsc{TxGraffiti2}) was strictly preferred for its determinism, speed, and exactness.
 
 \begin{acknowledgments}
   I thank Samuel Varchol and Vladimír Jančár for valuable discussions on techniques of counterexample search. 

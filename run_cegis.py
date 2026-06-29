@@ -53,10 +53,18 @@ def wrap_survivors(result) -> list:
     from pipeline.cegis_novelty import classify_native
     out = []
     for nc, touch, lean in zip(natives, result.touches, leans):
-        try:
-            stmt = nc.pretty()
-        except Exception:
-            stmt = str(nc)
+        # Sophie sufficient-conditions have no pretty(); render as "hyp ⇒ property".
+        if hasattr(nc, "hyp_relation") and hasattr(nc, "property_name"):
+            try:
+                hyp = nc.hyp_relation.pretty()
+            except Exception:
+                hyp = getattr(nc, "hyp_name", "?")
+            stmt = f"({hyp}) ⇒ {nc.property_name}"
+        else:
+            try:
+                stmt = nc.pretty()
+            except Exception:
+                stmt = str(nc)
         is_known, why = (False, None)
         if CONFIG.cegis_filter_known:
             try:
@@ -139,20 +147,42 @@ def main(argv=None):
         log.info("[prove] attempting %d simplest survivors via %s",
                  len(to_prove), CONFIG.prover_backends)
         t_prove_start = time.time()
-        for c in to_prove:
-            if CONFIG.prove_time_budget_s and \
-               (time.time() - t_prove_start) > CONFIG.prove_time_budget_s:
-                log.info("[prove] wall-clock budget (%ds) reached — stopping with %d/%d attempted",
-                         CONFIG.prove_time_budget_s, proved, len(to_prove))
-                break
+        n_workers = max(1, int(getattr(CONFIG, "prove_concurrency", 1) or 1))
+
+        def _attempt(c):
             try:
-                r = prover.prove(c)
-                if r.success:
+                return c, prover.prove(c)
+            except Exception as e:                       # pragma: no cover
+                log.debug("[prove] %s failed: %s", c.id, e)
+                return c, None
+
+        if n_workers > 1:
+            # Parallel: vLLM batches the concurrent requests, so each completes
+            # inside the shim timeout while aggregate throughput stays high.
+            from concurrent.futures import ThreadPoolExecutor, as_completed
+            log.info("[prove] proving %d survivors with concurrency=%d", len(to_prove), n_workers)
+            with ThreadPoolExecutor(max_workers=n_workers) as ex:
+                futs = [ex.submit(_attempt, c) for c in to_prove]
+                for fut in as_completed(futs):
+                    c, r = fut.result()
+                    if r is not None and r.success:
+                        proved += 1
+                        c.metadata["proved_by"] = r.model_name
+                        c.lean_proof = r.proof_tactics
+                        log.info("[prove] ✓ %s verified by %s (%d so far)",
+                                 c.id, r.model_name, proved)
+        else:
+            for c in to_prove:
+                if CONFIG.prove_time_budget_s and \
+                   (time.time() - t_prove_start) > CONFIG.prove_time_budget_s:
+                    log.info("[prove] wall-clock budget (%ds) reached — stopping with %d/%d attempted",
+                             CONFIG.prove_time_budget_s, proved, len(to_prove))
+                    break
+                _, r = _attempt(c)
+                if r is not None and r.success:
                     proved += 1
                     c.metadata["proved_by"] = r.model_name
                     c.lean_proof = r.proof_tactics
-            except Exception as e:
-                log.debug("[prove] %s failed: %s", c.id, e)
         log.info("[prove] kernel-verified %d / %d", proved, len(to_prove))
 
     # ----- report -----------------------------------------------------------

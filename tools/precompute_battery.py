@@ -73,6 +73,9 @@ def main(argv=None):
     ap.add_argument("--max-n", type=int, default=14)
     ap.add_argument("--limit", type=int, default=0, help="cap #graphs (0 = all)")
     ap.add_argument("--g6", action="append", default=[], help="extra graph6 file(s)")
+    ap.add_argument("--workers", type=int, default=1,
+                    help="fork-pool size for the per-graph ILP computation "
+                         "(embarrassingly parallel across graphs)")
     args = ap.parse_args(argv)
 
     graphs = _graphs_from_enriched("database/graph_database_enriched.csv")
@@ -93,7 +96,8 @@ def main(argv=None):
     cache_path = os.path.join(CONFIG.cache_dir, "battery_bigdb.parquet")
     frame = battery.cached_battery(
         list(uniq.values()), list(uniq.keys()),
-        cache_path=cache_path, cap_s=CONFIG.battery_cap_s, max_n=args.max_n)
+        cache_path=cache_path, cap_s=CONFIG.battery_cap_s, max_n=args.max_n,
+        workers=args.workers)
     # store graph6 as a column too (the refuter reads it to rebuild witnesses)
     frame = frame.copy()
     frame["graph6"] = frame.index

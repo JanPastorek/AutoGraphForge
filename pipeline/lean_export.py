@@ -55,6 +55,8 @@ CLASS_PREDICATES = {
     "subcubic": "IsSubcubicClass", "triangle_free": "IsTriangleFreeClass",
     "K_4_free": "IsK4FreeClass", "bipartite": "IsBipartiteClass",
     "eulerian": "IsEulerianClass",
+    # graphcalc's auto-base hypothesis on every Graffiti3 conjecture: |V| ≥ 2.
+    "nontrivial": "IsNontrivialClass",
 }
 _REL_LEAN = {"≤": "≤", "≥": "≥", "<=": "≤", ">=": "≥", "=": "="}
 

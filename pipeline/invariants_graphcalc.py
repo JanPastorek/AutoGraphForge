@@ -28,8 +28,13 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-# graphcalc's full-battery entry point (accepts plain networkx graphs)
+# graphcalc's full-battery entry point (accepts plain networkx graphs); the
+# per-invariant entry point + the property name list are used for the salvage
+# path (compute each invariant under its own timeout so one slow NP-hard
+# invariant blanks only its own cell, not the whole row).
 from graphcalc.graphs import all_properties as _all_properties
+from graphcalc.graphs import compute_knowledge_table as _ckt
+from graphcalc.graphs import GRAPHCALC_PROPERTY_LIST as _PROPS
 
 
 # --------------------------------------------------------------------------- #
@@ -43,9 +48,54 @@ def _on_alarm(signum, frame):           # pragma: no cover - signal handler
     raise _Timeout()
 
 
-def _battery_one(G: nx.Graph, cap_s: int) -> Dict[str, float]:
-    """Full graphcalc battery for one graph, or {} on timeout/error."""
+# per-invariant cap (seconds) for the salvage path; a single slow invariant
+# blanks only its own cell instead of discarding the whole row. Kept small so a
+# big witness with a few intractable invariants does not dominate round time.
+_PER_INVARIANT_CAP_S = 3
+
+
+def _battery_salvage(G: nx.Graph, per_s: int) -> Dict[str, float]:
+    """Compute each invariant independently under its own timeout, returning a
+    *partial* row: every invariant that finishes in time is kept, the rest are
+    simply absent (→ NaN). This is what keeps big/hard graphs from becoming
+    all-NaN rows, which would poison graffiti3 generation; partial rows are
+    coverage-masked per target by both refutation and generation."""
+    row: Dict[str, float] = {}
     have_alarm = hasattr(signal, "SIGALRM")
+    if have_alarm:
+        old = signal.signal(signal.SIGALRM, _on_alarm)
+    try:
+        for name in _PROPS:
+            if have_alarm:
+                signal.alarm(int(per_s))
+            try:
+                row.update(_ckt([name], [G]).iloc[0].to_dict())
+            except Exception:                       # timeout / ILP blow-up / numeric
+                pass                                # leave this cell blank (NaN)
+            finally:
+                if have_alarm:
+                    signal.alarm(0)
+    finally:
+        if have_alarm:
+            signal.signal(signal.SIGALRM, old)
+    return row
+
+
+def _battery_one(G: nx.Graph, cap_s: int, max_n: Optional[int] = None) -> Dict[str, float]:
+    """Full graphcalc battery for one graph.
+
+    Fast path (graphs within the exact tier ``max_n``): the whole battery in one
+    call under a single ``cap_s`` alarm. On timeout/error, or for graphs beyond
+    the exact tier, fall back to the per-invariant *salvage* path so the row is
+    partial (cheap invariants kept) rather than empty — i.e. NaN means "unknown
+    for this graph", never "this graph is unusable"."""
+    n = G.number_of_nodes()
+    have_alarm = hasattr(signal, "SIGALRM")
+    # Graphs above the exact tier: skip the (doomed) whole-battery call and go
+    # straight to per-invariant salvage, which still recovers order/size/degree/
+    # spectral/… (polynomial) invariants even at large n.
+    if max_n is not None and n > max_n:
+        return _battery_salvage(G, _PER_INVARIANT_CAP_S)
     if have_alarm:
         old = signal.signal(signal.SIGALRM, _on_alarm)
         signal.alarm(int(cap_s))
@@ -53,38 +103,52 @@ def _battery_one(G: nx.Graph, cap_s: int) -> Dict[str, float]:
         df = _all_properties([G])
         return df.iloc[0].to_dict()
     except _Timeout:
-        logger.warning("[battery] timeout (%ds) on graph n=%d — partial row",
-                       cap_s, G.number_of_nodes())
-        return {}
+        logger.debug("[battery] whole-battery timeout (%ds) on n=%d — salvaging "
+                     "per-invariant", cap_s, n)
     except Exception as e:                                       # ILP / numeric
-        logger.debug("[battery] error on graph n=%d: %s", G.number_of_nodes(), e)
-        return {}
+        logger.debug("[battery] whole-battery error on n=%d (%s) — salvaging", n, e)
     finally:
         if have_alarm:
             signal.alarm(0)
             signal.signal(signal.SIGALRM, old)
+    return _battery_salvage(G, _PER_INVARIANT_CAP_S)
 
 
 # --------------------------------------------------------------------------- #
 # public table builder
 # --------------------------------------------------------------------------- #
+def _battery_one_args(args):
+    G, cap_s, max_n = args
+    return _battery_one(G, cap_s, max_n)
+
+
 def compute_battery(graphs: Sequence[nx.Graph], *, cap_s: int = 90,
                     max_n: Optional[int] = None,
-                    names: Optional[Sequence[str]] = None) -> pd.DataFrame:
+                    names: Optional[Sequence[str]] = None,
+                    workers: int = 1) -> pd.DataFrame:
     """
     Full graphcalc battery over ``graphs`` as a DataFrame (one row per graph).
 
-    cap_s   per-graph wall-clock cap (skip → empty/partial row).
-    max_n   skip graphs larger than this (avoid the ILP blow-up); their row is
-            left empty.  None ⇒ no size filter.
+    cap_s   per-graph wall-clock cap for the whole-battery fast path.
+    max_n   exact-tier threshold: graphs at or below it take the fast path;
+            larger graphs go straight to per-invariant salvage (a *partial*
+            row of the polynomial invariants), so they are never blank.
+            None ⇒ every graph takes the fast path.
     names   optional row labels (stored in the ``graph_name`` column).
+    workers fork-pool size for the (embarrassingly parallel) per-graph
+            computation; 1 = serial. Each graph's invariants are independent,
+            same pattern as the refute/search worker pool in pipeline/cegis.py.
     """
-    rows: List[Dict[str, float]] = []
-    for i, G in enumerate(graphs):
-        if max_n is not None and G.number_of_nodes() > max_n:
-            rows.append({})
-            continue
-        rows.append(_battery_one(G, cap_s))
+    if workers > 1:
+        import multiprocessing as mp
+        ctx = mp.get_context("fork")
+        args = [(G, cap_s, max_n) for G in graphs]
+        with ctx.Pool(workers) as pool:
+            rows: List[Dict[str, float]] = pool.map(
+                _battery_one_args, args,
+                chunksize=max(1, len(args) // (workers * 4) or 1))
+    else:
+        rows = [_battery_one(G, cap_s, max_n) for G in graphs]
     df = pd.DataFrame(rows)
     df = _coerce(df)
     # ensure a stable order column even if graphcalc names it differently
@@ -123,7 +187,7 @@ def _coerce(df: pd.DataFrame) -> pd.DataFrame:
 
 def cached_battery(graphs: Sequence[nx.Graph], ids: Sequence[str], *,
                    cache_path: str, cap_s: int = 90,
-                   max_n: Optional[int] = None) -> pd.DataFrame:
+                   max_n: Optional[int] = None, workers: int = 1) -> pd.DataFrame:
     """Battery for ``graphs`` (index = ``ids``), persisted graph6-keyed to
     ``cache_path``. Only graphs absent from the cache are recomputed."""
     cache = pd.DataFrame()
@@ -137,7 +201,7 @@ def cached_battery(graphs: Sequence[nx.Graph], ids: Sequence[str], *,
     if miss:
         logger.info("[battery] %d new graph(s) → %s", len(miss),
                     os.path.basename(cache_path))
-        new = compute_battery([g for _, g in miss], cap_s=cap_s, max_n=max_n)
+        new = compute_battery([g for _, g in miss], cap_s=cap_s, max_n=max_n, workers=workers)
         new.index = [i for i, _ in miss]
         cache = new if cache.empty else pd.concat([cache, new])
         cache = cache[~cache.index.duplicated(keep="last")]

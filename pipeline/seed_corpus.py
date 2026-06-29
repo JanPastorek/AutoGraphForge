@@ -97,6 +97,10 @@ class SeedCorpus:
                 [g for _, g in miss],
                 cap_s=self.cfg.battery_cap_s,
                 max_n=self.cfg.exact_tier_max_n,
+                # parallelise: large witnesses take the (slower) per-invariant
+                # salvage path, so fan them across the same worker budget the
+                # refute/search phases use instead of computing them serially.
+                workers=max(1, int(getattr(self.cfg, "cegis_workers", 1))),
             )
             new.index = [i for i, _ in miss]
             self._cache = (new if self._cache.empty

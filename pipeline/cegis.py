@@ -82,18 +82,46 @@ class CEGIS:
             nums = nums[: self.cfg.cegis_max_targets]
         return nums
 
-    def _gen_cache_key(self, targets) -> str:
-        """Stable key for the (seed, targets, gen-config) → raw candidates map."""
+    def _gen_kwargs(self, mode: Optional[str] = None, complexity: Optional[int] = None) -> dict:
+        """graffiti3.conjecture() kwargs from config (mode preset + per-feature
+        overrides). ``mode``/``complexity`` args let the one-shot final pass run
+        a deeper preset than the per-round loop."""
+        m = mode or self.cfg.cegis_gen_mode
+        comp = complexity if complexity is not None else self.cfg.cegis_gen_complexity
+        kw = {"mode": Mode(m), "enable_sophie": self.cfg.graffiti3_sophie}
+        if comp is not None:
+            kw["complexity"] = comp
+        if self.cfg.cegis_gen_products is not None:
+            kw["include_invariant_products"] = self.cfg.cegis_gen_products
+        if self.cfg.cegis_gen_abs is not None:
+            kw["include_abs"] = self.cfg.cegis_gen_abs
+        if self.cfg.cegis_gen_min_max is not None:
+            kw["include_min_max"] = self.cfg.cegis_gen_min_max
+        if self.cfg.cegis_gen_log is not None:
+            kw["include_log"] = self.cfg.cegis_gen_log
+        if self.cfg.cegis_gen_quick is not None:
+            kw["quick"] = self.cfg.cegis_gen_quick
+        return kw
+
+    def _gen_cache_key(self, targets, gen_kwargs: dict) -> str:
+        """Stable key for the (seed, targets, gen-config) → raw candidates map.
+        The generation config (mode/complexity/feature flags) is part of the key
+        so changing depth invalidates a stale cache instead of reusing it."""
         import hashlib
         ids = ",".join(sorted(self.seed.graphs.keys()))
-        sig = f"{ids}|{','.join(targets)}|sophie={self.cfg.graffiti3_sophie}|FAST"
+        cfg_sig = "|".join(f"{k}={gen_kwargs.get(k)}" for k in sorted(
+            ("mode", "complexity", "include_invariant_products", "include_abs",
+             "include_min_max", "include_log", "enable_sophie")))
+        sig = f"{ids}|{','.join(targets)}|{cfg_sig}"
         return hashlib.sha1(sig.encode()).hexdigest()[:16]
 
-    def _generate(self) -> Tuple[list, Graffiti3]:
+    def _generate(self, mode: Optional[str] = None,
+                  complexity: Optional[int] = None) -> Tuple[list, Graffiti3]:
         import os
         from pipeline.lean_export import make_lean_label
         frame = self.seed.frame
         targets = self._targets()
+        gen_kwargs = self._gen_kwargs(mode, complexity)
         # Map the supported invariants to their real Lean (mathlib + preamble)
         # names so survivor exports are kernel-checkable, not stubs over undefined
         # symbols; unsupported columns get a placeholder and are filtered later.
@@ -104,7 +132,8 @@ class CEGIS:
         # deterministic in (seed, targets, config). Cache the *raw* output (via
         # dill — the conjectures hold local closures pickle can't handle) so a
         # repeated dataset is restored instantly instead of regenerated.
-        ckey = os.path.join(self.cfg.cache_dir, f"gen_{self._gen_cache_key(targets)}.dill")
+        ckey = os.path.join(self.cfg.cache_dir,
+                            f"gen_{self._gen_cache_key(targets, gen_kwargs)}.dill")
         ineqs = sophie = None
         if os.path.exists(ckey):
             try:
@@ -117,8 +146,7 @@ class CEGIS:
                 logger.warning("[cegis] gen cache read failed (%s) — regenerating", e)
                 ineqs = None
         if ineqs is None:
-            res = g3.conjecture(targets, mode=Mode.FAST,
-                                enable_sophie=self.cfg.graffiti3_sophie)
+            res = g3.conjecture(targets, **gen_kwargs)
             ineqs = list(res.conjectures)
             sophie = list(getattr(res, "sophie_conditions", [])) \
                 if self.cfg.graffiti3_sophie else []
@@ -210,11 +238,50 @@ class CEGIS:
                    "allcols": all_cols, "cfg": self.cfg})
         ctx = mp.get_context("fork")
 
-        def _run(fn, items, chunk):
-            if workers > 1 and len(items) > 1:
-                with ctx.Pool(workers) as pool:
-                    return pool.map(fn, items, chunksize=max(1, chunk))
-            return [fn(i) for i in items]
+        # Hard per-phase wall-clock cap. The per-eval SIGALRM in the search
+        # cannot interrupt a C-extension ILP solver (exact χ/ω/α on a big graph),
+        # so a single eval can hang a worker indefinitely. We run the pool with a
+        # deadline via imap_unordered; if it elapses we ``terminate()`` the pool
+        # (SIGTERM *does* kill a hung native computation) and treat every
+        # not-yet-returned candidate as a survivor (never a false refutation).
+        phase_to = int(getattr(self.cfg, "cegis_phase_timeout_s", 0) or 0) or None
+
+        def _run(fn, items, chunk, default):
+            items = list(items)
+            if workers <= 1 or len(items) <= 1:
+                return [fn(i) for i in items]
+            out: List = [None] * len(items)
+            with ctx.Pool(workers) as pool:
+                # apply_async + readiness polling (portable; avoids the
+                # IMapIterator.next API). Collect every result that finishes
+                # before the deadline; on timeout, terminate() (SIGTERM kills a
+                # hung native ILP solver) and keep the rest as survivors.
+                asyncs = [(i, pool.apply_async(fn, (it,))) for i, it in enumerate(items)]
+                deadline = (time.time() + phase_to) if phase_to else None
+                pending = asyncs
+                while pending:
+                    nxt = []
+                    for i, ar in pending:
+                        if ar.ready():
+                            try:
+                                out[i] = ar.get()
+                            except Exception:
+                                out[i] = default(items[i])
+                        else:
+                            nxt.append((i, ar))
+                    pending = nxt
+                    if not pending:
+                        break
+                    if deadline is not None and time.time() > deadline:
+                        logger.warning("[cegis] phase wall-clock cap (%ss) hit: %d/%d done; "
+                                       "killing hung workers, rest kept as survivors",
+                                       phase_to, len(items) - len(pending), len(items))
+                        pool.terminate(); pool.join()
+                        for i, _ar in pending:
+                            out[i] = default(items[i])
+                        break
+                    time.sleep(0.2)
+            return out
 
         # Phase A — pool refutation on every candidate
         from collections import Counter
@@ -222,7 +289,8 @@ class CEGIS:
         witnesses: List[nx.Graph] = []
         refuted_pool = 0
         survivor_idx: List[int] = []
-        for idx, ref, tier, wits in _run(_refute_worker, range(n), n // (workers * 4)):
+        for idx, ref, tier, wits in _run(_refute_worker, range(n), n // (workers * 4),
+                                         lambda i: (i, False, None, [])):
             if ref:
                 refuted_pool += 1
                 tier_counts[tier or "?"] += 1
@@ -235,7 +303,7 @@ class CEGIS:
         survivors: List = []
         to_search = survivor_idx[: self.cfg.cegis_max_search] if do_search else []
         kept = survivor_idx[len(to_search):]
-        for idx, g in _run(_search_worker, to_search, 1):
+        for idx, g in _run(_search_worker, to_search, 1, lambda i: (i, None)):
             if g is not None:
                 refuted_search += 1
                 witnesses.append(g)
@@ -253,7 +321,13 @@ class CEGIS:
             rl_orders = tuple(o for o in self.cfg.search_orders if o <= 16)[:2]
             k = min(self.cfg.rl_max_search, len(survivors))
             still = []
-            for c in survivors[:k]:
+            rl_deadline = (time.time() + phase_to) if phase_to else None
+            for ci, c in enumerate(survivors[:k]):
+                if rl_deadline and time.time() > rl_deadline:
+                    logger.warning("[cegis] RL phase wall-clock cap hit at %d/%d — "
+                                   "keeping the rest as survivors", ci, k)
+                    still += survivors[ci:k]
+                    break
                 prob = GraphSearchProblem(c, all_cols,
                                           eval_cap_s=self.cfg.search_eval_cap_s)
                 g = rl_search(prob, orders=rl_orders,
@@ -282,6 +356,12 @@ class CEGIS:
         survivors, g3 = [], None
         t_start = time.time()
 
+        # Best healthy round's survivors, kept so a later degenerate round (where
+        # generation collapses to near-zero candidates — see the guard below)
+        # cannot overwrite a good result with an empty one.
+        best_survivors, best_g3 = [], None
+        prev_cands = 0
+
         for rnd in range(1, self.cfg.cegis_rounds + 1):
             if self.cfg.cegis_time_budget_s and (time.time() - t_start) > self.cfg.cegis_time_budget_s:
                 logger.info("[cegis] wall-clock budget (%ds) reached before round %d — "
@@ -291,6 +371,17 @@ class CEGIS:
             cands, g3 = self._generate()
             logger.info("[cegis][round %d] seed=%d graphs → %d candidate conjectures",
                         rnd, len(self.seed.graphs), len(cands))
+
+            # Generation-collapse guard: if a round produces drastically fewer
+            # candidates than the previous healthy round, generation has gone
+            # degenerate (e.g. seed pathology). Stop and keep the previous
+            # round's survivors rather than letting the few trivial leftovers be
+            # refuted down to zero. Only triggers once we have a healthy baseline.
+            if prev_cands >= 100 and len(cands) < 0.33 * prev_cands:
+                logger.warning("[cegis] generation collapse at round %d (%d cands "
+                               "vs %d previous) — stopping, keeping round %d survivors",
+                               rnd, len(cands), prev_cands, rnd - 1)
+                break
 
             survivors, witnesses, refuted_pool, refuted_search = \
                 self._refute_and_search(cands, all_cols, do_search)
@@ -312,6 +403,10 @@ class CEGIS:
                         rnd, len(survivors), refuted_pool, refuted_search,
                         len(added), len(self.seed.graphs), stat["seconds"])
 
+            # This round is healthy → it becomes the best result so far.
+            best_survivors, best_g3 = survivors, g3
+            prev_cands = len(cands)
+
             result.rounds_run = rnd
             if (refuted_pool + refuted_search) == 0:
                 result.fixed_point = True
@@ -323,7 +418,35 @@ class CEGIS:
                 logger.info("[cegis] refuted without new witnesses — stopping")
                 break
 
-        result.survivors = survivors
-        result.g3 = g3
-        result.touches = [self.refuter.touch_count(c, self.seed.frame) for c in survivors]
+        # One-shot deep extraction on the converged seed (optional, default off):
+        # run a single richer generation pass on the hardened seed, refute it,
+        # and merge its survivors — DEEP's richness once per shard rather than
+        # every round (which is far too slow on a large seed).
+        if self.cfg.cegis_final_deep_pass:
+            logger.info("[cegis] final deep pass on converged seed (%d graphs), mode=%s",
+                        len(self.seed.graphs), self.cfg.cegis_final_deep_mode)
+            try:
+                cands, g3d = self._generate(mode=self.cfg.cegis_final_deep_mode,
+                                            complexity=self.cfg.cegis_final_deep_complexity)
+                dsurv, dwit, rp, rs = self._refute_and_search(cands, all_cols, do_search)
+                added = self.seed.add(dwit) if dwit else []
+                if added:
+                    self.seed.persist_witnesses(added)
+                logger.info("[cegis] final deep pass: %d candidates → %d survivors "
+                            "(refuted pool=%d search=%d)", len(cands), len(dsurv), rp, rs)
+                seen, merged = set(), []
+                for c in list(best_survivors) + list(dsurv):
+                    try:
+                        key = c.pretty()
+                    except Exception:
+                        key = repr(c)
+                    if key not in seen:
+                        seen.add(key); merged.append(c)
+                best_survivors, best_g3 = merged, (g3d or best_g3)
+            except Exception as e:
+                logger.warning("[cegis] final deep pass failed (%s) — keeping loop survivors", e)
+
+        result.survivors = best_survivors
+        result.g3 = best_g3
+        result.touches = [self.refuter.touch_count(c, self.seed.frame) for c in best_survivors]
         return result

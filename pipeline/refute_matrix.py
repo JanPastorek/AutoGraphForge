@@ -261,6 +261,13 @@ class Refuter:
         hypothesis condition is respected (failures = applicable ∧ violated).
         witness_graphs are recoverable structures of the failing rows.
         """
+        # Sophie sufficient-conditions (hyp ⇒ property) carry no ``check`` method;
+        # route them to the boolean-implication refuter so they face the same
+        # corpus as the inequalities (a condition is refuted by any graph where
+        # the hypothesis holds but the property fails).
+        if hasattr(native, "hyp_relation") and hasattr(native, "property_name"):
+            return self._refute_sophie(native)
+
         # Tier 0 — constructive: refute constant/degree bounds by building an
         # extremal witness, independent of pool size (catches `order ≤ 14` etc.
         # that a bounded-order active search misses). Only engages for cheap
@@ -280,6 +287,36 @@ class Refuter:
                 continue                       # coverage miss: tier lacks a column
             if failures is not None and len(failures):
                 idx = list(failures.index)
+                wits = [tier.graphs[g] for g in idx if g in tier.graphs]
+                return True, wits[:32], tier.name
+        return False, [], None
+
+    def _refute_sophie(self, sophie
+                       ) -> Tuple[bool, List[nx.Graph], Optional[str]]:
+        """Refute a Sophie sufficient-condition ``hyp ⇒ property`` across the
+        tiers. A witness is a row where the hypothesis relation holds but the
+        boolean property fails. NaN-aware: rows whose hypothesis columns or
+        whose property column are missing in a tier are coverage misses, never
+        false refutations (mirrors the inequality path)."""
+        pn = sophie.property_name
+        neg = pn.startswith("¬") or pn.startswith("~")
+        col = pn[1:] if neg else pn
+        for tier in self.tiers:
+            frame = tier.frame
+            if col not in frame.columns:
+                continue                       # coverage miss: tier lacks the property
+            try:
+                hyp = np.asarray(pd.Series(sophie.hyp_relation.evaluate(frame)).values,
+                                 dtype=float)
+            except Exception:
+                continue                       # coverage miss: tier lacks a hyp column
+            prop_raw = pd.to_numeric(frame[col], errors="coerce").values  # bool→{0,1}, NaN kept
+            prop = (prop_raw == 0) if neg else (prop_raw == 1)   # property holds?
+            # applicable ∧ violated: hyp holds (≈1), property fully known, property fails
+            valid = ~np.isnan(hyp) & ~np.isnan(prop_raw)
+            viol = valid & (hyp >= 0.5) & (~prop)
+            if viol.any():
+                idx = [frame.index[i] for i in np.flatnonzero(viol)]
                 wits = [tier.graphs[g] for g in idx if g in tier.graphs]
                 return True, wits[:32], tier.name
         return False, [], None

@@ -6,6 +6,7 @@ All knobs are readable from environment variables or set programmatically.
 from __future__ import annotations
 import os
 from dataclasses import dataclass, field
+from typing import Optional
 
 
 @dataclass
@@ -84,6 +85,29 @@ class Config:
     graffiti3_mode: str = "fast"     # "fast" (cheap) | "standard" | "deep"
     graffiti3_max_n: int = 7         # corpus = connected atlas graphs up to this
     graffiti3_sophie: bool = True    # also mine Sophie sufficient-conditions
+    # Generation-depth knobs for the CEGIS loop (pipeline.cegis._generate). These
+    # map directly onto graffiti3.conjecture(): `cegis_gen_mode` picks the FAST/
+    # STANDARD/DEEP preset (complexity + feature defaults), and the four feature
+    # toggles override that preset when set (None = inherit the preset). DEEP per
+    # round is far too slow on a large seed (its product/LP3 stages blow up), so
+    # the default stays FAST; raise these only on a small seed, or use the
+    # one-shot final-deep pass below. cegis_gen_complexity overrides the stage
+    # depth directly (0=CONSTANT, 1=+RATIO/LP1, 2=+LP2/POLY/SQRT/LOG, 3=+LP3/
+    # SQRT_LOG, ≥4=+MIXED/SQRT_PAIR/GEOM_MEAN/SQRT_SUM/LOG_SUM).
+    cegis_gen_mode: str = "fast"             # "fast" | "standard" | "deep"
+    cegis_gen_complexity: Optional[int] = None       # None = inherit from mode
+    cegis_gen_products: Optional[bool] = None        # include_invariant_products
+    cegis_gen_abs: Optional[bool] = None             # include_abs
+    cegis_gen_min_max: Optional[bool] = None         # include_min_max
+    cegis_gen_log: Optional[bool] = None             # include_log
+    cegis_gen_quick: Optional[bool] = None           # cheap correlation prefilter
+    # One-shot deep extraction: after the (cheap) FAST CEGIS loop converges the
+    # seed, run ONE richer generation pass on the final hardened seed, refute it,
+    # and merge its survivors. Gets DEEP's richness once per shard without paying
+    # it every round. Disabled by default.
+    cegis_final_deep_pass: bool = False
+    cegis_final_deep_mode: str = "deep"      # mode for the one-shot final pass
+    cegis_final_deep_complexity: Optional[int] = None
     graffiti3_refute_random: bool = True   # refute against random models too
     graffiti3_max_per_target: int = 40     # keep top-N (by touches) per target
                                            # before the (per-candidate) refutation
@@ -181,6 +205,20 @@ class Config:
     # attempt; breaks cleanly and keeps whatever was already computed.
     cegis_time_budget_s: int = 0
     prove_time_budget_s: int = 0
+    # Concurrency for the survivor reprove loop. The loop was sequential (1
+    # request in flight → no vLLM batching → ~5 min/generation), so a full pass@k
+    # sweep took hours. Running N proofs concurrently lets vLLM batch them; with N
+    # small enough that each request still completes inside the shim timeout, we
+    # get both throughput and completion. Thread-safe: each prove() is an
+    # independent HTTP call + a unique-tempfile bare-lean check.
+    prove_concurrency: int = 8
+    # Hard per-phase wall-clock cap (seconds) for the parallel refute/search
+    # pools. Guards against a single eval hanging a worker forever: the per-eval
+    # SIGALRM cannot interrupt a C-extension ILP solver (exact χ/ω/α on a large
+    # search graph), but the pool deadline + terminate() (SIGTERM) can. On
+    # timeout, unfinished candidates are kept as survivors (never false-refuted).
+    # 0 = no cap.
+    cegis_phase_timeout_s: int = 2400        # 40 min/phase
 
     # --------------------------------------------------- Falsification loop --
     falsification_rounds: int = 2    # retry passes after db augmentation
@@ -240,7 +278,12 @@ class Config:
     # mathlib + the GraphInvariants preamble, exactly like the other backends.
     deepseek_local_enabled: bool = True
     deepseek_model_id: str = "deepseek-ai/DeepSeek-Prover-V2-7B"
-    deepseek_max_new_tokens: int = 8192
+    deepseek_max_new_tokens: int = 4096       # plan+proof for these short goals;
+    # 8192 caused a timeout death-spiral on the 671B vLLM server (a full
+    # generation at ~3.5 tok/s solo ≈ 2340s ≈ the shim's 2400s cap → attempts
+    # time out, but vLLM keeps generating them server-side → zombie requests pile
+    # up, dilute the GPU to ~1 tok/s each, and cascade: 38/43 timed out). 4096
+    # completes in ~1200s solo, well inside the cap.
     deepseek_dtype: str = "bfloat16"          # "bfloat16" | "float16"
     deepseek_seed: int = 30
     deepseek_attempts: int = 4                # pass@k sampled proof attempts
