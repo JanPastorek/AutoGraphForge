@@ -555,8 +555,12 @@ class LocalEndpointProver(BaseProver):
                                   error=f"{self.name}: no proof returned "
                                         f"({data.get('error', 'empty response')})")
         # The remote model's own success flag is advisory ONLY — we never trust a
-        # proof we did not kernel-check ourselves against our pinned mathlib.
-        code = proof if proof.lstrip().startswith("import") else "import Mathlib\n\n" + proof
+        # proof we did not kernel-check ourselves against our pinned mathlib. The
+        # preamble import MUST be included (machine-generated goals are stated over
+        # the custom GraphInvariants definitions); without it a valid proof fails
+        # this re-check with "unknown identifier" even though the shim verified it.
+        code = proof if proof.lstrip().startswith("import") \
+            else "import Mathlib\n" + self.cfg.lean_preamble_import + "\n\n" + proof
         if self._lean._available:
             ok, log = self._lean._run_lean(code)
             return ProverResponse(

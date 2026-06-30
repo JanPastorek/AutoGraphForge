@@ -91,3 +91,16 @@ lean_project/.lake/
 lean_project/lake-packages/
 **/*.olean
 **/*.olean.tmp
+
+# Code snapshots and downloaded reference material (not needed in the repo)
+pipeline.zip
+2026_ITAT_paper/pdfs/
+2026_ITAT_paper/*_reorganized.pdf
+2026_ITAT_paper/sample-franklin.png
+
+# Local scratch/env helper with machine-specific absolute paths
+.activate_scratch
+tmp/
+
+# LaTeX abstract build artifact
+*.abs

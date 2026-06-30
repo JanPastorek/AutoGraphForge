@@ -138,14 +138,52 @@ def _call_vllm(prompt: str, sample: bool) -> str | None:
     return DeepSeekProverLocal._extract_lean(text)
 
 
+def _wrap(candidate: str) -> str:
+    """The exact self-contained program kernel-checked for a candidate proof:
+    mathlib + the custom-invariant preamble import + the proof. Identical to the
+    wrapping LocalEndpointProver re-applies on its end, so what the shim verifies
+    is byte-for-byte what the caller re-verifies."""
+    return candidate if candidate.lstrip().startswith("import") \
+        else "import Mathlib\n" + CONFIG.lean_preamble_import + "\n\n" + candidate
+
+
+# Directory where every kernel-verified proof is persisted the instant it passes,
+# BEFORE returning over HTTP. The reprove client (LocalEndpointProver) uses a
+# short HTTP timeout (prover_timeout_s + 30); a multi-round agentic proof can take
+# longer than that, in which case the client hangs up and the verified proof is
+# lost from the job-level count (run 53863: 1 survivor + 1 curated proof verified
+# by the shim but never recorded because the client had already timed out). Saving
+# here guarantees the artifact survives independently of the client's patience and
+# can be re-checked by hand with `lake env lean`.
+_PROOF_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          "results", "verified_proofs")
+
+
+def _persist(statement: str, candidate: str) -> None:
+    import hashlib
+    try:
+        os.makedirs(_PROOF_DIR, exist_ok=True)
+        h = hashlib.sha1(statement.encode()).hexdigest()[:12]
+        path = os.path.join(_PROOF_DIR, f"{PROVER_NAME}_{h}.lean")
+        # Comment EVERY statement line — req.statement is a multi-line Lean skeleton
+        # (and ends in `sorry`); a single `-- statement: ` prefix would leave the
+        # rest as bare code, corrupting the artifact (illegal mid-file imports, a
+        # leaked sorry, a duplicate theorem). Each line gets its own `--`.
+        header = f"-- prover: {PROVER_NAME}\n" + "".join(
+            f"-- stmt: {ln}\n" for ln in statement.splitlines())
+        with open(path, "w") as f:
+            f.write(header + "\n" + _wrap(candidate) + "\n")
+        log.info("[shim] persisted verified proof -> %s", path)
+    except Exception as e:
+        log.warning("[shim] could not persist proof: %s", e)
+
+
 def _check(candidate: str | None) -> tuple[bool, str, str | None]:
     """Returns (verified, lean_log, candidate_or_None_if_placeholder)."""
     if not candidate or any(t in candidate for t in
                             ("sorry", "admit", "apply?", "exact?")):
         return False, "model produced no complete proof (placeholder/search tactic)", None
-    code = candidate if candidate.lstrip().startswith("import") \
-        else "import Mathlib\n" + CONFIG.lean_preamble_import + "\n\n" + candidate
-    ok, klog = _lean._run_lean(code)
+    ok, klog = _lean._run_lean(_wrap(candidate))
     return ok, klog, candidate
 
 
@@ -182,6 +220,7 @@ def prove(req: ProveRequest):
             log.info("[shim] round %d candidate (%d chars)", r + 1, len(cand))
             if ok:
                 log.info("[shim] round %d ✓ verified", r + 1)
+                _persist(req.statement, cand)
                 return {"proof": cand, "model": PROVER_NAME, "rounds": r + 1}
             prior, error = cand, klog
             last_err = f"failed Lean kernel check: {klog[:200]}"
@@ -205,6 +244,7 @@ def prove(req: ProveRequest):
             continue
         log.info("[shim] attempt %d candidate (%d chars)", attempt + 1, len(cand))
         if ok:
+            _persist(req.statement, cand)
             return {"proof": cand, "model": PROVER_NAME}
         last_err = f"failed Lean kernel check: {klog[:200]}"
         log.info("[shim] attempt %d ✗ (%s)", attempt + 1, klog[:160].replace("\n", " "))

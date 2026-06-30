@@ -133,3 +133,10 @@ echo "=== proving curated classical inequalities (671B baseline) ==="
 
 echo "=== proving the exportable machine-generated survivors (top-100) ==="
 .venv/bin/python tools/run_prove.py --prove-top 100 --time-budget-h 12
+
+# Authoritative count: re-verify every proof the shim PERSISTED, independently of
+# the HTTP client (whose short timeout can drop a slow agentic proof from the live
+# tally — see run 53863). This number, over the saved self-contained .lean files,
+# is the one to trust and to cite.
+echo "=== independent re-verification of persisted proofs ==="
+.venv/bin/python tools/verify_proofs.py

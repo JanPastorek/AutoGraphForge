@@ -4,7 +4,9 @@ An automated graph-theory **conjecturing → refutation → formal-proof** pipel
 It generates candidate invariant inequalities on a small "expressible" seed of
 graphs, refutes the false ones against tiered pools and active search until a
 fixed point, then exports the survivors to **Lean 4 / mathlib** and tries to
-**kernel-verify** them with a locally-run **DeepSeek-Prover-V2** (no API tokens).
+**kernel-verify** them with neural provers — a local **DeepSeek-Prover-V2-7B**,
+or a larger **vLLM-served** model (**DeepSeek-Prover-V2-671B** / **OProver-32B**)
+behind a shim — every proof checked by the Lean kernel itself (no API tokens).
 
 The design is Fajtlowicz's *Graffiti* loop framed as **CEGIS**
 (counterexample-guided inductive synthesis): conjecture on a small set, refute,
@@ -23,8 +25,14 @@ graphconj prove --curated                      # prove a few known theorems (cha
 graphconj precompute-battery --max-n 14        # build the offline big-DB refutation tier
 ```
 
+For the **served** prover path (large models on a cluster), launch a vLLM model +
+shim and reprove the survivors via SLURM — see `tools/slurm/` (`prove_671b.sbatch`,
+`prove_oprover.sbatch`) and `tools/run_prove.py`; the multi-node CEGIS run uses
+`tools/slurm/cegis_shard.sbatch` + `tools/merge_shards.py`.
+
 Requirements: Python ≥3.10, and (for the prover) a CUDA GPU + Lean 4 via `elan`
-with the mathlib cache fetched in `lean_project/` (`lake exe cache get`).
+with the mathlib cache fetched in `lean_project/` (`lake exe cache get`). The
+served path additionally needs the `.venv-prover` stack (vLLM, fastapi, uvicorn).
 
 ---
 
@@ -73,7 +81,7 @@ wins, and the refuting graph becomes a seed witness:
 | `symbolic` | constructive | refutes constant/degree bounds (`order ≤ 14`) by building an extremal in-class witness, independent of pool size |
 | `families` | atlas + parametric (barbells, lollipops, …) | full battery, n≤12 |
 | `random` | class-aware random models | full battery |
-| `hog` | HoG export's **precomputed** invariants | ~28 invariants for 69k graphs incl. **big** ones (n≤60), partial/NaN-aware, ingested directly (no recompute) |
+| `hog` | HoG export's **precomputed** invariants | ~28 invariants for **28,859** graphs incl. **big** ones (n≤60), partial/NaN-aware, ingested directly (no recompute) |
 | `bigdb` | offline-recomputed full battery | `tools/precompute_battery.py` |
 | active search | z3 → cross-entropy → vns → sa → mcts → rl | black-box over `violation = -slack`; per-candidate time budget |
 
@@ -94,13 +102,29 @@ subset — unconditioned bounds and class-conditioned ones over the formalized
 classes — and skips conjectures over not-yet-formalized invariants/classes
 rather than mis-formalizing them.
 
-### 5. Proving — `pipeline/theorem_prover.py`, `pipeline/lemma_retrieval.py`
-`DeepSeekProverLocal` runs DeepSeek-Prover-V2-7B locally via 🤗 transformers
-(pass@k sampling), grounded per-goal by `lemma_retrieval` (greps the pinned
-mathlib for relevant lemma signatures). Every candidate proof is
-**kernel-verified** with `lake env lean` against mathlib + the preamble — a
-success is a real proof, never the model's say-so. Other backends
-(`lean` tactics, `claude`, HTTP `goedel`/`deepseek`) remain in the ensemble.
+### 5. Proving — `pipeline/theorem_prover.py`, `pipeline/lemma_retrieval.py`, `tools/prover_shim.py`, `tools/verify_proofs.py`
+One rule governs both prover paths: **every candidate proof is independently
+kernel-verified** against the pinned mathlib + the `GraphInvariants` preamble
+before it counts — a success is a real proof, never the model's say-so.
+
+- **In-process (small model):** `DeepSeekProverLocal` runs DeepSeek-Prover-V2-7B
+  locally via 🤗 transformers (pass@k), grounded per-goal by `lemma_retrieval`
+  (greps the pinned mathlib for relevant lemma signatures).
+- **Served (large models):** for models too big for the in-process backend,
+  `tools/prover_shim.py` (FastAPI) adapts a **vLLM**-served model to the
+  `LocalEndpointProver` HTTP schema — registered as the `deepseek-671b` backend
+  (`PROVER_REGISTRY`; point `cfg.prover_api_url` at the shim). The same shim
+  serves **DeepSeek-Prover-V2-671B** or the Lean-specialised **OProver-32B**,
+  supports a multi-round **agentic** mode (`AGENTIC_ROUNDS`: feed each failed
+  attempt's Lean error back, with the invariant definitions grounding the
+  prompt), and **persists every verified proof** to `results/verified_proofs/*.lean`.
+  `tools/verify_proofs.py` re-checks those artifacts with a standalone kernel
+  pass, so the reported count is reproducible from the files alone.
+
+Verification uses **bare `lean` + a computed `LEAN_PATH`** (lake-free, so it
+never mutates the mathlib cache on no-git compute nodes; `lake env lean` is a
+fallback). Other ensemble backends (`lean` tactics, `claude`, HTTP
+`goedel`/`deepseek`) remain registered in `PROVER_REGISTRY`.
 
 ---
 
@@ -145,13 +169,21 @@ pipeline/
   cegis_novelty.py        known-theorem filter adapter
   refute_matrix.py        tiered refutation (incl. hog/bigdb tiers)
   symbolic_refute.py      constructive refutation of constant/degree bounds
+  random_models.py        class-aware random graph models (random tier)
   search/                 z3 + metaheuristics + rlgt active search
   lean_export.py          supported-subset Lean export (uncond. + class-cond.)
   lemma_retrieval.py      per-goal mathlib lemma retrieval for the prover
-  theorem_prover.py       prover ensemble incl. local DeepSeek-Prover-V2
+  theorem_prover.py       prover ensemble (local + served endpoint backends)
   reporting.py            ranking / printing
 lean_project/             Lean 4 + mathlib project; GraphInvariants.lean preamble
-tools/                    precompute_battery, prove_curated/demo/new
+tools/
+  precompute_battery.py   offline full-battery recompute (bigdb tier)
+  prove_curated.py / prove_demo.py / prove_new.py   curated / demo / survivor proving
+  run_prove.py            served-prover reprove driver (deepseek-671b backend)
+  prover_shim.py          FastAPI: vLLM (671B / OProver-32B) → endpoint schema; agentic mode; persists proofs
+  verify_proofs.py        independent re-verification of persisted proofs
+  run_shard.py / merge_shards.py   CEGIS SLURM-array shard launch + survivor/witness merge
+  slurm/                  sbatch scripts (cegis_shard, prove_671b, prove_oprover, gpu_probe, merge, …)
 tests/                    pytest unit tests for the CEGIS core
 legacy/                   superseded entry points + generation/falsification stack
 docs/                     CEGIS_PLAN.md (design), MIGRATION.md (legacy→CEGIS map)
