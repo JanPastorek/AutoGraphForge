@@ -42,7 +42,7 @@ orcid=0000-0001-8237-1275,
   We report on our ongoing project to develop a computational pipeline \emph{AutoGraphForge} for an automated
   graph-theoretic conjecturing-refuting-formalizing-proving system. Generation is counterexample-guided and runs in rounds: a \textsc{Graffiti3} generator
 proposes invariant inequalities over a small snapshot $T$ of a few hundred
-graphs that grows only by hard counterexamples to its own conjectures.  A \emph{novelty filter} of $203$ classical theorems, closed under transitive composition and linear identity substitution,
+graphs that grows only by hard counterexamples to its own conjectures.  A \emph{novelty filter} of $730$ classical and folklore relations, closed under transitive composition and linear identity substitution,
 that decides via a linear program whether a candidate conjecture is already implied
 by known results. Then the conjecture is tested against a dataset of $\sim\!348{,}000$
   graphs unioning the complete House of Graphs invariant export, the exhaustive census of all connected
@@ -144,8 +144,9 @@ Our current contributions are:
   prover independently kernel-verifies trivial
   inequalities ---but it has not yet been run as a controlled
   evaluation over the surviving conjectures (\S\ref{sec:formalize-prove}).
-  \item We create a novelty filter of $203$ classical and trivial theorems
-  (\S\ref{sec:heuristics_related}), closed under transitive composition of $f\le g$
+  \item We create a novelty filter of $730$ classical, folklore, and trivial relations
+  (\S\ref{sec:heuristics_related})---spanning the chromatic, connectivity,
+  matching/cover, domination, and zero-forcing families---closed under transitive composition of $f\le g$
   relations and under linear identity substitution (e.g. the regular-graph
   identity $\Delta=\delta=2m/n=\rho=\mathrm{degeneracy}$, K\"onig's $\nu=\tau$,
   Gallai's $n=\alpha+\tau$), implemented as a small linear-program feasibility
@@ -324,7 +325,7 @@ Suppose the system generates a candidate inequality
     Because the invariants $g_i$ are treated as independent symbolic variables, matching the coefficient of each $g_i$ on both sides reduces the problem to a system of linear equations. Verifying redundancy therefore reduces to a linear-programming (LP) feasibility test: if the solver finds weights and
   slacks satisfying the identity, the candidate is provably a structural consequence of the tabled theorems and is discarded.
 
-The table holds $203$ entries after closing the simple $f\le g$
+The table holds $730$ entries after closing the simple $f\le g$
 relations under transitivity; the restricted identity by graph class
 multipliers $\mu_k$ capture, in one
 mechanism, Whitney's connectivity chain $\kappa\le\lambda\le\delta$~\cite{whitney1932congruent}

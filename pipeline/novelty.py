@@ -334,6 +334,15 @@ def _transitive_theorems(base):
     return derived
 
 
+# Domain-curated known relations over the domination / zero-forcing families
+# (pipeline/known_relations.py), folded in *before* the transitive closure so
+# their simple f ≤ g links compose with the classical chains.
+try:
+    from pipeline import known_relations as _known_relations
+    KNOWN_THEOREMS += _known_relations.load_relations()
+except Exception as _exc:  # pragma: no cover - defensive: never break the filter
+    logger.warning("known_relations not loaded: %s", _exc)
+
 KNOWN_THEOREMS += _transitive_theorems(KNOWN_THEOREMS)
 
 

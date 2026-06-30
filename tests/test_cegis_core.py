@@ -173,10 +173,32 @@ def test_novelty_flags_omega_le_chi():
 
 def test_novelty_keeps_genuinely_novel():
     from pipeline.cegis_novelty import classify_native
-    nat = FakeNative("residue ≤ independence_number", "residue", "<=",
-                     rhs_col="independence_number")
-    # 'residue' isn't in the known-theorem table → not flagged
-    assert classify_native(nat, ["residue", "independence_number"]) == (False, None)
+    # annihilation_number ≤ slater is not a known relation (annihilation is an
+    # upper bound on most invariants, so this direction is not in the table).
+    nat = FakeNative("annihilation_number ≤ slater", "annihilation_number", "<=",
+                     rhs_col="slater")
+    assert classify_native(nat, ["annihilation_number", "slater"]) == (False, None)
+
+
+def test_novelty_flags_domination_family():
+    from pipeline.cegis_novelty import classify_native
+    # curated known relation: total domination ≤ connected domination
+    nat = FakeNative("total_domination_number ≤ connected_domination_number",
+                     "total_domination_number", "<=",
+                     rhs_col="connected_domination_number")
+    is_known, why = classify_native(
+        nat, ["total_domination_number", "connected_domination_number"])
+    assert is_known and why
+
+
+def test_novelty_normalizes_lower_bound():
+    from pipeline.cegis_novelty import classify_native
+    # ≥ restatement must normalize to the table's ≤ form: a(G) ≥ ν ⇔ ν ≤ a(G)
+    nat = FakeNative("annihilation_number ≥ matching_number",
+                     "annihilation_number", ">=", rhs_col="matching_number")
+    is_known, why = classify_native(
+        nat, ["annihilation_number", "matching_number"])
+    assert is_known and why
 
 
 def _named(pretty):

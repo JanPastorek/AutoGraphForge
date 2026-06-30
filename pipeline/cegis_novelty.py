@@ -34,6 +34,15 @@ _GC2TABLE = {
     "density": "density",
 }
 
+# Extend with the domination / zero-forcing family columns so generated
+# conjectures over them parse into Inequalities the curated known-relation table
+# (pipeline/known_relations.py) can judge.
+try:
+    from pipeline.known_relations import GC_COLUMNS as _GC_EXTRA
+    _GC2TABLE.update(_GC_EXTRA)
+except Exception:  # pragma: no cover - defensive
+    pass
+
 
 def _num(tok: str) -> Optional[float]:
     """Parse an int, float, or 'a/b' fraction."""
@@ -68,6 +77,9 @@ def _parse_side(s: str, cols: List[str]) -> Optional[Tuple[float, str, float]]:
         coeff = v
     # constant: standalone numeric tokens not glued to the invariant
     s_wo = re.sub(re.escape(inv), " ", s)
+    # drop any 'c *' multiplier (the coefficient) so it is not double-counted as
+    # a constant once the invariant it multiplied has been removed
+    s_wo = re.sub(r"[0-9.]+(?:\s*/\s*[0-9.]+)?\s*\*", " ", s_wo)
     s_wo = re.sub(r"[0-9.]+\s*/\s*[0-9.]+|\d+(?:\.\d+)?", lambda mm: f" {mm.group(0)} ", s_wo)
     const = 0.0
     for tok in re.findall(r"[+-]?\s*\d+(?:\.\d+)?(?:\s*/\s*\d+)?", s_wo):
@@ -102,13 +114,19 @@ def native_to_inequality(native, cols: List[str]) -> Optional[Inequality]:
         return None
     ca, inv_a, const_l = left
     cb, inv_b, const_r = right
+    # The known-theorem table is upper-bound form (lhs ≤ rhs); normalise a
+    # lower-bound conjecture  a ≥ b  into the equivalent  b ≤ a  by swapping
+    # sides, so ≥-shaped rediscoveries (most of the domination/zero-forcing
+    # folklore) are matched too rather than silently passing as novel.
+    if rel in ("≥", ">="):
+        (ca, inv_a, const_l), (cb, inv_b, const_r) = (cb, inv_b, const_r), (ca, inv_a, const_l)
     # Map to the table's symbolic names; both sides must be known to the table.
     if inv_a not in _GC2TABLE or inv_b not in _GC2TABLE:
         return None
     # coeff_a·inv_a (+const_l) ≤ coeff_b·inv_b (+const_r)  →  normalise const to RHS
     return Inequality(
         inv_a=_GC2TABLE[inv_a], inv_b=_GC2TABLE[inv_b], coeff_a=ca, coeff_b=cb,
-        offset=const_r - const_l, op=_REL.get(rel, "<="),
+        offset=const_r - const_l, op="<=",
         hypothesis=hypothesis)
 
 
