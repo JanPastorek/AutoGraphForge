@@ -37,6 +37,9 @@ runs/
 graphify-out/
 **/graphify-out/
 
+
+2026_ITAT_paper/*.py
+
 # Vendored upstream clone (lives in the graphconj repo's sage/ now)
 _conjecturing_pkg/
 
