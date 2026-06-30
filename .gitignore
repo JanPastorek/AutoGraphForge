@@ -58,6 +58,10 @@ _conjecturing_pkg/
 # Generated graph database
 database/
 
+
+2026_ITAT_paper/REVIEW_improvements.md
+2026_ITAT_paper/SUBMISSION_CHECKLIST.md
+
 # Large graph corpora (data, not code — downloadable / regenerable).
 # Keep the loaders and invariant code under graphs/, drop the bulk data.
 graphs/**/*.g6
