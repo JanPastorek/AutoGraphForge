@@ -70,7 +70,10 @@ witnesses. Generation (the ~13-min cost) is **cached** (`dill`) keyed by the see
 - **Dalmatian** (significance) + **Morgan** (hypothesis-maximality) filters prune
   the ~10⁵ raw products to the non-dominated envelope (a few thousand).
 - **Novelty filter** flags survivors that rediscover a classical theorem
-  (ω≤χ, König–Egerváry, …) via the 203-theorem table + convex-LP implication.
+  (ω≤χ, König–Egerváry, …) via the 559-relation table + convex-LP implication.
+  A theorem proved for a superclass is applied to its subclasses through a
+  class-subsumption lattice derived from ISGCI (`pipeline/data/class_hierarchy.json`,
+  regenerate with `tools/build_class_hierarchy.py`).
 
 ### 3. Refutation — `pipeline/refute_matrix.py`, `pipeline/symbolic_refute.py`, `pipeline/search/`
 Tiered, NaN-aware, coverage-masked; the first tier to produce a counterexample
@@ -95,7 +98,11 @@ simplest survivors:
 - defined here: `order`, `size`, domination family, `slaterNumber`,
   `annihilationNumber`, the **zero-forcing family** (`zeroForcingNumber` +
   total/connected), and graph-**class predicates** (regular/cubic/subcubic/
-  triangle_free/K_4_free/bipartite/eulerian).
+  triangle_free/K_4_free/bipartite/eulerian), plus `connected` and `tree`
+  (mathlib's `Connected` / `IsTree`, the latter reached through the decidable
+  edge-count form proved equivalent in `isTreeClass_iff`) and the two
+  forbidden-induced-subgraph classes `claw_free` (K₁,₃) and `cograph` (P₄).
+  `chordal` and `planar` remain unformalized.
 
 `lean_export` emits self-contained, compilable theorems for the *supported*
 subset — unconditioned bounds and class-conditioned ones over the formalized
@@ -149,6 +156,8 @@ All knobs live in `config.py` (`Config` dataclass, env-overridable). Highlights:
 - `results/cegis_results.json` — survivors (with novelty flags, touches, Lean),
   round history, refutation-by-tier provenance.
 - `results/cegis_survivors.dill` — persisted survivors for `--reprove`.
+- `results/refutations.json` — refuted conjectures paired with the graph that
+  refutes them (input to `tools/export_disproofs.py`).
 - `database/hard_seed/graphs.g6` — accumulated hard witnesses (grows across runs).
 - `database/cache/*.parquet|*.dill` — battery + generation caches (regenerable).
 
@@ -172,20 +181,28 @@ pipeline/
   random_models.py        class-aware random graph models (random tier)
   search/                 z3 + metaheuristics + rlgt active search
   lean_export.py          supported-subset Lean export (uncond. + class-cond.)
+  lean_disproof.py        Lean disproofs (¬∀ discharged on a refuting graph)
+  proof_audit.py          statement-identity + axiom guards for candidate proofs
+  known_relations.py      curated known relations feeding the novelty filter
+  novelty.py              known-theorem LP + ISGCI class-subsumption lattice
+  data/class_hierarchy.json  generated: superclass closure over our class vocabulary
   lemma_retrieval.py      per-goal mathlib lemma retrieval for the prover
   theorem_prover.py       prover ensemble (local + served endpoint backends)
   reporting.py            ranking / printing
 lean_project/             Lean 4 + mathlib project; GraphInvariants.lean preamble
+                          + GraphInvariantsComputable.lean (decidable mirror)
 tools/
   precompute_battery.py   offline full-battery recompute (bigdb tier)
   prove_curated.py / prove_demo.py / prove_new.py   curated / demo / survivor proving
   run_prove.py            served-prover reprove driver (deepseek-671b backend)
   prover_shim.py          FastAPI: vLLM (671B / OProver-32B) → endpoint schema; agentic mode; persists proofs
   verify_proofs.py        independent re-verification of persisted proofs
+  export_disproofs.py     emit + kernel-check disproofs from refutations.json
+  validate_known_relations.py  empirical check of the novelty table
+  build_class_hierarchy.py     regenerate the class lattice from a graphotaxy/ISGCI snapshot
   run_shard.py / merge_shards.py   CEGIS SLURM-array shard launch + survivor/witness merge
   slurm/                  sbatch scripts (cegis_shard, prove_671b, prove_oprover, gpu_probe, merge, …)
 tests/                    pytest unit tests for the CEGIS core
-legacy/                   superseded entry points + generation/falsification stack
 docs/                     CEGIS_PLAN.md (design), MIGRATION.md (legacy→CEGIS map)
 ```
 

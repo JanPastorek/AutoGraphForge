@@ -15,6 +15,10 @@ build/
 venv/
 env/
 .venv-prover
+.venv-leanstral/
+.hf_home/
+.ruff_cache
+
 
 .history/
 .pytest_cache/
@@ -111,3 +115,6 @@ tmp/
 
 # LaTeX abstract build artifact
 *.abs
+
+# Benchmark data/outputs (large .jsonl model dumps, not code)
+benchmark/

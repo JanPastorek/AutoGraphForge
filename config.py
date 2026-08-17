@@ -141,6 +141,23 @@ class Config:
     cegis_drop_constant_bounds: bool = True   # drop degenerate invariant-vs-constant
                                         # bounds (clique_number ≤ 20, 9 ≤ size, …);
                                         # Sophie sufficient-conditions are exempt
+    # ---- optional evidence gates (both OFF by default) ---------------------
+    # These trade recall for precision, so they are opt-in rather than assumed.
+    #
+    # Support gate: a bound asserted on a class with only a handful of seed
+    # representatives survives for lack of counterexamples, not because it is
+    # true. Measured on the first sharded run, a threshold of 20 drops 4.3% of
+    # class-conditioned survivors and removes every one resting on <5 graphs.
+    # 0 disables. Risk: a genuine discovery about a rare class is discarded
+    # along with the noise, since both look identical from support alone.
+    cegis_min_hypothesis_support: int = 0
+    # Decorative gate: drop a conditioned bound whose relation holds on *every*
+    # seed graph, in or out of the class — the hypothesis restricts nothing.
+    # Risk: "holds on every graph we have" is not "holds for every graph", so a
+    # class-specific truth can be dropped when the corpus fails to separate the
+    # class from its complement. Prefer proposing the unconditioned form and
+    # letting refutation decide; see docs.
+    cegis_drop_decorative: bool = False
     cegis_report_top: int = 40          # survivors to print/formalize/prove
     # Seed corpus
     exact_tier_max_n: int = 14          # graphs ≤ this get the full battery (≈1s/graph)
@@ -148,6 +165,24 @@ class Config:
     persist_seed: bool = True           # accumulate hard witnesses across runs
     hard_seed_dir: str = "database/hard_seed"
     cache_dir: str = "database/cache"
+    # Witness sharing between concurrent shards. A counterexample refutes
+    # conjectures about *any* invariant, so it is evidence for every shard,
+    # whereas a conjecture belongs to exactly one. Shards therefore keep private
+    # conjectures but publish witnesses to a single append-only log, which each
+    # re-reads at the start of every round. Without this each shard converges to
+    # its own local fixed point: the first sharded run left 2,350 survivors that
+    # another shard's witness already refuted.
+    shared_witness_log: str = "database/hard_seed/shared_witnesses.g6"
+    share_witnesses: bool = True
+    # Tier batteries are large, identical across shards and never written during
+    # a run, so they can live in one shared read-only directory while each shard
+    # keeps its own (frequently written) seed battery. Empty ⇒ use cache_dir.
+    tier_cache_dir: str = ""
+    # Where to look for battery rows a *peer* shard has already computed, so a
+    # shared witness is not re-measured once per shard. Safe without locking
+    # because each of these files has exactly one writer and is published by
+    # atomic rename (SeedCorpus._save_cache). Empty ⇒ never read peers.
+    peer_battery_glob: str = ""
     # Refutation tiers (cheap → expensive); each is NaN-aware + coverage-masked
     refute_symbolic: bool = True        # tier 0: constructively refute constant/
                                         # degree bounds (order≤14, Δ≤3, …) by
@@ -155,6 +190,11 @@ class Config:
                                         # false bounds a bounded-order search misses
     refute_use_families: bool = True    # atlas + named families (exact battery)
     refute_use_random: bool = True      # class-aware random models (exact battery)
+    # Disconnected / edgeless / isolate-bearing graphs. Only 0.28% of the usable
+    # pool is disconnected (the census tier is connected by construction), so
+    # without this tier a bound false only on a degenerate graph survives for
+    # want of a witness. Cheap: a few hundred small graphs.
+    refute_use_degenerate: bool = True
     refute_random_per: int = 6
     refute_families_max_n: int = 12     # cap n for the (expensive) family battery
     # Ingest the HoG enriched export's *already-computed* invariants directly

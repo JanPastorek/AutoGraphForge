@@ -50,7 +50,7 @@ def wrap_survivors(result) -> list:
         if result.g3 is not None else [None] * len(natives)
     # Known-theorem filter (legacy parity): flag survivors that rediscover a
     # classical/trivial bound (ω≤χ, König–Egerváry, diam≤2·rad, …).
-    from pipeline.cegis_novelty import classify_native
+    from pipeline.cegis_novelty import classify_statement
     out = []
     for nc, touch, lean in zip(natives, result.touches, leans):
         # Sophie sufficient-conditions have no pretty(); render as "hyp ⇒ property".
@@ -67,8 +67,10 @@ def wrap_survivors(result) -> list:
                 stmt = str(nc)
         is_known, why = (False, None)
         if CONFIG.cegis_filter_known:
+            # Classify from the rendered statement so both inequality natives and
+            # Sophie implications (which build their statement here) are judged.
             try:
-                is_known, why = classify_native(nc, columns)
+                is_known, why = classify_statement(stmt, columns)
             except Exception:
                 pass
         c = Conjecture(
@@ -208,6 +210,19 @@ def main(argv=None):
     with open(out_path, "w") as fh:
         json.dump(payload, fh, indent=2)
     log.info("[cegis] wrote %s", out_path)
+
+    # Refuted conjectures paired with the graph that refutes them. Kept in their
+    # own file (they outnumber the survivors) and exported separately: each pair
+    # is a formal disproof waiting to be discharged — see tools/export_disproofs.py.
+    if not args.reprove and getattr(result, "refutations", None):
+        ref_path = os.path.join(CONFIG.output_dir, "refutations.json")
+        with_witness = sum(1 for r in result.refutations if r.get("witness_graph6"))
+        with open(ref_path, "w") as fh:
+            json.dump({"refuted": len(result.refutations),
+                       "with_witness": with_witness,
+                       "refutations": result.refutations}, fh, indent=2)
+        log.info("[cegis] wrote %s (%d refuted, %d with a recoverable witness)",
+                 ref_path, len(result.refutations), with_witness)
     return 0
 
 

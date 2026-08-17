@@ -32,10 +32,10 @@ import networkx as nx
 import numpy as np
 import pandas as pd
 
-from config import Config, CONFIG
+from config import CONFIG, Config
 from pipeline import invariants_graphcalc as battery
-from pipeline.seed_corpus import graph6_id
 from pipeline.random_models import sample_graphs
+from pipeline.seed_corpus import graph6_id
 
 logger = logging.getLogger(__name__)
 
@@ -78,7 +78,8 @@ def _parametric_families(max_n: int) -> List[nx.Graph]:
             continue
         gid = graph6_id(G)
         if gid not in seen:
-            seen.add(gid); uniq.append(G)
+            seen.add(gid)
+            uniq.append(G)
     return uniq
 
 
@@ -140,16 +141,27 @@ class Refuter:
         self._build_tiers()
 
     # ----------------------------------------------------------- build tiers --
+    def _tier_cache_dir(self) -> str:
+        """Where tier batteries live.
+
+        Tier batteries are identical across shards and are never written during
+        a run, so pointing every shard at one shared directory saves both disk
+        and page cache — the bigdb battery alone was stored six times over. The
+        seed battery stays in ``cache_dir``, which is per-shard and written
+        constantly.
+        """
+        return getattr(self.cfg, "tier_cache_dir", "") or self.cfg.cache_dir
+
     def _tier_from_graphs(self, name: str, graphs: List[nx.Graph],
                           cache_file: str, max_n: int) -> Optional[Tier]:
         graphs = [g for g in graphs if g.number_of_nodes() <= max_n]
         if not graphs:
             return None
         ids = [graph6_id(g) for g in graphs]
-        gmap = dict(zip(ids, graphs))
+        gmap = dict(zip(ids, graphs, strict=True))
         frame = battery.cached_battery(
             list(gmap.values()), list(gmap.keys()),
-            cache_path=os.path.join(self.cfg.cache_dir, cache_file),
+            cache_path=os.path.join(self._tier_cache_dir(), cache_file),
             cap_s=self.cfg.battery_cap_s, max_n=max_n)
         if frame.empty:
             return None
@@ -161,6 +173,16 @@ class Refuter:
         if self.cfg.refute_use_families:
             fam = _atlas_connected(min(7, mx)) + _parametric_families(mx)
             t = self._tier_from_graphs("families", fam, "battery_families.parquet", mx)
+            if t:
+                self.tiers.append(t)
+        if getattr(self.cfg, "refute_use_degenerate", True):
+            # Disconnected / edgeless / isolate-bearing graphs. The census and
+            # family tiers are connected by construction, so without these a
+            # conjecture false only on a degenerate graph cannot be refuted.
+            from pipeline.degenerate_graphs import degenerate_graphs
+            t = self._tier_from_graphs(
+                "degenerate", degenerate_graphs(min(10, mx)),
+                "battery_degenerate.parquet", min(10, mx))
             if t:
                 self.tiers.append(t)
         if self.cfg.refute_use_random:
@@ -212,8 +234,12 @@ class Refuter:
         for h in _HOG_BOOL_COLS:
             g = _HOG_TO_GC[h]
             if g in df.columns:
-                df[g] = df[g].map({True: True, False: False, 1: True, 0: False,
-                                   "True": True, "False": False, "1": True, "0": False})
+                # 1/0 are omitted deliberately: they hash equal to True/False,
+                # so listing them would be redundant, and pandas matches an
+                # int/float 1 against the True key already.
+                df[g] = df[g].map({True: True, False: False,
+                                   "True": True, "False": False,
+                                   "1": True, "0": False})
         for g in df.columns:
             if g not in _HOG_BOOL_COLS and g not in _HOG_TO_GC.values():
                 continue
@@ -231,7 +257,7 @@ class Refuter:
 
     def _load_bigdb_tier(self) -> Optional[Tier]:
         """Load the offline-precomputed HoG/census battery if it exists."""
-        p = os.path.join(self.cfg.cache_dir, "battery_bigdb.parquet")
+        p = os.path.join(self._tier_cache_dir(), "battery_bigdb.parquet")
         if not os.path.exists(p):
             logger.info("[refute] big-DB battery cache absent — run "
                         "tools/precompute_battery.py to enable that tier (skipping)")
@@ -322,17 +348,34 @@ class Refuter:
         return False, [], None
 
     def touch_count(self, native, seed_frame: pd.DataFrame) -> int:
-        # Tight graphs (slack ≈ 0) on the *current* seed frame. graffiti3 exposes
-        # slack via the conjecture's relation, not the conjecture itself.
+        """Graphs on the current seed frame where the conjecture is tight.
+
+        Tight means *applicable and at equality*: a class-conditioned conjecture
+        may only be credited with graphs that satisfy its hypothesis. Scoring
+        the relation alone over the whole frame credits `(claw-free ∧ cubic) ⇒
+        χ = ω` with every seed graph where χ = ω, including the ones that are
+        neither claw-free nor cubic — which made the touch number identical
+        across completely different hypotheses over the same body.
+
+        This is graffiti3's own definition (``Conjecture.touch_count`` computes
+        ``applicable & is_tight``), but it is recomputed here rather than
+        delegated: that method overwrites itself with an ``int`` via
+        ``setattr`` on first call, so calling it again returns a stale count
+        from whichever frame happened to see it first.
+        """
         rel = getattr(native, "relation", None)
-        if rel is not None and hasattr(rel, "slack"):
+        if rel is not None and hasattr(rel, "is_tight") and hasattr(native, "check"):
             try:
-                s = np.asarray(pd.Series(rel.slack(seed_frame)).values, dtype=float)
-                return int((np.abs(s) < 1e-9).sum())
+                applicable, _, _ = native.check(seed_frame)
+                tight = rel.is_tight(seed_frame).reindex(seed_frame.index)
+                both = (pd.Series(applicable).astype(bool)
+                        & pd.Series(tight).fillna(False).astype(bool))
+                return int(both.sum())
             except Exception:
                 pass
-        # Fall back to the touch count precomputed at generation. Note ``.touch_count``
-        # is an *attribute* (int) on a native graffiti3 Conjecture, not a method.
+        # Fall back to the count graffiti3 cached at generation time. It was
+        # computed condition-aware, but against the seed as it stood then, so it
+        # is only used when the conjecture cannot be re-scored here.
         tc = getattr(native, "touch_count", None)
         if isinstance(tc, (int, np.integer)):
             return int(tc)

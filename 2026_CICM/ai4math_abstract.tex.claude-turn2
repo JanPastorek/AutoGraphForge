@@ -1,0 +1,107 @@
+%% AI4Math Workshop @ CICM 2026 -- 2-page abstract
+%% Short version of the ITAT 2026 paper
+%% "AutoGraphForge: Towards Automated Graph Theory Discovery".
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+
+\begin{document}
+
+\title{AutoGraphForge: Conjecturing, Refutation and\\
+Lean Formalization in One Loop}
+
+\titlerunning{AutoGraphForge}
+
+\author{J\'an Pastorek\orcidID{0000-0001-8237-1275}}
+\authorrunning{J. Pastorek}
+
+\institute{Department of Applied Informatics, Comenius University in Bratislava,
+Slovakia\\
+\email{jan.pastorek@fmph.uniba.sk}}
+
+\maketitle
+
+\begin{abstract}
+\textsf{AutoGraphForge} couples conjecturing, refuting, formalizing and proving
+into one loop for graph theory. A counterexample-guided loop on an HPC cluster
+produced $6{,}522$ conjectures surviving an implication-deciding novelty filter
+over $559$ known relations and refutation against $348{,}207$ graphs; survivors
+are exported to Lean~4 and handed to kernel-checked neural provers.
+\keywords{Automated conjecturing \and Autoformalization \and Lean~4 \and
+Counterexample search \and Mathematical knowledge management.}
+\end{abstract}
+
+\paragraph{Motivation.}
+Conjecturing systems from \textsc{Graffiti}~\cite{fajtlowicz1988conjectures} to
+\textsc{Graffiti}$^3$~\cite{davila2026graffiti3} and proof search over
+Lean~4~\cite{moura2015lean} have developed separately; to our knowledge no
+system joins conjecturing, refutation, formalization and proving into one loop.
+\textsf{AutoGraphForge} is our attempt at one (code, data and logs at
+\url{https://github.com/JanPastorek/AutoGraphForge}), answering the standing
+failure modes---candidates false in general, known, or trivial---with adversarial
+refutation, a machine-checkable knowledge base, and a kernel check.
+
+\paragraph{Generation.}
+\textsc{Graffiti}$^3$ emits bounds between graph invariants, and sufficient
+conditions (graph-class predicates whose conjunction implies a target property),
+over a \emph{small} evolving snapshot $T$ of graphs carrying $59$ exactly
+computed \textsc{GraphCalc}~\cite{davila2025graphcalc} invariants: $45$ numeric
+targets, $14$ boolean class predicates. Crucially $T$ grows \emph{only} by
+counterexamples to its own conjectures, so generation stays cheap
+while refutation ranges over a corpus three orders of magnitude larger.
+
+\paragraph{Novelty as an LP feasibility test.} 
+We curate $559$ classical, folklore and trivial relations, closed under
+transitive composition and linear identity substitution, each tagged with the
+graph class on which it holds. A candidate upper bound is \emph{redundant} when
+it decomposes into a convex combination of tabled bounds on the same invariant,
+non-negative multiples of known invariant lower bounds, and arbitrary multiples
+of identities vanishing on the candidate's graph class (e.g.\ Gallai's
+$n=\alpha+\tau$ on order, independence and vertex-cover numbers). Matching
+coefficients symbolically makes the search for such a certificate a
+linear-programming feasibility test, each tabled relation admitted only over the
+candidate's whole hypothesis class. This makes ``is this already known?'' a
+decidable query against a curated library.
+
+\paragraph{Refutation, formalization, proving.}
+Survivors face $348{,}207$ graphs unioning the House of Graphs
+export~\cite{coolsaet2023house}, all connected graphs on at most nine vertices,
+and extremal families, then random models, then six search backends that
+maximise a candidate's violation margin~\cite{jooken2025computer}; every
+counterexample enters $T$. Since a conjecture is already a structured
+object---named invariants under class predicates---the Lean~4 export is
+deterministic, yielding a \texttt{sorry}-terminated skeleton that elaborates to
+a type-correct goal. \textsc{DeepSeek-Prover-V2-671B}~\cite{deepseek2025prover}
+and \textsc{OProver-32B}~\cite{oprover2026} then search for proofs,
+kernel-checked against pinned \texttt{mathlib4} and our invariant preamble, so
+soundness is model-independent.
+
+\paragraph{Results and status.}
+Five $256$-core partitions split the $45$ targets and ran to a fixed point
+($1.22$ CPU-years); notably the static datasets refuted far more candidates than
+the search backends ($1$--$22$ counterexamples per round, at untuned defaults).
+Deduplication left $6{,}522$ survivors, of which $33$ are flagged as
+rediscoveries (K\H{o}nig--Egerv\'ary, Gallai)---a soundness check, not a
+discovery. Auditing the $100$ survivors sharp on the most graphs gave $49$
+recognised rediscoveries and $48$ not known to us to be trivial or false. Among
+the latter is a pair relating the annihilation number $a$ (the largest $k$ whose
+$k$ smallest degrees sum to at most the edge count) and the edge-cover number
+$\mathrm{ec}$, which we then proved by hand: bipartite
+$\Rightarrow\mathrm{ec}\le a$ and regular $\Rightarrow a\le\mathrm{ec}$, via
+Gallai, K\H{o}nig and Pepper's $\alpha\le a$~\cite{pepper2004thesis}. The loop is
+\emph{not yet closed}: the proving stage kernel-verifies trivial bounds but
+awaits a controlled evaluation, and we expect it to be the hard part, since
+invariants such as zero forcing exist only in our preamble and lie outside the
+provers' training distribution---how to ground provers on freshly formalized
+vocabulary is what we most hope to discuss.
+
+\subsubsection{Acknowledgements.} Computations used the PERUN supercomputer
+(TUKE, Slovakia), project No.~17I03-04-P03-00001. The author used an LLM as a
+coding and drafting assistant and takes responsibility for the content.
+
+\bibliographystyle{splncs04}
+\bibliography{refs}
+
+\end{document}

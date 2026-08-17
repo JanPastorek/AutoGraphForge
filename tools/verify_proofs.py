@@ -27,6 +27,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import CONFIG
 from pipeline.theorem_prover import LeanSubprocessProver
+from pipeline import proof_audit
 
 
 def _program(text: str) -> str:
@@ -41,6 +42,30 @@ def _program(text: str) -> str:
         if ln.strip() == "import Mathlib":
             return "\n".join(lines[i:])
     return text
+
+
+def _requested_statement(text: str) -> str:
+    """The statement the prover was asked about, recovered from the header.
+
+    Two header formats exist. The current one comments every statement line
+    (``-- stmt: …``). Older artifacts commented only the first line
+    (``-- statement: import Mathlib``) and leaked the rest as bare code above the
+    proof; there the statement runs to the standalone ``import Mathlib`` that
+    starts the proof proper. Returns "" when neither header is present.
+    """
+    lines = text.splitlines()
+    tagged = [ln[len("-- stmt:"):].lstrip() for ln in lines if ln.startswith("-- stmt:")]
+    if tagged:
+        return "\n".join(tagged)
+    for i, ln in enumerate(lines):
+        if ln.startswith("-- statement:"):
+            head = [ln[len("-- statement:"):].lstrip()]
+            for rest in lines[i + 1:]:
+                if rest.strip() == "import Mathlib":     # start of the proof file
+                    return "\n".join(head)
+                head.append(rest)
+            return "\n".join(head)
+    return ""
 
 
 def main() -> int:
@@ -63,9 +88,20 @@ def main() -> int:
     passed, failed = [], []
     for path in files:
         with open(path) as f:
-            code = _program(f.read())
-        ok, log = lean._run_lean(code)
+            text = f.read()
+        code = _program(text)
         name = os.path.basename(path)
+        # Identity first: a proof of the wrong statement must not be counted even
+        # if it elaborates perfectly. Skipped only for artifacts with no recorded
+        # request (pre-header files), where there is nothing to compare against.
+        want = _requested_statement(text)
+        if want.strip():
+            ok, why = proof_audit.static_audit(want, code)
+            if not ok:
+                failed.append(name)
+                print(f"  ✗ {name}  (identity: {why[:150]})")
+                continue
+        ok, log = lean._run_lean(code)
         if ok:
             passed.append(name)
             print(f"  ✓ {name}")

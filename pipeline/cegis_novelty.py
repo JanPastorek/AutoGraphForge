@@ -20,6 +20,13 @@ from pipeline import novelty
 
 _REL = {"≤": "<=", "<=": "<=", "≥": ">=", ">=": ">="}
 
+# Non-restricting base predicates that graffiti3 carries on essentially every
+# conjecture (G is connected and non-trivial). They do not restrict the validity
+# of an invariant *upper* bound, so they must not be counted as a class
+# hypothesis — otherwise a genuinely single-class statement such as
+# ``(nontrivial ∧ bipartite) ⇒ …`` looks two-class and is skipped.
+_BASE_CLASSES = {"nontrivial", "connected"}
+
 # graphcalc battery column  →  symbolic name used in pipeline.novelty.KNOWN_THEOREMS.
 # Only invariants the known-theorem table actually speaks about are mapped; a
 # conjecture using anything outside this map can't be judged and stays novel.
@@ -96,10 +103,16 @@ def native_to_inequality(native, cols: List[str]) -> Optional[Inequality]:
         pretty = native.pretty()
     except Exception:
         return None
+    return inequality_from_pretty(pretty, cols)
+
+
+def inequality_from_pretty(pretty: str, cols: List[str]) -> Optional[Inequality]:
+    """Linear ``Inequality`` from a pretty string ``[(cond) ⇒] lhs REL rhs``."""
     hypothesis = None
     if "⇒" in pretty:                                   # "(cond) ⇒ body"
         cond, pretty = pretty.split("⇒", 1)
-        conds = [c for c in cols if re.search(r"\b" + re.escape(c) + r"\b", cond)]
+        conds = [c for c in cols if re.search(r"\b" + re.escape(c) + r"\b", cond)
+                 and c not in _BASE_CLASSES]
         # only single-class conditions map to the novelty hypothesis model
         hypothesis = conds[0] if len(conds) == 1 else None
         if len(conds) > 1:
@@ -136,19 +149,18 @@ def native_to_inequality(native, cols: List[str]) -> Optional[Inequality]:
 _PERFECT_CLASSES = {"cograph", "chordal", "bipartite", "interval", "split"}
 
 
-def _body_parts(native, cols: List[str]):
+def _body_parts(pretty: str, cols: List[str]):
     """(classes, body_invariants, relation, constants) for a conditioned
     conjecture, else None. ``classes`` are the boolean class columns in the
     hypothesis; ``body_invariants`` the numeric invariants in the bounded
     relation; ``constants`` the bare integers in the body."""
-    try:
-        pretty = native.pretty()
-    except Exception:
+    if not isinstance(pretty, str):
         return None
     if "⇒" not in pretty and "=>" not in pretty:
         return None
     cond, body = re.split(r"⇒|=>", pretty, maxsplit=1)
-    classes = [c for c in cols if re.search(r"\b" + re.escape(c) + r"\b", cond)]
+    classes = [c for c in cols if re.search(r"\b" + re.escape(c) + r"\b", cond)
+               and c not in _BASE_CLASSES]
     rel = next((r for r in ("≤", "≥", "<=", ">=", "=") if r in body), None)
     if rel is None:
         return None
@@ -157,17 +169,28 @@ def _body_parts(native, cols: List[str]):
     return classes, body_invs, _REL.get(rel, rel), consts
 
 
-def conditioned_known(native, cols: List[str]) -> Tuple[bool, Optional[str]]:
+def conditioned_known(pretty, cols: List[str]) -> Tuple[bool, Optional[str]]:
     """Flag conditioned conjectures that restate a perfect-graph property or a
-    class definition — the classical results the unconditioned table misses."""
-    parts = _body_parts(native, cols)
+    class definition — the classical results the unconditioned table misses.
+
+    Accepts either a native (with ``.pretty()``) or a pretty string."""
+    if not isinstance(pretty, str):
+        try:
+            pretty = pretty.pretty()
+        except Exception:
+            return False, None
+    parts = _body_parts(pretty, cols)
     if parts is None:
         return False, None
     classes, invs, _rel, consts = parts
     if not classes:
         return False, None
-    perfect = any(c in _PERFECT_CLASSES for c in classes)
+    # a fact proved for a superclass holds for the subclass (tree ⊂ bipartite ⊂
+    # perfect, cubic ⊂ regular, …), so inherit superclass class-definitional rules
     cls = set(classes)
+    for c in list(cls):
+        cls |= novelty.SUPERCLASSES.get(c, set())
+    perfect = any(c in _PERFECT_CLASSES for c in cls)
 
     # perfect-graph identities (any relation direction — equality holds)
     if perfect and invs == {"chromatic_number", "clique_number"}:
@@ -194,18 +217,136 @@ def conditioned_known(native, cols: List[str]) -> Tuple[bool, Optional[str]]:
     return False, None
 
 
+def _inequality_known(pretty: str, cols: List[str]) -> Tuple[bool, Optional[str]]:
+    """A single linear (in)equality string implied by the known table?"""
+    ineq = inequality_from_pretty(pretty, cols)
+    if ineq is None:
+        return False, None
+    c = Conjecture(statement="", inequality=ineq, generation_method="cegis-graffiti3")
+    try:
+        return novelty.classify(c)
+    except Exception:
+        return False, None
+
+
+# strict/loose negation:  ¬(a < b) ≡ (a ≥ b), etc.  Only the two ordered forms
+# whose negation is a *non-strict* bound (≤ / ≥, the tabled shapes) are useful.
+_NEG = {"<": "≥", ">": "≤", "≤": ">", "≥": "<", "<=": "≥", ">=": "≤"}
+
+
+def _equality_known(stmt: str, cols: List[str]) -> Tuple[bool, Optional[str]]:
+    """An equality ``[(H) ⇒] f = g`` is known iff *both* f ≤ g and f ≥ g are
+    implied by the table — i.e. the two bounds are simultaneously necessary and
+    sufficient."""
+    body = stmt.split("⇒")[-1]
+    if "=" not in body or any(r in body for r in ("≤", "≥", "<=", ">=", "<", ">")):
+        return False, None
+    le, _ = _inequality_known(stmt.replace("=", "≤", 1), cols)
+    ge, _ = _inequality_known(stmt.replace("=", "≥", 1), cols)
+    if le and ge:
+        return True, "equality: both bounds known"
+    return False, None
+
+
+def _necessary_condition_known(stmt: str, cols: List[str]) -> Tuple[bool, Optional[str]]:
+    """A Sophie necessary condition ``(A) ⇒ ¬C`` (A a numeric predicate, C a
+    graph class) is known iff its contrapositive ``C ⇒ ¬A`` is a tabled class
+    bound — e.g. ``(2 < χ) ⇒ ¬bipartite`` is the contrapositive of the known
+    ``bipartite ⇒ χ ≤ 2``."""
+    if "⇒" not in stmt:
+        return False, None
+    ante, cons = stmt.rsplit("⇒", 1)
+    cons = cons.strip()
+    if not cons.startswith("¬"):
+        return False, None                          # only negative-class conclusions
+    C = cons[1:].strip().strip("()").strip()
+    if C not in cols or C in _GC2TABLE:             # C must be a boolean class
+        return False, None
+    rel = next((r for r in ("<=", ">=", "≤", "≥", "<", ">") if r in ante), None)
+    if rel is None:
+        return False, None
+    nrel = _NEG[rel]
+    if nrel not in ("≤", "≥"):                       # negation must be a tabled bound
+        return False, None
+    lhs, rhs = ante.split(rel, 1)
+    contrapositive = f"({C}) ⇒ {lhs}{nrel}{rhs}"
+    known, why = _classify_core(contrapositive, cols)
+    if known:
+        return True, f"necessary condition (contrapositive of: {why})"
+    return False, None
+
+
+# Textbook *sufficient conditions for class membership* (characterizations).
+# These are the converse of the tabled class bounds and CANNOT be data-mined:
+# a rare equality can agree with a class on every tested graph by coincidence
+# (e.g. γ = a happens to imply K₄-free on the snapshot but is no theorem), so
+# only genuine characterizations are listed here, by hand.
+#   regular:   δ = Δ, and (since δ ≤ 2m/n ≤ ρ ≤ Δ) equality of any two of
+#              {δ, 2m/n, ρ, Δ} collapses the chain ⇒ regular.
+#   connected: Fiedler — the algebraic connectivity a(G) > 0 iff G is connected.
+_REGULAR_EQ_PAIRS = {
+    frozenset({"delta", "Delta"}), frozenset({"avg_deg", "Delta"}),
+    frozenset({"avg_deg", "delta"}), frozenset({"spectral_radius", "Delta"}),
+    frozenset({"spectral_radius", "avg_deg"}), frozenset({"spectral_radius", "delta"}),
+}
+
+
+def _sufficient_class_known(stmt: str, cols: List[str]) -> Tuple[bool, Optional[str]]:
+    """A Sophie sufficient condition ``(A) ⇒ C`` (C a positive graph class) is
+    flagged known only when ``A`` is a textbook characterization of ``C``."""
+    if "⇒" not in stmt:
+        return False, None
+    ante, cons = stmt.rsplit("⇒", 1)
+    C = cons.strip().strip("()").strip()
+    if C.startswith("¬") or C not in cols or C in _GC2TABLE:
+        return False, None
+    a = ante.strip()
+    # Fiedler:  (0 < a(G)) ⇒ connected
+    if C == "connected" and "algebraic_connectivity" in a \
+            and ("<" in a or ">" in a) and re.search(r"(?<![\d.])0(?![\d.])", a):
+        return True, "Fiedler: a(G) > 0 ⇔ connected"
+    # regular:  equality of two invariants in the degree/spectral chain
+    if C == "regular" and "=" in a and not any(r in a for r in ("≤", "≥", "<", ">")):
+        syms = {_GC2TABLE[c] for c in cols
+                if c in _GC2TABLE and re.search(r"\b" + re.escape(c) + r"\b", a)}
+        if frozenset(syms) in _REGULAR_EQ_PAIRS:
+            return True, "regular: δ ≤ 2m/n ≤ ρ ≤ Δ collapses ⇔ regular"
+    return False, None
+
+
+def _classify_core(stmt: str, cols: List[str]) -> Tuple[bool, Optional[str]]:
+    """Numeric / equality / class-definitional novelty for one statement string
+    (no necessary-condition recursion)."""
+    known, why = _inequality_known(stmt, cols)
+    if known:
+        return True, why
+    eq = _equality_known(stmt, cols)
+    if eq[0]:
+        return eq
+    return conditioned_known(stmt, cols)
+
+
+def classify_statement(stmt: str, cols: List[str]) -> Tuple[bool, Optional[str]]:
+    """(is_known, why) for a conjecture *statement string*. Handles numeric
+    inequalities and their conditioned forms, equalities (both bounds known),
+    perfect-graph / class-definitional restatements, and Sophie necessary
+    conditions ``(A) ⇒ ¬C`` — implications judged in both the sufficient and the
+    necessary direction."""
+    core = _classify_core(stmt, cols)
+    if core[0]:
+        return core
+    nec = _necessary_condition_known(stmt, cols)
+    if nec[0]:
+        return nec
+    return _sufficient_class_known(stmt, cols)
+
+
 def classify_native(native, cols: List[str]) -> Tuple[bool, Optional[str]]:
-    """(is_known, matched_theorem) for a graffiti3 native; (False, None) if not a
-    recognised classical result. Tries the unconditioned linear table first, then
-    the conditioned (perfect-graph / class-definition) rules."""
-    ineq = native_to_inequality(native, cols)
-    if ineq is not None:
-        c = Conjecture(statement="", inequality=ineq,
-                       generation_method="cegis-graffiti3")
-        try:
-            known, why = novelty.classify(c)
-            if known:
-                return True, why
-        except Exception:
-            pass
-    return conditioned_known(native, cols)
+    """(is_known, matched_theorem) for a graffiti3 native, via its pretty form."""
+    try:
+        pretty = native.pretty()
+    except Exception:
+        return False, None
+    if not isinstance(pretty, str):
+        return False, None
+    return classify_statement(pretty, cols)

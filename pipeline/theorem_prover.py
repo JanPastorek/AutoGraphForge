@@ -32,6 +32,7 @@ from typing import List, Optional
 
 from config import Config, CONFIG
 from conjecture import Conjecture, ConjectureStatus
+from pipeline import proof_audit
 
 logger = logging.getLogger(__name__)
 
@@ -336,7 +337,18 @@ class LeanSubprocessProver(BaseProver):
             return ""
         return os.pathsep.join(dirs)
 
-    def _run_lean(self, code: str) -> tuple[bool, str]:
+    def _run_lean(self, code: str, audit_axioms: bool = True) -> tuple[bool, str]:
+        """Kernel-check ``code``; with ``audit_axioms`` also require every theorem
+        in it to depend only on the standard axioms.
+
+        The axiom probe is the difference between "this file compiles" and "this
+        proof is honest": a ``sorryAx`` reached through a helper lemma, or a
+        candidate-declared ``axiom``, compiles cleanly and is invisible to a
+        source-level grep for ``sorry``.
+        """
+        probed: list[str] = []
+        if audit_axioms:
+            code, probed = proof_audit.with_axiom_probe(code)
         root = getattr(self.cfg, "lean_project_root", "") or ""
         env = dict(os.environ)
         elan_bin = os.path.expanduser("~/.elan/bin")
@@ -384,7 +396,12 @@ class LeanSubprocessProver(BaseProver):
                 timeout=self.cfg.lean_timeout_s, cwd=cwd, env=env,
             )
             out = (result.stderr + result.stdout)
-            return _proof_certified(result.returncode, out), out[:2000]
+            ok = _proof_certified(result.returncode, out)
+            if ok and probed:
+                ok, why = proof_audit.audit_axiom_output(out, probed)
+                if not ok:
+                    return False, f"axiom audit failed: {why}\n{out[:1500]}"
+            return ok, out[:2000]
         except (subprocess.TimeoutExpired, FileNotFoundError) as e:
             return False, str(e)
         finally:

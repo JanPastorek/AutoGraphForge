@@ -56,3 +56,64 @@ def is_constant_bound(native, all_cols: List[str]) -> bool:
 def drop_constant_bounds(natives: list, all_cols: List[str]) -> list:
     """Filter an inequality list, removing invariant-vs-constant bounds."""
     return [c for c in natives if not is_constant_bound(c, all_cols)]
+
+
+def hypothesis_support(native, frame):
+    """Number of ``frame`` rows the conjecture's hypothesis admits.
+
+    This is the evidence a conditioned conjecture actually rests on. Returns
+    ``None`` when the hypothesis cannot be evaluated at all — "we could not
+    measure this" is not the same as "this has no support", and the callers
+    below must not confuse the two.
+    """
+    try:
+        applicable, _, _ = native.check(frame)
+        return int(applicable.sum())
+    except Exception:
+        return None
+
+
+def drop_low_support(natives: list, frame, min_support: int) -> list:
+    """Drop conjectures whose hypothesis holds for too few seed graphs.
+
+    A bound asserted on a class with a handful of representatives survives
+    refutation for lack of evidence rather than because it is true: the run
+    that produced this filter left survivors resting on a single graph. Gating
+    at generation also saves the refutation work they would otherwise consume.
+
+    Set ``min_support`` to 0 to disable.
+    """
+    if not min_support:
+        return natives
+    kept = []
+    for c in natives:
+        support = hypothesis_support(c, frame)
+        if support is None or support >= min_support:
+            kept.append(c)          # unmeasurable ⇒ leave it to refutation
+    return kept
+
+
+def is_decorative(native, frame) -> bool:
+    """True when the hypothesis restricts nothing the relation needs.
+
+    The relation holds on *every* row, so conditioning it on a class adds no
+    content — ``(cubic) ⇒ harmonic_index ≤ 29`` is a fact about the corpus's
+    bounded size range, not about cubic graphs. Only conditioned conjectures
+    can be decorative; an unconditioned one is judged on its own terms.
+    """
+    if getattr(native, "condition", None) is None:
+        return False
+    try:
+        holds = native.relation.evaluate(frame).reindex(frame.index)
+    except Exception:
+        return False
+    # An all-NaN column makes `holds` empty/undefined — not evidence of anything.
+    holds = holds.dropna()
+    if holds.empty:
+        return False
+    return bool(holds.all())
+
+
+def drop_decorative(natives: list, frame) -> list:
+    """Drop conditioned conjectures whose relation holds frame-wide."""
+    return [c for c in natives if not is_decorative(c, frame)]

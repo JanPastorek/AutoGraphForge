@@ -12,12 +12,15 @@ a prover can actually close.
 
 Out of scope (silently skipped, not mis-formalized): invariants with no faithful
 mathlib definition yet (zero forcing, residue, Roman domination, …) and
-conjectures conditioned on graph-class predicates (chordal, claw_free, …).
+conjectures conditioned on a graph class with no formalization (chordal, planar).
 """
 from __future__ import annotations
 
 import re
 from typing import Dict, List, Optional
+
+from pipeline import linear_form
+from pipeline.lean_disproof import definedness_hyps
 
 # pipeline invariant column  →  Lean expression over `(G : SimpleGraph V)`.
 # Only invariants with a faithful definition in LeanProject.GraphInvariants (or
@@ -36,6 +39,7 @@ SUPPORTED: Dict[str, str] = {
     "zero_forcing_number":           "G.zeroForcingNumber",
     "total_zero_forcing_number":     "G.totalZeroForcingNumber",
     "connected_zero_forcing_number": "G.connectedZeroForcingNumber",
+    "vertex_cover_number":            "(G.vertexCoverNum).toNat",
 }
 
 # Injected binders: a finite vertex type with decidable adjacency, enough for
@@ -47,14 +51,18 @@ _PREAMBLE = "import Mathlib\nimport LeanProject.GraphInvariants\n\nopen SimpleGr
 
 _SIG_RE = re.compile(r"theorem\s+(\w+)\s*\(G\s*:\s*SimpleGraph\s+V\)")
 
-# graph-class column → preamble predicate (the tractable classes; cograph /
-# chordal / claw_free / planar are not formalized, so conjectures conditioned on
-# them stay unexportable).
+# graph-class column → preamble predicate. The remaining unformalized classes
+# are chordal and planar: neither has a mathlib definition or a cheap decidable
+# characterization, so conjectures conditioned on them stay unexportable.
 CLASS_PREDICATES = {
     "regular": "IsRegularClass", "cubic": "IsCubicClass",
     "subcubic": "IsSubcubicClass", "triangle_free": "IsTriangleFreeClass",
     "K_4_free": "IsK4FreeClass", "bipartite": "IsBipartiteClass",
     "eulerian": "IsEulerianClass",
+    # mathlib has these directly (`Connected`, `IsTree`)
+    "connected": "IsConnectedClass", "tree": "IsTreeClass",
+    # forbidden induced subgraph on four vertices: K₁,₃ and P₄ respectively
+    "claw_free": "IsClawFreeClass", "cograph": "IsCographClass",
     # graphcalc's auto-base hypothesis on every Graffiti3 conjecture: |V| ≥ 2.
     "nontrivial": "IsNontrivialClass",
 }
@@ -89,17 +97,73 @@ def render_conditioned(native, columns) -> Optional[str]:
     cond, body = pretty.split("⇒", 1)
     classes = _condition_classes(cond, columns)
     if not classes or any(c not in CLASS_PREDICATES for c in classes):
-        return None                                    # unsupported class (cograph, …)
-    rel = next((r for r in _REL_LEAN if r in body), None)
-    if rel is None:
+        return None                                    # unsupported class (chordal, planar)
+    # Any rational linear comparison, normalised to ℕ by `linear_form` — the
+    # same rewriting `render_necessary` and the disproof exporter apply.
+    #
+    # Both the ℕ and the widening matter. Restricting the body to bare
+    # invariants rejected constant bounds and scaled forms, so most
+    # class-conditioned survivors could not be stated at all; and rendering in
+    # ℝ here while the disproof rendered in ℕ meant the exported theorem and
+    # its refutation were not literally negations of one another. Going through
+    # one normaliser keeps `prove` and `refute` about the same proposition.
+    names = set(linear_form.invariants(body))
+    if not names or names <= set(CLASS_PREDICATES):
         return None
-    lhs, rhs = body.split(rel, 1)
-    li, ri = _bare_invariant(lhs, columns), _bare_invariant(rhs, columns)
-    if not li or not ri:
+    if any(n not in SUPPORTED for n in names):
         return None
-    hyps = " ".join(f"(_h{i} : G.{CLASS_PREDICATES[c]})" for i, c in enumerate(classes))
-    body_lean = f"({SUPPORTED[li]} : ℝ) {_REL_LEAN[rel]} ({SUPPORTED[ri]} : ℝ)"
+    body_lean = linear_form.render_comparison(body, SUPPORTED)
+    if body_lean is None:
+        return None
+    binders = [f"G.{CLASS_PREDICATES[c]}" for c in classes] + \
+        definedness_hyps(names, lambda h: f"G.{h}")
+    hyps = " ".join(f"(_h{i} : {b})" for i, b in enumerate(binders))
     thm = (f"theorem CEGIS_1 {_HEADER_BINDERS}\n    {hyps}\n  : {body_lean} :=\nsorry")
+    return _PREAMBLE + "\n" + thm
+
+
+def render_necessary(native, columns) -> Optional[str]:
+    """Theorem for a *necessary-condition* survivor, else None.
+
+    These read ``(inequality) ⇒ class-conclusion``: an inequality among the
+    invariants forces the graph into (or out of) a class, e.g.
+    ``(2 · independence_number < order) ⇒ ¬tree``. The hypothesis is a general
+    rational linear comparison, so it goes through ``linear_form``, which
+    rewrites it as an equivalent inequality over ℕ (see that module for why not
+    ℝ or ℚ). The conclusion is a conjunction of possibly-negated classes.
+    """
+    try:
+        pretty = native.pretty()
+    except Exception:
+        return None
+    if "⇒" not in pretty:
+        return None
+    cond, concl = pretty.split("⇒", 1)
+
+    clauses = linear_form.parse_class_conclusion(concl)
+    if not clauses or any(c not in CLASS_PREDICATES for _, c in clauses):
+        return None
+    # An all-class hypothesis is the class-conditioned shape, handled elsewhere.
+    hypothesis_names = set(linear_form.invariants(cond))
+    if not hypothesis_names or hypothesis_names <= set(CLASS_PREDICATES):
+        return None
+    if any(n not in SUPPORTED for n in hypothesis_names):
+        return None
+
+    hyp = linear_form.render_comparison(cond, SUPPORTED)
+    if hyp is None:
+        return None
+    goal = " ∧ ".join(
+        f"¬ G.{CLASS_PREDICATES[c]}" if neg else f"G.{CLASS_PREDICATES[c]}"
+        for neg, c in clauses)
+    # `nontrivial` is restored explicitly: it is part of the conjecture's scope,
+    # not decoration. Without it the statement is about all finite graphs
+    # including the empty one, which no generated conjecture ever claimed.
+    extra = definedness_hyps(hypothesis_names, lambda h: f"G.{h}")
+    guards = " ".join(f"(_hd{i} : {e})" for i, e in enumerate(extra))
+    thm = (f"theorem CEGIS_1 {_HEADER_BINDERS}\n"
+           f"    (_hnt : G.IsNontrivialClass) {guards}(_h0 : {hyp})\n"
+           f"  : {goal} :=\nsorry")
     return _PREAMBLE + "\n" + thm
 
 
@@ -127,7 +191,8 @@ def is_supported(native, columns) -> bool:
     except Exception:
         return False                              # SophieCondition / non-inequality
     if "⇒" in pretty or "=>" in pretty:          # conditioned → needs a class theorem
-        return render_conditioned(native, columns) is not None
+        return (render_conditioned(native, columns) is not None
+                or render_necessary(native, columns) is not None)
     used = _columns_used(native, columns)
     return bool(used) and all(c in SUPPORTED for c in used)
 
@@ -157,7 +222,9 @@ def export_supported(g3, natives, columns) -> List[Optional[str]]:
             out.append(None)
             continue
         if "⇒" in pretty or "=>" in pretty:           # conditioned → class theorem
-            out.append(render_conditioned(nc, columns))
+            # two shapes: (classes) ⇒ inequality, and (inequality) ⇒ classes
+            out.append(render_conditioned(nc, columns)
+                       or render_necessary(nc, columns))
             continue
         if not is_supported(nc, columns):
             out.append(None)

@@ -154,11 +154,27 @@ def compute_battery(graphs: Sequence[nx.Graph], *, cap_s: int = 90,
     # ensure a stable order column even if graphcalc names it differently
     if "order" not in df.columns:
         df["order"] = [g.number_of_nodes() for g in graphs]
+    _augment_derived(df)
     if names is not None:
         df.insert(0, "graph_name", list(names))
     n_full = int((df.notna().sum(axis=1) > 1).sum())
     logger.info("[battery] %d graphs → %d cols (%d rows with data)",
                 len(graphs), df.shape[1], n_full)
+    return df
+
+
+def _augment_derived(df: pd.DataFrame) -> pd.DataFrame:
+    """Add derived boolean class predicates usable as generation hypotheses.
+
+    ``order_bigger_than_2`` (n ≥ 3) and ``order_bigger_than_3`` (n ≥ 4) let
+    graffiti3 condition on graph size: many invariant inequalities hold for all
+    but the smallest graphs (e.g. total domination/zero-forcing bounds fail only
+    on K_2), so exposing an order threshold turns those from false universals
+    into true class-restricted conjectures."""
+    if "order" in df.columns:
+        o = pd.to_numeric(df["order"], errors="coerce")
+        df["order_bigger_than_2"] = (o > 2).fillna(False).astype(bool)
+        df["order_bigger_than_3"] = (o > 3).fillna(False).astype(bool)
     return df
 
 
@@ -211,7 +227,9 @@ def cached_battery(graphs: Sequence[nx.Graph], ids: Sequence[str], *,
         except Exception as e:
             logger.warning("[battery] cache write failed: %s", e)
     want = [i for i in ids if i in cache.index]
-    return _coerce(cache.loc[want].copy())
+    # Derive order-threshold predicates at load time so cached parquets written
+    # before these columns existed still expose them as hypotheses.
+    return _augment_derived(_coerce(cache.loc[want].copy()))
 
 
 def numeric_invariants(df: pd.DataFrame) -> List[str]:

@@ -21,6 +21,12 @@ def test_load_dedups():
     assert rels and len(rels) <= len(kr.KNOWN_CONJECTURES) + len(kr.KNOWN_INEQUALITIES)
 
 
+def test_falsified_relations_excluded():
+    # empirically-falsified relations must not reach the table
+    names = {name for *_rest, name in kr.load_relations()}
+    assert kr.FALSIFIED and not (names & kr.FALSIFIED)
+
+
 def test_geq_normalized_to_leq():
     # a ≥ b  ⇒  b ≤ a
     lhs, rhs, off, cls, _ = _one("annihilation_number >= matching_number")
@@ -55,6 +61,20 @@ def test_negated_paren_group_rejected():
     # paren-stripping would mis-sign this, so it must be skipped, not mis-encoded
     assert kr.parse_relation(
         "independence_number <= order - (order - annihilation_number)") == []
+
+
+def test_order_threshold_hypothesis():
+    # the K_2 edge cases are recovered under an order-threshold class
+    lhs, rhs, off, cls, _ = _one(
+        "If G is a connected and order_bigger_than_2 graph, then total_domination_number <= order - 1")
+    assert lhs == "total_domination_number"
+    assert rhs == {"n": 1.0} and off == -1.0 and cls == "order_bigger_than_2"
+
+
+def test_order_threshold_not_in_falsified():
+    # the conditioned recoveries must actually be loaded (not swallowed as FALSE)
+    loaded = {name for *_r, name in kr.load_relations()}
+    assert any("order_bigger_than_2" in n for n in loaded)
 
 
 def test_equality_emits_both_directions():

@@ -38,6 +38,32 @@ logger = logging.getLogger(__name__)
 _W: dict = {}
 
 
+def _refutation_record(native, wits, tier) -> dict:
+    """A refuted conjecture paired with the graph that kills it.
+
+    The smallest witness is kept (smallest order, then fewest edges): a formal
+    disproof is discharged by evaluating the invariants on this graph, and that
+    cost grows sharply with the vertex count, so the minimal witness is the one
+    worth exporting.
+    """
+    try:
+        stmt = native.pretty()
+    except Exception:
+        stmt = str(native)
+    g6, order, size = None, None, None
+    usable = [g for g in (wits or []) if g is not None and g.number_of_nodes() > 0]
+    if usable:
+        g = min(usable, key=lambda x: (x.number_of_nodes(), x.number_of_edges()))
+        try:
+            from pipeline.seed_corpus import graph6_id
+            g6 = graph6_id(g)
+            order, size = g.number_of_nodes(), g.number_of_edges()
+        except Exception:
+            g6 = None
+    return {"statement": stmt, "witness_graph6": g6, "witness_order": order,
+            "witness_size": size, "tier": tier or "?"}
+
+
 def _refute_worker(idx: int):
     try:
         ref, wits, tier = _W["refuter"].refute(_W["cands"][idx])
@@ -63,6 +89,9 @@ class CegisResult:
     rounds_run: int = 0
     fixed_point: bool = False
     history: List[dict] = field(default_factory=list)
+    # Refuted conjectures paired with the graph that refutes them, across all
+    # rounds — the input to formal disproof export (pipeline/lean_disproof.py).
+    refutations: List[dict] = field(default_factory=list)
 
 
 class CEGIS:
@@ -191,6 +220,28 @@ class CEGIS:
                 logger.info("[cegis] dropped %d invariant-vs-constant bounds "
                             "(%d → %d)", before - len(ineqs), before, len(ineqs))
 
+        # Evidence gates. Both run *after* the condition freeze above, so the
+        # hypothesis they judge is the one the conjecture will actually carry
+        # through refutation, and before the (expensive) Dalmatian/Morgan
+        # stages, so the work they save is real.
+        if self.cfg.cegis_min_hypothesis_support:
+            from pipeline.candidate_filters import drop_low_support
+            before = len(ineqs)
+            ineqs = drop_low_support(ineqs, frame,
+                                     self.cfg.cegis_min_hypothesis_support)
+            if before != len(ineqs):
+                logger.info("[cegis] dropped %d bound(s) supported by < %d seed "
+                            "graphs (%d → %d)", before - len(ineqs),
+                            self.cfg.cegis_min_hypothesis_support, before, len(ineqs))
+        if self.cfg.cegis_drop_decorative:
+            from pipeline.candidate_filters import drop_decorative
+            before = len(ineqs)
+            ineqs = drop_decorative(ineqs, frame)
+            if before != len(ineqs):
+                logger.info("[cegis] dropped %d bound(s) with a decorative "
+                            "hypothesis (%d → %d)", before - len(ineqs),
+                            before, len(ineqs))
+
         # Dalmatian significance filter on the seed: keep only conjectures that
         # are the tightest bound for at least one seed graph (per target /
         # direction / hypothesis). This makes the full graphcalc battery
@@ -289,12 +340,19 @@ class CEGIS:
         witnesses: List[nx.Graph] = []
         refuted_pool = 0
         survivor_idx: List[int] = []
+        # (conjecture, refuting graph) pairs. The loop only needs the graphs (they
+        # grow the snapshot), but the *pairing* is the raw material for formal
+        # disproofs — a refuted conjecture plus the graph that kills it is a
+        # ¬∀ theorem waiting to be exported (pipeline/lean_disproof.py). Keeping
+        # only the pooled witnesses, as before, threw that away irrecoverably.
+        refutations: List[dict] = []
         for idx, ref, tier, wits in _run(_refute_worker, range(n), n // (workers * 4),
                                          lambda i: (i, False, None, [])):
             if ref:
                 refuted_pool += 1
                 tier_counts[tier or "?"] += 1
                 witnesses += wits
+                refutations.append(_refutation_record(cands[idx], wits, tier))
             else:
                 survivor_idx.append(idx)
 
@@ -307,6 +365,7 @@ class CEGIS:
             if g is not None:
                 refuted_search += 1
                 witnesses.append(g)
+                refutations.append(_refutation_record(cands[idx], [g], "search"))
             else:
                 survivors.append(cands[idx])
         survivors += [cands[i] for i in kept]
@@ -337,6 +396,7 @@ class CEGIS:
                 if g is not None:
                     refuted_search += 1
                     witnesses.append(g)
+                    refutations.append(_refutation_record(c, [g], "search-rl"))
                 else:
                     still.append(c)
             survivors = still + survivors[k:]
@@ -346,6 +406,7 @@ class CEGIS:
             logger.info("[cegis] refutation provenance: %s",
                         ", ".join(f"{t}={c}" for t, c in tier_counts.most_common()))
         self._last_tier_counts = dict(tier_counts)
+        self._last_refutations = refutations
         return survivors, witnesses, refuted_pool, refuted_search
 
     # ---------------------------------------------------------------- loop --
@@ -368,6 +429,11 @@ class CEGIS:
                             "stopping with current survivors", self.cfg.cegis_time_budget_s, rnd)
                 break
             t0 = time.time()
+            # Pull in whatever the other shards have found. A counterexample is
+            # universal, so a graph one shard worked to find must be allowed to
+            # refute every shard's conjectures — otherwise each shard converges
+            # to a fixed point that is only local.
+            self.seed.absorb_shared_witnesses()
             cands, g3 = self._generate()
             logger.info("[cegis][round %d] seed=%d graphs → %d candidate conjectures",
                         rnd, len(self.seed.graphs), len(cands))
@@ -389,6 +455,9 @@ class CEGIS:
             added = self.seed.add(witnesses) if witnesses else []
             if added:
                 self.seed.persist_witnesses(added)
+            for rec in getattr(self, "_last_refutations", []):
+                rec["round"] = rnd
+            result.refutations.extend(getattr(self, "_last_refutations", []))
 
             stat = {
                 "round": rnd, "candidates": len(cands), "survivors": len(survivors),

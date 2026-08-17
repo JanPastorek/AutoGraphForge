@@ -38,6 +38,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import CONFIG
 from pipeline.theorem_prover import DeepSeekProverLocal, LeanSubprocessProver
+from pipeline import proof_audit
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(message)s",
                     datefmt="%H:%M:%S")
@@ -178,12 +179,24 @@ def _persist(statement: str, candidate: str) -> None:
         log.warning("[shim] could not persist proof: %s", e)
 
 
-def _check(candidate: str | None) -> tuple[bool, str, str | None]:
-    """Returns (verified, lean_log, candidate_or_None_if_placeholder)."""
+def _check(statement: str, candidate: str | None) -> tuple[bool, str, str | None]:
+    """Returns (verified, lean_log, candidate_or_None_if_placeholder).
+
+    A clean kernel run is necessary but not sufficient: the candidate must also
+    prove *the statement we asked about*. ``static_audit`` rejects a candidate
+    that re-declares the invariants (and so proves a theorem about its own
+    definitions), drops the preamble import, or carries a different goal — none
+    of which a compile check can see. The kernel run then additionally audits the
+    axioms (see ``LeanSubprocessProver._run_lean``).
+    """
     if not candidate or any(t in candidate for t in
                             ("sorry", "admit", "apply?", "exact?")):
         return False, "model produced no complete proof (placeholder/search tactic)", None
-    ok, klog = _lean._run_lean(_wrap(candidate))
+    wrapped = _wrap(candidate)
+    ok, why = proof_audit.static_audit(statement, wrapped)
+    if not ok:
+        return False, f"statement-identity audit failed: {why}", candidate
+    ok, klog = _lean._run_lean(wrapped)
     return ok, klog, candidate
 
 
@@ -213,7 +226,7 @@ def prove(req: ProveRequest):
                 last_err = f"vLLM call failed: {e}"
                 log.warning("[shim] round %d generation failed: %s", r + 1, e)
                 continue
-            ok, klog, cand = _check(candidate)
+            ok, klog, cand = _check(req.statement, candidate)
             if cand is None:
                 last_err = klog
                 continue
@@ -238,7 +251,7 @@ def prove(req: ProveRequest):
             last_err = f"vLLM call failed: {e}"
             log.warning("[shim] attempt %d generation failed: %s", attempt + 1, e)
             continue
-        ok, klog, cand = _check(candidate)
+        ok, klog, cand = _check(req.statement, candidate)
         if cand is None:
             last_err = klog
             continue

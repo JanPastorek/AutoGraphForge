@@ -126,11 +126,39 @@ def IsTriangleFreeClass (G : SimpleGraph V) : Prop := G.CliqueFree 3
 def IsK4FreeClass (G : SimpleGraph V) : Prop := G.CliqueFree 4
 /-- `G` is bipartite (2-colourable). -/
 def IsBipartiteClass (G : SimpleGraph V) : Prop := G.Colorable 2
-/-- `G` is Eulerian-degree (every vertex has even degree). -/
+/-- `G` is Eulerian: connected, with every vertex of even degree.
+
+Connectivity is part of the definition, not an extra: graphcalc's `eulerian`
+column is `networkx.is_eulerian`, which requires a closed Eulerian trail to
+exist and so rejects a disconnected graph even when all its degrees are even.
+Dropping it here would make this predicate strictly weaker than the hypothesis
+the pipeline validated, so a theorem proved against it would not be the
+conjecture. Caught by tools/lean_differential.py on the triangle-plus-isolated
+-vertex graph, whose degrees are 0, 2, 2, 2. -/
 def IsEulerianClass (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
-  ∀ v, Even (G.degree v)
+  G.Connected ∧ ∀ v, Even (G.degree v)
 /-- `G` is nontrivial (at least two vertices): the graphcalc `nontrivial`
 flag, `|V(G)| ≥ 2`, i.e. `2 ≤ G.order`. -/
 def IsNontrivialClass (G : SimpleGraph V) : Prop := 2 ≤ G.order
+/-- `G` is connected. -/
+def IsConnectedClass (G : SimpleGraph V) : Prop := G.Connected
+/-- `G` is a tree: connected and acyclic. -/
+def IsTreeClass (G : SimpleGraph V) : Prop := G.IsTree
+/-- `G` is claw-free: no vertex has three pairwise non-adjacent neighbours,
+i.e. no four vertices induce a `K₁,₃`.
+
+Stated as a forbidden configuration rather than as `¬ (K₁,₃ ⊴ G)` so that the
+computable mirror in `GraphInvariantsComputable.lean` can be the *same*
+condition: the two files then agree by definition, with no unproved bridge
+lemma sitting between the statement we prove and the statement we refute. -/
+def IsClawFreeClass (G : SimpleGraph V) : Prop :=
+  ∀ v a b c : V, G.Adj v a → G.Adj v b → G.Adj v c →
+    a ≠ b → a ≠ c → b ≠ c → G.Adj a b ∨ G.Adj a c ∨ G.Adj b c
+/-- `G` is a cograph: no four vertices induce a path `P₄` (Corneil–Lerchs–
+Stewart Burlingham). Distinctness of `a b c d` is implied by the adjacencies
+and non-adjacencies together with irreflexivity, so it is not assumed. -/
+def IsCographClass (G : SimpleGraph V) : Prop :=
+  ∀ a b c d : V, G.Adj a b → G.Adj b c → G.Adj c d →
+    ¬ G.Adj a c → ¬ G.Adj b d → G.Adj a d
 
 end SimpleGraph

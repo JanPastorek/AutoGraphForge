@@ -35,6 +35,10 @@ graphconj = "graphconj_cli:main"
 py-modules = ["config", "conjecture", "graphconj_cli", "run_cegis"]
 packages = ["pipeline", "pipeline.search", "graphs"]
 
+[tool.setuptools.package-data]
+# the ISGCI-derived class lattice is data the novelty filter reads at import
+pipeline = ["data/*.json"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"

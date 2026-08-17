@@ -1,0 +1,101 @@
+%% AI4Math Workshop @ CICM 2026 -- 2-page abstract
+%% Short version of the ITAT 2026 paper
+%% "AutoGraphForge: Towards Automated Graph Theory Discovery".
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage{microtype}
+
+\begin{document}
+
+\title{AutoGraphForge: Conjecturing, Refutation and\\
+Lean Proving in One Loop}
+
+\titlerunning{AutoGraphForge}
+
+\author{J\'an Pastorek\orcidID{0000-0001-8237-1275}}
+\authorrunning{J. Pastorek}
+
+\institute{Department of Applied Informatics, Comenius University in Bratislava,
+Slovakia\\
+\email{jan.pastorek@fmph.uniba.sk}}
+
+\maketitle
+
+\begin{abstract}
+\textsf{AutoGraphForge} couples conjecturing, refuting, formalizing and proving
+into one loop for graph theory. Counterexample-guided rounds produced $6{,}522$
+conjectures that survive an implication-deciding novelty filter over $559$ known
+relations, refutation against a dataset of $348{,}207$ (extremal) graphs and counterexample search algorithms; survivors are
+deterministically exported to Lean~4 with Mathlib for kernel-checked provers to attempt.
+\keywords{Automated conjecturing \and Graph theory \and Automated theorem proving \and
+Lean \and Counterexample search}
+\end{abstract}
+
+\paragraph{Motivation.}
+Graph theory conjecturing systems such as
+\textsc{Graffiti}~\cite{fajtlowicz1988conjectures} and now the recent
+\textsc{Graffiti}$^3$~\cite{davila2026graffiti3} have developed separately from automated provers and proof systems such as
+Lean~4~\cite{moura2015lean}. Then, there are many sophisticated search algorithms in the literature aiming to find (counter)examples to conjectures~\cite{jooken2025computer}. With recent advancements in AI, we aim to develop a system that joins all these automations together---automated conjecturing, refutation, and proving into one loop. \textsf{AutoGraphForge} is our attempt at one (code, data and logs at
+\url{https://github.com/JanPastorek/AutoGraphForge}). It works in rounds, every
+counterexample found is inserted into the dataset that drives the next round.
+
+\paragraph{Generation of conjectures.}
+We use \textsc{Graffiti}$^3$ to generate conjectures over a \emph{small}
+evolving dataset $T$
+carrying $59$ exactly computed invariants from
+\textsc{GraphCalc}~\cite{davila2025graphcalc}. Crucially this $T$ grows \emph{only}
+by counterexamples to its own conjectures, so generation stays cheap.
+
+\paragraph{Novelty filter as an LP feasibility test.}
+One of the problems with such conjecturing systems has always been to separate known, proven or trivial conjectures from unknown and potentially interesting ones. We curate $559$ classical, folklore and trivial relations, closed under transitive composition and linear identity substitution, each tagged with the
+class on which it holds. A candidate conjecture $f\le R(g)$---target invariant $f$, with $R$ a linear
+combination of the remaining invariants $g$---is redundant if a convex
+combination of tabled bounds $B_j$ on $f$
+dominates it, certified by weights $w_j\ge0$, $\sum_j w_j=1$, slacks
+$s_i,t\ge0$ and free multipliers $\mu_k$ with, identically in $g$,
+\[
+  R(g)-\sum_j w_j B_j(g)\;=\;\sum_i s_i\,(g_i-L_i)\;+\;\sum_k \mu_k E_k(g)\;+\;t ,
+\]
+for $g_i\ge L_i$ safe lower bounds and $E_k(g)=0$ class identities (e.g.\
+Gallai's $n=\alpha+\tau$ on order, independence and vertex-cover numbers); matching coefficients reduces this to LP feasibility. This
+makes ``is this already known?'' a decidable query against a curated library of known theorems and trivial relations.
+
+\paragraph{Refutation, formalization, proving.}
+Surviving conjectures are tested against $348{,}207$ graphs unioning the House
+of Graphs export~\cite{coolsaet2023house}, all connected graphs on at most nine
+vertices and some extremal graph families, then against graphs from several
+random graph models and by six automated counterexample-search algorithms chosen
+from~\cite{jooken2025computer}. Since a conjecture is already a structured
+object---named invariants under class predicates---the Lean~4 export is
+deterministic, yielding a skeleton ending in \texttt{sorry} that elaborates to a
+type-correct goal. The AI agent \textsc{OProver-32B}~\cite{oprover2026} then
+searches for proofs,
+kernel-checked against pinned \texttt{mathlib4} and our preamble.
+
+\paragraph{Results and status.}
+After 5 rounds of generation--refutation, $6{,}522$ conjectures survived. We
+checked the $100$ survivors
+sharp on the most graphs and with the help of AI tagged $48$ as not known to be
+trivial or false; among these is a pair relating the annihilation number $a$ (the
+largest $k$ whose $k$ smallest degrees sum to at most the edge count) and the
+edge-cover number $\mathrm{ec}$ that we then proved by hand---bipartite
+$\Rightarrow\mathrm{ec}\le a$, regular $\Rightarrow a\le\mathrm{ec}$---via
+Gallai, K\H{o}nig and Pepper's $\alpha\le a$~\cite{pepper2004thesis}. So far the
+proving stage has kernel-verified only trivial bounds, and scaling it to the
+survivors is our next step. 
+
+\begin{credits}
+\subsubsection{\ackname} Computations used the PERUN supercomputer
+(Supercomputing Centre, TUKE, Slovakia), funded by the EU Recovery and
+Resilience Plan of the Slovak Republic, project No.~17I03-04-P03-00001.
+
+\subsubsection{\discintname} The author has no competing interests to declare.
+\end{credits}
+
+\bibliographystyle{splncs04}
+\bibliography{refs}
+
+\end{document}

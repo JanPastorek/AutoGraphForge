@@ -78,6 +78,22 @@ def main():
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     CONFIG.cegis_targets = tuple(targets)
     CONFIG.cache_dir = os.path.join(base, "database", "shards", str(sid), "cache")
+    # Tier batteries are read-only and identical for every shard, so they stay
+    # in the one shared directory instead of being copied per shard. Only the
+    # seed battery (written every round) needs to be shard-private.
+    CONFIG.tier_cache_dir = os.path.join(base, "database", "cache")
+    # …and witnesses are published to a single shared log so a graph found by
+    # one shard can refute every shard's conjectures in the next round.
+    CONFIG.shared_witness_log = os.path.join(
+        base, "database", "hard_seed", "shared_witnesses.g6")
+    # …and a shared witness is measured once, by whichever shard sees it first.
+    CONFIG.peer_battery_glob = os.path.join(
+        base, "database", "shards", "*", "cache", "seed_battery.parquet")
+
+    # Optional evidence gates, off unless asked for (see config.py for the
+    # trade-off each one makes).
+    CONFIG.cegis_min_hypothesis_support = int(os.environ.get("MIN_HYP_SUPPORT", "0"))
+    CONFIG.cegis_drop_decorative = os.environ.get("DROP_DECORATIVE", "0") == "1"
     CONFIG.hard_seed_dir = os.path.join(base, "database", "shards", str(sid), "hard_seed")
     CONFIG.output_dir = os.path.join(base, "results", f"shard_{sid}")
 

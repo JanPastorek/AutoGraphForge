@@ -80,17 +80,88 @@ class SeedCorpus:
         return pd.DataFrame()
 
     def _save_cache(self) -> None:
+        """Publish the battery cache atomically.
+
+        Written to a temporary file in the same directory and then renamed:
+        ``os.replace`` is atomic on POSIX, so a concurrent shard reading this
+        file sees either the whole previous version or the whole new one, never
+        a half-written parquet. That is what makes ``_rows_from_peers`` safe —
+        every cache file has exactly one writer and is only ever published whole.
+        """
         os.makedirs(self.cfg.cache_dir, exist_ok=True)
+        path = self._cache_path()
+        tmp = f"{path}.tmp.{os.getpid()}"
         try:
-            self._cache.to_parquet(self._cache_path())
+            self._cache.to_parquet(tmp)
+            os.replace(tmp, path)
         except Exception as e:
             logger.warning("[seed] cache write failed: %s", e)
+            try:
+                os.remove(tmp)
+            except OSError:
+                pass
+
+    # ------------------------------------------------- peer battery reuse --
+    def _peer_cache_paths(self) -> List[str]:
+        """Other shards' seed batteries.
+
+        Safe to read precisely because of the invariant above: one writer per
+        file, published by atomic rename. No locking is involved and none is
+        needed — this process never writes these files.
+        """
+        pattern = getattr(self.cfg, "peer_battery_glob", "")
+        if not pattern:
+            return []
+        import glob as _glob
+        mine = os.path.abspath(self._cache_path())
+        return [p for p in sorted(_glob.glob(pattern))
+                if os.path.abspath(p) != mine]
+
+    def _rows_from_peers(self, ids: List[str]) -> pd.DataFrame:
+        """Battery rows for ``ids`` another shard has already computed.
+
+        A witness costs seconds to a minute of graphcalc time, and every shard
+        needs the same rows for the same shared witnesses, so recomputing them
+        per shard is pure duplicated work. Read failures are non-fatal: a peer
+        mid-write, absent, or corrupt just means we compute the rows ourselves.
+        """
+        want, found = set(ids), []
+        for path in self._peer_cache_paths():
+            if not want:
+                break
+            try:
+                peer = pd.read_parquet(path)
+            except Exception as e:
+                logger.debug("[seed] peer cache unreadable (%s): %s", path, e)
+                continue
+            hit = peer.index.intersection(list(want))
+            if len(hit):
+                found.append(peer.loc[hit])
+                want -= set(hit)
+        if not found:
+            return pd.DataFrame()
+        rows = pd.concat(found)
+        rows = rows[~rows.index.duplicated(keep="first")]
+        logger.info("[seed] reused %d battery row(s) computed by other shards",
+                    len(rows))
+        return rows
 
     # -------------------------------------------------------------- battery --
     def _battery_for(self, ids: List[str], graphs: List[nx.Graph]) -> pd.DataFrame:
         """Battery rows for ids, using the cache and filling misses."""
         miss = [(i, g) for i, g in zip(ids, graphs)
                 if self._cache.empty or i not in self._cache.index]
+        if miss:
+            # Before paying graphcalc, take whatever a peer shard already
+            # computed for these graphs. Shared witnesses are the common case:
+            # every shard absorbs them, so without this each one recomputes the
+            # same battery rows independently.
+            borrowed = self._rows_from_peers([i for i, _ in miss])
+            if not borrowed.empty:
+                self._cache = (borrowed if self._cache.empty
+                               else pd.concat([self._cache, borrowed]))
+                self._cache = self._cache[~self._cache.index.duplicated(keep="last")]
+                miss = [(i, g) for i, g in miss if i not in self._cache.index]
         if miss:
             logger.info("[seed] computing battery for %d new graph(s)", len(miss))
             new = battery.compute_battery(
@@ -193,6 +264,63 @@ class SeedCorpus:
                 for i in add:
                     fh.write(i + "\n")
             logger.info("[seed] persisted %d new hard witness(es)", len(add))
+        self.publish_witnesses(ids)
+
+    # ------------------------------------------------- cross-shard sharing --
+    def publish_witnesses(self, ids: List[str]) -> None:
+        """Append witnesses to the log shared by every concurrent shard.
+
+        Opened in append mode and written one short line at a time: on POSIX an
+        ``O_APPEND`` write below ``PIPE_BUF`` is atomic, so concurrent shards
+        interleave whole lines and never corrupt each other's. That keeps the
+        shards lock-free and unsynchronised — no barrier, no slowest-shard
+        stall — while still sharing evidence within a round.
+        """
+        if not (self.cfg.share_witnesses and ids and self.cfg.shared_witness_log):
+            return
+        path = self.cfg.shared_witness_log
+        try:
+            os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+            with open(path, "a") as fh:
+                for gid in ids:
+                    fh.write(gid + "\n")
+        except Exception as e:                             # pragma: no cover
+            logger.warning("[seed] could not publish witnesses to %s: %s", path, e)
+
+    def absorb_shared_witnesses(self) -> int:
+        """Pull in witnesses other shards have published since the last call.
+
+        Returns the number of genuinely new graphs added. Cheap by design: the
+        log holds thousands of graph6 lines against a 292k-graph refutation
+        tier, and ``add`` already skips graphs the corpus has.
+        """
+        if not (self.cfg.share_witnesses and self.cfg.shared_witness_log):
+            return 0
+        path = self.cfg.shared_witness_log
+        if not os.path.exists(path):
+            return 0
+        fresh = []
+        try:
+            with open(path) as fh:
+                for line in fh:
+                    gid = line.strip()
+                    # A torn final line from a shard writing concurrently simply
+                    # fails to parse and is skipped; it will be read next round.
+                    if gid and gid not in self.graphs:
+                        try:
+                            fresh.append(from_graph6(gid))
+                        except Exception:
+                            continue
+        except Exception as e:                             # pragma: no cover
+            logger.warning("[seed] could not read %s: %s", path, e)
+            return 0
+        if not fresh:
+            return 0
+        added = self.add(fresh)
+        if added:
+            logger.info("[seed] absorbed %d witness(es) published by other shards",
+                        len(added))
+        return len(added)
 
     # ----------------------------------------------------------------- views --
     def numeric_targets(self) -> List[str]:

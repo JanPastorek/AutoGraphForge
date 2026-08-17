@@ -1,2 +1,3 @@
 import LeanProject.Basic
 import LeanProject.GraphInvariants
+import LeanProject.GraphInvariantsComputable

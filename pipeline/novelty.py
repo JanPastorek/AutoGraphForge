@@ -31,7 +31,9 @@ conjecture (it may, at worst, leave a trivial one labelled "novel"). Extend
 
 from __future__ import annotations
 
+import json
 import logging
+import os
 from typing import Dict, List, Optional, Tuple
 
 from conjecture import Conjecture
@@ -43,14 +45,61 @@ logger = logging.getLogger(__name__)
 # Class hierarchy — a theorem proved for a superclass also holds for subclasses.
 # ---------------------------------------------------------------------------
 
-SUPERCLASSES: Dict[str, set] = {
-    # trees and (acyclic) forests are bipartite, chordal and planar
-    "tree": {"bipartite", "chordal", "planar", "acyclic"},
-    "acyclic": {"bipartite", "chordal", "planar"},
-    "cubic": {"regular"},
-    "split": {"chordal"},
-    "outerplanar": {"planar"},
+# Containments among the *structural* classes come from ISGCI, imported by
+# tools/build_class_hierarchy.py into pipeline/data/class_hierarchy.json (91
+# edges, already transitively closed, so the flat lookup below is correct).
+# Everything ISGCI does not model is listed here by hand.
+MANUAL_SUPERCLASSES: Dict[str, set] = {
+    # degree conditions: not ISGCI classes (they are not hereditary)
+    "cubic": {"regular", "subcubic"},
+    "regular": set(),
+    # ISGCI's "tree" is the hereditary class of forests, so the data file labels
+    # it `acyclic`; a tree is a connected forest, which ISGCI cannot say.
+    "tree": {"acyclic", "connected"},
+    "caterpillar": {"tree"},
+    # order thresholds: n ≥ 4 implies n ≥ 3, so an (n ≥ 4)-restricted candidate
+    # may be judged by an (n ≥ 3)-restricted known bound.
+    "order_bigger_than_3": {"order_bigger_than_2"},
 }
+
+
+CLASS_HIERARCHY_PATH = os.path.join(os.path.dirname(__file__), "data",
+                                    "class_hierarchy.json")
+
+
+def _load_class_hierarchy(path: Optional[str] = None) -> Dict[str, set]:
+    """ISGCI-derived superclass table, merged with the manual entries.
+
+    A missing/damaged data file degrades to the manual table rather than
+    failing the run: a smaller lattice only makes the filter *more*
+    conservative, which is the safe direction (it may leave a rediscovery
+    labelled novel; it can never hide a genuine conjecture).
+    """
+    table = {k: set(v) for k, v in MANUAL_SUPERCLASSES.items()}
+    path = path or CLASS_HIERARCHY_PATH
+    try:
+        with open(path) as fh:
+            derived = json.load(fh)["superclasses"]
+    except Exception as e:
+        logger.warning("class hierarchy unavailable (%s); using manual table only", e)
+        return table
+    for cls, sup in derived.items():
+        table.setdefault(cls, set()).update(sup)
+    # Re-close: a manual edge into an ISGCI class (tree ⊆ acyclic) must inherit
+    # that class's own superclasses, or the flat lookup would miss them.
+    for cls in list(table):
+        seen, stack = set(), list(table[cls])
+        while stack:
+            c = stack.pop()
+            if c in seen or c == cls:
+                continue
+            seen.add(c)
+            stack.extend(table.get(c, ()))
+        table[cls] = seen
+    return table
+
+
+SUPERCLASSES: Dict[str, set] = _load_class_hierarchy()
 
 
 # ---------------------------------------------------------------------------

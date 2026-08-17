@@ -36,6 +36,11 @@ class FakeNative:
     def slack(self, frame):                     # rhs - lhs  (≥0 ⇒ holds for ≤)
         return self._rhs(frame) - frame[self.lhs_col]
 
+    def is_tight(self, frame, atol=1e-12):      # mirrors graffiti3's Relation
+        import numpy as np
+        s = self.slack(frame)
+        return pd.Series(np.isclose(s.values, 0.0, atol=atol), index=frame.index)
+
     def check(self, frame):
         applicable = pd.Series(True, index=frame.index)
         if self.condition_col:
@@ -94,14 +99,22 @@ def test_symbolic_respects_hypothesis_class():
 # --------------------------------------------------------------------------- #
 # refute_matrix.touch_count  (the attribute-vs-method bug)
 # --------------------------------------------------------------------------- #
-def test_touch_count_uses_relation_slack_then_attribute():
+def test_touch_count_counts_applicable_tight_rows():
     from pipeline.refute_matrix import Refuter
     r = Refuter.__new__(Refuter)                 # skip tier building
-    frame = pd.DataFrame({"minimum_degree": [1, 2, 2], "maximum_degree": [1, 2, 3]})
+    frame = pd.DataFrame({"minimum_degree": [1, 2, 2], "maximum_degree": [1, 2, 3],
+                          "regular": [True, False, False]})
     nat = FakeNative("minimum_degree ≤ maximum_degree", "minimum_degree", "<=",
                      rhs_col="maximum_degree", touch_count=99)
     # two rows are tight (slack 0): indices 0 and 1
     assert r.touch_count(nat, frame) == 2
+
+    # …but a conditioned conjecture may only claim the tight rows in its class.
+    # Scoring the relation alone would still say 2, which is the bug this pins.
+    conditioned = FakeNative("(regular) ⇒ minimum_degree ≤ maximum_degree",
+                             "minimum_degree", "<=", rhs_col="maximum_degree",
+                             touch_count=99, condition_col="regular")
+    assert r.touch_count(conditioned, frame) == 1
 
     class NoRelation:
         touch_count = 42                          # attribute fallback
@@ -152,12 +165,19 @@ def test_lean_export_conditioned_supported_class():
 
 
 def test_lean_export_conditioned_unsupported_class():
-    # conditioned on cograph (not formalized) → not exportable
+    # conditioned on chordal (no mathlib definition, no cheap decidable form)
+    # → not exportable. cograph and claw_free *are* formalized, as forbidden
+    # induced subgraphs on four vertices.
     from pipeline import lean_export as le
-    cols = ["clique_number", "order", "cograph"]
-    nat = FakeNative("(cograph) ⇒ clique_number ≤ order", "clique_number", "<=",
+    cols = ["clique_number", "order", "chordal"]
+    nat = FakeNative("(chordal) ⇒ clique_number ≤ order", "clique_number", "<=",
                      rhs_col="order")
     assert not le.is_supported(nat, cols)
+    for cls in ("cograph", "claw_free", "tree", "connected"):
+        cols2 = ["clique_number", "order", cls]
+        nat2 = FakeNative(f"({cls}) ⇒ clique_number ≤ order", "clique_number",
+                          "<=", rhs_col="order")
+        assert le.is_supported(nat2, cols2), cls
 
 
 # --------------------------------------------------------------------------- #
@@ -226,6 +246,46 @@ def test_novelty_conditioned_class_definitions():
     assert classify_native(_named("(regular) ⇒ maximum_degree = minimum_degree"), cols)[0]
     assert classify_native(_named("(triangle_free) ⇒ clique_number ≤ 2"), cols)[0]
     assert classify_native(_named("(K_4_free) ⇒ clique_number ≤ 3"), cols)[0]
+
+
+def test_novelty_equality_both_bounds_known():
+    # γ = i under claw-free: γ ≤ i (universal) and i ≤ γ (claw-free) are both
+    # tabled, so the equality is necessary-and-sufficient → known.
+    from pipeline.cegis_novelty import classify_statement
+    cols = ["domination_number", "independent_domination_number",
+            "nontrivial", "claw_free"]
+    ok, why = classify_statement(
+        "((nontrivial) ∧ (claw_free)) ⇒ domination_number = independent_domination_number", cols)
+    assert ok and "equality" in why
+
+
+def test_novelty_necessary_condition_contrapositive():
+    # (χ > 2) ⇒ ¬bipartite is the contrapositive of the known bipartite ⇒ χ ≤ 2
+    from pipeline.cegis_novelty import classify_statement
+    cols = ["chromatic_number", "clique_number", "bipartite", "tree"]
+    assert classify_statement("(2 < chromatic_number) ⇒ ¬bipartite", cols)[0]
+    # subclass inherits the superclass bound: tree ⊂ bipartite
+    assert classify_statement("(2 < chromatic_number) ⇒ ¬tree", cols)[0]
+
+
+def test_novelty_necessary_condition_keeps_novel():
+    # a non-tabled necessary condition must stay novel
+    from pipeline.cegis_novelty import classify_statement
+    cols = ["harmonic_index", "annihilation_number", "cubic"]
+    assert classify_statement("(harmonic_index < annihilation_number) ⇒ ¬cubic", cols) == (False, None)
+
+
+def test_novelty_sufficient_characterization():
+    # genuine sufficient conditions for class membership (textbook)
+    from pipeline.cegis_novelty import classify_statement
+    cols = ["average_degree", "maximum_degree", "spectral_radius",
+            "algebraic_connectivity", "regular", "connected", "K_4_free",
+            "domination_number", "annihilation_number"]
+    assert classify_statement("(average_degree = maximum_degree) ⇒ regular", cols)[0]
+    assert classify_statement("(0 < algebraic_connectivity) ⇒ connected", cols)[0]
+    # a coincidental equality→class must stay novel (not a characterization)
+    assert classify_statement(
+        "(domination_number = annihilation_number) ⇒ K_4_free", cols) == (False, None)
 
 
 def test_novelty_conditioned_keeps_novel_zero_forcing():

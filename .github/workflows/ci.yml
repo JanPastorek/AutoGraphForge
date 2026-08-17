@@ -20,7 +20,10 @@ jobs:
       - name: Lint (ruff)
         run: ruff check . || true   # advisory on research code; never blocks CI
       - name: Unit tests
-        run: pytest tests/test_cegis_core.py -q
+        # The whole suite, not one file: the novelty-relation, proof-audit and
+        # disproof-export tests guard soundness properties, and a green CI that
+        # never ran them is worse than no CI.
+        run: pytest tests/ -q
 
   lean:
     runs-on: ubuntu-latest

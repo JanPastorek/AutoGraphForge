@@ -92,6 +92,10 @@ _CLASS_WORDS = {
     "tree": "tree",
     "triangle-free": "triangle_free",
     "cubic": "cubic",
+    # order-threshold predicates (n ≥ 3 / n ≥ 4): rule out the smallest graphs
+    # on which many "total" bounds fail only at K_2.
+    "order_bigger_than_2": "order_bigger_than_2",
+    "order_bigger_than_3": "order_bigger_than_3",
 }
 _SKIP = object()  # sentinel: hypothesis present but not modellable -> drop
 
@@ -111,6 +115,15 @@ KNOWN_CONJECTURES = [
     "If G is a connected and triangle-free graph, then independence_number >= max_degree",
     "If G is a connected and claw-free graph, then zero_forcing_number <= positive_semidefinite_zero_forcing_number",
     "If G is a connected and claw-free graph, then zero_forcing_number = positive_semidefinite_zero_forcing_number",
+    # Recovered from the FALSIFIED set by adding the hypothesis under which they
+    # actually hold (verified with tools/validate_known_relations.py):
+    #   a(G) ≥ n − μ  holds on bipartite graphs (König α = n − μ, Pepper a ≥ α),
+    #   the "total"/edge bounds hold once the atomic graph K_2 is excluded (n ≥ 3).
+    "If G is a connected and bipartite graph, then annihilation_number >= (order - matching_number)",
+    "If G is a connected and order_bigger_than_2 graph, then total_domination_number <= order - 1",
+    "If G is a connected and order_bigger_than_2 graph, then total_zero_forcing_number <= order - 1",
+    "If G is a connected and order_bigger_than_2 graph, then total_zero_forcing_number <= size",
+    "If G is a connected and order_bigger_than_2 graph, then zero_forcing_number <= size - 1",
 ]
 
 KNOWN_INEQUALITIES = [
@@ -451,11 +464,42 @@ def parse_relation(text: str) -> List[Tuple5]:
     return out
 
 
+# Relations that the curated list asserts but that have explicit counterexamples
+# among the 277,625 connected, non-trivial graphs of the refutation battery
+# (verified with tools/validate_known_relations.py). They are kept above for
+# provenance but EXCLUDED from the table — a false upper bound is the one error
+# that can wrongly hide a genuine conjecture, so we never trust an unverified
+# relation over the data. (e.g. α ≤ rad is violated by ~99% of graphs; the
+# remaining few fail only on small extremal graphs such as K_2.)
+FALSIFIED = {
+    "independence_number <= radius",
+    "annihilation_number <= 1/2 order",
+    "annihilation_number >= (order - matching_number)",
+    "total_domination_number <= 7/9 * max_degree + 5/3",
+    "total_zero_forcing_number <= connected_zero_forcing_number",
+    "connected_zero_forcing_number >= total_zero_forcing_number",
+    "independent_domination_number <= 2/3 zero_forcing_number + 13/3",
+    "total_zero_forcing_number <= order + -1",
+    "total_zero_forcing_number <= order - 1",
+    "total_domination_number <= order + -1",
+    "independent_domination_number <= 1/2 order",
+    "independent_domination_number <= 1/2 power_domination_number + 11/2",
+    "independent_domination_number <= 1/5 diameter + 27/5",
+    "zero_forcing_number <= size + -1",
+    "total_zero_forcing_number <= size",
+}
+
+
 def load_relations() -> List[Tuple5]:
-    """All curated relations as deduplicated KNOWN_THEOREMS tuples."""
+    """All curated relations as deduplicated KNOWN_THEOREMS tuples.
+
+    Empirically-falsified relations (see ``FALSIFIED``) are excluded.
+    """
     seen = set()
     result: List[Tuple5] = []
     for text in KNOWN_CONJECTURES + KNOWN_INEQUALITIES:
+        if text.strip().rstrip(",.") in FALSIFIED:
+            continue
         for lhs, rhs, off, cls, name in parse_relation(text):
             key = (lhs, frozenset(rhs.items()), round(off, 9), cls)
             if key in seen:

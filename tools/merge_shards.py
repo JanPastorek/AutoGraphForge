@@ -81,13 +81,99 @@ def _merge_hard_seeds(n_shards: int) -> int:
     return len(add)
 
 
+def _drop_cross_shard_refuted(conjs: list, n_shards: int) -> tuple:
+    """Re-refute the merged survivors against the merged witness set.
+
+    Each shard grows its own hard seed and never sees the others', so a graph
+    that one shard worked hard to find cannot kill a conjecture another shard
+    is keeping. Unioning the survivors without re-checking them therefore
+    reports conjectures the run had the evidence to refute — the witness simply
+    sat in the wrong shard.
+
+    Evaluation only: the witnesses already exist, so this costs one pass over
+    the cached batteries and no search.
+    """
+    import glob
+    import hashlib
+
+    from pipeline import conjecture_lattice as cl
+
+    # Each shard runs against its own *copy* of the refutation tiers, so the
+    # 18 MB bigdb battery appears six times over. Loading it once instead of
+    # six times is the difference between a few hundred MB and a few GB, and
+    # deduplicating by content hash keeps that safe if the copies ever diverge.
+    candidates = sorted(
+        glob.glob(os.path.join("database", "shards", "*", "cache", "*.parquet"))
+        + glob.glob(os.path.join(CONFIG.cache_dir, "*.parquet")))
+    paths, seen = [], set()
+    for path in candidates:
+        with open(path, "rb") as fh:
+            digest = hashlib.blake2b(fh.read(), digest_size=16).hexdigest()
+        if digest in seen:
+            log.info("[merge] skipping duplicate cache %s", path)
+            continue
+        seen.add(digest)
+        paths.append(path)
+    frame = cl.load_pool(paths)
+    if frame is None:
+        log.warning("[merge] no cached batteries found — skipping the "
+                    "cross-shard refutation pass")
+        return conjs, 0, len(conjs)
+
+    evaluator = cl.PoolEvaluator(frame)
+    payloads = [{"statement": c.statement} for c in conjs]
+    refuted, unchecked = cl.find_refuted(payloads, evaluator)
+    log.info("[merge] cross-shard refutation: %d graphs, %d survivor(s) refuted, "
+             "%d not checkable", evaluator.n_rows, len(refuted), unchecked)
+    for i, witness in list(refuted.items())[:5]:
+        log.info("[merge]   refuted by %s: %s", witness, conjs[i].statement[:90])
+
+    # A refutation is a result, not a rejection. Each entry here is a statement
+    # paired with an explicit graph on which it fails — the strongest kind of
+    # answer this pipeline produces, and the only one that is decidable in Lean
+    # without a proof search. Earlier runs kept only `kept` and dropped these on
+    # the floor, which is why the refuted set had to be recomputed from scratch.
+    record_refutations(
+        [{"statement": conjs[i].statement,
+          "witness_g6": witness,
+          "id": getattr(conjs[i], "id", None),
+          "generation_method": getattr(conjs[i], "generation_method", None),
+          "refuted_by": "cross-shard merge"}
+         for i, witness in refuted.items()])
+
+    kept = [c for i, c in enumerate(conjs) if i not in refuted]
+    return kept, len(refuted), unchecked
+
+
+def record_refutations(rows: list, filename: str = "cegis_refuted.json") -> str:
+    """Write refuted statements with their counterexample graphs.
+
+    Published whole via atomic rename so a reader never observes a partial
+    file, matching how the rest of the pipeline publishes artefacts.
+    """
+    os.makedirs(CONFIG.output_dir, exist_ok=True)
+    path = os.path.join(CONFIG.output_dir, filename)
+    tmp = path + ".tmp"
+    with open(tmp, "w") as fh:
+        json.dump(rows, fh, indent=1)
+    os.replace(tmp, path)
+    log.info("[merge] wrote %s (%d refutation(s) with witnesses)", path, len(rows))
+    return path
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--shards", type=int, default=5)
+    ap.add_argument("--keep-cross-shard-refuted", action="store_true",
+                    help="skip the cross-shard refutation pass (old behaviour)")
     args = ap.parse_args(argv)
 
     conjs = _merge_survivors(args.shards)
     added_witnesses = _merge_hard_seeds(args.shards)
+    n_refuted = n_unchecked = 0
+    if not args.keep_cross_shard_refuted:
+        conjs, n_refuted, n_unchecked = _drop_cross_shard_refuted(conjs, args.shards)
+        log.info("[merge] %d survivors after cross-shard refutation", len(conjs))
 
     os.makedirs(CONFIG.output_dir, exist_ok=True)
     import dill
@@ -102,6 +188,8 @@ def main(argv=None):
         "conjectures": [c.to_dict() for c in conjs],
         "merged_from_shards": args.shards,
         "witnesses_added_to_canonical_hard_seed": added_witnesses,
+        "cross_shard_refuted": n_refuted,
+        "cross_shard_unchecked": n_unchecked,
     }
     out_json = os.path.join(CONFIG.output_dir, "cegis_results.json")
     with open(out_json, "w") as fh:
