@@ -17,8 +17,8 @@
   Use permitted under Creative Commons License Attribution 4.0
   International (CC BY 4.0).}
 
-\conference{ITAT'26: Information Technologies -- Applications and Theory,
-  September 25--29, 2026, Biele Karpaty, Slovakia}
+\conference{ITAT 2026: Information Technologies -- Applications and Theory,
+  September 25--29, 2026, Vr\v{s}atec, Slovakia}
 
 \title{AutoGraphForge: Towards Automated Graph Theory Discovery}
 
@@ -676,14 +676,11 @@ Additionally, we want to explore the use of large language models as a \emph{con
 \end{acknowledgments}
 
 \section*{Declaration on Generative AI}
-During the preparation of this work, the author used Claude (Anthropic) in order
-to: Drafting content, Improve writing style, Formatting assistance. The same
-tool was additionally used as a coding assistant, to
-implement the pipeline and to run the experiments reported here. All
-computational results are kernel-checked or verified against authoritative data
-sources -- House of Graphs and exact recomputation with \textsc{GraphCalc}.
-After using these tool(s)/service(s), the author reviewed and edited the content
-as needed and takes full responsibility for the publication's content.
+During the preparation of this work, the author used a large language model
+as a coding and experimentation assistant to implement the pipeline, run the
+experiments, and help with the draft of the manuscript. All computational results were verified against authoritative data sources -- House of Graphs and exact recomputation of GraphCalc; the
+author reviewed and edited all content and takes full responsibility for the
+publication's content.
 
 \section*{Code availability}
 All code and its documentation, data, logs, and databases are available and being developed at \url{https://github.com/JanPastorek/AutoGraphForge}.

@@ -294,3 +294,38 @@ def test_merge_still_fills_gaps_from_the_less_complete_row(tmp_path):
     merged = cl.load_pool([str(pa), str(pb)])
     assert merged.loc["X", "size"] == 1.0
     assert merged.loc["X", "extra"] == 7.0
+
+
+def test_collapses_restatements_of_the_same_bound():
+    """Same body, same hypothesis, different surface form.
+
+    `b <= r + 1` and `b - 1 <= r` are one claim; `linear_form` already maps them
+    to a single canonical body. They were both reported because `weaker` is
+    strict (`a != b`), so neither is weaker than the other and the subsumption
+    loop skipped both — 82 of the 2,677 ranked survivors were such restatements,
+    two of them adjacent at ranks 18 and 19 of the audited top 100.
+    """
+    survivors = cl.parse_survivors([
+        {"statement": "(nontrivial) ⇒ burning_number ≤ (radius + 1)"},
+        {"statement": "(nontrivial) ⇒ (burning_number + -1) ≤ radius"},
+    ])
+    assert len(survivors) == 2
+    assert survivors[0].body_key == survivors[1].body_key, "canonical body differs"
+
+    subsumed = cl.find_subsumed(survivors)
+    assert len(subsumed) == 1, "exactly one of the pair must be dropped"
+    dropped, kept = next(iter(subsumed.items()))
+    assert kept not in subsumed, "must not point at a dropped representative"
+
+    # The published figures predate this, so the old behaviour stays reachable.
+    assert cl.find_subsumed(survivors, collapse_duplicates=False) == {}
+
+
+def test_equivalent_hypotheses_still_keep_one_representative():
+    """The strictness of `weaker` exists to protect this case; keep it working."""
+    survivors = cl.parse_survivors([
+        {"statement": "((nontrivial) ∧ (tree)) ⇒ order ≤ size"},
+        {"statement": "(((nontrivial) ∧ (tree)) ∧ (planar)) ⇒ order ≤ size"},
+    ])
+    subsumed = cl.find_subsumed(survivors)
+    assert len(subsumed) == 1, "one of an equivalent pair is kept, not both dropped"

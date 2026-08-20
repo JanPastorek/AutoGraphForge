@@ -124,7 +124,8 @@ def _simplicity(classes: FrozenSet[str]) -> tuple:
     return (len(classes), sorted(classes))
 
 
-def find_subsumed(survivors: Sequence[Survivor]) -> Dict[int, int]:
+def find_subsumed(survivors: Sequence[Survivor],
+                  collapse_duplicates: bool = True) -> Dict[int, int]:
     """{index of redundant survivor: index of the survivor implying it}.
 
     Only survivors with the *same* body are compared; a weaker hypothesis over
@@ -134,6 +135,19 @@ def find_subsumed(survivors: Sequence[Survivor]) -> Dict[int, int]:
     always planar, so ``tree ∧ planar`` and ``tree`` describe the same graphs and
     each subsumes the other. Dropping both would lose the claim entirely, so one
     representative is kept: the simplest (fewest conjuncts, then alphabetical).
+
+    ``collapse_duplicates`` additionally removes *restatements*: same body, same
+    hypothesis, different surface form. These are invisible to ``weaker``, which
+    is strict (``a != b``), so each fails to be weaker than the other and both
+    survive — ``burning_number ≤ radius + 1`` and ``burning_number - 1 ≤ radius``
+    normalise to one canonical body yet were both reported, adjacent in the
+    ranking and with identical touch and support. The strictness is deliberate
+    elsewhere (it is what stops both members of an *equivalent* pair being
+    dropped), so the identical case is handled separately rather than by
+    loosening ``weaker``.
+
+    Pass ``collapse_duplicates=False`` to reproduce the published figures, which
+    were computed before this was handled.
     """
     by_body: Dict[tuple, List[int]] = {}
     for i, s in enumerate(survivors):
@@ -142,8 +156,27 @@ def find_subsumed(survivors: Sequence[Survivor]) -> Dict[int, int]:
     for group in by_body.values():
         if len(group) < 2:
             continue
+        if collapse_duplicates:
+            same: Dict[FrozenSet[str], List[int]] = {}
+            for i in group:
+                same.setdefault(survivors[i].classes, []).append(i)
+            for dupes in same.values():
+                if len(dupes) < 2:
+                    continue
+                # `_simplicity` cannot separate identical hypotheses, so the
+                # representative is chosen from the statement itself: shortest,
+                # then alphabetical. Deterministic, so reruns agree.
+                keep = min(dupes, key=lambda i: (len(survivors[i].statement),
+                                                 survivors[i].statement))
+                for i in dupes:
+                    if i != keep:
+                        subsumed[i] = keep
         for i in group:
+            if i in subsumed:
+                continue
             for j in group:
+                if j in subsumed:
+                    continue          # never point at a dropped representative
                 if i == j or not weaker(survivors[i].classes, survivors[j].classes):
                     continue
                 if weaker(survivors[j].classes, survivors[i].classes):
