@@ -32,7 +32,8 @@ env/
 *.swo
 
 # Pipeline outputs
-results/
+results/*.log
+results/*.tar.gz
 runs/
 *.log
 *.bak

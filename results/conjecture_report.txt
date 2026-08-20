@@ -1,0 +1,37 @@
+============================================================
+  CONJECTURE PIPELINE REPORT
+============================================================
+  Generated           : 12
+  Falsified           : 3
+  Survived falsif.    : 9
+  Formalized (Lean 4) : 9
+  Proven              : 0
+  Proof failed        : 9
+  CEX fed back to db  : 3
+  Total time          : 66.5s
+============================================================
+
+[7d7b7973] PROOF_FAILED | rad(G) ≤ gamma(G)  (for cograph graphs)
+          Lean: -- Conjecture: rad(G) ≤ gamma(G)  (for cograph graphs)
+[ebb496fe] PROOF_FAILED | rad(G) ≤ gamma(G)  (for split graphs)
+          Lean: -- Conjecture: rad(G) ≤ gamma(G)  (for split graphs)
+[6a783b18] PROOF_FAILED | rad(G) ≤ gamma(G)  (for well_covered graphs)
+          Lean: -- Conjecture: rad(G) ≤ gamma(G)  (for well_covered graphs)
+[3f398fbb] FALSIFIED    | chi(G) ≤ 0.5·delta(G) + 1.5  (for tree graphs)
+          CEX : n=17, m=16, violation=1.000
+[cc93c260] FALSIFIED    | chi(G) ≤ 0.5·kappa(G) + 1.5  (for tree graphs)
+          CEX : n=17, m=16, violation=1.000
+[2104a786] FALSIFIED    | chi(G) ≤ 0.5·lambda(G) + 1.5  (for tree graphs)
+          CEX : n=17, m=16, violation=1.000
+[1a14d7f2] PROOF_FAILED | delta(G) ≤ 0.5·chi(G)  (for tree graphs)
+          Lean: -- Conjecture: delta(G) ≤ 0.5·chi(G)  (for tree graphs)
+[b89794b1] PROOF_FAILED | delta(G) ≤ 0.5·kappa(G) + 0.5  (for tree graphs)
+          Lean: -- Conjecture: delta(G) ≤ 0.5·kappa(G) + 0.5  (for tree graphs)
+[212d90c0] PROOF_FAILED | delta(G) ≤ 0.5·lambda(G) + 0.5  (for tree graphs)
+          Lean: -- Conjecture: delta(G) ≤ 0.5·lambda(G) + 0.5  (for tree graphs)
+[6e31c4c6] PROOF_FAILED | delta(G) ≤ 0.5·omega(G)  (for tree graphs)
+          Lean: -- Conjecture: delta(G) ≤ 0.5·omega(G)  (for tree graphs)
+[36933278] PROOF_FAILED | kappa(G) ≤ 0.5·chi(G)  (for tree graphs)
+          Lean: -- Conjecture: kappa(G) ≤ 0.5·chi(G)  (for tree graphs)
+[e5a8efdc] PROOF_FAILED | kappa(G) ≤ 0.5·delta(G) + 0.5  (for tree graphs)
+          Lean: -- Conjecture: kappa(G) ≤ 0.5·delta(G) + 0.5  (for tree graphs)

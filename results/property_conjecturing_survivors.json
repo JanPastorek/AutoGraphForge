@@ -1,0 +1,34 @@
+[
+  {
+    "target": "is_hamiltonian",
+    "condition": "((~((is_chordal)|(is_planar)))&(is_eulerian))->(is_hamiltonian)"
+  },
+  {
+    "target": "is_hamiltonian",
+    "condition": "(((is_regular)->(is_vertex_transitive))->(is_dirac))->(is_hamiltonian)"
+  },
+  {
+    "target": "is_hamiltonian",
+    "condition": "((is_three_connected)&(is_planar))->(is_hamiltonian)"
+  },
+  {
+    "target": "is_hamiltonian",
+    "condition": "(((is_two_connected)&(is_bipartite))&(has_perfect_matching))->(is_hamiltonian)"
+  },
+  {
+    "target": "is_hamiltonian",
+    "condition": "((is_two_connected)&(is_claw_free))->(is_hamiltonian)"
+  },
+  {
+    "target": "has_perfect_matching",
+    "condition": "((has_even_order)&(is_claw_free))->(has_perfect_matching)"
+  },
+  {
+    "target": "has_perfect_matching",
+    "condition": "((is_hamiltonian)&(has_even_order))->(has_perfect_matching)"
+  },
+  {
+    "target": "has_perfect_matching",
+    "condition": "((~((is_chordal)|(is_bipartite)))&(has_even_order))->(has_perfect_matching)"
+  }
+]

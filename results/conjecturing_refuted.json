@@ -1,0 +1,902 @@
+[
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= max_degree(x)^2",
+    "witness_g6": "MIC_OGA?O@?A_A_@?"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= diameter(x) + 1",
+    "witness_g6": "L???GOOGA?O??~"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= chi(x)^2",
+    "witness_g6": "MIC_OGA?O@?A_A_@?"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= radius(x)^2",
+    "witness_g6": "J??G`@?_?N_"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(diameter(x), nu(x) - 1)",
+    "witness_g6": "J??G`@?_?N_"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= ceil(order(x)/spectral_radius(x))",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= 2*tau(x)/floor(avg_degree(x))",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(diameter(x) - 1, chi(x)^min_degree(x))",
+    "witness_g6": "J??G`@?_?N_"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= 2*(tau(x) + 1)/avg_degree(x)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= (tau(x)^girth(x))^alg_conn(x)",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= 2*girth(x)/(omega(x) - 2)",
+    "witness_g6": "K~{?GKF@wN~@"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= alg_conn(x)*girth(x)*tau(x)",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= ceil((alg_conn(x) + 1)^girth(x))",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= order(x)/minimum(avg_degree(x), radius(x))",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(diameter(x) - 1, order(x)^alg_conn(x))",
+    "witness_g6": "J??G`@?_?N_"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= (alg_conn(x) + 1)*order(x)/omega(x)",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= 2*diameter(x)*min_degree(x)/radius(x)",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= sqrt(alpha(x)) + min_degree(x)/alg_conn(x)",
+    "witness_g6": "L???GOOGA?O??~"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= sqrt(nu(x)) + min_degree(x)/alg_conn(x)",
+    "witness_g6": "J??G`@?_?N_"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= min_degree(x) - omega(x)",
+    "witness_g6": "M??????~~~^{~w~w?"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= -girth(x) + nu(x)",
+    "witness_g6": "K~{?GKF@wN~@"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= -alpha(x) + diameter(x)",
+    "witness_g6": "SIGOOGA_O??@?B?B_@w?^?B{?Nw?^w@^{"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= diameter(x) - girth(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= -min_degree(x) + radius(x)",
+    "witness_g6": "SIGOOGA_O??@?B?B_@w?^?B{?Nw?^w@^{"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= minimum(max_degree(x), nu(x) - omega(x))",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= floor(tau(x)/omega(x))",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= tau(x)/min_degree(x) - triangles(x) - 1",
+    "witness_g6": "K@GOOGA?Q@OA"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= -chi(x)*girth(x) + order(x)",
+    "witness_g6": "MHOOOGA?O@OA_A~~_"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= ceil(avg_degree(x) + 1)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= omega(x)^girth(x)/max_degree(x)",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= omega(x)^girth(x)/(alpha(x) + 1)",
+    "witness_g6": "MHOOOGA?O@OA_A~~_"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= omega(x)^(tau(x)^alg_conn(x))",
+    "witness_g6": "I~~~~~~~w"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= omega(x)^tau(x)/floor(avg_degree(x))",
+    "witness_g6": "M???????????~~~~?"
+  },
+  {
+    "target": "chi",
+    "direction": "lower",
+    "conjecture": "chi(x) >= 1/2*gamma(x)",
+    "witness_g6": "MIC_OGA?O@?A_A_@?"
+  },
+  {
+    "target": "chi",
+    "direction": "lower",
+    "conjecture": "chi(x) >= maximum(omega(x), 1/2*gamma(x))",
+    "witness_g6": "MIC_OGA?O@?A_A_@?"
+  },
+  {
+    "target": "chi",
+    "direction": "lower",
+    "conjecture": "chi(x) >= gamma(x) - omega(x)",
+    "witness_g6": "MIC_OGA?O@?A_A_@?"
+  },
+  {
+    "target": "chi",
+    "direction": "lower",
+    "conjecture": "chi(x) >= ceil(1/2*gamma(x))",
+    "witness_g6": "MIC_OGA?O@?A_A_@?"
+  },
+  {
+    "target": "chi",
+    "direction": "lower",
+    "conjecture": "chi(x) >= ceil(sqrt(gamma(x)))",
+    "witness_g6": "MIC_OGA?O@?A_A_@?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)^2",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= minimum(max_degree(x), avg_degree(x)^2)",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= omega(x)^2",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/min_degree(x) + maximum(avg_degree(x), alpha(x))",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(avg_degree(x)^2 + order(x))",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= max_degree(x)^(sqrt(1/2)*sqrt(avg_degree(x)))",
+    "witness_g6": "K@GOOGA?Q@OA"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/16*(min_degree(x) + 2)^4",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= omega(x)^(avg_degree(x)^alg_conn(x))",
+    "witness_g6": "I~~~~~~~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)/omega(x) + floor(avg_degree(x))",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)^2/min_degree(x)",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= size(x)/nu(x) + 1/min_degree(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= alpha(x)^(1/4)*avg_degree(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= omega(x)/nu(x) + avg_degree(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(sqrt(size(x)), avg_degree(x) + 1)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(triangles(x), 2*diameter(x))",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(triangles(x), girth(x) + 1)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(ceil(avg_degree(x))*max_degree(x))",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)*max_degree(x)^(1/4)",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 2/gamma(x) + avg_degree(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (omega(x) + order(x))/gamma(x)",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)/tau(x) + omega(x)",
+    "witness_g6": "M??????~~~^{~w~w?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (order(x)/diameter(x))^girth(x)",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (size(x)/gamma(x))^sqrt(avg_degree(x))",
+    "witness_g6": "L???GOOGA?O??~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (1/gamma(x) + 1)*avg_degree(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= ceil(avg_degree(x))^(alg_conn(x) + 1)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= max_degree(x)^alg_conn(x)*girth(x)",
+    "witness_g6": "K~{?GKF@wN~@"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= size(x)/nu(x) + 1/2*gamma(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(2)*sqrt(gamma(x)) + omega(x)",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)^diameter(x)/gamma(x)",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)^2 + alg_conn(x) - 1",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(diameter(x)^2, min_degree(x) + omega(x))",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(avg_degree(x))*size(x)/tau(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= triangles(x)/avg_degree(x) + girth(x)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= triangles(x)/alpha(x) + girth(x)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(omega(x), sqrt(size(x))) + 1",
+    "witness_g6": "ILvv^zz~_"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/4*girth(x)^2 + triangles(x)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (size(x) - 1)/nu(x) + 1",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= alg_conn(x)*avg_degree(x) + diameter(x)",
+    "witness_g6": "K~{?GKF@wN~@"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(size(x) + 1) + alg_conn(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)^(diameter(x)^alg_conn(x))",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt((max_degree(x) + 1)*avg_degree(x))",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= floor(avg_degree(x)) + 1/2*girth(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(2*diameter(x), triangles(x) - 1)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(girth(x) + 1, triangles(x) - 1)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 2*maximum(triangles(x), alg_conn(x) + 1)",
+    "witness_g6": "MIKq?CEA?AOB_Q_K?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)/diameter(x) + 1/2*max_degree(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/triangles(x) + alg_conn(x) + omega(x)",
+    "witness_g6": "KHOOOGA_S@^~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (alpha(x) + size(x))/(radius(x) + 1)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(order(x)) + avg_degree(x)/gamma(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= diameter(x)/tau(x) + ceil(avg_degree(x))",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)*girth(x)/sqrt(alpha(x))",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)^2*girth(x)/diameter(x)",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(chi(x)) + maximum(min_degree(x), omega(x))",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= size(x)/diameter(x) + 1/2*radius(x)",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= size(x)/radius(x) + 1/order(x)",
+    "witness_g6": "I@GOOHA_O"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= max_degree(x)^alg_conn(x) + 1/2*tau(x)",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(diameter(x)) + maximum(min_degree(x), omega(x))",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 2*alg_conn(x) + maximum(avg_degree(x), triangles(x))",
+    "witness_g6": "L???GOOGA?O??~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)*girth(x)^2/max_degree(x)",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 2*avg_degree(x)^gamma(x)/radius(x)",
+    "witness_g6": "N???????????????^~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(order(x)) + tau(x)/gamma(x)",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 2*chi(x)^radius(x)/gamma(x)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (alg_conn(x) + 1)*(avg_degree(x) + triangles(x))",
+    "witness_g6": "M@GOOGA?O@?AOA_@?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*girth(x) + maximum(diameter(x), triangles(x))",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(girth(x), triangles(x)) + 1/2*min_degree(x)",
+    "witness_g6": "M??????~~~^{~w~w?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= alg_conn(x)/nu(x) + omega(x) + 1",
+    "witness_g6": "KHOOOGA_S@^~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(triangles(x), order(x)^2/size(x))",
+    "witness_g6": "M??????~~~^{~w~w?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(triangles(x), 2*order(x)/avg_degree(x))",
+    "witness_g6": "M??????~~~^{~w~w?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(triangles(x), 1/2*max_degree(x))",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (avg_degree(x) + max_degree(x))/girth(x)",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(1/2*diameter(x), size(x)^alg_conn(x))",
+    "witness_g6": "IIC_OIA_O"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 1/2*(alpha(x) + 1)/avg_degree(x)",
+    "witness_g6": "L???????????~~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= alpha(x)^(gamma(x)/order(x))",
+    "witness_g6": "MIC_OGA?O@?A_A_@?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 2*size(x)/(girth(x)*nu(x))",
+    "witness_g6": "M???????????~~~~?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= diameter(x)^2/alpha(x)^2 - 1",
+    "witness_g6": "I@GOOHA_O"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(2)*sqrt(minimum(max_degree(x), triangles(x)))",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (avg_degree(x) - min_degree(x))*sqrt(gamma(x))",
+    "witness_g6": "RWCWw{^Fw??@?B?B_@w?^?B|^oC?^o"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (alpha(x) + gamma(x))/girth(x)",
+    "witness_g6": "MIKq?CEA?AOB_Q_K?"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(max_degree(x), nu(x) - radius(x))",
+    "witness_g6": "KHOOOGA_S@^~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (avg_degree(x)/diameter(x))^(1/2*alpha(x))",
+    "witness_g6": "KHOOOGA_S@^~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(diameter(x), triangles(x)/radius(x))",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(1/alg_conn(x), size(x)/diameter(x))",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= nu(x)^(max_degree(x)/order(x))",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= triangles(x)^(gamma(x)/max_degree(x))",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (1/2*avg_degree(x) - 1/2)^diameter(x)",
+    "witness_g6": "K~{?GKF@wN~@"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= ceil(sqrt(triangles(x)))/min_degree(x)",
+    "witness_g6": "OIGOSG??G@_F?N?N_FwD~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(alpha(x), 1/2*triangles(x) - 1/2)",
+    "witness_g6": "KHOOOGA_S@^~"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= alpha(x)^omega(x)/size(x)^2",
+    "witness_g6": "KIIO?CB?wF`^"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 1/2*minimum(triangles(x), max_degree(x) + 1)",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 1/2*minimum(max_degree(x), avg_degree(x)^2)",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (max_degree(x) - 1)/girth(x) + 1",
+    "witness_g6": "MHOOOGA?O@OA_A~~_"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt((min_degree(x) - 1)*max_degree(x))",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(max_degree(x)) + avg_degree(x) - omega(x)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(tau(x) - 1, -avg_degree(x) + max_degree(x))",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(sqrt(size(x)), -girth(x) + max_degree(x))",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 1/diameter(x) - alg_conn(x) + avg_degree(x)",
+    "witness_g6": "K~{?GKF@wN~@"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)/(sqrt(alg_conn(x))*gamma(x))",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(gamma(x) - 1, alpha(x)/radius(x))",
+    "witness_g6": "J??G`@?_?N_"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(triangles(x) - 1, -alg_conn(x) + alpha(x))",
+    "witness_g6": "MHOOOGA?O@OA_A~~_"
+  },
+  {
+    "target": "nu",
+    "direction": "upper",
+    "conjecture": "nu(x) <= alpha(x) + min_degree(x)",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "nu",
+    "direction": "upper",
+    "conjecture": "nu(x) <= gamma(x) + girth(x)",
+    "witness_g6": "K~{?GKF@wN~@"
+  },
+  {
+    "target": "nu",
+    "direction": "upper",
+    "conjecture": "nu(x) <= ceil(avg_degree(x))^gamma(x)",
+    "witness_g6": "IHOOSIA~w"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= max_degree(x)/girth(x)",
+    "witness_g6": "M???????????~~~~?"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -girth(x) + min_degree(x)",
+    "witness_g6": "I~~~~~~~w"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -girth(x) + tau(x)",
+    "witness_g6": "K~{?GKF@wN~@"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -girth(x) + max_degree(x) - 1",
+    "witness_g6": "KHOOOGA_S@^~"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -2*girth(x) + order(x)",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(avg_degree(x) - 1, gamma(x) + 1)",
+    "witness_g6": "M???????????~~~~?"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(triangles(x), -max_degree(x) + order(x))",
+    "witness_g6": "NWCWw{??G@_F?NVoOFo"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= 2*size(x)/(girth(x)*spectral_radius(x))",
+    "witness_g6": "M???????????~~~~?"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= (size(x) - triangles(x))/(girth(x) + 1)",
+    "witness_g6": "K??????~~~^{"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(floor(avg_degree(x)), max_degree(x) - triangles(x))",
+    "witness_g6": "K??????~~~^{"
+  }
+]

@@ -1,0 +1,2338 @@
+{
+  "generated_total": 494,
+  "generated_by_method": {
+    "txgraffiti": 209,
+    "conjecturing-expr": 277,
+    "conjecturing-prop": 8
+  },
+  "refuted": 162,
+  "survivors": 332,
+  "novel_survivors": 332,
+  "elapsed_s": 1982.8,
+  "results": [
+    {
+      "id": "d3723714",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7degeneracy(G) + tri(G) + 0.5  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: omega(G) \u2264 0.5\u00b7degeneracy(G) + tri(G) + 0.5  (for hypohamiltonian graphs)"
+    },
+    {
+      "id": "8190a184",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 longest_path(G) + 0.5\u00b7omega(G)  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "872042a3",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 longest_path(G) + 0.5\u00b7tri(G) + 1  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "4ac9d113",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 longest_path(G) + 0.5\u00b7tri(G)  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "fff56536",
+      "method": "txgraffiti",
+      "statement": "longest_path(G) \u2264 circumference(G) + 0.5\u00b7tri(G)  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "a6624070",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 circumference(G) + 0.5\u00b7omega(G)  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "2d376a93",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 circumference(G) + 0.5\u00b7tri(G) + 1  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "f829b595",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7lambda(G) + 0.5\u00b7spanning_trees(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "05af3082",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7kappa(G) + 0.5\u00b7spanning_trees(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "43a511e5",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 spanning_trees(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "089c60eb",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 spanning_trees(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "a4fcfa5f",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7delta(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: degeneracy(G) \u2264 0.5\u00b7delta(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "263d1e6c",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: degeneracy(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "f3058a92",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: degeneracy(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "87bbab20",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: degeneracy(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)"
+    },
+    {
+      "id": "2174e7bf",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: delta(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "fb8e8bd1",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "2c30ae72",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "54599075",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "55d6c02b",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "12806632",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "75447fee",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "8ef690e8",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: degeneracy(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)"
+    },
+    {
+      "id": "eb0352b8",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: degeneracy(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "6907493f",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: delta(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "ec3c3abe",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "7a734e5b",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "4555d0cf",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: treewidth(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)"
+    },
+    {
+      "id": "65897777",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: treewidth(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "21642960",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7delta(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: treewidth(G) \u2264 0.5\u00b7delta(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "17337b8a",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: treewidth(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "1dcb43ec",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: treewidth(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "3ce6e45d",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: treewidth(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)"
+    },
+    {
+      "id": "368eda3a",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "f07b165e",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: delta(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "3ff1e9e9",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: delta(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "7309c985",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: delta(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)"
+    },
+    {
+      "id": "3fa0036e",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7delta(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7delta(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "849f4776",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "d882e010",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)"
+    },
+    {
+      "id": "65f1c7ab",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7delta(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7delta(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "0547715f",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for tree graphs)"
+    },
+    {
+      "id": "26e464aa",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7omega(G)  (for tree graphs)"
+    },
+    {
+      "id": "13ea9fbb",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7delta(G) + 1.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: omega(G) \u2264 0.5\u00b7delta(G) + 1.5  (for tree graphs)"
+    },
+    {
+      "id": "82ea5032",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7kappa(G) + 1.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: omega(G) \u2264 0.5\u00b7kappa(G) + 1.5  (for tree graphs)"
+    },
+    {
+      "id": "fbbb39f8",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7lambda(G) + 1.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: omega(G) \u2264 0.5\u00b7lambda(G) + 1.5  (for tree graphs)"
+    },
+    {
+      "id": "7e649f79",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7delta(G) + 1.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: chi(G) \u2264 0.5\u00b7delta(G) + 1.5  (for tree graphs)"
+    },
+    {
+      "id": "b0d426d6",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7kappa(G) + 1.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: chi(G) \u2264 0.5\u00b7kappa(G) + 1.5  (for tree graphs)"
+    },
+    {
+      "id": "b8a6ddae",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7lambda(G) + 1.5  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: chi(G) \u2264 0.5\u00b7lambda(G) + 1.5  (for tree graphs)"
+    },
+    {
+      "id": "8b58deb3",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: delta(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)"
+    },
+    {
+      "id": "84e9f30d",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)"
+    },
+    {
+      "id": "52cd3e92",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7chi(G)  (for tree graphs)"
+    },
+    {
+      "id": "b4ef8193",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7components(G) + 1.5  (for bipartite graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "fcb84cd9",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7components(G) + 0.5\u00b7omega(G) + 0.5  (for bipartite graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "a90e635b",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7chi(G) + 0.5\u00b7components(G) + 0.5  (for bipartite graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "df47a3aa",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7components(G) + 1.5  (for bipartite graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "dda32f04",
+      "method": "txgraffiti",
+      "statement": "gamma(G) \u2264 0.5\u00b7ind_dom(G) + 0.5\u00b7rad(G)  (for cograph graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "6eee1102",
+      "method": "txgraffiti",
+      "statement": "rad(G) \u2264 0.5\u00b7gamma(G) + 0.5\u00b7ind_dom(G)  (for cograph graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "21f93706",
+      "method": "txgraffiti",
+      "statement": "rad(G) \u2264 ind_dom(G)  (for cograph graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "3b384199",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: degeneracy(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "393c3885",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "b681b532",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7delta(G) + 0.5\u00b7kappa(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7delta(G) + 0.5\u00b7kappa(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "55d58210",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: degeneracy(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "7b4c195e",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: degeneracy(G) \u2264 0.5\u00b7treewidth(G) + 0.5  (for acyclic graphs)"
+    },
+    {
+      "id": "affaf42c",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: treewidth(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "12cf9a69",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: treewidth(G) \u2264 0.5\u00b7degeneracy(G) + 0.5  (for acyclic graphs)"
+    },
+    {
+      "id": "b7a8c44e",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: treewidth(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "d7c5b7de",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7delta(G) + 0.5\u00b7spanning_trees(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "62cfc992",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7delta(G) + 0.5\u00b7spanning_trees(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "9541484e",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "8938e7e9",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7alg(G) + 0.5\u00b7delta(G)  (for cograph graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "e4046271",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7alg(G) + 0.5\u00b7lambda(G)  (for cograph graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "b84c274e",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 alg(G) + eig2(G)  (for regular graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "e2c9dfac",
+      "method": "txgraffiti",
+      "statement": "nu(G) \u2264 0.5\u00b7gamma(G) + 3  (for self_compl graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: nu(G) \u2264 0.5\u00b7gamma(G) + 3  (for self_compl graphs)"
+    },
+    {
+      "id": "2d98d442",
+      "method": "txgraffiti",
+      "statement": "fvs(G) \u2264 0.5\u00b7nu(G) + 1  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "53748d3f",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7lambda(G) + 1.5  (for cubic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7lambda(G) + 1.5  (for cubic graphs)"
+    },
+    {
+      "id": "5c5f664d",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7kappa(G) + 1.5  (for cubic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7kappa(G) + 1.5  (for cubic graphs)"
+    },
+    {
+      "id": "b663a8ab",
+      "method": "txgraffiti",
+      "statement": "longest_path(G) \u2264 1.5\u00b7fvs(G) + 0.5\u00b7n(G) + 2  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "a5218148",
+      "method": "txgraffiti",
+      "statement": "m(G) \u2264 Delta(G) + 1.5\u00b7longest_path(G)  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "25f573c4",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 1.5\u00b7fvs(G) + 0.5\u00b7longest_path(G) + 5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "123eb323",
+      "method": "txgraffiti",
+      "statement": "nu(G) \u2264 0.5\u00b7longest_path(G) + 1  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "cbcb034a",
+      "method": "txgraffiti",
+      "statement": "alpha(G) \u2264 gamma(G) + genus(G) + 1  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "8d1ad2d0",
+      "method": "txgraffiti",
+      "statement": "alpha(G) \u2264 genus(G) + ind_dom(G) + 1  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "ccd20f0b",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 2\u00b7fvs(G) + gamma(G) + 4  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "c82c0310",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 2\u00b7fvs(G) + ind_dom(G) + 4  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "a9aac80b",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 3\u00b7fvs(G) + kappa(G) + 2  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "0a704326",
+      "method": "txgraffiti",
+      "statement": "fvs(G) \u2264 0.5\u00b7chi_e(G) + 2\u00b7kappa(G) + 4  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "d22f98fb",
+      "method": "txgraffiti",
+      "statement": "gamma(G) \u2264 0.5\u00b7chi_e(G) + 3\u00b7kappa(G) + 2  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "bc7f3b58",
+      "method": "txgraffiti",
+      "statement": "gamma(G) \u2264 0.5\u00b7fvs(G) + 1.5\u00b7kappa(G) + 2.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "8baa9cdc",
+      "method": "txgraffiti",
+      "statement": "gamma(G) \u2264 0.5\u00b7ind_dom(G) + kappa(G) + 3.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "ecfdfa64",
+      "method": "txgraffiti",
+      "statement": "ind_dom(G) \u2264 0.5\u00b7chi_e(G) + 3\u00b7kappa(G) + 2  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "2ea9b5bc",
+      "method": "txgraffiti",
+      "statement": "ind_dom(G) \u2264 0.5\u00b7fvs(G) + 1.5\u00b7kappa(G) + 2.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "6283c24e",
+      "method": "txgraffiti",
+      "statement": "ind_dom(G) \u2264 0.5\u00b7gamma(G) + kappa(G) + 3.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "54fcde2f",
+      "method": "txgraffiti",
+      "statement": "longest_induced_path(G) \u2264 1.5\u00b7gamma(G) + 2\u00b7kappa(G) + 1.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "54f1eb32",
+      "method": "txgraffiti",
+      "statement": "longest_induced_path(G) \u2264 1.5\u00b7ind_dom(G) + 2\u00b7kappa(G) + 1.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "438bfa8a",
+      "method": "txgraffiti",
+      "statement": "longest_path(G) \u2264 alpha(G) + 2\u00b7fvs(G)  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "4d94f20d",
+      "method": "txgraffiti",
+      "statement": "longest_path(G) \u2264 2\u00b7kappa(G) + 0.5\u00b7m(G) + 3  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "4dbf57d8",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 alpha(G) + 2\u00b7fvs(G) + 2  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "4bb43b1e",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 0.5\u00b7chi_e(G) + longest_path(G)  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "c79dd6ea",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 2\u00b7kappa(G) + 0.5\u00b7m(G) + 5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: n(G) \u2264 2\u00b7kappa(G) + 0.5\u00b7m(G) + 5  (for hypotraceable graphs)"
+    },
+    {
+      "id": "d4bddf99",
+      "method": "txgraffiti",
+      "statement": "nu(G) \u2264 alpha(G) + kappa(G) + 1  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: nu(G) \u2264 alpha(G) + kappa(G) + 1  (for hypotraceable graphs)"
+    },
+    {
+      "id": "17c98475",
+      "method": "txgraffiti",
+      "statement": "nu(G) \u2264 1.5\u00b7fvs(G) + 0.5\u00b7rad(G) + 1  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "2b91fc8f",
+      "method": "txgraffiti",
+      "statement": "vertex_cover(G) \u2264 2\u00b7fvs(G) + 2  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "55d2f7f8",
+      "method": "txgraffiti",
+      "statement": "vertex_cover(G) \u2264 0.5\u00b7chi_e(G) + 1.5\u00b7gamma(G) + 4.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "c7267584",
+      "method": "txgraffiti",
+      "statement": "vertex_cover(G) \u2264 0.5\u00b7chi_e(G) + 1.5\u00b7ind_dom(G) + 4.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "507f848b",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 alg(G) + eig2(G)  (for regular graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "c817814e",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 0.5\u00b7gamma(G) + 1.5\u00b7nu(G) + 1.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "a787bac1",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 0.5\u00b7ind_dom(G) + 1.5\u00b7nu(G) + 1.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "d6aa7ed4",
+      "method": "txgraffiti",
+      "statement": "nu(G) \u2264 0.5\u00b7Delta(G) + 0.5\u00b7circumference(G)  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "c2124551",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 Delta(G) + circumference(G)  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "7412c819",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 2\u00b7alpha(G) + 0.5\u00b7gamma(G) + 1.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: n(G) \u2264 2\u00b7alpha(G) + 0.5\u00b7gamma(G) + 1.5  (for hypotraceable graphs)"
+    },
+    {
+      "id": "251ea768",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 2\u00b7alpha(G) + 0.5\u00b7ind_dom(G) + 1.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "c8253866",
+      "method": "txgraffiti",
+      "statement": "vertex_cover(G) \u2264 alpha(G) + 0.5\u00b7gamma(G) + 1.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: vertex_cover(G) \u2264 alpha(G) + 0.5\u00b7gamma(G) + 1.5  (for hypotraceable graphs)"
+    },
+    {
+      "id": "50ca7742",
+      "method": "txgraffiti",
+      "statement": "vertex_cover(G) \u2264 alpha(G) + 0.5\u00b7ind_dom(G) + 1.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "2a80e01d",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 kappa(G) + 1.5\u00b7nu(G) + 5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "908c8b9b",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: delta(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "a68d7489",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7degeneracy(G) + 0.5\u00b7kappa(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7degeneracy(G) + 0.5\u00b7kappa(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "af2bc121",
+      "method": "txgraffiti",
+      "statement": "gamma(G) \u2264 0.5\u00b7ind_dom(G) + rad(G) + 0.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "38b486d6",
+      "method": "txgraffiti",
+      "statement": "ind_dom(G) \u2264 0.5\u00b7gamma(G) + rad(G) + 0.5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "d5855305",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "a66d5488",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7degeneracy(G) + 0.5\u00b7spanning_trees(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "494f95e4",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7degeneracy(G) + 0.5\u00b7spanning_trees(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "04abc1e9",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 0.5\u00b7arc_orbits(G) + 0.5\u00b7degeneracy(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "5b4cd6f2",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 0.5\u00b7arc_orbits(G) + 0.5\u00b7delta(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "09de6ed9",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 0.5\u00b7arc_orbits(G) + 0.5\u00b7kappa(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "32d08450",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 0.5\u00b7arc_orbits(G) + 0.5\u00b7lambda(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "03b756a5",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 0.5\u00b7arc_orbits(G) + 0.5\u00b7omega(G)  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "d224cf27",
+      "method": "txgraffiti",
+      "statement": "delta(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: delta(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "6310b1de",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7kappa(G) + 2.5  (for outerplanar graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: chi(G) \u2264 0.5\u00b7kappa(G) + 2.5  (for outerplanar graphs)"
+    },
+    {
+      "id": "c01644ed",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 0.5\u00b7arc_orbits(G) + 1  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "6a897a12",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7kappa(G) + 0.5\u00b7treewidth(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7kappa(G) + 0.5\u00b7treewidth(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "08a515b3",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 degeneracy(G) + edge_orbits(G)  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "21b19c21",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 delta(G) + edge_orbits(G)  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "0a6446d1",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 edge_orbits(G) + kappa(G)  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "17ccde6f",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 edge_orbits(G) + lambda(G)  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "d13ec61a",
+      "method": "txgraffiti",
+      "statement": "gamma(G) \u2264 kappa(G) + rad(G) + 4  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: gamma(G) \u2264 kappa(G) + rad(G) + 4  (for hypotraceable graphs)"
+    },
+    {
+      "id": "c21bb45e",
+      "method": "txgraffiti",
+      "statement": "ind_dom(G) \u2264 kappa(G) + rad(G) + 4  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "56caa419",
+      "method": "txgraffiti",
+      "statement": "rad(G) \u2264 Delta(G) + 3  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: rad(G) \u2264 Delta(G) + 3  (for hypotraceable graphs)"
+    },
+    {
+      "id": "f02c4dfb",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7spanning_trees(G) + 0.5\u00b7treewidth(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "fd0315e4",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7spanning_trees(G) + 0.5\u00b7treewidth(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "ba87ea1e",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 edge_orbits(G) + 0.5\u00b7omega(G)  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "c9f098ca",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 edge_orbits(G) + 1  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "d8153f30",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 0.5\u00b7arc_orbits(G) + 0.5\u00b7chi(G)  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "2d6f7d6f",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 1.5\u00b7nu(G) + rad(G) + 2  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "9d48b047",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 0.5\u00b7arc_orbits(G) + 0.5\u00b7treewidth(G) + 0.5  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "6a55b8fb",
+      "method": "txgraffiti",
+      "statement": "rad(G) \u2264 Delta(G) + 0.5\u00b7chi_e(G) + 1  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "436ce2a9",
+      "method": "txgraffiti",
+      "statement": "rad(G) \u2264 1.5\u00b7Delta(G) + 0.5\u00b7kappa(G)  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: rad(G) \u2264 1.5\u00b7Delta(G) + 0.5\u00b7kappa(G)  (for hypotraceable graphs)"
+    },
+    {
+      "id": "5dd205bc",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 edge_orbits(G) + treewidth(G)  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "82fb89cd",
+      "method": "txgraffiti",
+      "statement": "vertex_orbits(G) \u2264 0.5\u00b7chi(G) + edge_orbits(G)  (for tree graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "16f3a82b",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7avg_deg(G) + 0.5\u00b7density(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "f8aa68a3",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7avg_deg(G) + 0.5\u00b7density(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "752e522b",
+      "method": "txgraffiti",
+      "statement": "spanning_trees(G) \u2264 0.5\u00b7avg_deg(G) + 0.5\u00b7density(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "50f9e098",
+      "method": "txgraffiti",
+      "statement": "gamma(G) \u2264 2\u00b7rad(G) + 1  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: gamma(G) \u2264 2\u00b7rad(G) + 1  (for hypotraceable graphs)"
+    },
+    {
+      "id": "9f772a89",
+      "method": "txgraffiti",
+      "statement": "ind_dom(G) \u2264 2\u00b7rad(G) + 1  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "4fb56341",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7chi(G) + 0.5\u00b7kappa(G) + 1  (for outerplanar graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: omega(G) \u2264 0.5\u00b7chi(G) + 0.5\u00b7kappa(G) + 1  (for outerplanar graphs)"
+    },
+    {
+      "id": "a60eb8bd",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7kappa(G) + 2.5  (for outerplanar graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: omega(G) \u2264 0.5\u00b7kappa(G) + 2.5  (for outerplanar graphs)"
+    },
+    {
+      "id": "87d7fd25",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 2\u00b7fvs(G) + 2\u00b7rad(G) + 5  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "88d527b7",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 degeneracy(G) + 0.5\u00b7genus(G)  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "3511d344",
+      "method": "txgraffiti",
+      "statement": "nu(G) \u2264 0.5\u00b7chi_e(G) + 3\u00b7rad(G) + 2  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "7c560c6e",
+      "method": "txgraffiti",
+      "statement": "longest_induced_path(G) \u2264 2\u00b7kappa(G) + 3\u00b7rad(G) + 3  (for hypotraceable graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "1fc051ac",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7zero_eigenvalues(G) + 3  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "b06d438d",
+      "method": "txgraffiti",
+      "statement": "circumference(G) \u2264 longest_path(G) + 0.5\u00b7zero_eigenvalues(G)  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "21b42858",
+      "method": "txgraffiti",
+      "statement": "longest_path(G) \u2264 circumference(G) + 0.5\u00b7zero_eigenvalues(G)  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "edeaa3e2",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 circumference(G) + 0.5\u00b7zero_eigenvalues(G) + 1  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "bc160543",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 longest_path(G) + 0.5\u00b7zero_eigenvalues(G) + 1  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "348f8e0a",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7omega(G) + 0.5\u00b7zero_eigenvalues(G) + 2  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "6459b1d0",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7tri(G) + 0.5\u00b7zero_eigenvalues(G) + 3  (for hypohamiltonian graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "2cc67e9d",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7components(G) + degeneracy(G) + 0.5  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "ba554040",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7components(G) + degeneracy(G) + 0.5  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "cb4d5e68",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7components(G) + treewidth(G) + 0.5  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "3a718802",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7components(G) + treewidth(G) + 0.5  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "1be13c91",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7lambda(G) + 0.5  (for acyclic graphs)"
+    },
+    {
+      "id": "61149163",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7kappa(G) + 0.5  (for acyclic graphs)"
+    },
+    {
+      "id": "0b712f4b",
+      "method": "txgraffiti",
+      "statement": "spanning_trees(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "d8d24c97",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "84f5655c",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7omega(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "ea51b103",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "5b371f86",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7eig_min(G) + 0.5\u00b7spectral_radius(G) + 1  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "9ff19c74",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7lambda(G) + 2.5  (for outerplanar graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: chi(G) \u2264 0.5\u00b7lambda(G) + 2.5  (for outerplanar graphs)"
+    },
+    {
+      "id": "0767cbb6",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7kappa(G) + 0.5\u00b7lambda(G) + 2  (for outerplanar graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: chi(G) \u2264 0.5\u00b7kappa(G) + 0.5\u00b7lambda(G) + 2  (for outerplanar graphs)"
+    },
+    {
+      "id": "dfb00c41",
+      "method": "txgraffiti",
+      "statement": "kappa(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: kappa(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "37684405",
+      "method": "txgraffiti",
+      "statement": "lambda(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: lambda(G) \u2264 0.5\u00b7chi(G)  (for acyclic graphs)"
+    },
+    {
+      "id": "9c73471e",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 2\u00b7nu(G) + 1  (for self_compl graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: n(G) \u2264 2\u00b7nu(G) + 1  (for self_compl graphs)"
+    },
+    {
+      "id": "7761d6b9",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7fvs(G) + 0.5\u00b7omega(G)  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "d989bd01",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7degeneracy(G) + 0.5\u00b7fvs(G) + 1.5  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "368a2035",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7fvs(G) + 0.5\u00b7omega(G) + 1  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "08f960d8",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7chi(G) + 0.5\u00b7fvs(G)  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "52747c3f",
+      "method": "txgraffiti",
+      "statement": "chi(G) \u2264 0.5\u00b7fvs(G) + 0.5\u00b7treewidth(G) + 1.5  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "21f5faa0",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7fvs(G) + 0.5\u00b7treewidth(G) + 0.5  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "f06a8424",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7chi(G) + 0.5\u00b7fvs(G)  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "04ff0b66",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7degeneracy(G) + 0.5\u00b7fvs(G) + 0.5  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "5b57d58c",
+      "method": "txgraffiti",
+      "statement": "treewidth(G) \u2264 0.5\u00b7fvs(G) + 0.5\u00b7omega(G)  (for chordal graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "cef93f57",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7components(G) + 0.5\u00b7kappa(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "8bdff989",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7components(G) + 0.5\u00b7lambda(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "5450cc89",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7components(G) + 0.5\u00b7kappa(G) + 1  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "03c64e6d",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7components(G) + 0.5\u00b7lambda(G) + 1  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "197fc1bb",
+      "method": "txgraffiti",
+      "statement": "degeneracy(G) \u2264 0.5\u00b7components(G) + 0.5\u00b7spanning_trees(G)  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "b5f03e9e",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7components(G) + 0.5\u00b7spanning_trees(G) + 1  (for acyclic graphs)",
+      "novel": true,
+      "lean": null
+    },
+    {
+      "id": "a3caaa46",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7chi(G) + 0.5\u00b7lambda(G) + 1  (for outerplanar graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: omega(G) \u2264 0.5\u00b7chi(G) + 0.5\u00b7lambda(G) + 1  (for outerplanar graphs)"
+    },
+    {
+      "id": "c405dfbc",
+      "method": "txgraffiti",
+      "statement": "omega(G) \u2264 0.5\u00b7lambda(G) + 2.5  (for outerplanar graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: omega(G) \u2264 0.5\u00b7lambda(G) + 2.5  (for outerplanar graphs)"
+    },
+    {
+      "id": "3b698879",
+      "method": "conjecturing-expr",
+      "statement": "alpha(x) >= gamma(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: alpha(x) >= gamma(x)"
+    },
+    {
+      "id": "1aadee34",
+      "method": "conjecturing-expr",
+      "statement": "alpha(x) >= radius(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: alpha(x) >= radius(x)"
+    },
+    {
+      "id": "c0859c86",
+      "method": "conjecturing-expr",
+      "statement": "alpha(x) >= order(x) - tau(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: alpha(x) >= order(x) - tau(x)"
+    },
+    {
+      "id": "1914a4a4",
+      "method": "conjecturing-expr",
+      "statement": "alpha(x) >= order(x)/chi(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: alpha(x) >= order(x)/chi(x)"
+    },
+    {
+      "id": "876665f6",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) <= alpha(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) <= alpha(x)"
+    },
+    {
+      "id": "2813747d",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) <= nu(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) <= nu(x)"
+    },
+    {
+      "id": "e71013d9",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) <= minimum(alpha(x), -max_degree(x) + order(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) <= minimum(alpha(x), -max_degree(x) + order(x))"
+    },
+    {
+      "id": "71ad8283",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) <= 2*tau(x)/min_degree(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) <= 2*tau(x)/min_degree(x)"
+    },
+    {
+      "id": "675cc25c",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) <= ceil(size(x)/(min_degree(x) + 1))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) <= ceil(size(x)/(min_degree(x) + 1))"
+    },
+    {
+      "id": "f0ec8b29",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) <= lam(x) - min_degree(x) + nu(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) <= lam(x) - min_degree(x) + nu(x)"
+    },
+    {
+      "id": "35ae8fa7",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) <= chi(x)^alpha(x)/ceil(spectral_radius(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) <= chi(x)^alpha(x)/ceil(spectral_radius(x))"
+    },
+    {
+      "id": "869d89e2",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) >= sqrt(radius(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) >= sqrt(radius(x))"
+    },
+    {
+      "id": "46fdf90e",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) >= ceil(sqrt(radius(x)))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) >= ceil(sqrt(radius(x)))"
+    },
+    {
+      "id": "34e28284",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) >= floor(sqrt(diameter(x)))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) >= floor(sqrt(diameter(x)))"
+    },
+    {
+      "id": "c2c8659c",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) >= ceil(sqrt(diameter(x) - 1))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) >= ceil(sqrt(diameter(x) - 1))"
+    },
+    {
+      "id": "30900599",
+      "method": "conjecturing-expr",
+      "statement": "gamma(x) >= order(x)/chi(x) - max_degree(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: gamma(x) >= order(x)/chi(x) - max_degree(x)"
+    },
+    {
+      "id": "bab15f38",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= 2*avg_degree(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= 2*avg_degree(x)"
+    },
+    {
+      "id": "3d48a954",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= omega(x) + 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= omega(x) + 1"
+    },
+    {
+      "id": "7209066d",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= tau(x) + 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= tau(x) + 1"
+    },
+    {
+      "id": "c2e3f6f9",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= maximum(omega(x), tau(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= maximum(omega(x), tau(x))"
+    },
+    {
+      "id": "8b20e2a6",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= maximum(omega(x), floor(avg_degree(x) + 1))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= maximum(omega(x), floor(avg_degree(x) + 1))"
+    },
+    {
+      "id": "4356ec88",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= maximum(omega(x), -diameter(x) + order(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= maximum(omega(x), -diameter(x) + order(x))"
+    },
+    {
+      "id": "a383a81f",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= omega(x) - radius(x) + tau(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= omega(x) - radius(x) + tau(x)"
+    },
+    {
+      "id": "e01c05db",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= maximum(girth(x) + 1, 1/2*triangles(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= maximum(girth(x) + 1, 1/2*triangles(x))"
+    },
+    {
+      "id": "a6a64cc0",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= maximum(ceil(avg_degree(x)), omega(x)^gamma(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= maximum(ceil(avg_degree(x)), omega(x)^gamma(x))"
+    },
+    {
+      "id": "8141b38b",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= maximum(ceil(avg_degree(x)), maximum(omega(x), girth(x)))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= maximum(ceil(avg_degree(x)), maximum(omega(x), girth(x)))"
+    },
+    {
+      "id": "e30e40ca",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) <= maximum(omega(x), sqrt(min_degree(x)) + nu(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) <= maximum(omega(x), sqrt(min_degree(x)) + nu(x))"
+    },
+    {
+      "id": "67adbad1",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) >= ceil(order(x)/alpha(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) >= ceil(order(x)/alpha(x))"
+    },
+    {
+      "id": "54a16f26",
+      "method": "conjecturing-expr",
+      "statement": "chi(x) >= ceil(max_degree(x)/alpha(x) + 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: chi(x) >= ceil(max_degree(x)/alpha(x) + 1)"
+    },
+    {
+      "id": "64b57e2e",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= avg_degree(x)^alpha(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= avg_degree(x)^alpha(x)"
+    },
+    {
+      "id": "ddb0d53f",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= 1/4*size(x) + tau(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= 1/4*size(x) + tau(x)"
+    },
+    {
+      "id": "bd743b6b",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= 1/2*order(x) + triangles(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= 1/2*order(x) + triangles(x)"
+    },
+    {
+      "id": "ce0f6b3b",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= ceil(sqrt(size(x))) + triangles(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= ceil(sqrt(size(x))) + triangles(x)"
+    },
+    {
+      "id": "d6b71fb2",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= avg_degree(x)^(sqrt(1/2)*sqrt(order(x)))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= avg_degree(x)^(sqrt(1/2)*sqrt(order(x)))"
+    },
+    {
+      "id": "607a3e41",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= maximum(omega(x), 1/2*size(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= maximum(omega(x), 1/2*size(x))"
+    },
+    {
+      "id": "11c6214b",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= 1/2*maximum(order(x), triangles(x)) + 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= 1/2*maximum(order(x), triangles(x)) + 1"
+    },
+    {
+      "id": "bba30de9",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= sqrt(floor(avg_degree(x))*order(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= sqrt(floor(avg_degree(x))*order(x))"
+    },
+    {
+      "id": "e53834c2",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= size(x)/omega(x) + 1/2*tau(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= size(x)/omega(x) + 1/2*tau(x)"
+    },
+    {
+      "id": "1814123f",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= order(x)*tau(x)/omega(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= order(x)*tau(x)/omega(x)"
+    },
+    {
+      "id": "2156a66e",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= sqrt(size(x) + triangles(x) + 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= sqrt(size(x) + triangles(x) + 1)"
+    },
+    {
+      "id": "59990897",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= 1/2/nu(x) + 1/2*size(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= 1/2/nu(x) + 1/2*size(x)"
+    },
+    {
+      "id": "5835304d",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= maximum(triangles(x), alpha(x) + gamma(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= maximum(triangles(x), alpha(x) + gamma(x))"
+    },
+    {
+      "id": "f6436511",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= size(x)/floor(sqrt(max_degree(x)))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= size(x)/floor(sqrt(max_degree(x)))"
+    },
+    {
+      "id": "c6267c7a",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= maximum(alpha(x), tau(x)^2 - 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= maximum(alpha(x), tau(x)^2 - 1)"
+    },
+    {
+      "id": "c9fa188f",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= 1/2*omega(x) + 1/4*size(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= 1/2*omega(x) + 1/4*size(x)"
+    },
+    {
+      "id": "3a3bcd91",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= -sqrt(alpha(x)) + maximum(order(x), triangles(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= -sqrt(alpha(x)) + maximum(order(x), triangles(x))"
+    },
+    {
+      "id": "bd83405a",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= maximum(triangles(x), alpha(x) + kappa(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= maximum(triangles(x), alpha(x) + kappa(x))"
+    },
+    {
+      "id": "5777cca0",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= alg_conn(x) + maximum(alpha(x), triangles(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= alg_conn(x) + maximum(alpha(x), triangles(x))"
+    },
+    {
+      "id": "5b096a31",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= maximum(triangles(x), alg_conn(x) + alpha(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= maximum(triangles(x), alg_conn(x) + alpha(x))"
+    },
+    {
+      "id": "e3510530",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= sqrt(max_degree(x))^(min_degree(x) + 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= sqrt(max_degree(x))^(min_degree(x) + 1)"
+    },
+    {
+      "id": "7c2b0d4c",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= sqrt(size(x) + 1) + triangles(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= sqrt(size(x) + 1) + triangles(x)"
+    },
+    {
+      "id": "0614497b",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= maximum(min_degree(x), max_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= maximum(min_degree(x), max_degree(x))"
+    },
+    {
+      "id": "a65c3ba9",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= (chi(x) - 1)*order(x)/omega(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= (chi(x) - 1)*order(x)/omega(x)"
+    },
+    {
+      "id": "537d2c65",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= maximum(order(x), size(x))/sqrt(max_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= maximum(order(x), size(x))/sqrt(max_degree(x))"
+    },
+    {
+      "id": "af6fcbe9",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= max_degree(x)/min_degree(x) + avg_degree(x) - 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= max_degree(x)/min_degree(x) + avg_degree(x) - 1"
+    },
+    {
+      "id": "d222ce26",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= maximum(max_degree(x), nu(x))^(1/2*avg_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= maximum(max_degree(x), nu(x))^(1/2*avg_degree(x))"
+    },
+    {
+      "id": "4c0c9f8f",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= (alg_conn(x) + size(x))/sqrt(order(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= (alg_conn(x) + size(x))/sqrt(order(x))"
+    },
+    {
+      "id": "720d5a86",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= sqrt(order(x))^tau(x)/gamma(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= sqrt(order(x))^tau(x)/gamma(x)"
+    },
+    {
+      "id": "1b907e22",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) <= (size(x) + 1)/chi(x) + triangles(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) <= (size(x) + 1)/chi(x) + triangles(x)"
+    },
+    {
+      "id": "310e2e1a",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= omega(x) - 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= omega(x) - 1"
+    },
+    {
+      "id": "48f228eb",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= chi(x) - 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= chi(x) - 1"
+    },
+    {
+      "id": "f07c1a25",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= floor(sqrt(max_degree(x)))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= floor(sqrt(max_degree(x)))"
+    },
+    {
+      "id": "169b0a99",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= sqrt(max_degree(x)) - floor(alg_conn(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= sqrt(max_degree(x)) - floor(alg_conn(x))"
+    },
+    {
+      "id": "cea8c559",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x)"
+    },
+    {
+      "id": "142bdd2e",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= sqrt(ceil(avg_degree(x)))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= sqrt(ceil(avg_degree(x)))"
+    },
+    {
+      "id": "c335b72d",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= minimum(gamma(x), sqrt(max_degree(x)))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= minimum(gamma(x), sqrt(max_degree(x)))"
+    },
+    {
+      "id": "d011717e",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= 2*size(x)/order(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= 2*size(x)/order(x)"
+    },
+    {
+      "id": "fb403f1d",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= gamma(x)^(2/size(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= gamma(x)^(2/size(x))"
+    },
+    {
+      "id": "db9acf39",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= minimum(nu(x), alg_conn(x) + 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= minimum(nu(x), alg_conn(x) + 1)"
+    },
+    {
+      "id": "4465abf8",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= sqrt(-1/girth(x) + max_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= sqrt(-1/girth(x) + max_degree(x))"
+    },
+    {
+      "id": "2eb8ef03",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= 4/(alg_conn(x) + 2)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= 4/(alg_conn(x) + 2)"
+    },
+    {
+      "id": "9d33daa2",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x)*min_degree(x)/tau(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x)*min_degree(x)/tau(x)"
+    },
+    {
+      "id": "599c82c0",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x) + min_degree(x) - tau(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x) + min_degree(x) - tau(x)"
+    },
+    {
+      "id": "2d244fac",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x)*omega(x)/chi(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x)*omega(x)/chi(x)"
+    },
+    {
+      "id": "0245f304",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x) - chi(x) + omega(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x) - chi(x) + omega(x)"
+    },
+    {
+      "id": "89062684",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x) + nu(x) - tau(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x) + nu(x) - tau(x)"
+    },
+    {
+      "id": "2b742639",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x) - diameter(x) + radius(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x) - diameter(x) + radius(x)"
+    },
+    {
+      "id": "c0ba06a0",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= minimum(diameter(x), alg_conn(x)^avg_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= minimum(diameter(x), alg_conn(x)^avg_degree(x))"
+    },
+    {
+      "id": "6a2f33ca",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= -gamma(x)/triangles(x) + girth(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= -gamma(x)/triangles(x) + girth(x)"
+    },
+    {
+      "id": "b6485e60",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= minimum(max_degree(x), avg_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= minimum(max_degree(x), avg_degree(x))"
+    },
+    {
+      "id": "67a65dcb",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= triangles(x)^(1/tau(x)) + 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= triangles(x)^(1/tau(x)) + 1"
+    },
+    {
+      "id": "a80cb21c",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= 2*sqrt(sqrt(max_degree(x)) - 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= 2*sqrt(sqrt(max_degree(x)) - 1)"
+    },
+    {
+      "id": "6d17ad34",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x) + max_degree(x) - order(x) + 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x) + max_degree(x) - order(x) + 1"
+    },
+    {
+      "id": "7bb83ca2",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x)*kappa(x)/min_degree(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x)*kappa(x)/min_degree(x)"
+    },
+    {
+      "id": "fc6bc32f",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= avg_degree(x)*lam(x)/min_degree(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= avg_degree(x)*lam(x)/min_degree(x)"
+    },
+    {
+      "id": "ef7c1ff8",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= (avg_degree(x)^omega(x))^(1/chi(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= (avg_degree(x)^omega(x))^(1/chi(x))"
+    },
+    {
+      "id": "fcfdcc6d",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= minimum(max_degree(x), omega(x))/sqrt(alpha(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= minimum(max_degree(x), omega(x))/sqrt(alpha(x))"
+    },
+    {
+      "id": "8973cc45",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= minimum(max_degree(x), omega(x))/sqrt(diameter(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= minimum(max_degree(x), omega(x))/sqrt(diameter(x))"
+    },
+    {
+      "id": "499ca5ab",
+      "method": "conjecturing-expr",
+      "statement": "spectral_radius(x) >= (avg_degree(x) - 1)*omega(x)/tau(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: spectral_radius(x) >= (avg_degree(x) - 1)*omega(x)/tau(x)"
+    },
+    {
+      "id": "88054d39",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) <= size(x)/avg_degree(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) <= size(x)/avg_degree(x)"
+    },
+    {
+      "id": "4bba4a79",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) <= floor(1/2*order(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) <= floor(1/2*order(x))"
+    },
+    {
+      "id": "7b5072ca",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) <= minimum(tau(x), size(x)/avg_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) <= minimum(tau(x), size(x)/avg_degree(x))"
+    },
+    {
+      "id": "84d2d45b",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= gamma(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= gamma(x)"
+    },
+    {
+      "id": "15fd03e9",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= radius(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= radius(x)"
+    },
+    {
+      "id": "ee220434",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= 1/2*min_degree(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= 1/2*min_degree(x)"
+    },
+    {
+      "id": "53deaaca",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= min_degree(x)/kappa(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= min_degree(x)/kappa(x)"
+    },
+    {
+      "id": "4a0aebe6",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= min_degree(x) - triangles(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= min_degree(x) - triangles(x)"
+    },
+    {
+      "id": "f537a70f",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= -max_degree(x) + tau(x) + 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= -max_degree(x) + tau(x) + 1"
+    },
+    {
+      "id": "081433c6",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(min_degree(x), alpha(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(min_degree(x), alpha(x))"
+    },
+    {
+      "id": "4712f9b5",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= -omega(x) + tau(x) + 1",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= -omega(x) + tau(x) + 1"
+    },
+    {
+      "id": "95abe236",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= ceil(1/2*min_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= ceil(1/2*min_degree(x))"
+    },
+    {
+      "id": "83f285e7",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= ceil(1/2*avg_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= ceil(1/2*avg_degree(x))"
+    },
+    {
+      "id": "6d75e6e1",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= ceil(1/2*tau(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= ceil(1/2*tau(x))"
+    },
+    {
+      "id": "9a603956",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(lam(x), -min_degree(x) + order(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(lam(x), -min_degree(x) + order(x))"
+    },
+    {
+      "id": "da297c64",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= -kappa(x) + min_degree(x) + radius(x)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= -kappa(x) + min_degree(x) + radius(x)"
+    },
+    {
+      "id": "7276b025",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(diameter(x), floor(avg_degree(x)))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(diameter(x), floor(avg_degree(x)))"
+    },
+    {
+      "id": "e4430fbd",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(girth(x), -min_degree(x) + tau(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(girth(x), -min_degree(x) + tau(x))"
+    },
+    {
+      "id": "5ba9f608",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(alpha(x), tau(x) - 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(alpha(x), tau(x) - 1)"
+    },
+    {
+      "id": "d8a46be4",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(diameter(x), omega(x) - 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(diameter(x), omega(x) - 1)"
+    },
+    {
+      "id": "755ea5d0",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= tau(x)/(chi(x) - 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= tau(x)/(chi(x) - 1)"
+    },
+    {
+      "id": "b3835c45",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(omega(x), diameter(x) - 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(omega(x), diameter(x) - 1)"
+    },
+    {
+      "id": "e5ccaf37",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(chi(x), diameter(x) - 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(chi(x), diameter(x) - 1)"
+    },
+    {
+      "id": "e2972c38",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(diameter(x), kappa(x)^2)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(diameter(x), kappa(x)^2)"
+    },
+    {
+      "id": "05797fff",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= floor(size(x)/max_degree(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= floor(size(x)/max_degree(x))"
+    },
+    {
+      "id": "da3cf53e",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(kappa(x), -min_degree(x) + order(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(kappa(x), -min_degree(x) + order(x))"
+    },
+    {
+      "id": "a35837c1",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(girth(x), -kappa(x) + tau(x))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(girth(x), -kappa(x) + tau(x))"
+    },
+    {
+      "id": "f39b44ab",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= minimum(alpha(x), floor(avg_degree(x)) - 1)",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= minimum(alpha(x), floor(avg_degree(x)) - 1)"
+    },
+    {
+      "id": "7711cb63",
+      "method": "conjecturing-expr",
+      "statement": "nu(x) >= ceil(size(x)/(max_degree(x) + 1))",
+      "novel": true,
+      "lean": "-- conjecturing-expr: nu(x) >= ceil(size(x)/(max_degree(x) + 1))"
+    },
+    {
+      "id": "df8f17a8",
+      "method": "conjecturing-prop",
+      "statement": "(((is_regular)->(is_vertex_transitive))->(is_dirac))->(is_hamiltonian)",
+      "novel": true,
+      "lean": "-- conjecturing-prop: (((is_regular)->(is_vertex_transitive))->(is_dirac))->(is_hamiltonian)"
+    },
+    {
+      "id": "07f5d3e7",
+      "method": "conjecturing-prop",
+      "statement": "((is_three_connected)&(is_planar))->(is_hamiltonian)",
+      "novel": true,
+      "lean": "-- conjecturing-prop: ((is_three_connected)&(is_planar))->(is_hamiltonian)"
+    },
+    {
+      "id": "8618daed",
+      "method": "conjecturing-prop",
+      "statement": "(((is_two_connected)&(is_bipartite))&(has_perfect_matching))->(is_hamiltonian)",
+      "novel": true,
+      "lean": "-- conjecturing-prop: (((is_two_connected)&(is_bipartite))&(has_perfect_matching))->(is_hamiltonian)"
+    },
+    {
+      "id": "4dea5a9b",
+      "method": "conjecturing-prop",
+      "statement": "((is_two_connected)&(is_claw_free))->(is_hamiltonian)",
+      "novel": true,
+      "lean": "-- conjecturing-prop: ((is_two_connected)&(is_claw_free))->(is_hamiltonian)"
+    },
+    {
+      "id": "664bd82b",
+      "method": "conjecturing-prop",
+      "statement": "((has_even_order)&(is_claw_free))->(has_perfect_matching)",
+      "novel": true,
+      "lean": "-- conjecturing-prop: ((has_even_order)&(is_claw_free))->(has_perfect_matching)"
+    },
+    {
+      "id": "313689eb",
+      "method": "conjecturing-prop",
+      "statement": "((is_hamiltonian)&(has_even_order))->(has_perfect_matching)",
+      "novel": true,
+      "lean": "-- conjecturing-prop: ((is_hamiltonian)&(has_even_order))->(has_perfect_matching)"
+    },
+    {
+      "id": "58bab79f",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 0.5\u00b7alpha(G) + 0.5\u00b7m(G) + 0.5  (for cubic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: n(G) \u2264 0.5\u00b7alpha(G) + 0.5\u00b7m(G) + 0.5  (for cubic graphs)"
+    },
+    {
+      "id": "73ce202e",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 0.5\u00b7alpha(G) + 1.5\u00b7nu(G) + 0.5  (for cubic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: n(G) \u2264 0.5\u00b7alpha(G) + 1.5\u00b7nu(G) + 0.5  (for cubic graphs)"
+    },
+    {
+      "id": "e51adee8",
+      "method": "txgraffiti",
+      "statement": "m(G) \u2264 alpha(G) + n(G) + 1  (for cubic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: m(G) \u2264 alpha(G) + n(G) + 1  (for cubic graphs)"
+    },
+    {
+      "id": "e18de800",
+      "method": "txgraffiti",
+      "statement": "m(G) \u2264 alpha(G) + 2\u00b7nu(G) + 1  (for cubic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: m(G) \u2264 alpha(G) + 2\u00b7nu(G) + 1  (for cubic graphs)"
+    },
+    {
+      "id": "92f15bc4",
+      "method": "txgraffiti",
+      "statement": "nu(G) \u2264 alpha(G) + 1  (for cubic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: nu(G) \u2264 alpha(G) + 1  (for cubic graphs)"
+    },
+    {
+      "id": "30b46da5",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 0.5\u00b7gamma(G) + 2\u00b7nu(G)  (for self_compl graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: n(G) \u2264 0.5\u00b7gamma(G) + 2\u00b7nu(G)  (for self_compl graphs)"
+    },
+    {
+      "id": "d9456e13",
+      "method": "txgraffiti",
+      "statement": "n(G) \u2264 2\u00b7alpha(G) + 2  (for cubic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: n(G) \u2264 2\u00b7alpha(G) + 2  (for cubic graphs)"
+    },
+    {
+      "id": "5f3184bf",
+      "method": "txgraffiti",
+      "statement": "m(G) \u2264 3\u00b7alpha(G) + 3  (for cubic graphs)",
+      "novel": true,
+      "lean": "-- Conjecture: m(G) \u2264 3\u00b7alpha(G) + 3  (for cubic graphs)"
+    }
+  ]
+}

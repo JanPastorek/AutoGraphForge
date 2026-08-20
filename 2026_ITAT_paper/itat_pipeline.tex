@@ -65,7 +65,7 @@ eliminated---among them nontrivial relations between the annihilation number and
 
 \section{Introduction}
 
-Computer-assisted discovery of mathematical results and conjectures has a long history which is well documented in \cite{larson2017automated,delavina2005history}. With the advent of artificial intelligence and high-performance computing, it might be expected that the role of computers in mathematical discovery will increase. In fact, T. Tao \cite{tao2025machine} notes that new methods for computer assistance in mathematical research already include using machine learning to discover new relationships, searching for counterexamples, and using formal proof assistants to verify proofs. Moreover, as the same author notes, large language models such as ChatGPT can be used to assist in mathematical research, for example by searching through the known literature or suggesting proof strategies. A quite thorough entry point into this growing area is the proceedings of the June~2023 National Academies workshop on ``AI to Assist Mathematical Reasoning''~\cite{koretsky2023ai}; as one of its outcomes, Talia Ringer led the compilation of a community resource list on AI for mathematics, available and updated at \url{https://docs.google.com/document/d/1kD7H4E28656ua8jOGZ934nbH2HcBLyxcRgFDduH5iQ0}.
+Computer-assisted discovery of mathematical results and conjectures has a long history which is well documented in \cite{larson2017automated,delavina2005history}. With the advent of artificial intelligence and high-performance computing, it might be expected that the role of computers in mathematical discovery will increase. In fact, as T. Tao \cite{tao2025machine} notes that new methods for computer assistance in mathematical research already include using machine learning to discover new relationships, searching for counterexamples, and using formal proof assistants to verify proofs. Moreover, as the same author notes, large language models such as ChatGPT can be used to assist in mathematical research, for example by searching through the known literature or suggesting proof strategies. A quite thorough entry point into this growing area is the proceedings of the June~2023 National Academies workshop on ``AI to Assist Mathematical Reasoning''~\cite{koretsky2023ai}; as one of its outcomes, Talia Ringer led the compilation of a community resource list on AI for mathematics, available and updated at \url{https://docs.google.com/document/d/1kD7H4E28656ua8jOGZ934nbH2HcBLyxcRgFDduH5iQ0}.
 
 For the purpose of this paper, we divide computer-assistance in mathematical discovery based on the research stage computers assist: (i) \emph{conjecturing} new statements based on a knowledge base, (ii) \emph{refuting} them by searching for counterexamples or inconsistencies, (iii) \emph{formalizing} them into a rigorous language, and ultimately (iv) \emph{proving} them in a formal system.
 
@@ -107,7 +107,7 @@ conjecture that overfits the table by accumulating many terms and constants
 (producing unnecessarily complex bounds such as $\alpha\le 0.31\,\Delta+0.42\,\nu-0.07\,m+1.8$).
 Fifth, the system can ``discover'' a counterexample
 to a well-established conjecture, which almost always signals an error in an
-invariant routine. The first and the last failure
+invariant computation. The first and the last failure
 modes are about trust: a generated inequality that ``holds'' and a
 verified ``counterexample'' are each only as reliable as the data and invariant computations behind them. The second and the third failure modes are about novelty: a candidate that is true but known, or true but trivial, is mathematically uninteresting and of little value to the practitioner. All of these failure modes are mitigated---though, as \S\ref{sec:worked} shows for triviality, not yet eliminated---in our pipeline by the adversarial counterexample search, the novelty filter, and the selection heuristics.
 
@@ -334,7 +334,8 @@ valid on all graphs are admissible for every candidate.
     \end{itemize}
 
     Because the invariants $g_i$ are treated as independent symbolic variables, matching the coefficient of each $g_i$ on both sides reduces the problem to a system of linear equations. Verifying redundancy therefore reduces to a linear-programming (LP) feasibility test: if the solver finds weights and
-  slacks satisfying the identity, the candidate is provably a structural consequence of the tabled theorems and is \emph{flagged as a known rediscovery}---excluded from the set of \emph{novel} survivors, but stored, so it can serve as a soundness check (the $33$ flagged rediscoveries of \S\ref{sec:dynamics}).
+  slacks satisfying the identity, the candidate is provably a structural consequence of the tabled theorems and is \emph{flagged as a known rediscovery}---excluded from the set of \emph{novel} survivors, but stored, so it can serve as a soundness check (the $33$ rediscoveries flagged \emph{during the run}, \S\ref{sec:dynamics}; the
+  filter has since been extended and now flags $146$ of the ranked survivors).
 
 We inserted into the novelty filter a list of known relations, including classical theorems, folklore, and trivial bounds from standard books and literature in graph theory. Together the list holds $559$ entries after closing the simple $f\le g$
 relations under transitivity. For instance the following are captured in the list: Whitney's connectivity chain $\kappa\le\lambda\le\delta$~\cite{whitney1932congruent}
@@ -490,7 +491,7 @@ We now report on the iterative process of the pipeline and its preliminary outco
 \subsection{Iterative run dynamics on the cluster}
 \label{sec:dynamics}
 
-The snapshot $T$ persists across all development and reported runs, so it is not the bootstrap
+The snapshot $T$ persists across all development and reported runs, so it is not the initial
 $337$ TxGraffiti expressive graphs by the time we report numbers below---it already carries witnesses
 accumulated over earlier runs. To establish a baseline, we first ran a single-pass generation
 (one generate--refute round) from an intermediate snapshot of $1{,}554$ graphs ($337$ expressive plus
@@ -539,7 +540,7 @@ by the span of its nine invariant targets.
 \end{table}
 
 Three patterns are robust across partitions. (i) The first round alone contributes
-$\sim\!500$--$790$ new witnesses (a $\sim\!20$--$28\%$ expansion of $T$), after which the
+$\sim\!500$--$790$ new witnesses (a $\sim\!17$--$28\%$ expansion of $T$), after which the
 per-round yield falls sharply and trends toward zero---$\sim\!40$--$160$ in
 round~2 and $\sim\!3$--$20$ in round~3 (Table~\ref{tab:rounds}). The decline is
 not strictly monotone, however: partition~1 rebounds in its later rounds
@@ -553,7 +554,7 @@ a minor contributor.} The entire set of algorithms (z3 / cross-entropy / VNS / S
 / MCTS / RL) accounts for only $1$--$22$ counterexamples per round. We note this is a
 single-run observation over stochastic searchers run at default hyperparameters (configurations
 are in the public repository), so it should not be read as a general verdict on the methods; a possible
-reason is precisely that we did not optimize their hyperparameters, and we plan to investigate this further.
+reason is precisely that we did not optimize their hyperparameters or only harder conjectures remain, and we plan to investigate this further.
 
 Merging the five partitions' output conjectures ($8{,}281$ in total) and removing duplicate
 statements yields $6{,}522$ survivors. The class-conditioned inequalities
@@ -568,7 +569,13 @@ by disconnected graphs in the refutation dataset (which break bounds that tacitl
 recognised as known, leaving the survivors in their class-conditioned forms. This is not a claim that
 unconditioned inequalities cannot hold in general---$\Delta\ge\delta$, for instance, holds for every
 graph---only that, in this run, the surviving novel candidates were class-conditioned. The novelty filter
-flags $33$ survivors as rediscoveries of classical results---among them Gallai's identity $\tau = n - \alpha$, the bound $\mathrm{rad} \le \alpha$ (conjectured by \textsc{Graffiti} and proved by Erd\H{o}s, Saks, and S\'os~\cite{erdos1986induced}), the K\"onig--Egerv\'ary theorem $\nu = \tau$, the perfect-graph identity $\alpha = \overline{\theta}$, and fundamental inequalities such as $\nu \le \tau \le 2\nu$, $\nu \le n/2$, and $\gamma \le i(G)$---each recovered independently on the chordal, cograph, and bipartite classes. We read these rediscoveries as a soundness check: the pipeline recovers known theorems and correctly does not flag them as novel. We note that they are expected---the generator recombines invariants, so producing known relations is the design working, not a discovery---and therefore evidence correctness, not discovery capability; the genuine test is whether the novel survivors are meaningful, which we begin to examine in \S\ref{sec:worked}. 
+flags $33$ survivors as rediscoveries of classical results---among them Gallai's identity $\tau = n - \alpha$, the bound $\mathrm{rad} \le \alpha$ (conjectured by \textsc{Graffiti} and proved by Erd\H{o}s, Saks, and S\'os~\cite{erdos1986induced}), the K\"onig--Egerv\'ary theorem $\nu = \tau$, the perfect-graph identity $\alpha = \overline{\theta}$, and fundamental inequalities such as $\nu \le \tau \le 2\nu$, $\nu \le n/2$, and $\gamma \le i(G)$---each recovered independently on the chordal, cograph, and bipartite classes. We read these rediscoveries as a soundness check: the pipeline recovers known theorems and correctly does not flag them as novel. We note that they are expected---the generator recombines invariants, so producing known relations is the design working, not a discovery---and therefore evidence correctness, not discovery capability; the genuine test is whether the novel survivors are meaningful, which we begin to examine in \S\ref{sec:worked}.
+This count is the one recorded \emph{during the run}, against the novelty table as it
+then stood. The table has since been extended to its present $559$ entries, and
+re-classifying the survivors against the extended table flags $146$ of the $2{,}677$
+ranked survivors as known---among them the $49$ of Table~\ref{tab:audit}. The two
+figures are therefore not comparable: $33$ measures what the run itself caught, $146$
+what the current filter catches. 
 
 \subsection{Exemplary machine-generated discoveries}
 \label{sec:worked}
@@ -675,6 +682,8 @@ publication's content.
 
 \section*{Code availability}
 All code and its documentation, data, logs, and databases are available and being developed at \url{https://github.com/JanPastorek/AutoGraphForge}.
+The complete list of surviving conjectures is published there as
+\texttt{results/survivors\_by\_touch.txt}.
 
 \bibliography{sample-ceur}
 

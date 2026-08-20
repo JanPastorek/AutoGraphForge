@@ -1,0 +1,128 @@
+{
+  "trivial": [
+    [
+      "Delta(G) \u2264 delta(G)",
+      "tautology on regular graphs"
+    ],
+    [
+      "delta(G) \u2264 Delta(G)",
+      "tautology on regular graphs"
+    ],
+    [
+      "regular(G) \u2264 0.5\u00b7tree(G) + 1",
+      "boolean-vacuum/scale-bound (likely trivial)"
+    ],
+    [
+      "regular(G) \u2264 0.5\u00b7chordal(G) + 1",
+      "boolean-vacuum/scale-bound (likely trivial)"
+    ],
+    [
+      "regular(G) \u2264 0.5\u00b7planar(G) + 1",
+      "boolean-vacuum/scale-bound (likely trivial)"
+    ],
+    [
+      "regular(G) \u2264 0.5\u00b7eulerian(G) + 1",
+      "boolean-vacuum/scale-bound (likely trivial)"
+    ],
+    [
+      "regular(G) \u2264 0.5\u00b7bipartite(G) + 1",
+      "boolean-vacuum/scale-bound (likely trivial)"
+    ],
+    [
+      "bipartite(G) \u2264 0.5\u00b7regular(G) + 0.5",
+      "boolean-vacuum/scale-bound (likely trivial)"
+    ],
+    [
+      "bipartite(G) \u2264 regular(G)",
+      "boolean-vacuum/scale-bound (likely trivial)"
+    ],
+    [
+      "eulerian(G) \u2264 0.5\u00b7regular(G) + 0.5",
+      "boolean-vacuum/scale-bound (likely trivial)"
+    ],
+    [
+      "eulerian(G) \u2264 regular(G)",
+      "boolean-vacuum/scale-bound (likely trivial)"
+    ]
+  ],
+  "textbook": [
+    [
+      "kappa(G) \u2264 lambda(G)",
+      "standard inequality"
+    ],
+    [
+      "lambda(G) \u2264 Delta(G)",
+      "standard inequality"
+    ]
+  ],
+  "potential": [
+    [
+      "tree(G) \u2264 chordal(G)",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "nu(G) \u2264 0.5\u00b7n(G)",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "tree(G) \u2264 planar(G)",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "lambda(G) \u2264 delta(G)",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "kappa(G) \u2264 Delta(G)",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "kappa(G) \u2264 delta(G)",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "tree(G) \u2264 bipartite(G)",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "rad(G) \u2264 diam(G)",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "bipartite(G) \u2264 0.5\u00b7tree(G) + 1",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "bipartite(G) \u2264 0.5\u00b7chordal(G) + 1",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "bipartite(G) \u2264 0.5\u00b7planar(G) + 1",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "bipartite(G) \u2264 0.5\u00b7eulerian(G) + 1",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "chi(G) \u2264 Delta(G) + 1",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "chi(G) \u2264 delta(G) + 1",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "eulerian(G) \u2264 0.5\u00b7tree(G) + 1",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "eulerian(G) \u2264 0.5\u00b7chordal(G) + 1",
+      "holds on dataset; needs falsification"
+    ],
+    [
+      "eulerian(G) \u2264 0.5\u00b7planar(G) + 1",
+      "holds on dataset; needs falsification"
+    ]
+  ]
+}

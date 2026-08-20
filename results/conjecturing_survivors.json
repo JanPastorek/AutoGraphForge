@@ -1,0 +1,1407 @@
+[
+  {
+    "target": "alpha",
+    "direction": "lower",
+    "conjecture": "alpha(x) >= gamma(x)"
+  },
+  {
+    "target": "alpha",
+    "direction": "lower",
+    "conjecture": "alpha(x) >= radius(x)"
+  },
+  {
+    "target": "alpha",
+    "direction": "lower",
+    "conjecture": "alpha(x) >= order(x) - tau(x)"
+  },
+  {
+    "target": "alpha",
+    "direction": "lower",
+    "conjecture": "alpha(x) >= order(x)/chi(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= alpha(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= nu(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(max_degree(x), nu(x) - triangles(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= minimum(alpha(x), -max_degree(x) + order(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(max_degree(x), -nu(x) + size(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(diameter(x), alpha(x) - 1)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= 2*tau(x)/min_degree(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(chi(x), order(x)/avg_degree(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= ceil(order(x)/avg_degree(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= size(x)/minimum(diameter(x), triangles(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(floor(spectral_radius(x)), order(x)/triangles(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= min_degree(x)/triangles(x) + spectral_radius(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= alpha(x)/lam(x) + kappa(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(min_degree(x), alpha(x)/alg_conn(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(omega(x) - 1, size(x)/triangles(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= (order(x)/chi(x))^sqrt(omega(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= ceil(size(x)/(min_degree(x) + 1))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= lam(x) - min_degree(x) + nu(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(min_degree(x), nu(x)/alg_conn(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= 2*floor(tau(x)/kappa(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= ceil((order(x) - 1)/avg_degree(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= ceil(order(x)/ceil(avg_degree(x)))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= 1/triangles(x) - diameter(x) + order(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= maximum(max_degree(x) - 1, order(x)/triangles(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= 1/2*avg_degree(x)^max_degree(x)/triangles(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= alpha(x)/triangles(x) + spectral_radius(x) - 1"
+  },
+  {
+    "target": "gamma",
+    "direction": "upper",
+    "conjecture": "gamma(x) <= chi(x)^alpha(x)/ceil(spectral_radius(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= sqrt(radius(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= ceil(sqrt(radius(x)))"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= minimum(min_degree(x), radius(x))"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= floor(sqrt(diameter(x)))"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= ceil(sqrt(diameter(x) - 1))"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= order(x)/chi(x) - max_degree(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= (chi(x) - max_degree(x))*alpha(x)"
+  },
+  {
+    "target": "gamma",
+    "direction": "lower",
+    "conjecture": "gamma(x) >= -maximum(alpha(x), triangles(x)) + tau(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= 2*avg_degree(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= omega(x) + 1"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= tau(x) + 1"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= floor(spectral_radius(x) + 1)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(omega(x), tau(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(girth(x), triangles(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= 2*floor(avg_degree(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(omega(x), floor(avg_degree(x) + 1))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(max_degree(x), order(x)^alg_conn(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(omega(x), -diameter(x) + order(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= -min_degree(x) + omega(x) + tau(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= omega(x) - radius(x) + tau(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= alg_conn(x)*gamma(x) + omega(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(omega(x), alpha(x) + min_degree(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= tau(x)/spectral_radius(x) + omega(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(omega(x), alpha(x) + kappa(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(girth(x) + 1, 1/2*triangles(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(omega(x), sqrt(size(x)) + 1)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(omega(x), (size(x) + 1)/alg_conn(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= (order(x) - 1)*omega(x)/spectral_radius(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(ceil(avg_degree(x)), omega(x)^gamma(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= omega(x)^kappa(x) + 1/min_degree(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= 1/2*omega(x)^spectral_radius(x)/triangles(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= girth(x)*omega(x) - diameter(x) - 1"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(omega(x), alpha(x) + 1/2*max_degree(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(ceil(avg_degree(x)), maximum(omega(x), girth(x)))"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= kappa(x)*omega(x)^2/min_degree(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= (order(x) + triangles(x))/(spectral_radius(x) - 1)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= 1/triangles(x) + alg_conn(x) + omega(x)"
+  },
+  {
+    "target": "chi",
+    "direction": "upper",
+    "conjecture": "chi(x) <= maximum(omega(x), sqrt(min_degree(x)) + nu(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "lower",
+    "conjecture": "chi(x) >= ceil(order(x)/alpha(x))"
+  },
+  {
+    "target": "chi",
+    "direction": "lower",
+    "conjecture": "chi(x) >= ceil(max_degree(x)/alpha(x) + 1)"
+  },
+  {
+    "target": "chi",
+    "direction": "lower",
+    "conjecture": "chi(x) >= tau(x)/(gamma(x)*min_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)^alpha(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(girth(x), 1/2*avg_degree(x)^2)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)/omega(x) + triangles(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/4*size(x) + tau(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*order(x) + triangles(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= ceil(sqrt(size(x))) + triangles(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)^(sqrt(1/2)*sqrt(order(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(omega(x), 1/2*size(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= alpha(x)*avg_degree(x)^2/tau(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (nu(x) + size(x))/(radius(x) + 1)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= alg_conn(x)^alpha(x) + omega(x) + 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*maximum(order(x), triangles(x)) + 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(floor(avg_degree(x))*order(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= size(x)/omega(x) + 1/2*tau(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)^2/(gamma(x)*max_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= ceil(size(x)/radius(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= omega(x)*order(x)/(diameter(x) + 1)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)/alpha(x)^(1/4)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)*tau(x)/omega(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)/kappa(x) + min_degree(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)/kappa(x) + alg_conn(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(size(x) + triangles(x) + 1)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(girth(x), -alpha(x) + size(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(omega(x), size(x)/radius(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2/nu(x) + 1/2*size(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(alpha(x), tau(x)) + min_degree(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (omega(x)^max_degree(x))^(1/2*min_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= order(x)/diameter(x) + tau(x) - 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= avg_degree(x)^girth(x)/nu(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= -alpha(x)^(1/4) + order(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= max_degree(x)^alg_conn(x) + omega(x) - 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(triangles(x), alpha(x) + gamma(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= size(x)/floor(sqrt(max_degree(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(alpha(x), tau(x)^2 - 1)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*omega(x) + 1/4*size(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= -sqrt(alpha(x)) + maximum(order(x), triangles(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(triangles(x)) + order(x)/omega(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(triangles(x), alpha(x) + kappa(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= girth(x)*maximum(min_degree(x), triangles(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= alg_conn(x) + maximum(alpha(x), triangles(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= tau(x)/(chi(x) - omega(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= triangles(x)/gamma(x) + alpha(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= girth(x)*maximum(kappa(x), triangles(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*omega(x)^girth(x)*alg_conn(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(triangles(x), alg_conn(x) + alpha(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= triangles(x)/order(x) + alpha(x) + 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(max_degree(x))^(min_degree(x) + 1)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*max_degree(x)^avg_degree(x)/triangles(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(size(x) + 1) + triangles(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*maximum(triangles(x), girth(x)^2)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/4*order(x) + tau(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(min_degree(x), max_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= floor(sqrt(alg_conn(x))*size(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(size(x)) + tau(x)/alpha(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 2*floor(alg_conn(x) + avg_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= kappa(x) - min_degree(x) + order(x) - 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (chi(x) - 1)*order(x)/omega(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(tau(x) + 1, order(x)/gamma(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= alg_conn(x)^2 + maximum(girth(x), triangles(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= ceil(alg_conn(x))*order(x)/kappa(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(girth(x) + 1, -order(x) + size(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(order(x), size(x))/sqrt(max_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (size(x)/tau(x))^sqrt(omega(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(omega(x) + 1, size(x)/diameter(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= -sqrt(lam(x)) + kappa(x) + max_degree(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= max_degree(x)/min_degree(x) + avg_degree(x) - 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(size(x)) + omega(x)/alpha(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(diameter(x))*maximum(alpha(x), tau(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(tau(x) + 1, alpha(x) + min_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (order(x) - 1)*omega(x)/chi(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(min_degree(x), chi(x))^(1/2*max_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*alpha(x) + maximum(min_degree(x), chi(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(max_degree(x), nu(x))^(1/2*avg_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(girth(x))*min_degree(x)*nu(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*(max_degree(x) + tau(x))*min_degree(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (alg_conn(x) + size(x))/sqrt(order(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= alg_conn(x)*girth(x) + tau(x) - 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(triangles(x) - 1, alg_conn(x) + girth(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= girth(x) + maximum(triangles(x), alg_conn(x)) - 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (order(x) + 1)/lam(x) + kappa(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(omega(x), (order(x) + 1)*alg_conn(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(omega(x), alpha(x) + 1/2*order(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= maximum(omega(x), alg_conn(x) + 1/2*order(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(order(x))^tau(x)/gamma(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= sqrt(order(x))^girth(x)/alpha(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= alg_conn(x) + maximum(triangles(x), sqrt(order(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= (size(x) + 1)/chi(x) + triangles(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "upper",
+    "conjecture": "spectral_radius(x) <= 1/2*size(x)/kappa(x) + alg_conn(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= omega(x) - 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= chi(x) - 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(gamma(x), triangles(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= floor(sqrt(max_degree(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(max_degree(x)) - floor(alg_conn(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(ceil(avg_degree(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(triangles(x), sqrt(order(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= alpha(x)^1/sqrt(girth(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(gamma(x), sqrt(max_degree(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 2*size(x)/order(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(girth(x), triangles(x) - 1)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= gamma(x)^(2/size(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(nu(x), alg_conn(x) + 1)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(-1/girth(x) + max_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= -(max_degree(x) - order(x))/nu(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 4/(alg_conn(x) + 2)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= -1/triangles(x) + radius(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 2*(max_degree(x) - min_degree(x))/alpha(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 1/2*(avg_degree(x) - kappa(x))*lam(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(diameter(x), min_degree(x)^alg_conn(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(ceil(avg_degree(x)*min_degree(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)*min_degree(x)/tau(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x) + min_degree(x) - tau(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)*omega(x)/chi(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(triangles(x), alpha(x) - nu(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= alg_conn(x) + diameter(x) - girth(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x) - chi(x) + omega(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(ceil(avg_degree(x)), order(x)/girth(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (gamma(x) + max_degree(x))/girth(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(gamma(x), 1/4*omega(x)^2)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x) + nu(x) - tau(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x) - diameter(x) + radius(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (alpha(x) + radius(x))/girth(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(alpha(x), -max_degree(x) + triangles(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(diameter(x), alg_conn(x)^avg_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(radius(x), alg_conn(x)*omega(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= alg_conn(x)*diameter(x) - min_degree(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(gamma(x), alg_conn(x) + triangles(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(2)*sqrt(omega(x)) - alg_conn(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)*min_degree(x)/tau(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= -max_degree(x)/alpha(x) + omega(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)*omega(x)/chi(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= -chi(x)/alpha(x) + omega(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(2)*sqrt(chi(x)) - alg_conn(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= -min_degree(x)/triangles(x) + gamma(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= -gamma(x)/triangles(x) + girth(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(1/2*diameter(x), max_degree(x)/avg_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= ceil(avg_degree(x))*max_degree(x)/order(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(max_degree(x), avg_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(triangles(x), sqrt(2)*sqrt(alpha(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (radius(x) + 1)*max_degree(x)/order(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 2*order(x)/(girth(x)*nu(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= triangles(x)^(1/tau(x)) + 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(alpha(x)*sqrt(triangles(x)))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= 2*sqrt(sqrt(max_degree(x)) - 1)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(max_degree(x) - 1, order(x)/girth(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(gamma(x)^2, -diameter(x) + max_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= sqrt(gamma(x))*max_degree(x)/girth(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(diameter(x) - 1, max_degree(x)^alg_conn(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x) + max_degree(x) - order(x) + 1"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)*kappa(x)/min_degree(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)*lam(x)/min_degree(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= avg_degree(x)*min_degree(x)/tau(x)"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (avg_degree(x)^omega(x))^(1/chi(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(triangles(x)^2, alpha(x) - avg_degree(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(max_degree(x), omega(x))/sqrt(alpha(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= minimum(max_degree(x), omega(x))/sqrt(diameter(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= -1/alg_conn(x) + minimum(alpha(x), omega(x))"
+  },
+  {
+    "target": "spectral_radius",
+    "direction": "lower",
+    "conjecture": "spectral_radius(x) >= (avg_degree(x) - 1)*omega(x)/tau(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "upper",
+    "conjecture": "nu(x) <= size(x)/avg_degree(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "upper",
+    "conjecture": "nu(x) <= floor(1/2*order(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "upper",
+    "conjecture": "nu(x) <= minimum(tau(x), size(x)/avg_degree(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= gamma(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= radius(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= 1/2*min_degree(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= size(x)/(max_degree(x)*min_degree(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(alpha(x) + 1, tau(x) - 1)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= min_degree(x)/kappa(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= min_degree(x) - triangles(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -max_degree(x) + tau(x) + 1"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(min_degree(x), alpha(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -omega(x) + tau(x) + 1"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= ceil(1/2*min_degree(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= ceil(1/2*avg_degree(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= ceil(1/2*tau(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(lam(x), -min_degree(x) + order(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -kappa(x) + min_degree(x) + radius(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(diameter(x), floor(avg_degree(x)))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= floor(avg_degree(x)) - min_degree(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(girth(x), -min_degree(x) + tau(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(alpha(x), tau(x) - 1)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(diameter(x), omega(x) - 1)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= tau(x)/(chi(x) - 1)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -floor(spectral_radius(x)) + tau(x) + 1"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(omega(x), diameter(x) - 1)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(chi(x), diameter(x) - 1)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(diameter(x), kappa(x)^2)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= ceil(minimum(avg_degree(x), 1/alg_conn(x)))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= floor(size(x)/max_degree(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(alpha(x), size(x)/max_degree(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(gamma(x) + 1, 1/2*triangles(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(kappa(x), -min_degree(x) + order(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(girth(x), -kappa(x) + tau(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(alpha(x), floor(avg_degree(x)) - 1)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(tau(x), max_degree(x)/spectral_radius(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(alpha(x), avg_degree(x) - min_degree(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(max_degree(x), tau(x)) - triangles(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(radius(x) + 1, triangles(x) - 1)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(alpha(x), 1/2*triangles(x)) - 1"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= 1/2*minimum(max_degree(x), triangles(x) - 1)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= ceil(size(x)/(max_degree(x) + 1))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(alpha(x), floor(sqrt(triangles(x))))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= floor(1/2*minimum(order(x), triangles(x)))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(diameter(x), 1/4*avg_degree(x)^2)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= triangles(x)^(1/floor(avg_degree(x)))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= minimum(floor(spectral_radius(x)), -max_degree(x) + order(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= order(x)/spectral_radius(x) - 1/triangles(x)"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -(alpha(x) - 1)*(kappa(x) - min_degree(x))"
+  },
+  {
+    "target": "nu",
+    "direction": "lower",
+    "conjecture": "nu(x) >= -alg_conn(x)^2 + minimum(avg_degree(x), alpha(x))"
+  }
+]

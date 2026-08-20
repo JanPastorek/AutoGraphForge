@@ -1,0 +1,242 @@
+[
+  {
+    "statement": "Delta(G) \u2264 delta(G)",
+    "label": "tautology (equality on regular graphs)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 11772,
+    "violations_sample": []
+  },
+  {
+    "statement": "delta(G) \u2264 Delta(G)",
+    "label": "tautology (equality on regular graphs)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 11772,
+    "violations_sample": []
+  },
+  {
+    "statement": "regular(G) \u2264 0.5\u00b7tree(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 11771,
+    "violations_sample": []
+  },
+  {
+    "statement": "regular(G) \u2264 0.5\u00b7chordal(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 11669,
+    "violations_sample": []
+  },
+  {
+    "statement": "tree(G) \u2264 chordal(G)",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 11670,
+    "violations_sample": []
+  },
+  {
+    "statement": "kappa(G) \u2264 lambda(G)",
+    "label": "holds (potentially interesting)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 11575,
+    "violations_sample": []
+  },
+  {
+    "statement": "nu(G) \u2264 0.5\u00b7n(G)",
+    "label": "holds (potentially interesting)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 11171,
+    "violations_sample": []
+  },
+  {
+    "statement": "regular(G) \u2264 0.5\u00b7planar(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 11034,
+    "violations_sample": []
+  },
+  {
+    "statement": "tree(G) \u2264 planar(G)",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 11035,
+    "violations_sample": []
+  },
+  {
+    "statement": "lambda(G) \u2264 Delta(G)",
+    "label": "holds (potentially interesting)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 10493,
+    "violations_sample": []
+  },
+  {
+    "statement": "lambda(G) \u2264 delta(G)",
+    "label": "holds (potentially interesting)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 10493,
+    "violations_sample": []
+  },
+  {
+    "statement": "kappa(G) \u2264 Delta(G)",
+    "label": "holds (potentially interesting)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 10341,
+    "violations_sample": []
+  },
+  {
+    "statement": "kappa(G) \u2264 delta(G)",
+    "label": "holds (potentially interesting)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 10341,
+    "violations_sample": []
+  },
+  {
+    "statement": "regular(G) \u2264 0.5\u00b7eulerian(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 9890,
+    "violations_sample": []
+  },
+  {
+    "statement": "regular(G) \u2264 0.5\u00b7bipartite(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 6939,
+    "violations_sample": []
+  },
+  {
+    "statement": "tree(G) \u2264 bipartite(G)",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 6940,
+    "violations_sample": []
+  },
+  {
+    "statement": "rad(G) \u2264 diam(G)",
+    "label": "holds (potentially interesting)",
+    "total_checked": 11687,
+    "holds": 11687,
+    "tight": 6385,
+    "violations_sample": []
+  },
+  {
+    "statement": "bipartite(G) \u2264 0.5\u00b7regular(G) + 0.5",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 4833,
+    "violations_sample": []
+  },
+  {
+    "statement": "bipartite(G) \u2264 regular(G)",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 4833,
+    "violations_sample": []
+  },
+  {
+    "statement": "bipartite(G) \u2264 0.5\u00b7tree(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 4832,
+    "violations_sample": []
+  },
+  {
+    "statement": "bipartite(G) \u2264 0.5\u00b7chordal(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 4783,
+    "violations_sample": []
+  },
+  {
+    "statement": "bipartite(G) \u2264 0.5\u00b7planar(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 4675,
+    "violations_sample": []
+  },
+  {
+    "statement": "bipartite(G) \u2264 0.5\u00b7eulerian(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 4347,
+    "violations_sample": []
+  },
+  {
+    "statement": "chi(G) \u2264 Delta(G) + 1",
+    "label": "holds (potentially interesting)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 3889,
+    "violations_sample": []
+  },
+  {
+    "statement": "chi(G) \u2264 delta(G) + 1",
+    "label": "holds (potentially interesting)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 3889,
+    "violations_sample": []
+  },
+  {
+    "statement": "eulerian(G) \u2264 0.5\u00b7regular(G) + 0.5",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 1882,
+    "violations_sample": []
+  },
+  {
+    "statement": "eulerian(G) \u2264 regular(G)",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 1882,
+    "violations_sample": []
+  },
+  {
+    "statement": "eulerian(G) \u2264 0.5\u00b7tree(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 1882,
+    "violations_sample": []
+  },
+  {
+    "statement": "eulerian(G) \u2264 0.5\u00b7chordal(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 1859,
+    "violations_sample": []
+  },
+  {
+    "statement": "eulerian(G) \u2264 0.5\u00b7planar(G) + 1",
+    "label": "holds (likely trivial/boolean bound)",
+    "total_checked": 11772,
+    "holds": 11772,
+    "tight": 1781,
+    "violations_sample": []
+  }
+]
