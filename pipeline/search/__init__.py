@@ -42,8 +42,12 @@ def find_counterexample(native, all_cols: List[str], cfg: Config = CONFIG,
     big graph orders can be probed safely — a slow candidate simply runs out of
     budget rather than stalling the round."""
     import time
-    problem = GraphSearchProblem(native, all_cols, hypothesis_class,
-                                 eval_cap_s=cfg.search_eval_cap_s)
+    problem = GraphSearchProblem(
+        native, all_cols, hypothesis_class,
+        eval_cap_s=cfg.search_eval_cap_s,
+        constrain_to_class=getattr(cfg, "search_class_constrained", True))
+    if problem.constraint:
+        logger.debug("[search] constrained to %s", problem.constraint)
     orders = tuple(cfg.search_orders)
     ref, floor = cfg.search_order_ref, cfg.search_min_trials
     deadline = time.time() + cfg.search_time_budget_s

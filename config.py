@@ -229,6 +229,15 @@ class Config:
     search_order_ref: int = 6           # reference order for trial scaling
     search_min_trials: int = 12         # floor on per-order trials at large n
     search_eval_cap_s: int = 3          # per-graph invariant-eval timeout
+    # Keep the searchers inside the conjecture's hypothesis class: class-aware
+    # starts, class-preserving moves, and a restricted action set / RL action
+    # mask where the class is an edge-set restriction (pipeline/search/
+    # class_moves.py). A conjecture conditioned on a class says nothing about
+    # graphs outside it, so `violation` scores those -inf; the median survivor's
+    # hypothesis holds on 0.07% of the refutation pool, which made that -inf the
+    # whole landscape. Set False to reproduce the unconstrained search that
+    # produced the published run.
+    search_class_constrained: bool = True
     sa_iterations: int = 120            # base SA steps (scaled down per order)
     sa_restarts: int = 1
     rl_episodes: int = 40               # rlgt deep-CE / REINFORCE iterations

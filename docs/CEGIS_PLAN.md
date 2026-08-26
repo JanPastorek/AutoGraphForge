@@ -163,6 +163,19 @@ Shared infra to build: a `GraphSearchProblem(conjecture)` exposing
 `violation` as their `graph_invariant` reward. Per-class search
 (regular/gnp/tree) restricts proposals/starts to that hypothesis class.
 
+**As built, then fixed.** The per-class restriction above was specified but not
+wired: both call sites left `hypothesis_class=None`, so every searcher explored
+the whole space for conjectures that speak about a median 0.07% of it, and the
+neighbourhood move was a blind edge flip that left the class on essentially
+every step. `pipeline/search/class_moves.py` supplies the missing structure —
+class-aware starts, class-preserving moves (fixed bipartition for bipartite,
+double edge swap for regular/cubic, remove-and-reconnect for tree, rejection
+otherwise), a restricted pair set for the sampling searchers, and an rlgt
+`action_mask` plus `initial_graph_generator` for the RL environment. The class
+is read off the conjecture rather than passed in, so it cannot go unset again.
+Set `search_class_constrained=False` to reproduce the unconstrained behaviour of
+the published run.
+
 ### Dependency note
 `rlgt[agents]` pulled **torch 2.12 + CUDA wheels** and upgraded **numpy
 2.1.3 → 2.4.6**. Verified the existing stack (pandas, scipy, networkx, graphcalc,

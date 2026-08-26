@@ -33,6 +33,8 @@ def _local_ascent(problem, G, rng, budget):
     v = problem.violation(G)
     for _ in range(budget):
         H = problem.neighbors(G, rng, k=1)
+        if H is G:
+            break                     # no in-class neighbour found; see mcts
         vh = problem.violation(H)
         if vh > _HIT:
             return H, vh
@@ -96,7 +98,11 @@ def mcts(problem: GraphSearchProblem, *, orders, iterations: int, c: float = 1.4
         if _expired(deadline):
             return None
         budget = per_order_trials(iterations, n, ref=ref, floor=floor)
-        actions = [(i, j) for i in range(n) for j in range(i + 1, n)]
+        # Where the class is an edge-set restriction (bipartite), the action
+        # set *is* the restriction: toggling any of these pairs keeps the graph
+        # in the class, so the tree never contains an out-of-class node.
+        actions = (problem.allowed_pairs(n)
+                   or [(i, j) for i in range(n) for j in range(i + 1, n)])
         root = _Node(problem.random_start(n, rng), None, actions)
         if problem.violation(root.G) > _HIT:
             return root.G
@@ -113,13 +119,29 @@ def mcts(problem: GraphSearchProblem, *, orders, iterations: int, c: float = 1.4
                 H = node.G.copy()
                 u, v = a
                 H.remove_edge(u, v) if H.has_edge(u, v) else H.add_edge(u, v)
+                # For a class the action set cannot express (degree- or
+                # subgraph-defined), the toggle can still leave it. Discarding
+                # the action is right: expanding into an out-of-class child adds
+                # a subtree whose every node scores -inf, which is where the
+                # budget used to go.
+                if not problem.in_class(H):
+                    continue
                 node = node.children.setdefault(a, _Node(H, node, actions))
             r = problem.violation(node.G)                        # evaluate
             if r > _HIT:
                 return node.G
             G = node.G
             for _ in range(rollout_depth):                       # random rollout
-                G = problem.neighbors(G, rng, k=1)
+                H = problem.neighbors(G, rng, k=1)
+                if H is G:
+                    # The class-preserving move found no in-class neighbour
+                    # within its try budget and handed the graph back. Carrying
+                    # on would re-evaluate the same graph for the rest of the
+                    # rollout — free, because `violation` is memoised by graph6,
+                    # but it inflates the evaluation count without covering any
+                    # new ground.
+                    break
+                G = H
                 rr = problem.violation(G)
                 if rr > _HIT:
                     return G
@@ -144,7 +166,12 @@ def cross_entropy(problem: GraphSearchProblem, *, orders, population: int,
         if _expired(deadline):
             return None
         iters = per_order_trials(iterations, n, ref=ref, floor=floor)
-        pairs = [(i, j) for i in range(n) for j in range(i + 1, n)]
+        # Independent Bernoulli edges are the worst case for a structural
+        # hypothesis: the chance that such a sample is bipartite vanishes with
+        # n, so without the restricted pair set this searcher scored -inf on
+        # essentially every sample it ever drew.
+        pairs = (problem.allowed_pairs(n)
+                 or [(i, j) for i in range(n) for j in range(i + 1, n)])
         p = np.full(len(pairs), 0.5)
         n_elite = max(1, int(population * elite_frac))
         for _ in range(iters):
@@ -156,6 +183,12 @@ def cross_entropy(problem: GraphSearchProblem, *, orders, population: int,
                 G = nx.Graph()
                 G.add_nodes_from(range(n))
                 G.add_edges_from(pairs[k] for k in range(len(pairs)) if bits[k])
+                # Independent Bernoulli edges land outside a structural class
+                # almost every time, and only `bipartite` can be expressed as a
+                # restricted pair set. Projecting the sample onto the class
+                # keeps the learned edge distribution meaningful while making
+                # the evaluated graph a member of the class it is a sample for.
+                G = problem.project(G, rng) or G
                 v = problem.violation(G)
                 if v > _HIT:
                     return G

@@ -24,6 +24,7 @@ import pandas as pd
 
 from graphcalc.graphs import compute_knowledge_table, all_properties
 
+from pipeline.search.class_moves import ClassConstraint, hypothesis_classes
 from pipeline.seed_corpus import graph6_id
 
 logger = logging.getLogger(__name__)
@@ -53,10 +54,22 @@ class GraphSearchProblem:
     """Black-box objective wrapping one graffiti3 native conjecture."""
 
     def __init__(self, native, all_cols: List[str],
-                 hypothesis_class: Optional[str] = None, eval_cap_s: int = 3):
+                 hypothesis_class: Optional[str] = None, eval_cap_s: int = 3,
+                 constrain_to_class: bool = True):
         self.native = native
         self.hypothesis_class = hypothesis_class
         self.eval_cap_s = int(eval_cap_s)
+        # The conjecture's own hypothesis is the authority on where the search
+        # should walk, so it is read off the conjecture rather than passed in.
+        # It used to be passed in — and never was: both call sites left
+        # `hypothesis_class` at None, so the class-aware start distribution in
+        # `random_models` was unreachable from the search path and every
+        # searcher explored the whole space for a conjecture that spoke about
+        # 0.07% of it. An explicit `hypothesis_class` still wins, so a caller
+        # can narrow further.
+        classes = ((hypothesis_class,) if hypothesis_class
+                   else hypothesis_classes(native, all_cols))
+        self.constraint = ClassConstraint(classes if constrain_to_class else ())
         # referenced columns = battery names appearing in the (relation+condition) text
         text = ""
         for attr in ("pretty",):
@@ -120,9 +133,28 @@ class GraphSearchProblem:
         return self.violation(G) > tol
 
     # --------------------------------------------------------------- moves --
+    def in_class(self, G: nx.Graph) -> bool:
+        """Whether G satisfies the conjecture's hypothesis classes.
+
+        A cheap networkx predicate, used to steer the walk. It never decides
+        whether G is a counterexample — `violation` does that through graphcalc.
+        """
+        return self.constraint.satisfies(G)
+
+    def allowed_pairs(self, n: int):
+        """Pair set the sampling searchers may toggle freely, or None."""
+        return self.constraint.allowed_pairs(n)
+
+    def project(self, G: nx.Graph, rng):
+        """Nearest in-class graph to G, or None. See `ClassConstraint.project`."""
+        return self.constraint.project(G, rng)
+
     def random_start(self, n: int, rng) -> nx.Graph:
         """A random connected graph of order n in the hypothesis class (best effort)."""
         from pipeline.random_models import sample_graphs
+        G = self.constraint.start(n, rng)
+        if G is not None:
+            return G
         cls = self.hypothesis_class
         try:
             gs = sample_graphs(cls, orders=(n,), per=1, seed=int(rng.integers(1 << 30)))
@@ -136,16 +168,11 @@ class GraphSearchProblem:
             G = nx.connected_watts_strogatz_graph(n, min(4, n - 1), 0.3)
         return G
 
-    @staticmethod
-    def neighbors(G: nx.Graph, rng, k: int = 1) -> nx.Graph:
-        """A k-edge-flip neighbour (toggle k random pairs), kept simple/undirected."""
-        H = G.copy()
-        nodes = list(H.nodes())
-        for _ in range(k):
-            u, v = rng.choice(nodes, size=2, replace=False)
-            u, v = int(u), int(v)
-            if H.has_edge(u, v):
-                H.remove_edge(u, v)
-            else:
-                H.add_edge(u, v)
-        return H
+    def neighbors(self, G: nx.Graph, rng, k: int = 1) -> nx.Graph:
+        """A k-step neighbour that stays inside the hypothesis class.
+
+        With no class constraint this is the plain k-edge-flip it always was.
+        With one it is the class-preserving move from `class_moves`, so the walk
+        does not spend its budget on graphs the conjecture never spoke about.
+        """
+        return self.constraint.neighbor(G, rng, k)

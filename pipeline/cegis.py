@@ -14,6 +14,7 @@ tried.
 from __future__ import annotations
 
 import logging
+import os
 import time
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
@@ -36,6 +37,54 @@ logger = logging.getLogger(__name__)
 # copy-on-write (the graffiti3 conjectures carry unpicklable lambda predicates —
 # fork avoids ever pickling them; only integer indices cross the boundary).
 _W: dict = {}
+
+
+def _gen_cache_tag() -> str:
+    """Identifies the interpreter a generation cache was written by."""
+    import sys
+    return f"{sys.version_info.major}.{sys.version_info.minor}"
+
+
+def _stamp_gen_cache(path: str) -> None:
+    try:
+        with open(path + ".python", "w") as fh:
+            fh.write(_gen_cache_tag() + "\n")
+    except Exception as e:                                   # pragma: no cover
+        logger.warning("[cegis] could not stamp gen cache: %s", e)
+
+
+def _gen_cache_is_loadable(path: str) -> bool:
+    """Whether this interpreter may restore `path`.
+
+    The cached conjectures carry local closures, which is why they are dilled
+    rather than pickled — and a dilled closure stores its ``__code__``. Code
+    objects are not portable across Python minor versions: ``dill.load``
+    succeeds, and the interpreter then **segfaults** when the restored function
+    is first called, deep inside graffiti3's predicate evaluation. That is not
+    an exception, so the try/except around the load cannot catch it and the run
+    dies mid-round.
+
+    This repository has such caches: `database/cache/gen_*.dill` were written by
+    a Python 3.12 miniconda install and crash the 3.11 venv. So the check is a
+    hard gate, not a warning — a cache without a matching stamp is regenerated,
+    which costs the ~13 minutes the cache existed to save but does not take the
+    process down with it.
+    """
+    stamp = path + ".python"
+    try:
+        with open(stamp) as fh:
+            tag = fh.read().strip()
+    except Exception:
+        logger.warning("[cegis] gen cache %s has no interpreter stamp — "
+                       "regenerating (a cache from another Python segfaults on "
+                       "use, and that cannot be caught)", os.path.basename(path))
+        return False
+    if tag != _gen_cache_tag():
+        logger.warning("[cegis] gen cache %s was written by Python %s, running "
+                       "%s — regenerating", os.path.basename(path), tag,
+                       _gen_cache_tag())
+        return False
+    return True
 
 
 def _refutation_record(native, wits, tier) -> dict:
@@ -164,7 +213,7 @@ class CEGIS:
         ckey = os.path.join(self.cfg.cache_dir,
                             f"gen_{self._gen_cache_key(targets, gen_kwargs)}.dill")
         ineqs = sophie = None
-        if os.path.exists(ckey):
+        if os.path.exists(ckey) and _gen_cache_is_loadable(ckey):
             try:
                 import dill
                 with open(ckey, "rb") as fh:
@@ -184,6 +233,7 @@ class CEGIS:
                 os.makedirs(self.cfg.cache_dir, exist_ok=True)
                 with open(ckey, "wb") as fh:
                     dill.dump((ineqs, sophie), fh)
+                _stamp_gen_cache(ckey)
                 logger.info("[cegis] cached generation → %s", os.path.basename(ckey))
             except Exception as e:
                 logger.warning("[cegis] gen cache write failed: %s", e)
@@ -387,8 +437,9 @@ class CEGIS:
                                    "keeping the rest as survivors", ci, k)
                     still += survivors[ci:k]
                     break
-                prob = GraphSearchProblem(c, all_cols,
-                                          eval_cap_s=self.cfg.search_eval_cap_s)
+                prob = GraphSearchProblem(
+                    c, all_cols, eval_cap_s=self.cfg.search_eval_cap_s,
+                    constrain_to_class=self.cfg.search_class_constrained)
                 g = rl_search(prob, orders=rl_orders,
                               episodes=min(self.cfg.rl_episodes, 5),
                               candidates=min(self.cfg.rl_candidates, 40),

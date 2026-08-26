@@ -86,7 +86,7 @@ wins, and the refuting graph becomes a seed witness:
 | `random` | class-aware random models | full battery |
 | `hog` | HoG export's **precomputed** invariants | ~28 invariants for **28,859** graphs incl. **big** ones (n≤60), partial/NaN-aware, ingested directly (no recompute) |
 | `bigdb` | offline-recomputed full battery | `tools/precompute_battery.py` |
-| active search | z3 → cross-entropy → vns → sa → mcts → rl | black-box over `violation = -slack`; per-candidate time budget |
+| active search | z3 → cross-entropy → vns → sa → mcts → rl | black-box over `violation = -slack`; per-candidate time budget; **constrained to the conjecture's hypothesis class** (`search_class_constrained`) |
 
 Refutation provenance (which tier killed each candidate) is logged and persisted
 per round.
@@ -180,6 +180,7 @@ pipeline/
   symbolic_refute.py      constructive refutation of constant/degree bounds
   random_models.py        class-aware random graph models (random tier)
   search/                 z3 + metaheuristics + rlgt active search
+  search/class_moves.py   class-preserving starts/moves/action masks for the searchers
   lean_export.py          supported-subset Lean export (uncond. + class-cond.)
   lean_disproof.py        Lean disproofs (¬∀ discharged on a refuting graph)
   proof_audit.py          statement-identity + axiom guards for candidate proofs
