@@ -1,0 +1,12 @@
+{"name":".agents","isDir":true}
+{"name":".swarm_blackboard_e20263a9_20260911_144940.md","sizeBytes":"2055"}
+{"name":"Challenge_e20263a9.lean","sizeBytes":"634"}
+{"name":"ORIGINAL_REQUEST.md","sizeBytes":"27"}
+{"name":"agy.log","sizeBytes":"770533"}
+{"name":"agy_output.txt","sizeBytes":"5023"}
+{"name":"preflight.log","sizeBytes":"451"}
+{"name":"reference","isDir":true}
+{"name":"scratch.lean","sizeBytes":"2479"}
+{"name":"solved","isDir":true}
+
+Summary: This directory contains 3 subdirectories and 7 files.

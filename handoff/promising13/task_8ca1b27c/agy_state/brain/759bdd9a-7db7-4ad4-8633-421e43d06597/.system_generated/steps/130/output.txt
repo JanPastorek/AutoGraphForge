@@ -1,0 +1,10 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.NgHUFBVbdg.lean:11:2: error: Invalid alternative name `top`: Expected `bot`
+Try this:
+  [apply] exact Finset.mem_of_max h
+/tmp/tmp.NgHUFBVbdg.lean:10:2: error: Alternative `bot` has not been provided
+CHECK: FAILED (exit 1)
+

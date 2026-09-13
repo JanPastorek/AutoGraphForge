@@ -1,0 +1,21 @@
+
+The command exited with code 0.
+Output:
+total 64
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 11:13 .
+drwx------ 3 japake298 domain users   60 Sep 11 16:54 ..
+-r--r--r-- 1 japake298 domain users  632 Sep 11 11:13 Challenge_1bc2a7b5.lean
+-r--r--r-- 1 japake298 domain users  592 Sep 11 11:13 Challenge_1facfd37.lean
+-r--r--r-- 1 japake298 domain users  627 Sep 11 11:13 Challenge_2a2555cc.lean
+-r--r--r-- 1 japake298 domain users  643 Sep 11 11:13 Challenge_39fd4057.lean
+-r--r--r-- 1 japake298 domain users  633 Sep 11 11:13 Challenge_40a99333.lean
+-r--r--r-- 1 japake298 domain users  615 Sep 11 11:13 Challenge_63ce884f.lean
+-r--r--r-- 1 japake298 domain users  589 Sep 11 11:13 Challenge_8ca1b27c.lean
+-r--r--r-- 1 japake298 domain users  653 Sep 11 11:13 Challenge_9968b18e.lean
+-r--r--r-- 1 japake298 domain users  579 Sep 11 11:13 Challenge_9e476a83.lean
+-r--r--r-- 1 japake298 domain users  586 Sep 11 11:13 Challenge_a23c41a0.lean
+-r--r--r-- 1 japake298 domain users  628 Sep 11 11:13 Challenge_aa3292c1.lean
+-r--r--r-- 1 japake298 domain users  596 Sep 11 11:13 Challenge_e20263a9.lean
+-r--r--r-- 1 japake298 domain users  643 Sep 11 11:13 Challenge_fbfcd99b.lean
+-r--r--r-- 1 japake298 domain users 4583 Sep 11 11:13 index.json
+

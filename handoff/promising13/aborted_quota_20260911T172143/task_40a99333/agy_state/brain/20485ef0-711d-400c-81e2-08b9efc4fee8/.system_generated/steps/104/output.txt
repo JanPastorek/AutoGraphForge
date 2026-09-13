@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+grep: /mnt/home/japake298/project/GraphConjecturing/pipeline/search/__pycache__/rlgt_adapter.cpython-311.pyc: binary file matches
+/mnt/home/japake298/project/GraphConjecturing/pipeline/search/rlgt_adapter.py:14:  * ``initial_graph_generator`` — episodes start from a graph in the class
+/mnt/home/japake298/project/GraphConjecturing/pipeline/search/rlgt_adapter.py:83:def _initial_graph_generator(problem, n, rng):
+/mnt/home/japake298/project/GraphConjecturing/pipeline/search/rlgt_adapter.py:142:            gen = _initial_graph_generator(problem, int(n), rng)
+/mnt/home/japake298/project/GraphConjecturing/pipeline/search/rlgt_adapter.py:144:                kwargs["initial_graph_generator"] = gen
+

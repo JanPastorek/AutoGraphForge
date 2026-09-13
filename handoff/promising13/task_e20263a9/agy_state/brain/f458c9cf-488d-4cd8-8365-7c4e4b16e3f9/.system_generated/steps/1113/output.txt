@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+Testing trees up to n=18...
+All 23 trees on n=8 passed.
+All 47 trees on n=9 passed.
+All 106 trees on n=10 passed.
+All 235 trees on n=11 passed.
+All 551 trees on n=12 passed.
+All 1301 trees on n=13 passed.
+All 3159 trees on n=14 passed.
+All 7741 trees on n=15 passed.
+

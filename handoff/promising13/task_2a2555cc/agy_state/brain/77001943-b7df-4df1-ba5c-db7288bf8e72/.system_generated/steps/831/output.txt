@@ -1,0 +1,18 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.TiCAD5RxKn.lean:23:82: error: Application type mismatch: The argument
+  v
+has type
+  V
+but is expected to have type
+  SimpleGraph ?m.134
+in the application
+  @mem_ballWithin_of_walk_to ?m.134 ?m.135 ?m.136 v
+/tmp/tmp.TiCAD5RxKn.lean:23:56: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Fintype (G.Walk v✝ v)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+CHECK: FAILED (exit 1)
+

@@ -1,0 +1,2 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_a23c41a0/reference/GraphInvariantsComputable.lean","LineNumber":30,"LineContent":"namespace GraphCalc"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_a23c41a0/reference/GraphInvariantsComputable.lean","LineNumber":536,"LineContent":"end GraphCalc"}

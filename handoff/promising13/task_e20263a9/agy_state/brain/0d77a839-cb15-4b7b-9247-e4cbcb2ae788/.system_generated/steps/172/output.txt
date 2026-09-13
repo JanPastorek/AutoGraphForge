@@ -1,0 +1,16 @@
+
+The command exited with code 0.
+Output:
+375: 
+376: /-- There exists a path of maximal length in a non-empty graph on finite edges. -/
+377: lemma exists_isPath_forall_isPath_length_le_length (G : SimpleGraph V) [N : Nonempty V]
+378:     [Finite G.edgeSet] :
+379:     ∃ (u v : V) (p : G.Walk u v) (_ : p.IsPath),
+380:       ∀ (u' v' : V) (p' : G.Walk u' v') (_ : p'.IsPath), p'.length ≤ p.length := by
+381:   have := Fintype.ofFinite G.edgeSet
+382:   let s := {n | ∃ (u v : V) (p : G.Walk u v), p.IsPath ∧ p.length = n}
+383:   have : s.Finite := Set.Finite.subset (Set.finite_le_nat G.edgeFinset.card)
+384:     fun n ⟨_, _, _, hp, hn⟩ ↦ hn ▸ hp.isTrail.length_le_card_edgeFinset
+385:   obtain ⟨x⟩ := N
+386:   obtain ⟨_, ⟨⟨u, v, p, hp, _⟩, hn⟩⟩ := this.exists_maximal ⟨0, ⟨x, x, Walk.nil, by simp⟩⟩
+

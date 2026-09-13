@@ -1,0 +1,9 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":53,"LineContent":"    \"diameter\": \"diam\", \"radius\": \"rad\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":239,"LineContent":"    \"independence_number \u003e= radius\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":254,"LineContent":"    \"independence_number \u003c= radius\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":258,"LineContent":"    \"diameter \u003e= radius\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":291,"LineContent":"    \"diameter \u003c= 2 radius\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":292,"LineContent":"    \"radius \u003c= diameter\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":293,"LineContent":"    \"radius \u003e= 1/2 diameter\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":294,"LineContent":"    \"radius \u003c= independence_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":475,"LineContent":"    \"independence_number \u003c= radius\","}

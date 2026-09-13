@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+m=2: |V|=10, rad=4, gamma_t=4
+m=3: |V|=16, rad=6, gamma_t=6
+m=4: |V|=22, rad=8, gamma_t=8
+m=5: |V|=28, rad=10, gamma_t=10
+m=6: |V|=34, rad=12, gamma_t=12
+m=7: |V|=40, rad=14, gamma_t=14
+m=8: |V|=46, rad=16, gamma_t=16
+m=9: |V|=52, rad=18, gamma_t=18
+

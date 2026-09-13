@@ -1,0 +1,6 @@
+Created the following subagents:
+{
+  "conversationId": "b3ad7580-0176-458c-bebc-0ec3ed731f9e",
+  "logAbsoluteUri": "file:///tmp/agyhome.NWyWnj/.gemini/antigravity-cli/brain/b3ad7580-0176-458c-bebc-0ec3ed731f9e/.system_generated/logs/transcript.jsonl"
+}
+The subagents will send you a message when they have completed their task or require guidance. There is no need to poll for their responses.

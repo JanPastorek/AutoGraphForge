@@ -1,0 +1,1 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":402,"LineContent":"def totalDominationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :="}

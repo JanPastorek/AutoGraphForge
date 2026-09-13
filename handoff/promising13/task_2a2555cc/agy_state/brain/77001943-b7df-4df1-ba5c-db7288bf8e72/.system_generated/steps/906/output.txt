@@ -1,0 +1,14 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.FKwtk4Jz7B.lean:17:30: error: Application type mismatch: The argument
+  ih
+has type
+  k ≤ k + d' → GraphCalc.ballWithin G k v ⊆ GraphCalc.ballWithin G (k + d') v
+but is expected to have type
+  GraphCalc.ballWithin G k v ⊆ ?m.56
+in the application
+  Finset.Subset.trans ih
+CHECK: FAILED (exit 1)
+

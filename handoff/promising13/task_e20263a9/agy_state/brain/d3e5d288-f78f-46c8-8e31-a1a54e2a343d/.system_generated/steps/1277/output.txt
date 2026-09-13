@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+All connected graphs in Graph Atlas with n <= 7 have rad <= n//2!
+

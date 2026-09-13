@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+When V1 is empty and k=2: radius(G) >= 4 NEVER HAPPENS!
+

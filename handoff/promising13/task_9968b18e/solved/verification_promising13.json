@@ -1,0 +1,8 @@
+[
+ {
+  "id": "9968b18e",
+  "statement": "((nontrivial) \u2227 (bipartite)) \u21d2 edge_cover_number \u2264 annihilation_number",
+  "label": "open",
+  "status": "unresolved"
+ }
+]

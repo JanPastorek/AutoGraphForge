@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+GraphCalc.totalDominationNumber.{u_1} {V : Type u_1} [Fintype V] (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ
+GraphCalc.romanDominationNumber.{u_1} {V : Type u_1} [Fintype V] [DecidableEq V] (G : SimpleGraph V)
+  [DecidableRel G.Adj] : ℕ
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

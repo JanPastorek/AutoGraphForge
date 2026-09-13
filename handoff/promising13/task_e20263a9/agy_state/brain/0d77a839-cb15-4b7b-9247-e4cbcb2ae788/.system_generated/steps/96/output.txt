@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+ALL GRAPHS UP TO N=6 HAVE A VERTEX WITH ecc(v) + 1 <= weight(f)!
+

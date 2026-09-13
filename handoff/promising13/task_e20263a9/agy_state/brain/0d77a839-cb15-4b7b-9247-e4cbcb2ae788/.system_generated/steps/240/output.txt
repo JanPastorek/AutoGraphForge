@@ -1,0 +1,31 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.dughzJROD6.lean:262:19: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  b ≥ 0
+  a ≥ 0
+  a - b ≥ 1
+where
+ a := ↑(ballWithin G k v).card
+ b := ↑(ballWithin G (k + 0) v).card
+/tmp/tmp.dughzJROD6.lean:280:8: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  e ≥ 0
+  d ≥ 0
+  c ≥ 0
+  b ≥ 0
+  b + c - e ≥ 0
+  a ≥ 0
+  a - b - c ≥ 0
+  a - d ≤ -1
+where
+ a := ↑(ballWithin G (k + m) v).card
+ b := ↑(ballWithin G k v).card
+ c := ↑m
+ d := ↑(ballWithin G (k + m + 1) v).card
+ e := ↑(ballWithin G (k + (m + 1)) v).card
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+FOUND: n=8, rad=4, w=7, u1=1, u2=3, len_uncovered=3
+Is rad + 1 <= w? True
+

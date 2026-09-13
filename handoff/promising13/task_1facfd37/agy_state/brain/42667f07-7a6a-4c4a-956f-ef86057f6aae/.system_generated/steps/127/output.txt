@@ -1,0 +1,9 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+fun s => Option.getD s.max 0 : Finset ℕ → ℕ
+/tmp/tmp.P9P2oIqkzl.lean:7:7: error(lean.unknownIdentifier): Unknown constant `WithBot.unbot'`
+/tmp/tmp.P9P2oIqkzl.lean:8:7: error(lean.unknownIdentifier): Unknown constant `WithTop.untop'`
+CHECK: FAILED (exit 1)
+

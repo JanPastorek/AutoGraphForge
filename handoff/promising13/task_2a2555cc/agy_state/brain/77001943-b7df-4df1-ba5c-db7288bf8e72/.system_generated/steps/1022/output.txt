@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+Finset.coe_min'.{u_2} {α : Type u_2} [LinearOrder α] {s : Finset α} (hs : s.Nonempty) : ↑(s.min' hs) = s.min
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

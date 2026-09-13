@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+For ANY graph with V = N[u1] U N[u2], radius is ALWAYS <= 3 (in fact <= 2)!
+

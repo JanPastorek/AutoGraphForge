@@ -1,0 +1,16 @@
+The search for ""Haynes" "Henning" "total domination" "Theorem 2.15" OR "rad(G)" proof" returned the following summary:
+The theorem referred to is: **"If $G$ is a connected graph of order at least two, then $\gamma_t(G) \geq \text{rad}(G)$"**[1], where $\gamma_t(G)$ denotes the total domination number and $\text{rad}(G)$ is the radius of the graph.
+
+This result appears in literature associated with the authors **Teresa W. Haynes** and **Michael A. Henning**[1]. Specifically, it is identified as **Theorem 2.15** in certain texts (often referencing foundational works on total domination)[1].
+
+### Context and Proof Sketch
+*   **The Bound:** The inequality $\gamma_t(G) \geq \text{rad}(G)$ establishes that the radius of a connected graph serves as a lower bound for its total domination number[1].
+*   **Source:** This result is frequently cited in research concerning total domination in graphs[1]. While "Theorem 2.15" varies by specific textbook or paper, it is explicitly referenced in the context of Haynes and Henning’s work on total domination[1].
+*   **Equality:** The characterization of graphs for which $\gamma_t(G) = \text{rad}(G)$ is often provided in the subsequent theorem (e.g., Theorem 2.16 in the same source)[1].
+
+If you are looking for the formal proof, it generally relies on the definition of a total dominating set and the properties of central vertices (vertices with eccentricity equal to the radius)[2][3]. Since every vertex must be totally dominated (i.e., have a neighbor in the dominating set), one can demonstrate that the number of vertices required is at least the radius of the graph by considering the distance properties of the central vertex and its surroundings[1][3].
+
+Sources:
+[1] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGlXT-fysZPEZTWZgtCipMWIPXKxaY73woaAjwamgHrSCzEQyCqqz9-ZY5_lzDYVuo5g3WLOMAY-dXxZfcIAqY5u8Iejv14msXBNPTVkHrviv0jOhfAjw_lLpGPpqaLVHpNwFEk2ZwNVV-JeNv71mMqzi6yMBYrYZGK)
+[2] [e-bookshelf.de](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE9oLd1a_SVGQmFuyPL5XD0nFWpOQWejQv_xI_cipuQR1MA6nIZJGsP9lFULR3kABOyreu3RrHwKqJy7icet5elbBnhW8kv1v5ycsiiYJ0vxf_cOf4yVrvGjYl_ZNOC7rc5fhL2rSr29ej8v7TR6w_lyzBbifoiz0WJzf0=)
+[3] [the-ica.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFsGjnCjTqCFnap7VadzaD5ve7AAFa8AClOoWWSyRswesqCPV8pQNp-kAfmGiUQIV-QY6EXYAw3J0bCtz3tGj-vIMweUjvunX8tdyH44xHeh3enzmvi_3Kzj2x-_QsD5ZCrEa-MIXjPcnLjCDKSUzGy7AV2pBXiwSMS0Q==)

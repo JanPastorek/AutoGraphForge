@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+P_6: W=4, f=(0, 2, 0, 0, 2, 0), k=1 fails!
+P_7: W=5, f=(0, 2, 0, 0, 2, 0, 1), k=1 fails!
+P_8: W=6, f=(0, 2, 0, 0, 2, 0, 0, 2), k=1 fails!
+

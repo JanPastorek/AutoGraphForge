@@ -1,0 +1,15 @@
+The search for "site:ejpam.com "roman domination" radius" returned the following summary:
+The *European Journal of Pure and Applied Mathematics* (EJPAM) contains several articles discussing "Roman domination" in the context of graph theory[1][2][3]. While the term "radius" appears in these publications, it is typically used in two distinct ways:
+
+*   **Graph Theory Definitions:** In articles discussing Roman domination (such as *"On The Global Distance Roman Domination of Some Graphs"*), the **radius** of a graph $G$ is formally defined as the minimum eccentricity among all its vertices, denoted as $\text{rad}(G) = \min\{\text{ecc}(u) : u \in V(G)\}$[1].
+*   **Independent Research Topics:** Other articles in the journal use "radius" in unrelated mathematical contexts, such as *"Radius Inequalities Involving $2 \times 2$ Block Matrices"*[4] or *"Radius and Signless Laplacian Spectral Radius for Generalized Core-satellite Graphs"*[5].
+
+If you are looking for a specific relationship or bound involving both Roman domination and the radius of a graph, the article *"On The Global Distance Roman Domination of Some Graphs"* is the most relevant, as it explores distance-based variants of Roman domination[1][2][6].
+
+Sources:
+[1] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGneooxtdatU6-UzGqt2WpdZ7yFfYjcCreqzy08gtma4l_dqyJNrmbew5ksqeeJ-5CJgvdFBKN6zyoagE1Zy7aBSd3Q-7WFJitbRdMq9HMTbacw6RCOgc3EElfG8ORo3uBT7L5KuUsT)
+[2] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGneooxtdatU6-UzGqt2WpdZ7yFfYjcCreqzy08gtma4l_dqyJNrmbew5ksqeeJ-5CJgvdFBKN6zyoagE1Zy7aBSd3Q-7WFJitbRdMq9HMTbacw6RCOgc3EElfG8ORo3uBT7L5KuUsT)
+[3] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGneooxtdatU6-UzGqt2WpdZ7yFfYjcCreqzy08gtma4l_dqyJNrmbew5ksqeeJ-5CJgvdFBKN6zyoagE1Zy7aBSd3Q-7WFJitbRdMq9HMTbacw6RCOgc3EElfG8ORo3uBT7L5KuUsT)
+[4] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGQDTPGViso0xybA3112q7JYLhWObb-HGrM-9HMaGP5WY6VBHJn5RSqX8dHtsCbeHu4UZDNo_mQY78B0aZyDQKmNpKCr7wyXg-JJ6sVWuAezldc1E9k_1DUGLILEqYPu44XlrjVe6EaqA==)
+[5] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGXFdnQ08epYPpyzzdW4nBWpPkP1jz_XUTISX6MSPRhgt-lgwPTdIFJX2PTzecUzkxJ1nc48avsjJbsWazOIEWi9JuyqCy7PbzI_pH-vT8ZWAS4v2ifJLMNGvS-q5OF)
+[6] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGneooxtdatU6-UzGqt2WpdZ7yFfYjcCreqzy08gtma4l_dqyJNrmbew5ksqeeJ-5CJgvdFBKN6zyoagE1Zy7aBSd3Q-7WFJitbRdMq9HMTbacw6RCOgc3EElfG8ORo3uBT7L5KuUsT)

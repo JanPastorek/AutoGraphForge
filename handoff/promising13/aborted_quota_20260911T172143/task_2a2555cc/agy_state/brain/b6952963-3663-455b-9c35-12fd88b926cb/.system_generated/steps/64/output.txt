@@ -1,0 +1,18 @@
+The search for ""DeLaVina" "total domination" "radius" OR "rad(G)"" returned the following summary:
+Ermelinda DeLaViña and her colleagues have conducted significant research on the **total domination number** ($\gamma_t(G)$) of graphs, specifically establishing bounds related to the **radius** ($rad(G)$) of a graph[1][2].
+
+### Key Findings
+*   **Lower Bound Theorem:** DeLaViña et al. proved that for any connected graph $G$ with at least two vertices, the total domination number is at least the radius of the graph[1][2]:
+    $$\gamma_t(G) \geq rad(G)$$
+*   **Case of Equality:** Further research by the group provides a characterization for when this bound is met[1][2]. Specifically, for a connected graph $G$ and a total dominating set $S$ (where $|S| = \gamma_t(G)$), the equality $\gamma_t(G) = rad(G)$ holds if and only if the size of the subgraph induced by $S$, denoted $G[S]$, is $rad(G)/2$[1][2].
+*   **Sharpness:** This bound is known to be sharp; for example, in the case of a path $P_n$ where $n \equiv 0 \pmod 4$, both the radius and the total domination number equal $n/2$[1][2].
+
+### Research Context
+These results are often cited in the context of graph theory research concerning domination parameters[1][2]. The work by DeLaViña, Craig Larson, Ryan Pepper, and Bill Waller frequently appears in literature related to extremal graph theory, particularly in studies involving trees and various domination invariants[3][4][5].
+
+Sources:
+[1] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGDam-4E7Kn06yS4GJ8EMwN1GRawn9NJz-ltvauWCjKslZqd6zCD2PdS6CKYQfr7NyHnYS0ysyVkVg5r0XVm_kWWYka4_nMNNt2tcf06Mr8BF2dq7aIancB0WFFyiHhTn-oyn9BM6vNc8bYCn61IggmqRLL-q-31zd0yg==)
+[2] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGDam-4E7Kn06yS4GJ8EMwN1GRawn9NJz-ltvauWCjKslZqd6zCD2PdS6CKYQfr7NyHnYS0ysyVkVg5r0XVm_kWWYka4_nMNNt2tcf06Mr8BF2dq7aIancB0WFFyiHhTn-oyn9BM6vNc8bYCn61IggmqRLL-q-31zd0yg==)
+[3] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEoWMJq3aHpRDyk9O6E6DRFYbND0ulCIDkmqA6-XV0O3jsiFoFemh38KskI_Vei2IIRWhLIs-1TZroLK_2RZS-9iaw-W9pNTsZ474L0Kll8cfUajHB4T_eB_FfqaT8ghP0J0t3Y9WvMoaDmQPQC)
+[4] [uz.zgora.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFLz6uE6jnS_ivSqJ2r3sTwcqMsssuyIXuvu8cRH66iKM652vljdah-QQ0ppXRg0qNCtZCBIoPQ0kml4OJf1irpe06BmfTzRryefXmZmX7GcXOiGdwKHWNKIS8Ft000F_A9U3s9MUfML1ZqEw==)
+[5] [bibliotekanauki.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEAbVEdkdlvlmDYNNnaVYLY6J9aDzu7o1FqzJnGljUhjnjRc9r5rhCm6hoPG2o67gmCkDvzvNIh2CaLj5-8REec7wbxYAVsYqnkXnC8wYhzk1wVxAYuHfZl7IDBbx3otkrB3g==)

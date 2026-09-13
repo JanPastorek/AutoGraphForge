@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+P_8 (rad=4): rdn = 6
+P_9 (rad=4): rdn = 6
+P_10 (rad=5): rdn = 7
+C_8 (rad=4): rdn = 6
+C_9 (rad=4): rdn = 6
+

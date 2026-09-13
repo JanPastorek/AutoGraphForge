@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+By definition of minimum, gamma_t <= gamma_R implies gamma_t <= weight(f) for ALL f!
+

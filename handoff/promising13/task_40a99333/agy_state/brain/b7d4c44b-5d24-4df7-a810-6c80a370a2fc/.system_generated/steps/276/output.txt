@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean:960:  simpa only [card_eq_sum_ones] using sum_fiberwise_eq_sum_filter _ _ _ _
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/Group/Finset/Basic.lean:981:  simp only [card_eq_sum_ones, sum_fiberwise_of_maps_to H]
+

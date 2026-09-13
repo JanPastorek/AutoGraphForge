@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+I0912 01:32:01.576174   40702 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xd153b9da47b120d8 ResponseID: cI-kaqLxJrqF3boPgK7U-QY
+I0912 01:32:01.994558   40662 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x4004b8ca896ce222 ResponseID: cI-kasbHF-bNkdUP6Yu40AY
+I0912 01:32:02.822862   40656 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x9cb2c5e46d95afb0 ResponseID: cY-kaq-MONa1kdUPqvSW2Qo
+I0912 01:32:04.146531   40794 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xc27b77fc740456c0 ResponseID: co-kau_AEpqT3boPrYipgAU
+I0912 01:32:05.048210   40817 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x51f6b5a795e416b9 ResponseID: c4-kaor7B-W8vdIPndXk0A0
+I0912 01:32:06.343850   40888 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x343d425c12e6a0ce ResponseID: dY-kate4B5eZ3boPjpeEmAc
+I0912 01:32:06.556547   40939 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x66083258f6ea1dba ResponseID: dY-karnLHongnsEP1aq4cA
+I0912 01:32:06.818716   40537 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0x15fd96f91e05e264 ResponseID: dY-kaumhGsbrkdUP_bGyuAE
+I0912 01:32:07.753039   41043 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xba7154a364a710f1 ResponseID: do-kauGlN8D6xs0P8du1sQM
+I0912 01:32:08.420887   40976 http_helpers.go:296] URL: https://daily-cloudcode-pa.googleapis.com/v1internal:streamGenerateContent?alt=sse Trace: 0xef020a831c052a4a ResponseID: do-kasmhKLqD7M8Pm62P6AQ
+

@@ -1,0 +1,9 @@
+[
+ {
+  "id": "40a99333",
+  "statement": "(nontrivial) \u21d2 total_domination_number \u2264 roman_domination_number",
+  "label": "open",
+  "status": "resolved",
+  "direction": "prove"
+ }
+]

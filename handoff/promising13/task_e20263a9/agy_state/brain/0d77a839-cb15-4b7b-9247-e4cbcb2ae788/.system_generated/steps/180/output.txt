@@ -1,0 +1,21 @@
+
+The command exited with code 0.
+Output:
+276: to `SimpleGraph.Walk.rec`, which inducts on `SimpleGraph.Walk.cons`. -/
+277: @[elab_as_elim]
+278: def concatRec {u v : V} (p : G.Walk u v) : motive u v p :=
+279:   reverse_reverse p ▸ concatRecAux @Hnil @Hconcat p.reverse
+280: 
+281: @[simp]
+282: theorem concatRec_nil (u : V) :
+283:     @concatRec _ _ motive @Hnil @Hconcat _ _ (nil : G.Walk u u) = Hnil := rfl
+284: 
+285: @[simp]
+286: theorem concatRec_concat {u v w : V} (p : G.Walk u v) (h : G.Adj v w) :
+287:     @concatRec _ _ motive @Hnil @Hconcat _ _ (p.concat h) =
+288:       Hconcat p h (concatRec @Hnil @Hconcat p) := by
+289:   simp only [concatRec]
+290:   apply eq_of_heq (rec_heq_of_heq _ _)
+291:   trans concatRecAux @Hnil @Hconcat (cons h.symm p.reverse)
+292:   · congr
+

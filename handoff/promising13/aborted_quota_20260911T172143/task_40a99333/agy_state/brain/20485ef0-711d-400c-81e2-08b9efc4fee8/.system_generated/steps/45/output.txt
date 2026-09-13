@@ -1,0 +1,33 @@
+
+The command exited with code 1.
+Output:
+Traceback (most recent call last):
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/graphcalc/graphs/data/data_generation.py", line 73, in compute_graph_properties
+    results[func_name] = func(graph)
+                         ^^^^^^^^^^^
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/graphcalc/graphs/core/basics.py", line 369, in order
+    return len(G.nodes)
+               ^^^^^^^
+AttributeError: 'int' object has no attribute 'nodes'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/graphcalc/graphs/data/data_generation.py", line 174, in compute_knowledge_table
+    graph_properties = compute_graph_properties(function_names, graph)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/graphcalc/graphs/data/data_generation.py", line 75, in compute_graph_properties
+    raise Exception(f"Error while executing function '{func_name}': {e}")
+Exception: Error while executing function 'order': 'int' object has no attribute 'nodes'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/graphcalc/graphs/data/data_generation.py", line 292, in all_properties
+    return compute_knowledge_table(GRAPHCALC_PROPERTY_LIST, graphs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/graphcalc/graphs/data/data_generation.py", line 177, in compute_knowledge_table
+    raise Exception(f"Error while processing a graph: {e}")
+Exception: Error while processing a graph: Error while executing function 'order': 'int' object has no attribute 'nodes'
+

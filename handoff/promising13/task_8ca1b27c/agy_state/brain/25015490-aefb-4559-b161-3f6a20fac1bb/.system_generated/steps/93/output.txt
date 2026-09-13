@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+total 12
+drwxr-xr-x 3 japake298 domain users 4096 Jun 25 16:13 .
+drwxr-xr-x 5 japake298 domain users 4096 Jun 25 16:12 ..
+drwxr-xr-x 7 japake298 domain users 4096 Jun 25 16:13 leanprover--lean4---v4.31.0
+

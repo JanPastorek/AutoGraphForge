@@ -1,0 +1,22 @@
+
+The command exited with code 0.
+Output:
+Corona K_2 o K_1: n=4, gamma_t=2, gamma_R=3
+Corona K_3 o K_1: n=6, gamma_t=3, gamma_R=4
+Corona K_4 o K_1: n=8, gamma_t=4, gamma_R=5
+Corona K_5 o K_1: n=10, gamma_t=5, gamma_R=6
+Cycle C_3: n=3, gamma_t=2, gamma_R=2
+Cycle C_4: n=4, gamma_t=2, gamma_R=3
+Cycle C_5: n=5, gamma_t=3, gamma_R=4
+Cycle C_6: n=6, gamma_t=4, gamma_R=4
+Cycle C_7: n=7, gamma_t=4, gamma_R=5
+Cycle C_8: n=8, gamma_t=4, gamma_R=6
+Cycle C_9: n=9, gamma_t=5, gamma_R=6
+Path P_3: n=3, gamma_t=2, gamma_R=2
+Path P_4: n=4, gamma_t=2, gamma_R=3
+Path P_5: n=5, gamma_t=3, gamma_R=4
+Path P_6: n=6, gamma_t=4, gamma_R=4
+Path P_7: n=7, gamma_t=4, gamma_R=5
+Path P_8: n=8, gamma_t=4, gamma_R=6
+Path P_9: n=9, gamma_t=5, gamma_R=6
+

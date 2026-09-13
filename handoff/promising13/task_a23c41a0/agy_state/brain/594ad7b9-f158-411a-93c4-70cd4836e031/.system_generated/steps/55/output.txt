@@ -1,0 +1,11 @@
+{"name":".github","isDir":true}
+{"name":".gitignore","sizeBytes":"7"}
+{"name":".lake","isDir":true}
+{"name":"LeanProject","isDir":true}
+{"name":"LeanProject.lean","sizeBytes":"105"}
+{"name":"README.md","sizeBytes":"489"}
+{"name":"lake-manifest.json","sizeBytes":"3146"}
+{"name":"lakefile.toml","sizeBytes":"363"}
+{"name":"lean-toolchain","sizeBytes":"25"}
+
+Summary: This directory contains 3 subdirectories and 6 files.

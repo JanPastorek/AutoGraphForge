@@ -1,0 +1,62 @@
+
+The command exited with code 0.
+Output:
+\DeclareMathOperator{\rgamawtwo}{\widetilde{\displaystyle\gamma}\;\!\!_{{\it w}\!\!\:2}}
+see, e.g.,~\cite{bks-2007}. Note that in this paper the concept will be called rainbow weak $2$-domination,
+and the invariant will be denoted by $\rgamawtwo$, suggesting that it is the rainbow counterpart
+under the name ``weak $2$-rainbow domination''~\cite{bks-2007}.) By the above reasoning
+Two of the parameters among $\rgamatwo(G)$, $\rgamawtwo(G)$, $\rgamasettwo(G)$, $\rgamaxtwo(G)$, $\rgamatsettwo(G)$
+\noindent{\bf Weak $2$-domination, rainbow weak $2$-domination.}
+% rainbow weak 2-domination
+\begin{definition}($\boldsymbol{\rgamawtwo}$, row/column {\bf 9} in
+Let $G=(V,E)$ be a graph. A {\em rainbow weak $2$-dominating
+holds that $f_\cup(N(v)) = \{a,b\}$. The {\em rainbow weak
+$\boldsymbol{\rgamawtwo(G)}$ and equals the minimum weight $f(V)$
+over all rainbow weak $2$-dominating functions $f$ of $G$.
+the aim to give more insight in the (weak) $2$-rainbow domination. It has probably
+ rainbow weak 2-domination & $\rgamawtwo$ & $f:V\to 2^{\{a,b\}}$ & $|f_\cup(N(v))|\geq 2$ & if
+\multicolumn{2}{|c||}{} &  $\gamma$ & $\gamat$ & $\gamawtwo$ & $\gamasettwo$ & $\gamatsettwo$ & $\gamatwo$ & $\gamaxtwo$ & $\gamatxtwo$   & $\rgamawtwo$ & $\rgamatwo$ & $\rgamaxtwo$ & $\rgamatxtwo$ &  $\gamaR$   \\
+  & $\rgamawtwo$ & $\rgamatwo$ & $\frac{1}{2}\rgamaxtwo$ & $\frac{1}{2}\rgamatxtwo$ &
+  & $\rgamawtwo$ & $\rgamatwo$ & $\rgamaxtwo$ & $\frac{1}{2}\rgamatxtwo$ &
+  & $\rgamawtwo$ & $\rgamatwo$ & $\rgamaxtwo$ & $\rgamatxtwo$ & $\gamaR$   \\
+  $2\rgamawtwo-1$\,$^*$  & $2\rgamatwo-1$\,$^*$    & $\rgamaxtwo$ & $\rgamatxtwo$ & $2\gamaR-2$\,$^*$    \\
+  & $2\rgamawtwo$ & $2\rgamatwo$ & 2$\rgamaxtwo$ & $\rgamatxtwo$ & $2\gamaR$\\
+9 & $\rgamawtwo$ & $2\gama$ & $2\gamat$  &  $2\gamawtwo-2$ & $2\gamasettwo-2$ &$2\gamatsettwo-2$ & $2\gamatwo-2$ & $2\gamaxtwo-2$ & $2\gamatxtwo-2$ & $=$ &  $\rgamatwo$  & $\rgamaxtwo$ & $\rgamatxtwo$ & $\gamaR$\\
+   & $2\gamaxtwo-2$& $2\gamatxtwo-2$& $\frac{3}{2}\rgamawtwo$ & $\frac{3}{2}\rgamatwo$ & $\rgamaxtwo$ & $\rgamatxtwo$& $=$ \\
+2\gamatwo = 2\rgamawtwo = 2\rgamatwo = 2\gamaR$, and can be
+\multicolumn{2}{|c||}{} &  $\gamma$ & $\gamat$ & $\gamawtwo$ & $\gamasettwo$ & $\gamatsettwo$ & $\gamatwo$ & $\gamaxtwo$ & $\gamatxtwo$   & $\rgamawtwo$ & $\rgamatwo$ & $\rgamaxtwo$ & $\rgamatxtwo$ &  $\gamaR$   \\
+9 & $\rgamawtwo$ & T13 & T1  &  \ref{prp:rgamma-w2-gamma-w2} & T3
+For every graph $G\neq K_1$, it holds that $\rgamawtwo(G)\le
+satisfies $g_\cup(N(v)) = \{a,b\}$. Thus, $g$ is a rainbow weak
+$2$-dominating function of $G$, and we have $\rgamawtwo(G)\le
+$\rgamawtwo(G)\le g(V(G)) = |V(G)|\le 2|V(G)|-2= 2\gamawtwo(G)-2$,
+\{a,b\}$. Thus, $g$ is a rainbow weak $2$-dominating function of
+$G$, and we have $\rgamawtwo(G)\le g(V(G)) = 2+2(|V_1|-2) =
+\multicolumn{2}{|c||}{} &  $\gamma$ & $\gamat$ & $\gamawtwo$ & $\gamasettwo$ & $\gamatsettwo$ & $\gamatwo$ & $\gamaxtwo$ & $\gamatxtwo$   & $\rgamawtwo$ & $\rgamatwo$ & $\rgamaxtwo$ & $\rgamatxtwo$ &  $\gamaR$   \\
+%$\gamawtwo(K_n^{**})= n$; $\rgamawtwo(K_n^{**})= 2n-2$.
+%$\rgamawtwo(G_n)\ge 2n-2$, which by the general bound
+%$\rgamawtwo(G)\le 2\gamawtwo(G)-2$ in arbitrary graphs $G$
+%is a minimum rainbow weak $2$-dominating function
+%$f$ is a rainbow weak $2$-dominating function of $G_n$ with $f(v)
+%$f$ is a rainbow weak $2$-dominating function and $f(v) =
+%$f$ is a rainbow weak $2$-dominating function and $f(v) =
+$\rgamawtwo(K_n^{**}) = \gamaR(K_n^{**})=2n-2$.
+$\rgamawtwo(G_n)\ge 2n-2$. Since the bounds from Table~\ref{table-bounds}
+imply that $\rgamawtwo(G_n)\le \gamaR(G_n)\le 2\gamatxtwo(G_n)-2$
+Suppose for a contradiction that there is a minimum rainbow weak $2$-dominating function
+$f$ is a rainbow weak $2$-dominating function of $G_n$ with $f(v)
+$f$ is a rainbow weak $2$-dominating function and $f(v) = \emptyset$.
+%\textcolor{red}{Since $\rgamawtwo(K_n^{**})\leq\gamaR(K_n^{**})$ (see Table \ref{table-bounds})}, it suffices to show that the Roman domination number of $K_n^{**}$ is at least $2n-2$.
+$\rgamawtwo(F_n^4)\le \rgamatwo(F_n^4)\le n+1$, which is proven by
+the inequality $\rgamawtwo(F_n^4)\le \rgamatwo(F_n^4)$ (see Table \ref{table-bounds}) and the function
+The values $\gamawtwo(F_n^4)=\gamatwo(F_n^4)=\rgamawtwo(F_n^4)=\rgamatwo(F_n^4)=n+1$
+\multicolumn{2}{|c||}{} &  $\gamma$ & $\gamat$ & $\gamawtwo$ & $\gamasettwo$ & $\gamatsettwo$ & $\gamatwo$ & $\gamaxtwo$ & $\gamatxtwo$   & $\rgamawtwo$ & $\rgamatwo$ & $\rgamaxtwo$ & $\rgamatxtwo$ &  $\gamaR$   \\
+9 & $\rgamawtwo$ & $kK_2$ & $kH$  & $K_n^{**},n\ge 3$  &
+Since the parameters $\gama,\gamat,\gamawtwo,\gamasettwo,\rgamawtwo,\gamaR$
+We are not aware of inapproximability results for any of the invariants \hbox{$\rho\in \{\gamaR, \gamawtwo, \gamasettwo, \gamatsettwo, \rgamatwo, \rgamawtwo, \rgamaxtwo, \rgamatxtwo\}$.} (Recall that invariants $\rgamatwo$, $\rgamaxtwo$, and $\rgamatxtwo$ are, to the best of our knowledge, considered for the first time in this paper.) The following \NP-completeness results for some of these parameters are available in the literature:
+  \item The weak $2$-domination ($\gamawtwo$) and the rainbow weak $2$-domination ($\rgamawtwo$) problems were proved \NP-complete by Bre\v{s}ar and Kraner \v{S}umenjak in~\cite{bks-2007}.
+\hbox{$\rho\in \{\gamawtwo, \gamasettwo, \gamatsettwo, \gamaR, \rgamatwo, \rgamawtwo, \rgamaxtwo\}$,} it suffices to show an inapproximability bound of the same type for just one parameter in each of the bottom three equivalence classes
+For every $\rho\in \{\gamawtwo, \gamasettwo, \gamatsettwo, \gamaR, \rgamawtwo, \rgamasettwo, \rgamatsettwo\}$ and every $\epsilon >0$, there is no polynomial time algorithm approximating $\rho$ for $n$-vertex split graphs without isolated vertices within a factor of \hbox{$(1/2-\epsilon)\ln n$}, {unless ${\sf P} = {\sf NP}$.}
+$\gama(G)\le \gamawtwo(G)\le \rgamawtwo(G)\le\gamaR(G)\le \rgamasettwo(G) = 2\gama(G)$ and
+For every $\rho\in \{\gamasettwo, \gamatsettwo, \rgamawtwo, \gamaR, \rgamasettwo, \rgamatsettwo\}$, there is a $2(\ln(\Delta(G)+2)+1)$-approximation algorithm for $\rho$.
+

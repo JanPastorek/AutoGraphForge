@@ -65,6 +65,10 @@ _conjecturing_pkg/
 
 # Generated graph database
 database/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
 
 
 2026_ITAT_paper/REVIEW_improvements.md

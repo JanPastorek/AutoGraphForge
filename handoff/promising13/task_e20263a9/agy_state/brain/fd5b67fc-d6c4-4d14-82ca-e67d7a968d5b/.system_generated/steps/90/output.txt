@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Starting wide graph search...
+Tested 2000 graphs across 10 families, 0 counterexamples!
+

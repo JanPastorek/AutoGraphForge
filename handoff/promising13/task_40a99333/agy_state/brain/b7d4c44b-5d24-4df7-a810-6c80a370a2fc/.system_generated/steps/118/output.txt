@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+Fujita and Furuya (Difference between 2-rainbow domination and Roman domination in graphs, Discrete Applied Mathematics 161 (2013) 806-812) present some kind of characterization 
+\begin{theorem}[Wu and Xing \cite{wx}, Chellali and Rad \cite{cr}, and Fujita and Furuya \cite{ff}]\label{theorembefore}
+\noindent Fujita and Furuya \cite{ff} present some kind of characterization 
+\bibitem{chh} M. Chellali, T.W. Haynes, S.T. Hedetniemi, Bounds on weak roman and $2$-rainbow domination numbers, Discrete Appl. Math. 178 (2014) 27-32.
+\bibitem{cr} M. Chellali and N.J. Rad, On 2-rainbow domination and Roman domination in graphs, Australasian J. Combin. 56 (2013) 85-93.
+\bibitem{ff} S. Fujita and M. Furuya, Difference between 2-rainbow domination and Roman domination in graphs, Discrete Applied Mathematics 161 (2013) 806-812.
+

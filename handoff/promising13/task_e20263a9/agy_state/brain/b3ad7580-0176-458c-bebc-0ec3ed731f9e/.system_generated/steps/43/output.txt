@@ -1,0 +1,16 @@
+{"name":"Challenge_1bc2a7b5.lean","sizeBytes":"632"}
+{"name":"Challenge_1facfd37.lean","sizeBytes":"592"}
+{"name":"Challenge_2a2555cc.lean","sizeBytes":"627"}
+{"name":"Challenge_39fd4057.lean","sizeBytes":"643"}
+{"name":"Challenge_40a99333.lean","sizeBytes":"633"}
+{"name":"Challenge_63ce884f.lean","sizeBytes":"615"}
+{"name":"Challenge_8ca1b27c.lean","sizeBytes":"589"}
+{"name":"Challenge_9968b18e.lean","sizeBytes":"653"}
+{"name":"Challenge_9e476a83.lean","sizeBytes":"579"}
+{"name":"Challenge_a23c41a0.lean","sizeBytes":"586"}
+{"name":"Challenge_aa3292c1.lean","sizeBytes":"628"}
+{"name":"Challenge_e20263a9.lean","sizeBytes":"596"}
+{"name":"Challenge_fbfcd99b.lean","sizeBytes":"643"}
+{"name":"index.json","sizeBytes":"4583"}
+
+Summary: This directory contains 0 subdirectories and 14 files.

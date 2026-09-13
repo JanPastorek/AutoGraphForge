@@ -1,0 +1,20 @@
+
+The command exited with code 0.
+Output:
+TIGHT: wheel, n=3, r=1, rd=2
+TIGHT: circular_ladder, n=8, r=3, rd=4
+TIGHT: wheel, n=4, r=1, rd=2
+TIGHT: wheel, n=5, r=1, rd=2
+TIGHT: wheel, n=6, r=1, rd=2
+TIGHT: wheel, n=7, r=1, rd=2
+TIGHT: wheel, n=8, r=1, rd=2
+TIGHT: wheel, n=9, r=1, rd=2
+TIGHT: wheel, n=10, r=1, rd=2
+TIGHT: wheel, n=11, r=1, rd=2
+TIGHT: wheel, n=12, r=1, rd=2
+TIGHT: wheel, n=13, r=1, rd=2
+TIGHT: wheel, n=14, r=1, rd=2
+TIGHT: wheel, n=15, r=1, rd=2
+TIGHT: gp_4_1, n=8, r=3, rd=4
+Done testing named graphs. Found 0 counterexamples.
+

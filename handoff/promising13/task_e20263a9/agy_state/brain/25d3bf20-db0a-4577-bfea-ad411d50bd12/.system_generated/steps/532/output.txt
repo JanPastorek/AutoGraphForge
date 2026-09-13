@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+2026-09-11+20:30:04.7081581780 ./agy.log
+2026-09-11+20:29:21.7140629270 ./.swarm_blackboard_e20263a9_20260911_144940.md
+2026-09-11+20:29:07.2092761240 ./agy_output.txt
+2026-09-11+20:28:58.6540798170 ./scratch.lean
+2026-09-11+17:02:16.4146505290 ./Challenge_e20263a9.lean
+2026-09-11+16:49:26.8560258570 ./.agents/teamwork_preview_pipeline_1/progress.md
+2026-09-11+16:45:48.6925042480 ./.agents/sentinel_1/BRIEFING.md
+2026-09-11+16:45:24.6128821510 ./.agents/ORIGINAL_REQUEST.md
+2026-09-11+16:44:21.3845563020 ./preflight.log
+2026-09-11+16:44:10.4164473640 ./reference/GraphInvariantsComputable.lean
+

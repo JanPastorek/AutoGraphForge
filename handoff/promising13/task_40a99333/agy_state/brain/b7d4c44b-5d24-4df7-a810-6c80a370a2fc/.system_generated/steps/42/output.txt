@@ -1,0 +1,36 @@
+
+The command exited with code 0.
+Output:
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/wpQztQSRtvPogp0R6X6tQWiC+E4</id>
+  <title>arXiv Query: search_query=&amp;id_list=1801.04257&amp;start=0&amp;max_results=10</title>
+  <updated>2026-09-11T18:37:12Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=1801.04257" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1801.04257v3</id>
+    <title>On projective and affine equivalence of sub-Riemannian metrics</title>
+    <updated>2019-03-01T06:37:40Z</updated>
+    <link href="https://arxiv.org/abs/1801.04257v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1801.04257v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Consider a smooth manifold $M$ equipped with a bracket generating distribution $D$. Two sub-Riemannian metrics on $(M,D)$ are said to be projectively (resp. affinely) equivalent if they have the same geodesics up to reparameterization (resp. up to affine reparameterization). A sub-Riemannian metric $g$ is called rigid (resp. conformally rigid) with respect to projective/affine equivalence, if any sub-Riemannian metric which is projectively/affinely equivalent to $g$ is constantly proportional to $g$ (resp. conformal to $g$). In the Riemannian case the local classification of projectively and affinely equivalent metrics is classical (Levi-Civita, Eisenhart). In particular, a Riemannian metric which is not rigid satisfies the following two special properties: its geodesic flow possesses nontrivial integrals and the metric induces certain canonical product structure on the ambient manifold. These classification results were extended to contact and quasi-contact distributions by Zelenko. Our general goal is to extend these results to arbitrary sub-Riemannian manifolds, and we establish two types of results toward this goal: if a sub-Riemannian metric is not projectively conformally rigid, then, first, its flow of normal extremals has at least one nontrivial integral quadratic on the fibers of the cotangent bundle and, second, the nilpotent approximation of the underlying distribution at any point admits a product structure. As a consequence we obtain two types of genericity results: first, we show that a generic sub-Riemannian metric on a fixed pair $(M,D)$ is projectively conformally rigid. Second, we prove that, except for special pairs $(m,n)$, every sub-Riemannian metric on a rank $m$ generic distribution in an $n$-dimensional manifold is projectively conformally rigid. For the affine equivalence in both genericity results conformal rigidity can be replaced by usual rigidity.</summary>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-01-12T18:11:23Z</published>
+    <arxiv:primary_category term="math.DG"/>
+    <author>
+      <name>F. Jean</name>
+    </author>
+    <author>
+      <name>S. Maslovskaya</name>
+    </author>
+    <author>
+      <name>I. Zelenko</name>
+    </author>
+  </entry>
+</feed>
+
+

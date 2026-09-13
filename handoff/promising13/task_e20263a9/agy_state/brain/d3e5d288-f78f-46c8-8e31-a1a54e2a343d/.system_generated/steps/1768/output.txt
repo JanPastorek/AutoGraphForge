@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+First fail: n=6, W=4, max_d=2, edges=[(0, 1), (0, 5), (2, 3), (3, 4), (4, 5)]
+Fails for |V \ B_1(v)| <= W - 2: 111
+

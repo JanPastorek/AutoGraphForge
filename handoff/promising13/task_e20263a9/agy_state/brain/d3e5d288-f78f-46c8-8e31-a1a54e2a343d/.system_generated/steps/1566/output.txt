@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+For ALL Roman dominating functions on P_2..P_8, a (v, k) pair ALWAYS EXISTS!
+

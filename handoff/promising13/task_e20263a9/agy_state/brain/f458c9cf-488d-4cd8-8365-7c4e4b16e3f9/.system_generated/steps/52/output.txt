@@ -1,0 +1,18 @@
+The search for ""rad(G) + 1" "roman domination" OR "gamma_R"" returned the following summary:
+The expression **$\text{rad}(G) + 1$** appears in the context of graph theory, specifically in research concerning relationships between graph invariants, such as the **nonsplit Roman domination number** ($\gamma_{nsr}(G)$) and other domination parameters[1][2].
+
+### Context and Usage
+*   **Nonsplit Roman Domination:** In studies investigating the nonsplit Roman domination number, researchers have established results relating this parameter to the graph's radius and diameter[1][2]. Specifically, a known corollary states:
+    > If $\gamma_{nsr}(G) = \gamma_{ns}(G) + 1$, then $\text{diam}(G) \leq 4$ and $\text{rad}(G) \leq 2$[1][2].
+*   **Radius and Domination:** The radius of a graph, $\text{rad}(G)$, is defined as the minimum eccentricity among all vertices in $G$[3][4]. It is frequently compared with various domination numbers (including the standard Roman domination number $\gamma_R(G)$ or $\gamma_{gR}(G)$) to establish upper or lower bounds for specific classes of graphs[5][6][7].
+
+While there is no single universal theorem stating $\gamma_R(G) = \text{rad}(G) + 1$, the terms often appear together in theorems that bound domination parameters in terms of the graph's radius, diameter, or other distance-based metrics[1][5][2].
+
+Sources:
+[1] [unm.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFmzdU24hYqSOLeL-UpGNPyL-pI-FIwVNu_JSyTCORr8ze7nSYqPmVDbC9cifJ03ToX1mCseNVgYO7xB-0Iv0tAJAZtzwYP8NvHqACfBwvduZcao2U2_0aWerqvFwG7A7kU53EiBpEmZDT7DhHMjgvicA==)
+[2] [unm.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFmzdU24hYqSOLeL-UpGNPyL-pI-FIwVNu_JSyTCORr8ze7nSYqPmVDbC9cifJ03ToX1mCseNVgYO7xB-0Iv0tAJAZtzwYP8NvHqACfBwvduZcao2U2_0aWerqvFwG7A7kU53EiBpEmZDT7DhHMjgvicA==)
+[3] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHoCDuR8bIAWuurCRWa58BvhZT-na-U_EK50EH5l20bofV0LzHyQSqQm_Rhg_E3HuhkMIqx1weDmIbGgp0cQXCBTkdJm_G_RHwluYF_Bl9D1jKNUqa97SIWej7Mr0RvIODwe0eWpaAsHQ==)
+[4] [dergipark.org.tr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF0EsYSSyPx0YasotNxf4QjbwNrG9e2r-K84dWmFh-qwUWx10hIQb_0CKE8YNIKeaaar-2NMHk0RbfDN6GdVQ2wP-0rj5bnIcirNxEkG6SCFgokRP7hLY4AJZ8wNSCI3FoJTsPpvIj0SDfsoD4imKI=)
+[5] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEyuZACbmfldqz0GK0BWxZ0nELXc3qr9XtY8_7Ftm_hCCbG-cXQxdQyRSGMNrrtgiq4Bis_a2HISzd24XB5A8iHhnOZyt_PSaYmUJoqruXMOAfucFopmBQfI5u8nRiV9OlHCAU=)
+[6] [ijmsi.ir](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHCUp-yiKJ8Q740lk-onOsQ61mkky0xIh4gT6DBy0o0XEt_T5GhyAU76jbJAJaMbBqyU7_UegGFuGZyEoIKVRY1NMdhh1u66z6EPr2ZKMNW5unNFmu996sKg4Fv9RyeDgNlbgIoRK_7LHH3F0a-uas1Hc6HSg==)
+[7] [semanticscholar.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGFCZUB3rVJ4sSU_77NwJoFSDNQp9AXn1ZmWAZGibyy4c8wYeLb6T8oCkcTzjSrvHCIlvdJVqVbxD7HlvQTHLj66VvKwR-XnDLZzJ5QexXbtwqLLne1Z19AThrAcBlctCmYfROaDGc3dmW9Q0AbTelux1sga4KFzKc9WqHDV6edDqUOh9wViB6u8BeL2oBe7LOE7HRHya2Mborbzc7qOKp4hV2DUJgCN1Nesfqx5BBUKa8=)

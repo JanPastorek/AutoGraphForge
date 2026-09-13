@@ -1,0 +1,15 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.lgl0a2geNn.lean:262:34: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  b ≥ 0
+  a ≥ 0
+  a - b ≥ 1
+where
+ a := ↑(ballWithin G k v).card
+ b := ↑(ballWithin G (k + 0) v).card
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

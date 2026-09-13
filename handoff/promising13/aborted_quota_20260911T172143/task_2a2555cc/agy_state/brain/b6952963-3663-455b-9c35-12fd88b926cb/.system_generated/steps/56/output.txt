@@ -1,0 +1,28 @@
+The search for ""Total Domination in Graphs" "Henning" "radius" OR "rad(G)" proof" returned the following summary:
+The relationship between the **total domination number** ($\gamma_t(G)$) and the **radius** ($\text{rad}(G)$) of a graph is a recurring theme in the work of **Michael A. Henning** and his co-authors (notably in their research on distance domination and bounds for specific graph classes)[1][2][3][4].
+
+### Key Context and Relevant Proof Approaches
+In the literature authored by Henning et al., the radius $\text{rad}(G)$ is often used as a parameter to bound the total domination number, particularly for restricted classes of graphs (like planar graphs) or when considering distance-$k$ domination[1][3].
+
+*   **Distance Domination and Radius:** A common proof strategy for lower bounds involving the radius involves the construction of a spanning tree $T$[1][2]. Because adding edges to a graph cannot increase its radius, one can establish that $\text{rad}(G) \le \text{rad}(T)$[1][2]. Since $T$ is a tree, the relationship between diameter, radius, and domination number is more easily calculated (e.g., using $\text{diam}(T) \ge 2\text{rad}(T) - 1$)[2].
+*   **Planar Graphs:** Research by Dorfling, Goddard, and Henning[3][5] specifically explores how $\text{diam}(G)$ and $\text{rad}(G)$ influence $\gamma_t(G)$. For instance, they showed that for planar graphs with diameter 3, the upper bound for the total domination number varies depending on whether the radius is 2 or 3[3].
+
+### Notable References
+If you are looking for specific proofs, the following works by Henning are primary sources:
+
+1.  **"Lower bounds on the distance domination number of a graph"** (with F. Kenter, *Contributions to Discrete Mathematics*, 2017): This paper contains proofs relating distance $k$-domination to the radius of the graph[1][4]. It explicitly uses the property that $\text{rad}(G) \le \text{rad}(T)$ for a spanning tree $T$[2].
+2.  **"Total Domination in Graphs"** (Springer Monographs in Mathematics, 2013, with A. Yeo): This is the definitive text on the subject[6][7]. It provides the foundational theorems and proofs for various bounds on $\gamma_t(G)$, including those related to structural parameters like radius and diameter[8].
+3.  **"A New Upper Bound on the Total Domination Number of a Graph"** (with A. Yeo, 2007): Focuses on bounds for graphs with specified minimum/maximum degrees[9].
+
+To find the specific proof you are looking for, it is recommended to consult **Chapter 2 or 3 of the Henning & Yeo monograph**[7][8], or the **2017 *Contributions to Discrete Mathematics* paper**[1][4], which contains the most direct technical application of the radius parameter in a proof context.
+
+Sources:
+[1] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGNR40QE-QqZSPEOzG3VMnf7rKjfNdbrN3gwW3yxWiFD3FQ8ih4IavJRr189fDN3Yr7uMaS2aX4RXUhCXMrOyrxSCjspn-DynmHQC6OlYH74p7yaSDO)
+[2] [ucalgary.ca](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFtM6EcSn0klLVUGxeYHu6RuBEohQpUwiqTdGRWk-iRCB6gHK0VfsUO7_kpPFFnlv1tF0n7ZXsHsiZf1IBfLJOrzRxDkDy5Ex_jlQpt84xT3XXrU6breH5-QpSZJPno66SumyVgQC2TnEQsdk3HQzmp)
+[3] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEJ31_s8jFGIqtEziByAnMHgsATKDD2YSHziGyCmbbVmoWY-iKWU-xCsyEQiqVDM43t8mpY_9Q9VvuXVZwkftaw4rJvfQeckwu7c772PY1tZh8ZV-6De_Au88g4biHf-x37jsp6bps7hqYHRM3XmHQGXj5QmkI96mzeKASi)
+[4] [ucalgary.ca](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFK9TZB0sDGGZLkW3Q6NGQXSEEtQHBkdADJVnvHVRgfHnq0BdbADCzIFeoEpF2_qUd4BZJVOkeQG7AqB3_VLUv9hN60g1XHJiekyPmJlwLc8-QC53x221Qq-J9uY56hdA==)
+[5] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEJ4xkSpja6ymN8kP9-hOAcWfs1uqu5P4a71EcCE66sRy3uBJtwj7pjBWJaX8rWHUZ1X1N1pSFswaGwp2Lo2nbTImKagWP6R2axxMmABH7ZX243dCH1OL15)
+[6] [buchnievergelt.ch](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEe7NOSjUc0lygZV3tTyOyohoV2HXZBxNDL767y4vhFR7hXCgURJhGGG-Z6v2YCOAYzknyzNFP8HKdvq4HdA5p2udM3ZwyRes3vpCuZPgjxBTRBXScI8qDp3443rDzdBJ1jWuEZVBvi1Rr4n-gsGImLI0vxELdkUClQ7qpZkgA4GpeQX4BCYEYSY2EF1YAhySH1lPGVPFQg7dCewMjgXZ75z8fJ8PwNMg==)
+[7] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHQk_M_3vqLW3GKPwcVz2_0vQHF8uP3MnvuoeesAH9XQKVpqxJgY2SMz9aLK2mmqKyKI2tPSl1RDhQqkOMbHIYAM0zJrarBrA61idifhnfUpqAG4JiNwXiVTNw7hegOwmWDh1KA3gX0Jet_gSmiwOYb4v9-Pkvz3NOB)
+[8] [wolfram.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEaAo4LWpdkivLtdCBsSNsRyGrPfaD_-nr1dv5J3XIjpJD1Ymyx6PLJyIIei1e7HcZKzM5MRkzHfX8qP2Jtvf8tgHNIenrNcZkMD8Q8hB1CTAqtjrBAG3mKObju2u2l1874wYdWppovMxXeozG4)
+[9] [combinatorics.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE0Dm1ICFF7EimO7QiHIDDWeWNO9Bsr67wfhFz3GYg010zNy_PCJFHR-mojtNxGK5PhYMXHt1PkBC7RXdVmAaQe61UzEHM3-uOWs99RLy2NE-Ca2EQ8D3AyHXy1PfCGafyWKBPkvOyisx9X2dIwedy4TbYQDKlvupKOb0A=)

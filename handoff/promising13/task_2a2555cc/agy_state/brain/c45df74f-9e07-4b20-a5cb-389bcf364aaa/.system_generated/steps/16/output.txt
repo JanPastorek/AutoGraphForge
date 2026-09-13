@@ -1,0 +1,2 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":498,"LineContent":"/- ── radius ───────────────────────────────────────────────────────────────── -/"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":513,"LineContent":"def radius (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :="}

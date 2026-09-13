@@ -1,0 +1,10 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.LhIKV2jIbB.lean:9:4: error: 'change' tactic failed, pattern
+  Option.getD s.max 0 ≤ k
+is not definitionally equal to target
+  Option.getD ⊥ 0 ≤ k
+CHECK: FAILED (exit 1)
+

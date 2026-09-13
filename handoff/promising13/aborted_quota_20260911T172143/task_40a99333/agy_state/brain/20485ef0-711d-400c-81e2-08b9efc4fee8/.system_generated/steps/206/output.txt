@@ -1,0 +1,11 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.hrGpIrkxXU.lean:19:4: error: 'change' tactic failed, pattern
+  K ≤ Option.getD s.min 0
+is not definitionally equal to target
+  K ≤ Option.getD (↑m) 0
+'test_min_le' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

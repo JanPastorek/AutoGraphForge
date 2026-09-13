@@ -1,0 +1,22 @@
+The search for ""Davila" "total" "domination" "radius" "rad(G)" OR "rad(T)"" returned the following summary:
+In graph theory research, particularly in works authored or co-authored by **Randy Davila** regarding domination parameters, the relationship between the **total domination number** ($\gamma_t(G)$) and the **radius** ($\text{rad}(G)$) is a recognized area of study[1][2][3].
+
+### Relationship and Lower Bounds
+Research by Davila and others often focuses on generalizing lower bounds for domination numbers to total distance $k$-domination numbers[1][4]. Key findings in this area include:
+
+*   **Total Domination and Radius:** It is a known result that for any connected graph $G$ with at least two vertices, the total domination number is bounded below by the radius of the graph, often expressed as $\gamma_t(G) \geq \text{rad}(G)$[1][5].
+*   **Generalization to $k$-domination:** Davila and his co-authors have extended these concepts to the **total distance $k$-domination number** ($\gamma_{t,k}(G)$)[1][4]. A primary theorem in this context states that for $k \geq 1$ and a connected graph $G$ of order $n \geq 2$:
+    $$\gamma_{t,k}(G) \geq \frac{1}{k} \text{rad}(G)$$
+*   **Spanning Trees:** A critical technique used in these proofs is the utilization of a spanning tree $T$ of $G$ such that $\gamma_{t,k}(G) = \gamma_{t,k}(T)$[2][3]. Because adding edges to a tree cannot increase its radius, the relationship $\text{rad}(G) \leq \text{rad}(T)$ is frequently employed to establish or verify these bounds[1][5].
+
+### Context
+These results are often discussed within the context of **Graffiti.pc** conjectures (or generalizations thereof), which seek to relate various graph invariants like domination numbers to distance-based parameters such as the radius and diameter[3][4]. Researchers such as Randy Davila, Caleb Fast, Michael A. Henning, and Franklin Kenter have published extensively on these bounds, often establishing that the properties of spanning trees provide a path to proving lower bounds for general graphs[6][5][7].
+
+Sources:
+[1] [georgiasouthern.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQExMylX1ff8G6WZNJ2hzsN7dr6mVQaOEB_h7aEeKY_tRuup_9LO3r-u0Btt5i33WqrLamiIaXxG0I2hZDZ1EHpMEpj-wVCv6Q10jzOZdZiDPP0Mx5b-TzNbwkIOdhWr9W0VbUHAvcYfvpfrnSHZBKB1pMr071acQG3RazwABIYjiVXthFVUx6RWUWuUFLU=)
+[2] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFdTnt5RGvAOJR-B7aKB2jHOoD8K2j1r5h-IcbCY_TtgzV70fb_lEEL0fXkUcqg4tEnN5ZzUH3zjG-yQHe0Mh97XJbAeSSOuo88TmpWzmh0ptYDlyivFg==)
+[3] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHD8ZdPUxiFjjP3tjC7kP98J7nFiejc0rIEqQ9c8sb0BxVGvs4RPIp9fxCKsNr4oA4XMV74FPr5lsQGFl_vUyNYzt7UOMnCzrCvyAKf1kZz2OGAWEVafDEShsMwvH0cFokwdJ4TXuHzKMrqtlnxXNnY1voIY4fyGRWP12j6xNlCWOju_C3dF35iUnpAErLFMK1TCco7KgPv4rJqbg==)
+[4] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHD8ZdPUxiFjjP3tjC7kP98J7nFiejc0rIEqQ9c8sb0BxVGvs4RPIp9fxCKsNr4oA4XMV74FPr5lsQGFl_vUyNYzt7UOMnCzrCvyAKf1kZz2OGAWEVafDEShsMwvH0cFokwdJ4TXuHzKMrqtlnxXNnY1voIY4fyGRWP12j6xNlCWOju_C3dF35iUnpAErLFMK1TCco7KgPv4rJqbg==)
+[5] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFdTnt5RGvAOJR-B7aKB2jHOoD8K2j1r5h-IcbCY_TtgzV70fb_lEEL0fXkUcqg4tEnN5ZzUH3zjG-yQHe0Mh97XJbAeSSOuo88TmpWzmh0ptYDlyivFg==)
+[6] [ucalgary.ca](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGHNtOI9pS7eKbPlp7FALM7Ax6VYbD2ClGhiFTxCJQbWlH5dOdUW0h0JHY3-TYr9P_3JfpuzhJC8UTdFI_Rs_p7iT1LcYoxEuq2v8-jNWuTQPUTz41mtuHMgY0VKpkrTYug1kBR5rMyNENu354R6VxxtQ==)
+[7] [ucalgary.ca](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGHNtOI9pS7eKbPlp7FALM7Ax6VYbD2ClGhiFTxCJQbWlH5dOdUW0h0JHY3-TYr9P_3JfpuzhJC8UTdFI_Rs_p7iT1LcYoxEuq2v8-jNWuTQPUTz41mtuHMgY0VKpkrTYug1kBR5rMyNENu354R6VxxtQ==)

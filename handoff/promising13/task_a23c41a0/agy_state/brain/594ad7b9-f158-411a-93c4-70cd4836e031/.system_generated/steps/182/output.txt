@@ -1,0 +1,2 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Order/WithBot.lean","LineNumber":490,"LineContent":"@[to_dual lt_top_iff_ne_top"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Order/WithBot.lean","LineNumber":491,"LineContent":"/-- A version of `lt_top_iff_ne_top` for `WithTop` that only requires `LT α`, not"}

@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+C_3: rad=1, rad+1=2, rdn=2, holds=True
+C_4: rad=2, rad+1=3, rdn=3, holds=True
+C_5: rad=2, rad+1=3, rdn=4, holds=True
+C_6: rad=3, rad+1=4, rdn=4, holds=True
+C_7: rad=3, rad+1=4, rdn=5, holds=True
+C_8: rad=4, rad+1=5, rdn=6, holds=True
+C_9: rad=4, rad+1=5, rdn=6, holds=True
+C_10: rad=5, rad+1=6, rdn=7, holds=True
+

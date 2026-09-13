@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "write_file(/tmp/agyprobe.aS1PaH/ws/*)",
+      "read_file(/tmp/agyprobe.aS1PaH/ws/*)",
+      "command(*)",
+      "read_file(*)",
+      "write_file(*)",
+      "read_url(*)",
+      "execute_url(*)"
+    ]
+  },
+  "trustedWorkspaces": [
+    "/tmp/agyprobe.aS1PaH/ws"
+  ],
+  "model": "Gemini 3.8 Flash (High)"
+}

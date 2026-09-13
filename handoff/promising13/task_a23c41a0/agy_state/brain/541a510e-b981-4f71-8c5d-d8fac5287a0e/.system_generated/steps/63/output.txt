@@ -1,0 +1,2 @@
+Successfully killed 2 subagent(s) and their descendants.
+Killed roles: Pipeline Orchestrator, Victory Auditor

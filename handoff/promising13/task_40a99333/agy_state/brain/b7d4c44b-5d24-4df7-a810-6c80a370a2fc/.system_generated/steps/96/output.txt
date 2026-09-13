@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+Title: Trees with equal total domination and 2-rainbow domination numbers
+OA: {'is_oa': True, 'oa_status': 'hybrid', 'oa_url': 'http://www.doiserbia.nb.rs/ft.aspx?id=0354-51801802599S', 'any_repository_has_fulltext': False}
+Locations: [{'id': 'doi:10.2298/fil1802599s', 'is_oa': True, 'landing_page_url': 'https://doi.org/10.2298/fil1802599s', 'pdf_url': 'http://www.doiserbia.nb.rs/ft.aspx?id=0354-51801802599S', 'source': {'id': 'https://openalex.org/S14920484', 'display_name': 'Filomat', 'issn_l': '0354-5180', 'issn': ['0354-5180', '2406-0933'], 'is_oa': False, 'is_in_doaj': False, 'is_core': True, 'host_organization': 'https://openalex.org/P4310321616', 'host_organization_name': 'University of Niš', 'host_organization_lineage': ['https://openalex.org/P4310321616'], 'host_organization_lineage_names': ['University of Niš'], 'type': 'journal'}, 'license': 'public-domain', 'license_id': 'https://openalex.org/licenses/public-domain', 'version': 'publishedVersion', 'is_accepted': True, 'is_published': True, 'raw_source_name': 'Filomat', 'raw_type': 'journal-article'}]
+

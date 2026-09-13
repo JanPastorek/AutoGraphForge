@@ -1,0 +1,226 @@
+
+The command exited with code 0.
+Output:
+<truncated 1 lines>
+    _ = 2 * G.eccent u := (two_mul _).symm
+
+end ediam
+
+section diam
+
+/--
+The diameter is the greatest distance between any two vertices, with the value `0` in
+case the distances are not bounded above, or the graph is not connected.
+-/
+noncomputable def diam (G : SimpleGraph α) :=
+  G.ediam.toNat
+
+lemma diam_def : G.diam = (⨆ p : α × α, G.edist p.1 p.2).toNat := by
+  rw [diam, ediam_def]
+
+lemma dist_le_diam (h : G.ediam ≠ ⊤) {u v : α} : G.dist u v ≤ G.diam :=
+  ENat.toNat_le_toNat edist_le_ediam h
+
+lemma nontrivial_of_diam_ne_zero (h : G.diam ≠ 0) : Nontrivial α := by
+  contrapose! h
+  simp [diam, h]
+
+lemma diam_eq_zero_of_not_connected (h : ¬ G.Connected) : G.diam = 0 := by
+  cases isEmpty_or_nonempty α
+  · rw [diam, ediam, ciSup_of_empty, bot_eq_zero']; rfl
+  · rw [diam, ediam_eq_top_of_not_connected h, ENat.toNat_top]
+
+lemma diam_eq_zero_of_ediam_eq_top (h : G.ediam = ⊤) : G.diam = 0 := by
+  rw [diam, h, ENat.toNat_top]
+
+lemma ediam_ne_top_of_diam_ne_zero (h : G.diam ≠ 0) : G.ediam ≠ ⊤ :=
+  mt diam_eq_zero_of_ediam_eq_top h
+
+lemma exists_dist_eq_diam [Nonempty α] :
+    ∃ u v, G.dist u v = G.diam := by
+  by_cases h : G.diam = 0
+  · simp [h]
+  · obtain ⟨u, v, huv⟩ := exists_edist_eq_ediam_of_ne_top <| ediam_ne_top_of_diam_ne_zero h
+    use u, v
+    rw [diam, dist, congrArg ENat.toNat huv]
+
+lemma diam_ne_zero_of_ediam_ne_top [Nontrivial α] (h : G.ediam ≠ ⊤) : G.diam ≠ 0 :=
+  have ⟨_, _, hne⟩ := exists_pair_ne ‹_›
+  pos_iff_ne_zero.mp <|
+    lt_of_lt_of_le ((connected_of_ediam_ne_top h).pos_dist_of_ne hne) <| dist_le_diam h
+
+@[gcongr]
+lemma diam_anti_of_ediam_ne_top (h : G ≤ G') (hn : G.ediam ≠ ⊤) : G'.diam ≤ G.diam :=
+  ENat.toNat_le_toNat (ediam_anti h) hn
+
+@[simp]
+lemma diam_bot : (⊥ : SimpleGraph α).diam = 0 := by
+  rw [diam, ENat.toNat_eq_zero]
+  cases subsingleton_or_nontrivial α
+  · exact Or.inl ediam_eq_zero_of_subsingleton
+  · exact Or.inr ediam_bot
+
+@[simp]
+lemma diam_top [Nontrivial α] : (⊤ : SimpleGraph α).diam = 1 := by
+  rw [diam, ediam_top, ENat.toNat_one]
+
+@[simp]
+lemma diam_eq_zero : G.diam = 0 ↔ G.ediam = ⊤ ∨ Subsingleton α := by
+  rw [diam, ENat.toNat_eq_zero, or_comm, ediam_eq_zero_iff_subsingleton]
+
+@[simp]
+lemma diam_eq_one [Nontrivial α] : G.diam = 1 ↔ G = ⊤ := by
+  rw [diam, ENat.toNat_eq_iff one_ne_zero, Nat.cast_one, ediam_eq_one]
+
+lemma diam_eq_zero_iff_ediam_eq_top [Nontrivial α] : G.diam = 0 ↔ G.ediam = ⊤ := by
+  rw [← not_iff_not]
+  exact ⟨ediam_ne_top_of_diam_ne_zero, diam_ne_zero_of_ediam_ne_top⟩
+
+/-- A finite and nontrivial graph is connected if and only if its diameter is not zero.
+See also `connected_iff_ediam_ne_top` for the extended diameter version. -/
+lemma connected_iff_diam_ne_zero [Finite α] [Nontrivial α] : G.Connected ↔ G.diam ≠ 0 := by
+  rw [connected_iff_ediam_ne_top, not_iff_not, diam_eq_zero_iff_ediam_eq_top]
+
+end diam
+
+section radius
+
+/-- The radius of a simple graph is the minimum eccentricity of any vertex. -/
+noncomputable def radius (G : SimpleGraph α) : ℕ∞ :=
+  ⨅ u, G.eccent u
+
+lemma radius_eq_iInf_iSup_edist : G.radius = ⨅ u, ⨆ v, G.edist u v :=
+  rfl
+
+lemma radius_le_eccent {u : α} : G.radius ≤ G.eccent u :=
+  iInf_le G.eccent u
+
+lemma exists_eccent_eq_radius [Nonempty α] : ∃ u, G.eccent u = G.radius :=
+  ENat.exists_eq_iInf G.eccent
+
+lemma exists_edist_eq_radius_of_finite [Nonempty α] [Finite α] :
+    ∃ u v, G.edist u v = G.radius := by
+  obtain ⟨w, hw⟩ := G.exists_eccent_eq_radius
+  obtain ⟨v, hv⟩ := G.exists_edist_eq_eccent_of_finite w
+  use w, v
+  rw [hv, hw]
+
+lemma radius_eq_top_of_not_connected (h : ¬ G.Connected) : G.radius = ⊤ := by
+  simp [radius, eccent_eq_top_of_not_connected h]
+
+lemma radius_eq_top_of_isEmpty [IsEmpty α] : G.radius = ⊤ :=
+  iInf_of_empty G.eccent
+
+lemma radius_ne_top_iff [Nonempty α] [Finite α] : G.radius ≠ ⊤ ↔ G.Connected := by
+  refine ⟨Not.imp_symm radius_eq_top_of_not_connected, fun h ↦ ?_⟩
+  obtain ⟨u, v, huv⟩ := G.exists_edist_eq_radius_of_finite
+  rw [← huv, edist_ne_top_iff_reachable]
+  exact h u v
+
+lemma radius_ne_zero_of_nontrivial [Nontrivial α] : G.radius ≠ 0 := by
+  rw [← Order.one_le_iff_ne_zero]
+  apply le_iInf
+  simp [Order.one_le_iff_ne_zero, G.eccent_ne_zero]
+
+lemma radius_eq_zero_iff : G.radius = 0 ↔ Nonempty α ∧ Subsingleton α := by
+  refine ⟨fun h ↦ ⟨?_, ?_⟩, fun ⟨_, _⟩ ↦ ?_⟩
+  · contrapose! h
+    simp [radius]
+  · contrapose! h
+    simp [radius_ne_zero_of_nontrivial]
+  · rw [radius, ENat.iInf_eq_zero]
+    use Classical.ofNonempty
+    simpa [eccent] using Subsingleton.elim _
+
+lemma radius_le_ediam [Nonempty α] : G.radius ≤ G.ediam :=
+  iInf_le_iSup
+
+lemma ediam_eq_top_iff_radius_eq_top [Nonempty α] : G.ediam = ⊤ ↔ G.radius = ⊤ := by
+  refine ⟨?_, fun hr ↦ eq_top_iff.mpr (hr ▸ radius_le_ediam)⟩
+  contrapose
+  intro hr
+  obtain ⟨w, hw⟩ := G.exists_eccent_eq_radius
+  have hdiam : G.ediam ≤ 2 * G.eccent w := ediam_le_two_mul_eccent w
+  exact ne_top_of_lt <| lt_of_le_of_lt hdiam <| WithTop.mul_lt_top (ENat.coe_lt_top 2) <|
+    lt_top_iff_ne_top.mpr (hw ▸ hr)
+
+lemma ediam_le_two_mul_radius : G.ediam ≤ 2 * G.radius := by
+  cases isEmpty_or_nonempty α
+  · rw [radius_eq_top_of_isEmpty]
+    exact le_top
+  · by_cases hdiam : G.ediam = ⊤
+    · simp [hdiam, ediam_eq_top_iff_radius_eq_top.mp hdiam]
+    · obtain ⟨w, hw⟩ := G.exists_eccent_eq_radius
+      obtain ⟨_, _, h⟩ := G.exists_edist_eq_ediam_of_ne_top hdiam
+      apply le_trans (h ▸ G.edist_triangle (v := w))
+      rw [two_mul]
+      exact hw ▸ add_le_add (G.edist_comm ▸ G.edist_le_eccent) G.edist_le_eccent
+
+lemma radius_eq_ediam_iff [Nonempty α] :
+    G.radius = G.ediam ↔ ∃ e, ∀ u, G.eccent u = e := by
+  refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
+  · use G.radius
+    intro u
+    exact le_antisymm (h ▸ eccent_le_ediam) radius_le_eccent
+  · obtain ⟨e, h⟩ := h
+    have ediam_eq : G.ediam = e :=
+      le_antisymm (iSup_le fun u ↦ (h u).le) ((h Classical.ofNonempty) ▸ eccent_le_ediam)
+    rw [ediam_eq]
+    exact le_antisymm ((h Classical.ofNonempty) ▸ radius_le_eccent) (le_iInf fun u ↦ (h u).ge)
+
+@[simp]
+lemma radius_bot [Nontrivial α] : (⊥ : SimpleGraph α).radius = ⊤ :=
+  radius_eq_top_of_not_connected not_connected_bot
+
+@[simp]
+lemma radius_top [Nontrivial α] : (⊤ : SimpleGraph α).radius = 1 := by
+  simp [radius]
+
+end radius
+
+section center
+
+/-- The center of a simple graph is the set of vertices with eccentricity equal to the radius. -/
+def center (G : SimpleGraph α) : Set α :=
+  {u | G.eccent u = G.radius}
+
+lemma center_nonempty [Nonempty α] : G.center.Nonempty :=
+  exists_eccent_eq_radius
+
+lemma mem_center_iff (u : α) : u ∈ G.center ↔ G.eccent u = G.radius := .rfl
+
+lemma center_eq_univ_iff_radius_eq_ediam [Nonempty α] :
+    G.center = Set.univ ↔ G.radius = G.ediam := by
+  rw [radius_eq_ediam_iff, ← Set.univ_subset_iff]
+  refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
+  · use G.radius
+    exact fun _ ↦ h trivial
+  · obtain ⟨e, h⟩ := h
+    intro u hu
+    rw [mem_center_iff, h u]
+    exact le_antisymm (le_iInf fun u ↦ (h u).ge) ((h Classical.ofNonempty) ▸ radius_le_eccent)
+
+lemma center_eq_univ_of_subsingleton [Subsingleton α] : G.center = Set.univ := by
+  rw [Set.eq_univ_iff_forall]
+  intro u
+  rw [mem_center_iff, eccent_eq_zero_of_subsingleton u, eq_comm, radius_eq_zero_iff]
+  tauto
+
+lemma center_bot : (⊥ : SimpleGraph α).center = Set.univ := by
+  cases subsingleton_or_nontrivial α
+  · exact center_eq_univ_of_subsingleton
+  · rw [Set.eq_univ_iff_forall]
+    intro u
+    rw [mem_center_iff, eccent_bot, radius_bot]
+
+lemma center_top : (⊤ : SimpleGraph α).center = Set.univ := by
+  cases subsingleton_or_nontrivial α
+  · exact center_eq_univ_of_subsingleton
+  · rw [Set.eq_univ_iff_forall]
+    intro u
+    rw [mem_center_iff, eccent_top, radius_top]
+
+end center
+
+end SimpleGraph
+

@@ -1,0 +1,14 @@
+The search for ""On Roman domination in graphs" Cockayne "radius" OR "diameter"" returned the following summary:
+In the seminal paper **"On Roman domination in graphs"** by E.J. Cockayne, P.A. Dreyer Jr., S.M. Hedetniemi, and S.T. Hedetniemi (*Discrete Mathematics*, 2004), the authors provide several structural results relating the Roman domination number $\gamma_R(G)$ to graph parameters such as the radius and diameter[1][2][3].
+
+Specifically, the paper includes the following theorem regarding the radius and diameter for graphs where $\gamma_R(G) = \gamma(G) + 2$:
+
+*   **Theorem 2.18:** If $G$ is a connected graph and $\gamma_R(G) = \gamma(G) + 2$, then $2 \le \text{rad}(G) \le 4$ and $3 \le \text{diam}(G) \le 8$[4].
+
+This result is often cited in subsequent literature when discussing bounds on the Roman domination number in relation to the distance properties of a graph[4].
+
+Sources:
+[1] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEDHKMcDptWCINq_CmOOS7CgOumtO_iejASKZFYkFBtPAHnLVzfM2R9K0-_HQxuKmIujM9UuYB7IvJORnIRobxI_CHVMlfnzv5xABqSSYCPsISsqeS6pztm3_igGKn7IFgAGNYjoYLaSuIgOsrBNoK2yT-Rul3VxeCcN9gGGY58QN_UD_XQfT0JGvBDGKr4Jz7a-w==)
+[2] [dergipark.org.tr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGFKeFdDXSrW8LTfD78ydtWTwwgXsM4UCeMgmABnUBbjT1Du7ptEjIpaYr2jhaXa9byJ-ufC-ZPVPmXwMRWFnvYYrXaGJ6UjePWFrmJ9nXmRaGPsa9kmm0SjbzsngORIzY6IOlVypcYybYP)
+[3] [tandfonline.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzIWH9omZ6WQeP3TWO5qdE2_KaSJ-ipgAfDo3rCj55FQoBRfOgTQXOkWVLe1arD1Q_GW5q5zxNvfbZfg-WbWEtwaly6SB6MWblObuwAY6NorJCGbtyE4Za8XbgLkjwaqNGhCztcMNasdHLG6u4S-ZffaKv_7TbH5k=)
+[4] [dergipark.org.tr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPXCBf_UOeUdofgIoIhyh4cuUFQkuMLSDkKCZkKQ3hQQrWczn9OqDh7uL5Ws9kEHqIgSNAiNnvfaJHhA-Jo_s_0zSN6duxRRkxC5ya403oDed4NxP7EB8wWvEGB6tMMjaMUJsq0-WmsV3wpTk_1Qg=)

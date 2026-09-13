@@ -1,0 +1,22 @@
+The search for ""Henning" "Yeo" "Total Domination in Graphs" "rad(G)" OR "radius" "proof"" returned the following summary:
+In the monograph *Total Domination in Graphs* (2013) by Michael A. Henning and Anders Yeo, the authors provide several fundamental bounds relating the total domination number, $\gamma_t(G)$, to other graph invariants, including the radius of a graph, $\text{rad}(G)$[1][2].
+
+Specifically, they state the following result:
+
+**Proposition:** If $G$ is a connected graph of order at least two, then $\gamma_t(G) \ge \text{rad}(G)$[1].
+
+### Context and Related Bounds
+The book serves as a primary reference for total domination theory[3][2]. In addition to the inequality involving the radius, the text includes several related lower bounds for the total domination number:
+
+*   **Diameter:** For a connected graph $G$ of order at least two, $\gamma_t(G) \ge \frac{\text{diam}(G) + 1}{2}$[1].
+*   **Girth:** For a graph with girth $g$, $\gamma_t(G) \ge g/2$[1].
+*   **Domination Number:** For a graph with no isolated vertices, $\gamma(G) \le \gamma_t(G) \le 2\gamma(G)$[1][4].
+
+The proofs for these and other results are contained within the technical sections of the monograph, which covers both algorithmic aspects and structural graph theory related to total domination[5][2]. For the formal proof of the radius bound, readers are typically referred to the specific chapter addressing lower bounds in the *Total Domination in Graphs* text[1][2].
+
+Sources:
+[1] [jomardpublishing.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG8l9G4ovd4jM9AwTGChCPa6yk6C6JvfTaA1t_ZWkijOPINBjjWunShT66sttTJG7ajCMyJf_dkJrXyqVCHdwRtrGnhKJRmUjgBBUeKzMQaztYbN9e-Lh_9qm8Xfdk-xF9LItqZ2A0-_maIBpJO-EuKG2vH8th-QOQkaFyA8tD56-hUt_eckQ==)
+[2] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHpBpzaajf9zR2NCZed89Zrp6PxkipLBHMOWXUsUOrwu9VNnPp89JOVg43ofBKRC-7ijM89WyZs9KKsUCdUS6ruWvE1jJWP9zMETlb5-Pov7DrqAF8WuEiCBaxdK8dVou9Nx2pQxGBUjqv9XROC_w99S1IYrtx6kter)
+[3] [dokumen.pub](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGEOdYsWTLZyW6DKcXN2etGkDGoK5DHZ_FCGygrIL6aqFfhcZ2HVVhxRUD--1MLPBaJEjbJltjNHQPJCgwlSwsTucCDZOucpZ8h2Wvc_8D5kp9hkmhwwGyfIOcS0MjjHpdLEDYVhpE9YUsOCcsA3QlxcLaMql5YVAgxYDEL2cGf1zAcB3T1q7y6n0wpS5PZVHm0yESGYOixRju9ePCS0o1FwdzjQ2l0T0MzeCClxjrN)
+[4] [wmich.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG-9EPsw_TRS-mN7vbZy9hxWp5XtsWSl4RNc-2MblVf9cvJKGKTr9jYWe394TN9f4DkRpV593H7M9_DAsmQvrPnJT6Ny6mAO1Sbg43bigRwi-Cnj28K69UphbInZwgQwVhAv9VSv9HH___klw5QswImHO7bus6Aoj-6nmeWaoXnxpYPS59hTVKPtas=)
+[5] [the-ica.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHP8VejeNbD_rP0t2Pj37UMbiXVkHA92fPm4MUehjzN6Ez20DPfhFl8N8RQquAx9meoOy-gJwP-Wl17P25beopGqyCoW95u1WZGeWbWMiyBlJ9NlDIgPsczAatVmMQ6cAY7yAPO5EuCV0efi7OjSwe8g57ervBMbMIiJg==)

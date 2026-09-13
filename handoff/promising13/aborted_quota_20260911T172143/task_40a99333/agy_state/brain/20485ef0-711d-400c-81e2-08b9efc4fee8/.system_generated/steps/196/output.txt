@@ -1,0 +1,12 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.wJCPOPkBqK.lean:11:8: error(lean.unknownIdentifier): Unknown constant `Finset.min_isSome`
+/tmp/tmp.wJCPOPkBqK.lean:14:2: error: Invalid alternative name `none`: Expected `top` or `coe`
+/tmp/tmp.wJCPOPkBqK.lean:16:2: error: Invalid alternative name `some`: Expected `top` or `coe`
+/tmp/tmp.wJCPOPkBqK.lean:13:2: error: Alternative `top` has not been provided
+/tmp/tmp.wJCPOPkBqK.lean:13:2: error: Alternative `coe` has not been provided
+'test_min_le' depends on axioms: [propext, sorryAx, Quot.sound]
+CHECK: FAILED (exit 1)
+

@@ -1,0 +1,10 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+Finset.mem_of_max.{u_2} {α : Type u_2} [LinearOrder α] {s : Finset α} {a : α} : s.max = ↑a → a ∈ s
+Finset.mem_of_min.{u_2} {α : Type u_2} [LinearOrder α] {s : Finset α} {a : α} : s.min = ↑a → a ∈ s
+/tmp/tmp.MRhb4nHNIR.lean:8:7: error(lean.unknownIdentifier): Unknown constant `Finset.max_eq_some_iff`
+/tmp/tmp.MRhb4nHNIR.lean:9:7: error(lean.unknownIdentifier): Unknown constant `Finset.min_eq_some_iff`
+CHECK: FAILED (exit 1)
+

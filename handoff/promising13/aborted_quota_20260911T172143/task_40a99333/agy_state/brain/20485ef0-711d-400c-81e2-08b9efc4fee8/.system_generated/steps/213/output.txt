@@ -1,0 +1,10 @@
+Task: 20485ef0-711d-400c-81e2-08b9efc4fee8/task-211
+Status: DONE
+Log: /tmp/agyhome.ZeDW8w/.gemini/antigravity-cli/brain/20485ef0-711d-400c-81e2-08b9efc4fee8/.system_generated/tasks/task-211.log
+Log output:
+LINT: ok
+'test_min_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+
+Last progress: 5s ago

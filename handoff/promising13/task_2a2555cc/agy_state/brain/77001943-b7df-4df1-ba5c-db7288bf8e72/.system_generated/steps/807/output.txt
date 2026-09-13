@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+8ca1b27c open (nontrivial) ⇒ 2 ≤ sub_total_domination_number
+9e476a83 open (nontrivial) ⇒ 2 ≤ total_domination_number
+1facfd37 open (nontrivial) ⇒ independence_number ≤ edge_cover_number
+e20263a9 open (nontrivial) ⇒ (radius + 1) ≤ roman_domination_number
+2a2555cc open (nontrivial) ⇒ radius ≤ total_domination_number
+a23c41a0 open (nontrivial) ⇒ order ≤ (2 · edge_cover_number)
+40a99333 open (nontrivial) ⇒ total_domination_number ≤ roman_domination_number
+39fd4057 open ((nontrivial) ∧ (bipartite)) ⇒ edge_cover_number ≤ independence_number
+63ce884f open (nontrivial) ⇒ (roman_domination_number + 1) ≤ double_roman_domination_number
+9968b18e open ((nontrivial) ∧ (bipartite)) ⇒ edge_cover_number ≤ annihilation_number
+fbfcd99b open (nontrivial) ⇒ sub_total_domination_number ≤ roman_domination_number
+aa3292c1 open (nontrivial) ⇒ sub_total_domination_number ≤ (2 · slater)
+1bc2a7b5 open (nontrivial) ⇒ ((1/2) · sub_total_domination_number) ≤ slater
+

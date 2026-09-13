@@ -1,0 +1,13 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.rR52Wps5Gn.lean:9:12: error(lean.unknownIdentifier): Unknown constant `Finset.card_sdiff_add_card_eq`
+/tmp/tmp.rR52Wps5Gn.lean:8:56: error: unsolved goals
+V : Type
+inst✝¹ : Fintype V
+inst✝ : DecidableEq V
+s : Finset V
+⊢ Fintype.card V = s.card + (Finset.univ \ s).card
+CHECK: FAILED (exit 1)
+

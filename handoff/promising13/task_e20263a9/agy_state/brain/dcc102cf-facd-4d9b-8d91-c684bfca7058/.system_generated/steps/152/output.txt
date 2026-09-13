@@ -1,0 +1,51 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/conjecturing/conjecturing.py","LineNumber":319,"LineContent":"        \u003e\u003e\u003e o_key = lambda g: g.canonical_label().graph6_string()"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/conjecturing/run_property_conjecturing.sage.py","LineNumber":107,"LineContent":"        k = G.canonical_label().graph6_string()"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/conjecturing/run_property_conjecturing.sage.py","LineNumber":141,"LineContent":"                    witness = G.canonical_label().graph6_string(); break"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/search/class_moves.py","LineNumber":70,"LineContent":"    \"\"\"{order: [graph6, …]} for graphs in the tiers satisfying every class.\"\"\""}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/search/class_moves.py","LineNumber":98,"LineContent":"                n = nx.from_graph6_bytes(gid.encode()).number_of_nodes()"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/search/class_moves.py","LineNumber":356,"LineContent":"                G = nx.from_graph6_bytes(gid.encode())"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/search/metaheuristics.py","LineNumber":140,"LineContent":"                    # rollout — free, because `violation` is memoised by graph6,"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/search/problem.py","LineNumber":12,"LineContent":"full-battery fallback, and memoised by graph6."}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/search/problem.py","LineNumber":28,"LineContent":"from pipeline.seed_corpus import graph6_id"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/search/problem.py","LineNumber":110,"LineContent":"        gid = graph6_id(G)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/cegis.py","LineNumber":107,"LineContent":"            from pipeline.seed_corpus import graph6_id"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/cegis.py","LineNumber":108,"LineContent":"            g6 = graph6_id(g)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/cegis.py","LineNumber":112,"LineContent":"    return {\"statement\": stmt, \"witness_graph6\": g6, \"witness_order\": order,"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/invariants_graphcalc.py","LineNumber":207,"LineContent":"    \"\"\"Battery for ``graphs`` (index = ``ids``), persisted graph6-keyed to"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":16,"LineContent":"Tiers built here (all with structures + graphcalc battery, cached by graph6):"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":38,"LineContent":"from pipeline.seed_corpus import graph6_id"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":74,"LineContent":"    # dedup by graph6"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":79,"LineContent":"        gid = graph6_id(G)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":114,"LineContent":"    \"\"\"graph6-id → networkx graph, reconstructed on demand (no upfront memory for"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":124,"LineContent":"        return nx.from_graph6_bytes(k.encode() if isinstance(k, str) else k)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":130,"LineContent":"    frame: pd.DataFrame                 # index = graph6 id, graphcalc battery cols"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":160,"LineContent":"        ids = [graph6_id(g) for g in graphs]"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":271,"LineContent":"        if \"graph6\" in frame.columns:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":272,"LineContent":"            for gid in frame[\"graph6\"].dropna():"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":274,"LineContent":"                    graphs[gid] = nx.from_graph6_bytes(gid.encode())"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py","LineNumber":277,"LineContent":"            frame = frame.set_index(\"graph6\")"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":7,"LineContent":"computed exactly and cached by graph6 id so it is never recomputed."}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":14,"LineContent":"  database/hard_seed/graphs.g6        accumulated witness graphs (graph6, deduped)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":15,"LineContent":"  database/cache/seed_battery.parquet graph6 → battery row cache (incremental)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":43,"LineContent":"# graph6 id helpers (canonical, dedup-friendly)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":45,"LineContent":"def graph6_id(G: nx.Graph) -\u003e str:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":46,"LineContent":"    \"\"\"Canonical graph6 string id (relabelled to 0..n-1 ints).\"\"\""}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":48,"LineContent":"    return nx.to_graph6_bytes(H, header=False).strip().decode(\"ascii\")"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":51,"LineContent":"def from_graph6(s: str) -\u003e nx.Graph:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":52,"LineContent":"    return nx.from_graph6_bytes(s.encode(\"ascii\"))"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":63,"LineContent":"        self.graphs: Dict[str, nx.Graph] = {}      # graph6 id → structure"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":64,"LineContent":"        self.frame: pd.DataFrame = pd.DataFrame()   # index = graph6 id"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":185,"LineContent":"        \"\"\"Add graphs (dedup by graph6), extend the frame. Returns new ids.\"\"\""}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":190,"LineContent":"            gid = graph6_id(G)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":244,"LineContent":"                        out.append(from_graph6(line))"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":294,"LineContent":"        log holds thousands of graph6 lines against a 292k-graph refutation"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/seed_corpus.py","LineNumber":311,"LineContent":"                            fresh.append(from_graph6(gid))"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/conjecture_lattice.py","LineNumber":422,"LineContent":"    The battery caches are indexed by graph6, and they overlap heavily — the"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/degenerate_graphs.py","LineNumber":22,"LineContent":"from pipeline.seed_corpus import graph6_id"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/degenerate_graphs.py","LineNumber":61,"LineContent":"        gid = graph6_id(g)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py","LineNumber":139,"LineContent":"def _edge_list(graph6: str) -\u003e Optional[Tuple[int, List[Tuple[int, int]]]]:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py","LineNumber":140,"LineContent":"    \"\"\"(order, edges) for a graph6 string, else None.\"\"\""}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py","LineNumber":143,"LineContent":"        G = nx.from_graph6_bytes(graph6.encode(\"ascii\"))"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py","LineNumber":218,"LineContent":"def is_supported(statement: str, columns, witness_graph6: Optional[str]) -\u003e bool:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py","LineNumber":220,"LineContent":"    return render(statement, columns, witness_graph6) is not None"}
+(...139 more results not shown)

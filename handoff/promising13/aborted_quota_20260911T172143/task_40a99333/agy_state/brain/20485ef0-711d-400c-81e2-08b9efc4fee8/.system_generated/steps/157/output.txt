@@ -1,0 +1,24 @@
+The search for ""graphs with" "\gamma_t = 2\gamma" OR "\gamma_t(G) = 2 \gamma(G)" OR "\gamma_t(G) = 2\gamma(G)"" returned the following summary:
+The equality $\gamma_t(G) = 2\gamma(G)$ relates the **total domination number** ($\gamma_t$) and the **domination number** ($\gamma$) of a graph $G$.
+
+While there is no single, universally famous class of graphs defined exclusively by this specific equality, the relationship between these two parameters is a central topic in domination theory[1].
+
+### Context and Related Concepts
+
+*   **General Relationship:** For any graph $G$ with no isolated vertices, it is well-established that $\gamma(G) \le \gamma_t(G) \le 2\gamma(G)$. The upper bound $\gamma_t(G) \le 2\gamma(G)$ is a classic result in the field[1].
+*   **Equality $\gamma_t(G) = 2\gamma(G)$:** Graphs attaining this upper bound are of interest in extremal graph theory. Research in this area often seeks to characterize graphs that satisfy equality for various domination-type parameters[2][3].
+*   **Related Studies:**
+    *   **Equal Parameters:** Much research focuses on graphs where $\gamma(G) = \gamma_t(G)$[1].
+    *   **Specific Classes:** Researchers frequently investigate these parameters for specific families of graphs, such as trees[4], hypercubes[5], or regular graphs[6].
+    *   **Extremal Characterizations:** Studies often characterize graphs where certain domination numbers equal small integers (like 2) or specific functions of the order of the graph ($n$)[2][3][7].
+
+If you are looking for a specific paper or a structural characterization of graphs where $\gamma_t(G) = 2\gamma(G)$, it is common to find these results in journals specializing in combinatorics and graph theory (e.g., *Discrete Mathematics*, *Journal of Graph Theory*). You may want to search for "graphs satisfying the equality of total domination and twice the domination number" to find the most recent characterizations.
+
+Sources:
+[1] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGZGeefjqTMr5_AMzL8kax3_4RCK1e0kwYb48NTeY1f_G9CXSr1Bmkd7UpwOkitVYe9ymKyjJMQowaHxqVAZaLmixh7MiHXqFNbQcSsRvjJQFA-GvcXRAeeQWiMqLe_8t5y9GsFUqgaWJ1g91QVSBrR7eQNwmKPaheMSL3_61SxlbhSGJLjQTli-uAXNgwYD8Y4QH_wQEDaohLdwfNicGvFiXAKANA=)
+[2] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHEmAk4zNa1u5sA13yLk2cjYFgfjZvoEsyClRF5TxCOHq8bTQM7UCcdyoa2JuXCinz-3nUqsS2mqbQ6jHu64cm1FQmvu0InOkniU0o65Nt9pAAqB3rU6x7N1Q==)
+[3] [kexuetongbao-csb.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHnIEYr8JPr2tgz3LgVH0Nr_oa8mIUFSB6P26QtzMiFegtqw_xQLqh9d5FapUT7ndxRSFGaIt-D6jVjbk9QtnzljlK2qhr5NxuA9F0ZRyFHw_7JJDH2pG-rQwJV_lgqaod0-x6koFaseI93fgv7RVpuQNZc6-rWokArz6FKkRHRCIPDnaUIFmTURbxVlmeU5IFMzQ==)
+[4] [mdpi.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGr5xNB1rTK4EbGb6B95hp1QEQaWm3G0lkcA2Pfnm6VWfAFih2kOg40DzekihMtxWw8okDYsTbOy642Jq4Ujj3hyfD2JY-Y4or3P7Sc8QYExk4j5P8fwCzK77KoTcmLng==)
+[5] [uni-lj.si](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFVZtD1pX_xEIWyo0mFSwMSRQi9MGepBvmAeVBeZ6Ir2vLt4AycFLl4gSZj2xcpyB_ez_02vO_06QZ0h6MfLlMLhK_z8DnUxAuWKLHQ4EBhO5FMoYlbTo0EEQRx2rr2Ml637BhfVMcaCt5dJjZ6URS_YA11dy_f6UKuNMUrKQo=)
+[6] [ui.ac.ir](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH4lFpMpqq8dfhXNnSlOqBBel_fHrUA7IY9Abn-daG2WIR5yYT2vBj3zOsrkY8pcox6eNCEoU7bUy7uhu8wvi1oH96B1zO7BcLO6h_oRHy7OrPZFD0b0FI7BRtn)
+[7] [aimspress.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHwSsNzjgu6njPnAe_BFTRPu2PhKXN5LgSN_W_2mcQAKBKk7jUo54La0ORzcqtIjHMEHA4FpFA9aowOuehvqivKtjWNW5sr776UoKM10HE-rX7dQNjOl6qnpL81s5cIsmRGMoj60SMSKmEmihjuK4sVatvcx217uLsUYEcnQg==)

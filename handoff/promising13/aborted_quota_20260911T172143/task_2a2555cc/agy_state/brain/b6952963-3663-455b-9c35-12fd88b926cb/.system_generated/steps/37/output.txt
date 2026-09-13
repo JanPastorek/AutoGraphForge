@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+Checked 1 connected graphs on n=2, all satisfy rad <= tdn
+Checked 2 connected graphs on n=3, all satisfy rad <= tdn
+Checked 6 connected graphs on n=4, all satisfy rad <= tdn
+Checked 21 connected graphs on n=5, all satisfy rad <= tdn
+Checked 112 connected graphs on n=6, all satisfy rad <= tdn
+Checked 853 connected graphs on n=7, all satisfy rad <= tdn
+

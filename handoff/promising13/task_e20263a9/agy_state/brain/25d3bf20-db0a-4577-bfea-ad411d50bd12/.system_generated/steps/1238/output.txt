@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+null
+"**Examining Set Difference Cardinality**\n\nThe initial understanding was incorrect; the lemma `Finset.card_sdiff` does not require a subset hypothesis, the more general formula applies directly: `(t \\ s).card = t.card - (s ∩ t).card`. A different lemma, such as `Finset.card_sdiff_of_subset` likely applies. Considering an application of `Finset.card_sdiff` leads to evaluating `(Finset.univ \\ s).card = Finset.card Finset.univ - (s ∩ Finset.univ).card`.\n\n\n"
+

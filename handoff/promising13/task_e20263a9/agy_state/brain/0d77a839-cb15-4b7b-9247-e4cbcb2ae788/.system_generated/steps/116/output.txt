@@ -1,0 +1,104 @@
+
+The command exited with code 0.
+Output:
+1: /-
+2: Copyright (c) 2024 Rida Hamadani. All rights reserved.
+3: Released under Apache 2.0 license as described in the file LICENSE.
+4: Authors: Rida Hamadani
+5: -/
+6: module
+7: 
+8: public import Mathlib.Combinatorics.SimpleGraph.Metric
+9: 
+10: /-!
+11: # Diameter of a simple graph
+12: 
+13: This module defines the eccentricity of vertices, the diameter, and the radius of a simple graph.
+14: 
+15: ## Main definitions
+16: 
+17: - `SimpleGraph.eccent`: the eccentricity of a vertex in a simple graph, which is the maximum
+18:   distances between it and the other vertices.
+19: 
+20: - `SimpleGraph.ediam`: the graph extended diameter, which is the maximum eccentricity.
+21:   It is `ℕ∞`-valued.
+22: 
+23: - `SimpleGraph.diam`: the graph diameter, an `ℕ`-valued version of `SimpleGraph.ediam`.
+24: 
+25: - `SimpleGraph.radius`: the graph radius, which is the minimum eccentricity. It is `ℕ∞`-valued.
+26: 
+27: - `SimpleGraph.center`: the set of vertices with eccentricity equal to the graph's radius.
+28: 
+29: -/
+30: 
+31: @[expose] public section
+32: 
+33: assert_not_exists Field
+34: 
+35: namespace SimpleGraph
+36: variable {α : Type*} {G G' : SimpleGraph α}
+37: 
+38: section eccent
+39: 
+40: /-- The eccentricity of a vertex is the greatest distance between it and any other vertex. -/
+41: noncomputable def eccent (G : SimpleGraph α) (u : α) : ℕ∞ :=
+42:   ⨆ v, G.edist u v
+43: 
+44: lemma eccent_def : G.eccent = fun u ↦ ⨆ v, G.edist u v := rfl
+45: 
+46: lemma edist_le_eccent {u v : α} : G.edist u v ≤ G.eccent u :=
+47:   le_iSup (G.edist u) v
+48: 
+49: lemma exists_edist_eq_eccent_of_finite [Finite α] (u : α) :
+50:     ∃ v, G.edist u v = G.eccent u :=
+51:   have : Nonempty α := Nonempty.intro u
+52:   exists_eq_ciSup_of_finite
+53: 
+54: lemma eccent_eq_top_of_not_connected (h : ¬ G.Connected) (u : α) :
+55:     G.eccent u = ⊤ := by
+56:   rw [connected_iff_exists_forall_reachable] at h
+57:   push Not at h
+58:   obtain ⟨v, h⟩ := h u
+59:   rw [eq_top_iff, ← edist_eq_top_of_not_reachable h]
+60:   exact le_iSup (G.edist u) v
+61: 
+62: lemma eccent_eq_zero_of_subsingleton [Subsingleton α] (u : α) : G.eccent u = 0 := by
+63:   simpa [eccent, edist_eq_zero_iff] using subsingleton_iff.mp ‹_› u
+64: 
+65: lemma eccent_ne_zero [Nontrivial α] (u : α) : G.eccent u ≠ 0 := by
+66:   obtain ⟨v, huv⟩ := exists_ne ‹_›
+67:   contrapose huv
+68:   simp only [eccent, ENat.iSup_eq_zero, edist_eq_zero_iff] at huv
+69:   exact (huv v).symm
+70: 
+71: lemma eccent_eq_zero_iff (u : α) : G.eccent u = 0 ↔ Subsingleton α := by
+72:   refine ⟨fun h ↦ ?_, fun _ ↦ eccent_eq_zero_of_subsingleton u⟩
+73:   contrapose! h
+74:   exact eccent_ne_zero u
+75: 
+76: lemma eccent_pos_iff (u : α) : 0 < G.eccent u ↔ Nontrivial α := by
+77:   rw [pos_iff_ne_zero, ← not_subsingleton_iff_nontrivial, ← eccent_eq_zero_iff]
+78: 
+79: @[simp]
+80: lemma eccent_bot [Nontrivial α] (u : α) : (⊥ : SimpleGraph α).eccent u = ⊤ :=
+81:   eccent_eq_top_of_not_connected not_connected_bot u
+82: 
+83: @[simp]
+84: lemma eccent_top [Nontrivial α] (u : α) : (⊤ : SimpleGraph α).eccent u = 1 := by
+85:   apply le_antisymm ?_ <| Order.one_le_iff_pos.mpr <| pos_iff_ne_zero.mpr <| eccent_ne_zero u
+86:   rw [eccent, iSup_le_iff]
+87:   intro v
+88:   cases eq_or_ne u v <;> simp_all [edist_top_of_ne]
+89: 
+90: lemma eq_top_iff_forall_eccent_eq_one [Nontrivial α] :
+91:     G = ⊤ ↔ ∀ u, G.eccent u = 1 := by
+92:   refine ⟨fun h ↦ h ▸ eccent_top, fun h ↦ ?_⟩
+93:   ext u v
+94:   refine ⟨Adj.ne, fun huv ↦ ?_⟩
+95:   rw [← edist_eq_one_iff_adj]
+96:   apply le_antisymm ((h u).symm ▸ edist_le_eccent)
+97:   rw [Order.one_le_iff_pos, pos_iff_ne_zero, edist_eq_zero_iff.ne]
+98:   exact huv.ne
+99: 
+100: lemma eccent_le_iff (u : α) (k : ℕ∞) : G.eccent u ≤ k ↔ ∀ v, G.edist u v ≤ k :=
+

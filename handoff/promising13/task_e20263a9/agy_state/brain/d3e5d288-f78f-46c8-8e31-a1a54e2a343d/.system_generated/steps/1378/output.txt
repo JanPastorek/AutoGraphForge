@@ -1,0 +1,56 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/test_merge.lean. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -490,7 +490,49 @@
+   omega
+ 
+ theorem prove_e20263a9 : Candidate := by
+-  sorry
++  intro V _ _ G _ hnt hrad
++  apply le_romanDominationNumber G
++  intro f hf
++  by_cases hcard : Fintype.card V ≤ GraphCalc.romanWeight f
++  · exact radius_add_one_le_romanWeight_of_card_le G hrad hnt f hcard
++  · push Not at hcard
++    by_cases hrad1 : GraphCalc.radius G ≤ 1
++    · have h2 := two_le_romanWeight G hnt f hf
++      omega
++    · push Not at hrad1
++      by_cases hw2 : GraphCalc.romanWeight f ≤ 2
++      · have hrad_le1 := radius_le_one_of_romanWeight_le_two G hrad hnt f hf hw2
++        omega
++      · push Not at hw2
++        by_cases h_no2 : ∀ v : V, (f v : ℕ) ≠ 2
++        · have := card_le_romanWeight_of_no_two G f hf h_no2
++          omega
++        · push Not at h_no2
++          rcases h_no2 with ⟨u, hu2⟩
++          have hu2_eq : (f u : ℕ) = 2 := by
++            have : (f u : ℕ) ≤ 2 := by omega
++            omega
++          by_cases h_unique : ∀ v : V, (f v : ℕ) = 2 → v = u
++          · exact radius_add_one_le_romanWeight_of_unique_two G hrad hnt f hf u hu2_eq h_unique
++          · push Not at h_unique
++            rcases h_unique with ⟨u2, hu2_2, hu2_ne⟩
++            have hu2_2_eq : (f u2 : ℕ) = 2 := by
++              have : (f u2 : ℕ) ≤ 2 := by omega
++              omega
++            have h_sum_pair : (f u : ℕ) + (f u2 : ℕ) ≤ GraphCalc.romanWeight f := by
++              unfold GraphCalc.romanWeight
++              have hsub : {u, u2} ⊆ Finset.univ := Finset.subset_univ _
++              have h2sub : ∑ v ∈ {u, u2}, (f v : ℕ) ≤ ∑ v : V, (f v : ℕ) :=
++                Finset.sum_le_sum_of_subset_of_nonneg hsub (fun _ _ _ => Nat.zero_le _)
++              rw [Finset.sum_pair (Ne.symm hu2_ne)] at h2sub
++              exact h2sub
++            have hw4 : 4 ≤ GraphCalc.romanWeight f := by
++              rw [hu2_eq, hu2_2_eq] at h_sum_pair
++              omega
++            by_cases hrad3 : GraphCalc.radius G ≤ 3
++            · omega
++            · push Not at hrad3
++              sorry
+ 
+ theorem refute_e20263a9 : ¬ Candidate := by
+   sorry
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,13 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.xRZXyoSx8d.lean:37:2: error: Invalid alternative name `none`: Expected `top` or `coe`
+/tmp/tmp.xRZXyoSx8d.lean:41:2: error: Invalid alternative name `some`: Expected `top` or `coe`
+/tmp/tmp.xRZXyoSx8d.lean:36:2: error: Alternative `top` has not been provided
+/tmp/tmp.xRZXyoSx8d.lean:36:2: error: Alternative `coe` has not been provided
+/tmp/tmp.xRZXyoSx8d.lean:62:8: warning: declaration uses `sorry`
+'prove_a23c41a0' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'refute_a23c41a0' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

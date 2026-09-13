@@ -1,0 +1,5 @@
+
+The command exited with code 1.
+Output:
+cp: cannot stat 'Challenge_1facfd37.lean': No such file or directory
+

@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+/mnt/home/japake298/project/GraphConjecturing/pipeline/conjecture_lattice.py
+/mnt/home/japake298/project/GraphConjecturing/tools/lift_conjectures.py
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/txgraffiti/logic/conjectures.py
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/txgraffiti/playground/conjecture.py
+

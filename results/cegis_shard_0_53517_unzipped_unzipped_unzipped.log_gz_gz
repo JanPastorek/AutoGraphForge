@@ -1,0 +1,277 @@
+23:42:57 | [shard 0/5] starting
+23:42:57 | [shard 0/5] 9/45 invariants assigned: ['algebraic_connectivity', 'annihilation_number', 'average_degree', 'average_shortest_path_length', 'burning_number', 'chromatic_number', 'clique_number', 'connected_zero_forcing_number', 'diameter']
+23:42:59 | ======================================================================
+23:42:59 | CEGIS run: rounds=25 searchers=('z3', 'cross_entropy', 'vns', 'sa', 'mcts', 'rl') exact_tier_max_n=14
+23:42:59 | ======================================================================
+23:42:59 | [cegis] loading seed (TxGraffiti expressive graphs + battery)…
+23:42:59 | [seed] loaded 337 TxGraffiti expressive graphs
+23:42:59 | [seed] loaded 2531 persisted hard witnesses
+23:42:59 | [seed] computing battery for 2860 new graph(s)
+23:46:21 | [battery] 2860 graphs → 59 cols (2860 rows with data)
+23:46:22 | [seed] corpus: 2860 graphs, frame (2860, 59)
+23:46:22 | [cegis] building refutation tiers…
+23:46:22 | [refute] tier 'families': 1142 graphs, 59 cols
+23:46:22 | [refute] tier 'random': 219 graphs, 59 cols
+23:46:23 | [refute] tier 'hog': 69394 graphs, 28 precomputed invariants (incl. big graphs, partial/NaN-aware)
+23:46:49 | [refute] tier 'bigdb': 291480 graphs
+00:03:44 | [cegis] cached generation → gen_45717e9f8df4dfc6.dill
+00:03:59 | [cegis] candidates: 25403 ineq raw → 3300 Dalmatian → 996 Morgan (+1000/6395 sophie kept) → 1996 total
+00:03:59 | [cegis][round 1] seed=2860 graphs → 1996 candidate conjectures
+00:04:35 | [search] cross_entropy found a counterexample (n=6)
+00:04:35 | [search] cross_entropy found a counterexample (n=6)
+00:04:36 | [search] cross_entropy found a counterexample (n=6)
+00:04:36 | [search] cross_entropy found a counterexample (n=6)
+00:04:36 | [search] cross_entropy found a counterexample (n=6)
+00:04:36 | [search] cross_entropy found a counterexample (n=6)
+00:04:36 | [search] cross_entropy found a counterexample (n=6)
+00:04:36 | [search] cross_entropy found a counterexample (n=6)
+00:04:36 | [search] cross_entropy found a counterexample (n=6)
+00:04:37 | [search] cross_entropy found a counterexample (n=6)
+00:04:37 | [search] cross_entropy found a counterexample (n=6)
+00:04:38 | [search] cross_entropy found a counterexample (n=6)
+00:04:38 | [search] cross_entropy found a counterexample (n=6)
+00:04:38 | [search] cross_entropy found a counterexample (n=6)
+00:04:39 | [search] cross_entropy found a counterexample (n=6)
+00:04:40 | [search] cross_entropy found a counterexample (n=6)
+00:04:40 | [search] cross_entropy found a counterexample (n=6)
+00:04:40 | [search] cross_entropy found a counterexample (n=6)
+00:04:41 | [search] cross_entropy found a counterexample (n=6)
+00:04:42 | [search] cross_entropy found a counterexample (n=6)
+00:04:48 | [search] cross_entropy found a counterexample (n=6)
+00:04:48 | [search] cross_entropy found a counterexample (n=6)
+00:04:51 | [search] cross_entropy found a counterexample (n=6)
+00:04:55 | [search] cross_entropy found a counterexample (n=6)
+00:05:01 | [search] sa found a counterexample (n=6)
+00:05:18 | [search] sa found a counterexample (n=6)
+00:07:49 | [cegis] refutation provenance: families=199, bigdb=62, hog=38, search=26, random=24, symbolic=3
+00:07:50 | [seed] computing battery for 793 new graph(s)
+00:09:06 | [battery] 793 graphs → 59 cols (793 rows with data)
+00:09:06 | [seed] persisted 793 new hard witness(es)
+00:09:06 | [cegis][round 1] survivors=1644 refuted(pool=326,search=26) +793 witnesses → seed=3653  (1337.0s)
+00:34:57 | [cegis] cached generation → gen_c41893e4d62b7d29.dill
+00:35:18 | [cegis] candidates: 25622 ineq raw → 3402 Dalmatian → 1038 Morgan (+1000/6299 sophie kept) → 2038 total
+00:35:18 | [cegis][round 2] seed=3653 graphs → 2038 candidate conjectures
+00:36:07 | [search] cross_entropy found a counterexample (n=6)
+00:36:07 | [search] cross_entropy found a counterexample (n=6)
+00:36:07 | [search] cross_entropy found a counterexample (n=6)
+00:36:07 | [search] cross_entropy found a counterexample (n=6)
+00:36:07 | [search] cross_entropy found a counterexample (n=6)
+00:36:07 | [search] cross_entropy found a counterexample (n=6)
+00:36:08 | [search] cross_entropy found a counterexample (n=6)
+00:36:08 | [search] cross_entropy found a counterexample (n=6)
+00:36:08 | [search] cross_entropy found a counterexample (n=6)
+00:36:08 | [search] cross_entropy found a counterexample (n=6)
+00:36:08 | [search] cross_entropy found a counterexample (n=6)
+00:36:09 | [search] cross_entropy found a counterexample (n=6)
+00:36:09 | [search] cross_entropy found a counterexample (n=6)
+00:36:09 | [search] cross_entropy found a counterexample (n=6)
+00:36:09 | [search] cross_entropy found a counterexample (n=6)
+00:36:09 | [search] cross_entropy found a counterexample (n=6)
+00:36:10 | [search] cross_entropy found a counterexample (n=6)
+00:36:10 | [search] cross_entropy found a counterexample (n=6)
+00:36:11 | [search] cross_entropy found a counterexample (n=6)
+00:36:11 | [search] cross_entropy found a counterexample (n=6)
+00:36:13 | [search] cross_entropy found a counterexample (n=6)
+00:36:14 | [search] cross_entropy found a counterexample (n=6)
+00:36:16 | [search] cross_entropy found a counterexample (n=6)
+00:36:21 | [search] cross_entropy found a counterexample (n=6)
+00:36:23 | [search] cross_entropy found a counterexample (n=6)
+00:36:23 | [search] cross_entropy found a counterexample (n=6)
+00:36:34 | [search] sa found a counterexample (n=6)
+00:39:22 | [cegis] refutation provenance: families=197, hog=30, search=27, random=21, bigdb=15, symbolic=4
+00:39:22 | [seed] computing battery for 164 new graph(s)
+00:41:18 | [battery] 164 graphs → 59 cols (164 rows with data)
+00:41:18 | [seed] persisted 164 new hard witness(es)
+00:41:18 | [cegis][round 2] survivors=1744 refuted(pool=267,search=27) +164 witnesses → seed=3817  (1932.7s)
+01:06:51 | [cegis] cached generation → gen_220b6e123724dd8b.dill
+01:07:20 | [cegis] candidates: 24726 ineq raw → 3384 Dalmatian → 1033 Morgan (+1000/5843 sophie kept) → 2033 total
+01:07:20 | [cegis][round 3] seed=3817 graphs → 2033 candidate conjectures
+01:08:33 | [search] cross_entropy found a counterexample (n=6)
+01:08:33 | [search] cross_entropy found a counterexample (n=6)
+01:08:33 | [search] cross_entropy found a counterexample (n=6)
+01:08:33 | [search] cross_entropy found a counterexample (n=6)
+01:08:33 | [search] cross_entropy found a counterexample (n=6)
+01:08:33 | [search] cross_entropy found a counterexample (n=6)
+01:08:33 | [search] cross_entropy found a counterexample (n=6)
+01:08:33 | [search] cross_entropy found a counterexample (n=6)
+01:08:33 | [search] cross_entropy found a counterexample (n=6)
+01:08:34 | [search] cross_entropy found a counterexample (n=6)
+01:08:34 | [search] cross_entropy found a counterexample (n=6)
+01:08:34 | [search] cross_entropy found a counterexample (n=6)
+01:08:35 | [search] cross_entropy found a counterexample (n=6)
+01:08:35 | [search] cross_entropy found a counterexample (n=6)
+01:08:35 | [search] cross_entropy found a counterexample (n=6)
+01:08:36 | [search] cross_entropy found a counterexample (n=6)
+01:08:36 | [search] cross_entropy found a counterexample (n=6)
+01:08:36 | [search] cross_entropy found a counterexample (n=6)
+01:08:36 | [search] cross_entropy found a counterexample (n=6)
+01:08:37 | [search] cross_entropy found a counterexample (n=6)
+01:08:38 | [search] cross_entropy found a counterexample (n=6)
+01:08:43 | [search] cross_entropy found a counterexample (n=6)
+01:08:46 | [search] cross_entropy found a counterexample (n=6)
+01:08:59 | [search] sa found a counterexample (n=6)
+01:09:01 | [search] vns found a counterexample (n=6)
+01:09:33 | [search] sa found a counterexample (n=6)
+01:09:57 | [search] mcts found a counterexample (n=6)
+01:11:51 | [cegis] refutation provenance: families=191, search=27, hog=22, random=15, bigdb=12, symbolic=2
+01:11:52 | [seed] computing battery for 21 new graph(s)
+01:12:39 | [battery] 21 graphs → 59 cols (21 rows with data)
+01:12:39 | [seed] persisted 21 new hard witness(es)
+01:12:39 | [cegis][round 3] survivors=1764 refuted(pool=242,search=27) +21 witnesses → seed=3838  (1880.7s)
+01:39:38 | [cegis] cached generation → gen_1c4f4438d18da96a.dill
+01:39:47 | [cegis] candidates: 24608 ineq raw → 3381 Dalmatian → 1030 Morgan (+1000/5865 sophie kept) → 2030 total
+01:39:47 | [cegis][round 4] seed=3838 graphs → 2030 candidate conjectures
+01:40:14 | [search] cross_entropy found a counterexample (n=6)
+01:40:14 | [search] cross_entropy found a counterexample (n=6)
+01:40:14 | [search] cross_entropy found a counterexample (n=6)
+01:40:14 | [search] cross_entropy found a counterexample (n=6)
+01:40:14 | [search] cross_entropy found a counterexample (n=6)
+01:40:14 | [search] cross_entropy found a counterexample (n=6)
+01:40:15 | [search] cross_entropy found a counterexample (n=6)
+01:40:15 | [search] cross_entropy found a counterexample (n=6)
+01:40:15 | [search] cross_entropy found a counterexample (n=6)
+01:40:15 | [search] cross_entropy found a counterexample (n=6)
+01:40:16 | [search] cross_entropy found a counterexample (n=6)
+01:40:16 | [search] cross_entropy found a counterexample (n=6)
+01:40:16 | [search] cross_entropy found a counterexample (n=6)
+01:40:16 | [search] cross_entropy found a counterexample (n=6)
+01:40:16 | [search] cross_entropy found a counterexample (n=6)
+01:40:17 | [search] cross_entropy found a counterexample (n=6)
+01:40:17 | [search] cross_entropy found a counterexample (n=6)
+01:40:17 | [search] cross_entropy found a counterexample (n=6)
+01:40:17 | [search] cross_entropy found a counterexample (n=6)
+01:40:19 | [search] cross_entropy found a counterexample (n=6)
+01:40:19 | [search] cross_entropy found a counterexample (n=6)
+01:40:20 | [search] cross_entropy found a counterexample (n=6)
+01:40:25 | [search] cross_entropy found a counterexample (n=6)
+01:40:27 | [search] cross_entropy found a counterexample (n=6)
+01:40:41 | [search] sa found a counterexample (n=6)
+01:41:02 | [search] sa found a counterexample (n=6)
+01:41:05 | [search] mcts found a counterexample (n=6)
+01:43:34 | [cegis] refutation provenance: families=190, search=27, hog=20, random=15, bigdb=13, symbolic=3
+01:43:35 | [seed] computing battery for 12 new graph(s)
+01:43:52 | [battery] 12 graphs → 59 cols (12 rows with data)
+01:43:52 | [seed] persisted 12 new hard witness(es)
+01:43:52 | [cegis][round 4] survivors=1762 refuted(pool=241,search=27) +12 witnesses → seed=3850  (1872.2s)
+02:13:37 | [cegis] cached generation → gen_7238b3fd9dac80ca.dill
+02:13:46 | [cegis] candidates: 24608 ineq raw → 3379 Dalmatian → 1028 Morgan (+1000/5866 sophie kept) → 2028 total
+02:13:46 | [cegis][round 5] seed=3850 graphs → 2028 candidate conjectures
+02:14:12 | [search] cross_entropy found a counterexample (n=6)
+02:14:12 | [search] cross_entropy found a counterexample (n=6)
+02:14:12 | [search] cross_entropy found a counterexample (n=6)
+02:14:12 | [search] cross_entropy found a counterexample (n=6)
+02:14:12 | [search] cross_entropy found a counterexample (n=6)
+02:14:13 | [search] cross_entropy found a counterexample (n=6)
+02:14:13 | [search] cross_entropy found a counterexample (n=6)
+02:14:13 | [search] cross_entropy found a counterexample (n=6)
+02:14:13 | [search] cross_entropy found a counterexample (n=6)
+02:14:13 | [search] cross_entropy found a counterexample (n=6)
+02:14:14 | [search] cross_entropy found a counterexample (n=6)
+02:14:14 | [search] cross_entropy found a counterexample (n=6)
+02:14:14 | [search] cross_entropy found a counterexample (n=6)
+02:14:14 | [search] cross_entropy found a counterexample (n=6)
+02:14:15 | [search] cross_entropy found a counterexample (n=6)
+02:14:15 | [search] cross_entropy found a counterexample (n=6)
+02:14:15 | [search] cross_entropy found a counterexample (n=6)
+02:14:15 | [search] cross_entropy found a counterexample (n=6)
+02:14:15 | [search] cross_entropy found a counterexample (n=6)
+02:14:16 | [search] cross_entropy found a counterexample (n=6)
+02:14:17 | [search] cross_entropy found a counterexample (n=6)
+02:14:17 | [search] cross_entropy found a counterexample (n=6)
+02:14:22 | [search] cross_entropy found a counterexample (n=6)
+02:14:25 | [search] cross_entropy found a counterexample (n=6)
+02:14:38 | [search] sa found a counterexample (n=6)
+02:14:58 | [search] sa found a counterexample (n=6)
+02:15:01 | [search] mcts found a counterexample (n=6)
+02:17:39 | [cegis] refutation provenance: families=190, search=27, hog=20, random=15, bigdb=11, symbolic=3
+02:17:39 | [cegis][round 5] survivors=1762 refuted(pool=239,search=27) +0 witnesses → seed=3850  (2027.2s)
+02:17:39 | [cegis] refuted without new witnesses — stopping
+02:17:40 | [prove] 0/1762 survivors export to well-formed Lean (supported invariants)
+02:17:41 | [novelty] 16/1762 survivors rediscover a known theorem
+02:17:41 | [cegis] 1762 survivors after 5 round(s)
+02:17:42 | [cegis] persisted 1762 survivors → /mnt/data/home/japake298/project/GraphConjecturing/results/shard_0/cegis_survivors.dill
+02:17:42 | [cegis] wrote /mnt/data/home/japake298/project/GraphConjecturing/results/shard_0/cegis_results.json
+
+==============================================================================
+  CEGIS SURVIVORS (theorems = kernel-verified)  (n=1762, sorted by score, showing 40)
+==============================================================================
+  1. [known] (cegis-graffiti3) (nontrivial) ⇒ clique_number ≤ chromatic_number
+       score=3295.00  complexity= 0  touches=3295  status=proposed
+  2. [known] (cegis-graffiti3) ((nontrivial) ∧ (chordal)) ⇒ chromatic_number ≤ clique_number
+       score=3295.00  complexity= 0  touches=3295  status=proposed
+  3. [known] (cegis-graffiti3) ((nontrivial) ∧ (cograph)) ⇒ chromatic_number ≤ clique_number
+       score=3295.00  complexity= 0  touches=3295  status=proposed
+  4. [known] (cegis-graffiti3) ((nontrivial) ∧ (bipartite)) ⇒ chromatic_number ≤ clique_number
+       score=3295.00  complexity= 0  touches=3295  status=proposed
+  5. [known] (cegis-graffiti3) (((nontrivial) ∧ (chordal)) ∧ (planar)) ⇒ chromatic_number = clique_number
+       score=3295.00  complexity= 0  touches=3295  status=proposed
+  6. [known] (cegis-graffiti3) (((nontrivial) ∧ (cograph)) ∧ (planar)) ⇒ chromatic_number = clique_number
+       score=3295.00  complexity= 0  touches=3295  status=proposed
+  7. [known] (cegis-graffiti3) (((nontrivial) ∧ (cograph)) ∧ (subcubic)) ⇒ chromatic_number = clique_number
+       score=3295.00  complexity= 0  touches=3295  status=proposed
+  8. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (claw_free)) ∧ (cubic)) ⇒ chromatic_number = clique_number
+       score=3295.00  complexity= 0  touches=3295  status=proposed
+  9. [known] (cegis-graffiti3) (((nontrivial) ∧ (bipartite)) ∧ (cubic)) ⇒ chromatic_number = clique_number
+       score=3295.00  complexity= 0  touches=3295  status=proposed
+ 10. [NOVEL] (cegis-graffiti3) ((nontrivial) ∧ (eulerian)) ⇒ total_zero_forcing_number ≤ connected_zero_forcing_number
+       score=2626.00  complexity= 0  touches=2626  status=proposed
+ 11. [NOVEL] (cegis-graffiti3) ((nontrivial) ∧ (cubic)) ⇒ total_zero_forcing_number ≤ connected_zero_forcing_number
+       score=2626.00  complexity= 0  touches=2626  status=proposed
+ 12. [NOVEL] (cegis-graffiti3) ((nontrivial) ∧ (cograph)) ⇒ connected_zero_forcing_number ≤ total_zero_forcing_number
+       score=2626.00  complexity= 0  touches=2626  status=proposed
+ 13. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (K_4_free)) ∧ (eulerian)) ⇒ connected_zero_forcing_number ≤ total_zero_forcing_number
+       score=2626.00  complexity= 0  touches=2626  status=proposed
+ 14. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (regular)) ∧ (triangle_free)) ⇒ connected_zero_forcing_number ≤ total_zero_forcing_number
+       score=2626.00  complexity= 0  touches=2626  status=proposed
+ 15. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (eulerian)) ∧ (subcubic)) ⇒ connected_zero_forcing_number = total_zero_forcing_number
+       score=2626.00  complexity= 0  touches=2626  status=proposed
+ 16. [NOVEL] (cegis-graffiti3) ((nontrivial) ∧ (connected)) ⇒ burning_number ≤ (slater + 1)
+       score=2409.00  complexity= 1  touches=2409  status=proposed
+ 17. [NOVEL] (cegis-graffiti3) ((nontrivial) ∧ (regular)) ⇒ burning_number ≤ (slater + 1)
+       score=2409.00  complexity= 1  touches=2409  status=proposed
+ 18. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (cograph)) ∧ (connected)) ⇒ (power_domination_number + 1) ≤ burning_number
+       score=2196.00  complexity= 1  touches=2196  status=proposed
+ 19. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (cograph)) ∧ (planar)) ⇒ burning_number ≤ (power_domination_number + 1)
+       score=2196.00  complexity= 1  touches=2196  status=proposed
+ 20. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (claw_free)) ∧ (cograph)) ⇒ burning_number ≤ (power_domination_number + 1)
+       score=2196.00  complexity= 1  touches=2196  status=proposed
+ 21. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (bipartite)) ∧ (cograph)) ⇒ burning_number ≤ (power_domination_number + 1)
+       score=2196.00  complexity= 1  touches=2196  status=proposed
+ 22. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (cograph)) ∧ (regular)) ⇒ burning_number ≤ (power_domination_number + 1)
+       score=2196.00  complexity= 1  touches=2196  status=proposed
+ 23. [NOVEL] (cegis-graffiti3) (nontrivial) ⇒ zero_forcing_number ≤ connected_zero_forcing_number
+       score=2191.00  complexity= 0  touches=2191  status=proposed
+ 24. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (cograph)) ∧ (eulerian)) ⇒ connected_zero_forcing_number ≤ zero_forcing_number
+       score=2191.00  complexity= 0  touches=2191  status=proposed
+ 25. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (regular)) ∧ (triangle_free)) ⇒ connected_zero_forcing_number ≤ zero_forcing_number
+       score=2191.00  complexity= 0  touches=2191  status=proposed
+ 26. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (claw_free)) ∧ (cograph)) ⇒ connected_zero_forcing_number ≤ zero_forcing_number
+       score=2191.00  complexity= 0  touches=2191  status=proposed
+ 27. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (claw_free)) ∧ (triangle_free)) ⇒ connected_zero_forcing_number ≤ zero_forcing_number
+       score=2191.00  complexity= 0  touches=2191  status=proposed
+ 28. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (cograph)) ∧ (regular)) ⇒ connected_zero_forcing_number ≤ zero_forcing_number
+       score=2191.00  complexity= 0  touches=2191  status=proposed
+ 29. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (eulerian)) ∧ (subcubic)) ⇒ connected_zero_forcing_number = zero_forcing_number
+       score=2191.00  complexity= 0  touches=2191  status=proposed
+ 30. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (claw_free)) ∧ (tree)) ⇒ connected_zero_forcing_number = zero_forcing_number
+       score=2191.00  complexity= 0  touches=2191  status=proposed
+ 31. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (bipartite)) ∧ (connected)) ⇒ edge_cover_number ≤ annihilation_number
+       score=2181.00  complexity= 0  touches=2181  status=proposed
+ 32. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (bipartite)) ∧ (regular)) ⇒ edge_cover_number ≤ annihilation_number
+       score=2181.00  complexity= 0  touches=2181  status=proposed
+ 33. [NOVEL] (cegis-graffiti3) ((nontrivial) ∧ (cubic)) ⇒ annihilation_number ≤ edge_cover_number
+       score=2181.00  complexity= 0  touches=2181  status=proposed
+ 34. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (eulerian)) ∧ (regular)) ⇒ annihilation_number ≤ edge_cover_number
+       score=2181.00  complexity= 0  touches=2181  status=proposed
+ 35. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (cubic)) ∧ (triangle_free)) ⇒ annihilation_number = edge_cover_number
+       score=2181.00  complexity= 0  touches=2181  status=proposed
+ 36. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (cograph)) ∧ (tree)) ⇒ annihilation_number = edge_cover_number
+       score=2181.00  complexity= 0  touches=2181  status=proposed
+ 37. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (claw_free)) ∧ (tree)) ⇒ annihilation_number = edge_cover_number
+       score=2181.00  complexity= 0  touches=2181  status=proposed
+ 38. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (claw_free)) ∧ (cubic)) ⇒ annihilation_number = edge_cover_number
+       score=2181.00  complexity= 0  touches=2181  status=proposed
+ 39. [NOVEL] (cegis-graffiti3) (((nontrivial) ∧ (cograph)) ∧ (cubic)) ⇒ annihilation_number = edge_cover_number
+       score=2181.00  complexity= 0  touches=2181  status=proposed
+ 40. [NOVEL] (cegis-graffiti3) (nontrivial) ⇒ burning_number ≤ (radius + 1)
+       score=1994.00  complexity= 1  touches=1994  status=proposed

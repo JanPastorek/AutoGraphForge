@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Minimum vertices for radius >= 4 is at least 8!
+

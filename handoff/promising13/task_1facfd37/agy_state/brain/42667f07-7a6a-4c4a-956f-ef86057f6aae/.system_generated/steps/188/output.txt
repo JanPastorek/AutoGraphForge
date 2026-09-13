@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+__init__.py	       degenerate_graphs.py	proof_audit.py
+__pycache__	       falsification.py		random_models.py
+adversarial.py	       invariants_graphcalc.py	refute_matrix.py
+candidate_filters.py   known_relations.py	reporting.py
+cegis.py	       lean_disproof.py		search
+cegis_novelty.py       lean_export.py		seed_corpus.py
+conjecture_lattice.py  lemma_retrieval.py	symbolic_refute.py
+conjecturing	       linear_form.py		theorem_prover.py
+data		       novelty.py
+

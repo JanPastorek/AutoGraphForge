@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+total 52
+drwxr-xr-x 2 japake298 domain users  4096 Aug  6 12:12 .
+drwxr-xr-x 5 japake298 domain users  4096 Aug  6 10:56 ..
+-r--r--r-- 1 japake298 domain users    21 Jun 21 15:23 Basic.lean
+-r--r--r-- 1 japake298 domain users 11395 Sep  9 17:20 GraphInvariants.lean
+-r--r--r-- 1 japake298 domain users 27292 Sep 10 09:09 GraphInvariantsComputable.lean
+

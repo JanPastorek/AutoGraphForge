@@ -1,0 +1,34 @@
+
+The command exited with code 0.
+Output:
+I0911 16:51:23.664890      66 server.go:1544] Starting language server process with pid 2
+I0911 16:51:23.665564      66 server.go:1597] Language server version: 1.2.1
+I0911 16:51:23.665572      66 server.go:597] Language server will attempt to listen on host localhost
+I0911 16:51:23.667384      66 server.go:612] Language server listening on random port at 38965 for HTTPS (gRPC)
+I0911 16:51:23.668801      66 server.go:620] Language server listening on random port at 44005 for HTTP
+W0911 16:51:23.869106     130 cache.go:135] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0911 16:51:23.869168     130 errorreport.go:224] error getting token source: You are not logged into Antigravity.
+W0911 16:51:23.869325      66 cache.go:135] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0911 16:51:23.869354      66 errorreport.go:224] error getting token source: You are not logged into Antigravity.
+E0911 16:51:23.869426     130 errorreport.go:224] Failed to poll ListExperiments: error getting token source: You are not logged into Antigravity.
+W0911 16:51:23.869437      66 cache.go:135] Cache(userInfo): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+I0911 16:51:23.869446     130 model_configs.go:65] Auth mode is unspecified, skipping fetchAvailableModels and returning empty response
+E0911 16:51:23.869452      66 errorreport.go:224] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+W0911 16:51:23.869540     133 cache.go:135] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0911 16:51:23.869555     133 errorreport.go:224] error getting token source: You are not logged into Antigravity.
+W0911 16:51:23.869591     133 cache.go:135] Cache(userInfo): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0911 16:51:23.869602     133 errorreport.go:224] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+W0911 16:51:23.869778      66 cache.go:135] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+E0911 16:51:23.869814      66 errorreport.go:224] error getting token source: You are not logged into Antigravity.
+W0911 16:51:23.869879      66 cache.go:135] Cache(userInfo): Singleflight refresh failed: failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+E0911 16:51:23.869892      66 errorreport.go:224] failed to get load code assist response: error getting token source: You are not logged into Antigravity.
+I0911 16:51:23.870333      66 server.go:1877] Generated and saved persistent installation UUID: 19549d70-57fc-47fb-9461-bac3fbfa7b29
+I0911 16:51:23.870467      66 server.go:1891] Generated and saved default remote control hostname: cn01-polar-aurora
+W0911 16:51:23.870602      66 launchmanager.go:69] Entering local chrome mode! This is WRONG unless you are running tests or in eval mode on Linux.
+W0911 16:51:23.870889      66 defaults.go:776] failed to get cs path: cs path /usr/bin/cs invalid
+I0911 16:51:23.870915      66 manager.go:108] Creating trajectory store manager with proto store and SQLite store
+I0911 16:51:23.870921      45 migrate.go:50] Migration marker /tmp/agyhome.qfVsPi/.gemini/config/.migrated does not exist. Attempting migration from AppDataDir /tmp/agyhome.qfVsPi/.gemini/antigravity-cli.
+W0911 16:51:23.870989      66 cache.go:135] Cache(loadCodeAssistResponse): Singleflight refresh failed: error getting token source: You are not logged into Antigravity.
+I0911 16:51:23.870997      45 migrate.go:158] Migration complete, marked with /tmp/agyhome.qfVsPi/.gemini/config/.migrated
+E0911 16:51:23.871010      66 errorreport.go:224] error getting token source: You are not logged into Antigravity.
+

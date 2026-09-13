@@ -1,0 +1,104 @@
+
+The command exited with code 0.
+Output:
+Bounds on weak roman and 2-rainbow domination numbers
+https://doi.org/10.1016/j.dam.2014.06.016
+OA URL: https://www.sciencedirect.com/science/article/pii/S0166218X14002911/pdf
+------------------------------
+Trees with equal total domination and 2-rainbow domination numbers
+https://doi.org/10.2298/fil1802599s
+OA URL: http://www.doiserbia.nb.rs/ft.aspx?id=0354-51801802599S
+------------------------------
+Averaging 2-rainbow domination and Roman domination
+https://doi.org/10.1016/j.dam.2016.01.021
+OA URL: https://www.sciencedirect.com/science/article/pii/S0166218X16300087/pdf
+------------------------------
+On 3-Rainbow Domination Number of Generalized Petersen Graphs P(6k,k)
+https://doi.org/10.3390/sym13101860
+OA URL: https://www.mdpi.com/2073-8994/13/10/1860/pdf?version=1633252491
+------------------------------
+Averaging $2$-Rainbow Domination and Roman Domination
+https://doi.org/10.48550/arxiv.1507.04899
+OA URL: https://arxiv.org/pdf/1507.04899
+------------------------------
+Total 2-Rainbow Domination in Graphs
+https://doi.org/10.3390/math10122059
+OA URL: https://www.mdpi.com/2227-7390/10/12/2059/pdf?version=1655271216
+------------------------------
+On the k-rainbow domination in graphs with bounded tree-width
+https://doi.org/10.5614/ejgta.2021.9.2.4
+OA URL: https://www.ejgta.org/index.php/ejgta/article/download/615/pdf_179
+------------------------------
+Italian, 2-rainbow and Roman domination numbers in middle graphs
+https://doi.org/10.1051/ro/2024072
+OA URL: https://www.rairo-ro.org/articles/ro/pdf/forth/ro230294.pdf
+------------------------------
+On 2-Rainbow Domination of Generalized Petersen Graphs P(ck,k)
+https://doi.org/10.3390/math11102271
+OA URL: https://www.mdpi.com/2227-7390/11/10/2271/pdf?version=1684228907
+------------------------------
+On 2-rainbow domination number of functigraph and its complement
+https://doi.org/10.7494/opmath.2020.40.5.617
+OA URL: https://doi.org/10.7494/opmath.2020.40.5.617
+------------------------------
+Rainbow domination and related problems on some classes of perfect graphs
+https://doi.org/10.48550/arxiv.1502.07492
+OA URL: https://arxiv.org/pdf/1502.07492
+------------------------------
+On the Paired-Domination Subdivision Number of a Graph
+https://doi.org/10.3390/math9040439
+OA URL: https://www.mdpi.com/2227-7390/9/4/439/pdf?version=1614224292
+------------------------------
+Domination parameters with number 2: interrelations and algorithmic consequences
+https://doi.org/10.48550/arxiv.1511.00410
+OA URL: http://hdl.handle.net/11336/97057
+------------------------------
+Forbidden subgraphs for constant domination number
+https://doi.org/10.23638/dmtcs-20-1-19
+OA URL: https://dmtcs.episciences.org/4548/pdf
+------------------------------
+Quasi-total Roman reinforcement in graphs
+https://doi.org/10.1080/09728600.2022.2158051
+OA URL: https://www.tandfonline.com/doi/pdf/10.1080/09728600.2022.2158051?needAccess=true
+------------------------------
+Italian Reinforcement Number in Graphs
+https://doi.org/10.1109/access.2019.2960390
+OA URL: https://ieeexplore.ieee.org/ielx7/6287639/8600701/08935253.pdf
+------------------------------
+On the total Rainbow domination of digraphs
+https://doi.org/10.48550/arxiv.2001.03500
+OA URL: https://arxiv.org/pdf/2001.03500
+------------------------------
+On rainbow domination of cubic graphs
+https://doi.org/10.48550/arxiv.2403.07538
+OA URL: https://arxiv.org/pdf/2403.07538
+------------------------------
+On cubic rainbow domination regular graphs
+https://doi.org/10.48550/arxiv.2410.10662
+OA URL: https://repozitorij.uni-lj.si/IzpisGradiva.php?id=168895
+------------------------------
+Weakly Connected $k$-Rainbow Domination in Graphs
+https://doi.org/10.29020/nybg.ejpam.v18i2.5770
+OA URL: https://www.ejpam.com/index.php/ejpam/article/download/5770/1974
+------------------------------
+Restrained Italian reinforcement number in graphs
+https://doi.org/10.1080/09728600.2023.2218438
+OA URL: https://www.tandfonline.com/doi/pdf/10.1080/09728600.2023.2218438?needAccess=true
+------------------------------
+RESTRAINED ROMAN REINFORCEMENT NUMBER IN GRAPHS
+https://doi.org/10.15826/umj.2022.2.007
+OA URL: https://doi.org/10.15826/umj.2022.2.007
+------------------------------
+Independent k -rainbow bondage number of graphs
+https://doi.org/10.1080/09728600.2023.2246529
+OA URL: https://www.tandfonline.com/doi/pdf/10.1080/09728600.2023.2246529?needAccess=true
+------------------------------
+Benthic biology in the Polish exploration contract area of the Mid-Atlantic Ridge: The knowns and the unknowns. A review
+https://doi.org/10.3389/fmars.2022.898828
+OA URL: https://www.frontiersin.org/articles/10.3389/fmars.2022.898828/pdf
+------------------------------
+Caught in Comparisons: Japanese Salmon in an Uneven World
+None
+OA URL: https://escholarship.org/uc/item/68w9w3pz
+------------------------------
+

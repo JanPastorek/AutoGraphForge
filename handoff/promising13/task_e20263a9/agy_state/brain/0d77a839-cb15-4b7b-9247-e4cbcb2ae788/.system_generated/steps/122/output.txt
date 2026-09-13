@@ -1,0 +1,9 @@
+Task: 0d77a839-cb15-4b7b-9247-e4cbcb2ae788/task-118
+Status: RUNNING
+Log: /tmp/agyhome.NWyWnj/.gemini/antigravity-cli/brain/0d77a839-cb15-4b7b-9247-e4cbcb2ae788/.system_generated/tasks/task-118.log
+Log output:
+<truncated 1 lines>
+":[[137,37,137,54,"GraphCalc.annihilationNumber"]]},"{\"c\":{\"m\":\"lean_project.LeanProject.GraphInvariantsComputable\",\"n\":\"GraphCalc.subTotalDominationNumber\"}}":{"definition":[376,4,376,28],"usages":[]},"{\"c\":{\"m\":\"lean_project.LeanProject.GraphInvariantsComputable\",\"n\":\"GraphCalc.totalDominationNumber\"}}":{"definition":[401,4,401,25],"usages":[]},"{\"c\":{\"m\":\"lean_project.LeanProject.GraphInvariantsComputable\",\"n\":\"GraphCalc.totalZeroForcingNumber\"}}":{"definition":[208,4,208,26],"usages":[]},"{\"c\":{\"m\":\"lean_project.LeanProject.GraphInvariantsComputable\",\"n\":\"GraphCalc.vertexCoverNumber\"}}":{"definition":[180,4,180,21],"usages":[]},"{\"c\":{\"m\":\"lean_project.LeanProject.GraphInvariantsComputable\",\"n\":\"GraphCalc.zeroForcingNumber\"}}":{"definition":[198,4,198,21],"usages":[]}},"version":5}
+grep: /mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/build/lib/lean/LeanProject/GraphInvariantsComputable.olean: binary file matches
+
+Last progress: 2s ago

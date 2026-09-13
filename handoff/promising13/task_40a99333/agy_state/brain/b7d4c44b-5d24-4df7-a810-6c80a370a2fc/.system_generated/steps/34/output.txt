@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+Testing trees of order up to 12...
+Testing random connected graphs...
+No counterexamples found in random graphs!
+

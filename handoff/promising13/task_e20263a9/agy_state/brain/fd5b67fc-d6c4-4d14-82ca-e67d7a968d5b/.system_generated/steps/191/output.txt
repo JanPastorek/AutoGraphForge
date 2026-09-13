@@ -1,0 +1,13 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":8,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":18,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":28,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":38,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":48,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":58,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":68,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":78,"LineContent":"  \"stratum\": \"promising:class\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":88,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":98,"LineContent":"  \"stratum\": \"promising:class\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":108,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":118,"LineContent":"  \"stratum\": \"promising:universal\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/index.json","LineNumber":128,"LineContent":"  \"stratum\": \"promising:universal\","}

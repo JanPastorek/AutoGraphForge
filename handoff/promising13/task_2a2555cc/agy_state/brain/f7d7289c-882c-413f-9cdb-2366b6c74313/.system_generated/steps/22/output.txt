@@ -1,0 +1,3 @@
+{"name":"task_2a2555cc","isDir":true}
+
+Summary: This directory contains 1 subdirectories and 0 files.

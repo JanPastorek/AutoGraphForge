@@ -1,0 +1,98 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/scratch.lean. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1,7 +1,88 @@
+ import Mathlib
++import LeanProject.GraphInvariantsComputable
+ 
+ open SimpleGraph
+ 
+-#check Walk.length_concat
+-#check Walk.reverse_induction
++lemma ballWithin_zero {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj] (v : V) :
++    GraphCalc.ballWithin G 0 v = {v} := rfl
++
++lemma ballWithin_subset_succ {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj] (k : ℕ) (v : V) :
++    GraphCalc.ballWithin G k v ⊆ GraphCalc.ballWithin G (k + 1) v := by
++  dsimp [GraphCalc.ballWithin]
++  exact Finset.subset_union_left
++
++lemma mem_ballWithin_succ_of_adj {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
++    (k : ℕ) (v u w : V) (hu : u ∈ GraphCalc.ballWithin G k v) (hadj : G.Adj u w) :
++    w ∈ GraphCalc.ballWithin G (k + 1) v := by
++  dsimp [GraphCalc.ballWithin]
++  apply Finset.mem_union_right
++  apply Finset.mem_biUnion.mpr
++  refine ⟨u, hu, ?_⟩
++  rw [Finset.mem_filter]
++  exact ⟨Finset.mem_univ w, hadj⟩
++
++lemma mem_ballWithin_of_walk_reverse {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
++    {v w : V} (q : G.Walk w v) : w ∈ GraphCalc.ballWithin G q.length v := by
++  induction q with
++  | nil =>
++    dsimp [GraphCalc.ballWithin]
++    exact Finset.mem_singleton_self _
++  | cons hadj _ ih =>
++    rw [SimpleGraph.Walk.length_cons]
++    exact mem_ballWithin_succ_of_adj G _ _ _ _ ih hadj.symm
++
++lemma mem_ballWithin_of_walk {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
++    {v w : V} (p : G.Walk v w) : w ∈ GraphCalc.ballWithin G p.length v := by
++  have h := mem_ballWithin_of_walk_reverse G p.reverse
++  rw [SimpleGraph.Walk.length_reverse] at h
++  exact h
++
++lemma finset_min_getD_le {s : Finset ℕ} {b : ℕ} (hb : b ∈ s) :
++    s.min.getD 0 ≤ b := by
++  have h : s.min ≤ WithTop.some b := Finset.inf_le hb
++  cases hm : s.min with
++  | top =>
++    rw [hm] at h
++    simp at h
++  | coe m =>
++    rw [hm] at h
++    exact WithTop.coe_le_coe.mp h
++
++lemma radius_le_eccentricity {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] (v : V) :
++    GraphCalc.radius G ≤ GraphCalc.eccentricity G v := by
++  apply finset_min_getD_le
++  apply Finset.mem_image.mpr
++  exact ⟨v, Finset.mem_univ v, rfl⟩
++
++lemma finset_min_getD_le_of_mem (n : ℕ) {s : Finset ℕ} {b : ℕ} (hb : b ∈ s) :
++    s.min.getD n ≤ b := by
++  have h : s.min ≤ WithTop.some b := Finset.inf_le hb
++  cases hm : s.min with
++  | top =>
++    rw [hm] at h
++    simp at h
++  | coe m =>
++    rw [hm] at h
++    exact WithTop.coe_le_coe.mp h
++
++lemma eccentricity_le_of_ballWithin_eq_univ {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] (v : V) (k : ℕ)
++    (hkle : k ≤ Fintype.card V) (heq : GraphCalc.ballWithin G k v = Finset.univ) :
++    GraphCalc.eccentricity G v ≤ k := by
++  dsimp [GraphCalc.eccentricity, GraphCalc.minUpTo]
++  apply finset_min_getD_le_of_mem (Fintype.card V)
++  rw [Finset.mem_filter, Finset.mem_range]
++  exact ⟨Nat.lt_succ_of_le hkle, heq⟩
++
++lemma ballWithin_univ_of_subset {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] (v : V) (k : ℕ) (S : Finset V)
++    (hdom : GraphCalc.IsTotalDominatingSet G S)
++    (hsub : S ⊆ GraphCalc.ballWithin G k v) :
++    GraphCalc.ballWithin G (k + 1) v = Finset.univ := by
++  apply Finset.eq_univ_of_forall
++  intro u
++  obtain ⟨s, hs, hadj⟩ := hdom u
++  have hsb : s ∈ GraphCalc.ballWithin G k v := hsub hs
++  exact mem_ballWithin_succ_of_adj G k v s u hsb hadj.symm
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.
+
+We did our best to apply changes despite some inaccuracies. Double check if the edit applied is what you intended.

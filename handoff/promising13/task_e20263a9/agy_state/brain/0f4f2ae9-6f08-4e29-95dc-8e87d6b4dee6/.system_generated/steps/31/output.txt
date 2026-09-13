@@ -1,0 +1,4 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":498,"LineContent":"/- ── radius ───────────────────────────────────────────────────────────────── -/"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":513,"LineContent":"def radius (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :="}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":518,"LineContent":"def HasRadius (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :="}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":522,"LineContent":"    Decidable (HasRadius G) := by unfold HasRadius; infer_instance"}

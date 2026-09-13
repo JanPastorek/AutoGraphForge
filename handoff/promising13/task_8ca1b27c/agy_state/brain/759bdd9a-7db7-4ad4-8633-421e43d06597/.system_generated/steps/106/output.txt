@@ -1,0 +1,55 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.y8uvOEEXtJ.lean:12:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (Finset.filter p (Finset.range (n + 1))).min
+in the target expression
+  2 ≤ Option.getD ⊤ n
+
+case top
+n : ℕ
+p : ℕ → Prop
+inst✝ : DecidablePred p
+h_empty : 2 ≤ n
+h_elem : ∀ k ∈ Finset.filter p (Finset.range (n + 1)), 2 ≤ k
+h : (Finset.filter p (Finset.range (n + 1))).min = ⊤
+⊢ 2 ≤ Option.getD ⊤ n
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    ⊤
+  has type
+    WithTop ℕ
+  but is expected to have type
+    Option ℕ
+  in the application
+    Option.getD ⊤
+/tmp/tmp.y8uvOEEXtJ.lean:16:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (Finset.filter p (Finset.range (n + 1))).min
+in the target expression
+  2 ≤ Option.getD (↑k) n
+
+case coe
+n : ℕ
+p : ℕ → Prop
+inst✝ : DecidablePred p
+h_empty : 2 ≤ n
+h_elem : ∀ k ∈ Finset.filter p (Finset.range (n + 1)), 2 ≤ k
+k : ℕ
+h : (Finset.filter p (Finset.range (n + 1))).min = ↑k
+⊢ 2 ≤ Option.getD (↑k) n
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    ↑k
+  has type
+    WithTop ℕ
+  but is expected to have type
+    Option ℕ
+  in the application
+    Option.getD ↑k
+CHECK: FAILED (exit 1)
+

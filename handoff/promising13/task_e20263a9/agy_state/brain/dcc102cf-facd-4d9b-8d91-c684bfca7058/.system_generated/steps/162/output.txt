@@ -1,0 +1,7 @@
+
+Encountered error in step execution: context canceled
+Output:
+New best diff = -3 (rad=7, rom=10, n=15)
+New best diff = -2 (rad=3, rom=5, n=7)
+New best diff = -1 (rad=2, rom=3, n=7)
+

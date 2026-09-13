@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+reference:
+total 40
+drwxr-xr-x 2 japake298 domain users  4096 Sep 11 16:44 .
+drwxr-xr-x 5 japake298 domain users  4096 Sep 12 01:41 ..
+-r--r--r-- 1 japake298 domain users 27292 Sep 11 16:44 GraphInvariantsComputable.lean
+
+solved:
+total 8
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 16:44 .
+drwxr-xr-x 5 japake298 domain users 4096 Sep 12 01:41 ..
+

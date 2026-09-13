@@ -1,0 +1,7 @@
+{"name":".swarm_blackboard_e20263a9_20260911_144940.md","sizeBytes":"247"}
+{"name":".swarm_blackboard_e20263a9_20260911_144940.md.metadata.json","sizeBytes":"117"}
+{"name":".system_generated","isDir":true}
+{"name":".user_uploaded","isDir":true}
+{"name":"scratch","isDir":true}
+
+Summary: This directory contains 3 subdirectories and 2 files.

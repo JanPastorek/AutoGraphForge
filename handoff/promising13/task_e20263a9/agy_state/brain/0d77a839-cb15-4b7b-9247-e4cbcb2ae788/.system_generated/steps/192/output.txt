@@ -1,0 +1,28 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/scratch.lean. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -220,4 +220,22 @@
+   have h_rad_le := radius_le_eccentricity G v
+   have h_ecc_le := eccentricity_le_card_pred G v hrad hnt
+   omega
++
++lemma mem_ballWithin_of_walk {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] {v w : V} (p : G.Walk v w) :
++    w ∈ ballWithin G p.length v := by
++  induction p using SimpleGraph.Walk.concatRec with
++  | nil =>
++    dsimp [ballWithin]
++    exact Finset.mem_singleton_self v
++  | @concat u w' x p hadj ih =>
++    rw [SimpleGraph.Walk.length_concat]
++    dsimp [ballWithin]
++    rw [Finset.mem_union]
++    right
++    rw [Finset.mem_biUnion]
++    refine ⟨w', ih, ?_⟩
++    rw [Finset.mem_filter]
++    exact ⟨Finset.mem_univ x, hadj⟩
++
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

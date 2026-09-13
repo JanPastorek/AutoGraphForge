@@ -1,0 +1,22 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.nidOAa16KI.lean:111:6: error: Unexpected syntax
+  fin_cases (f u)
+/tmp/tmp.nidOAa16KI.lean:134:43: error: Type mismatch
+  add_le_add_left hX_card ?m.337
+has type
+  X.card + ?m.337 ≤ V1.card + V2.card + ?m.337
+but is expected to have type
+  V2.card + X.card ≤ V2.card + (V1.card + V2.card)
+/tmp/tmp.nidOAa16KI.lean:146:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+'totalDom_le_romanDom' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

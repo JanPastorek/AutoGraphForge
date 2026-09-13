@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Checked trees up to n=12 with rad >= 4: ZERO violations!
+

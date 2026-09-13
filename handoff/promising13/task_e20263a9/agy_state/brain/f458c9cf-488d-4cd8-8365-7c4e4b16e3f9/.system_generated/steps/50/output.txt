@@ -1,0 +1,17 @@
+The search for ""roman domination" diameter "lower bound"" returned the following summary:
+In graph theory, the Roman domination number $\gamma_R(G)$ of a connected graph $G$ is often studied in relation to its structural parameters, such as the diameter $\text{diam}(G)$. 
+
+Research into bounds for the Roman domination number has established that it can be bounded from below using the diameter of the graph[1][2][3]. Specifically, one known lower bound is:
+
+$$\gamma_R(G) \geq \left\lceil \frac{\text{diam}(G) + 2}{2} \right\rceil$$
+
+This result appears in literature exploring various bounds on Roman domination, often alongside considerations of other graph invariants like the girth or maximum degree[1][4][3]. Other studies have also examined lower bounds for different variants of Roman domination (such as outer-independent or distance Roman domination) in relation to the order, maximum degree, and diameter of graphs[5][6][7].
+
+Sources:
+[1] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHJO5PYmVT2KXOPpJ7VdUa3i_R1IX0azACrrfhICpQNglYlWJAdTj2h8sD3MLLCYrW0UoAv5lGQGhux7J6CWAqcHezFU3ktPfKjSDNzmV509DoCmQoWyMXxaH4qQGa3R5qd402tdYx9jeeMBCu1uARBpbkdeqPfb_f7F-209VGtORI77IMEElbdZuw1XHX-fXdrPptmOLrAB4lpCYJn3Mngetfk2pcC6WEgJQ==)
+[2] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHJO5PYmVT2KXOPpJ7VdUa3i_R1IX0azACrrfhICpQNglYlWJAdTj2h8sD3MLLCYrW0UoAv5lGQGhux7J6CWAqcHezFU3ktPfKjSDNzmV509DoCmQoWyMXxaH4qQGa3R5qd402tdYx9jeeMBCu1uARBpbkdeqPfb_f7F-209VGtORI77IMEElbdZuw1XHX-fXdrPptmOLrAB4lpCYJn3Mngetfk2pcC6WEgJQ==)
+[3] [sanu.ac.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQETSGzHhW5tPa0d4S2gxucSXY6qmRqYLGROS3l6bz1wzghulvppCFkDDLYCtSGiN3c9gjBMnhYshSn2Q3KswEoIy5RuhvgExfEl38ZUydXPX_cg7SLm_xHkW6iBuTdOc8JF9hX-4l7RG4l4vOhFeB4T)
+[4] [sanu.ac.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQETSGzHhW5tPa0d4S2gxucSXY6qmRqYLGROS3l6bz1wzghulvppCFkDDLYCtSGiN3c9gjBMnhYshSn2Q3KswEoIy5RuhvgExfEl38ZUydXPX_cg7SLm_xHkW6iBuTdOc8JF9hX-4l7RG4l4vOhFeB4T)
+[5] [upv.es](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFhUhGjKPVjdjN3ejW0Xuly1932rY45zWmYWySPAiKUqxbRZRW5DKZlSdrh-FgK8j2H0ooQXsJTARfJTC1xVFd76ABWoOfp7sMGoXNIG5sOiSwkDKcf3fccqiyDOPQOshyNMV_3rE2DvAialNBTpYepGe_J7cdsdF_-e6VeK6AjoKkrhXxz0teqymWNoAikgoz20A==)
+[6] [utcb.ro](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFQXedvroSeLuMSvHDn0OsupVL_pzuxI0gUunIrkwhx_hQh1zwsUG-hV0EDZB5D24v7ABFVNzZUrhaGhS4VuJLM5oA3GRWpAmR5dnnaHFtqWBlQ-bKzm9iH2w29ZyP38McNvhOl8-OfVmZ2_EFV9NiRxDLF1EgCTDC-n9SF)
+[7] [tandfonline.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGzOg9QsG7yPGOw6pZKPR6v4mhgxKPRm5kI7A5lHO3FNM7hJAW5YndfBrV-Q9yBQjWqUX9b3fVsip6ek8jSS_g-90PbMCtaKWBPX0J951u0k1t57l2Gl2n-PspInSuB-6EJYHKMK4bxC5nBV4PDpsawBDvICoI=)

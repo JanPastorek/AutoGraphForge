@@ -1,0 +1,39 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.Olg9Wre2Kp.lean:18:45: error: unsolved goals
+V : Type u_1
+inst✝¹ : Fintype V
+inst✝ : DecidableEq V
+f : V → Fin 3
+V1 : Finset V := {v | f v = 1}
+V2 : Finset V := {v | f v = 2}
+hdisj : Disjoint V1 V2
+this : ∀ v ∈ V1, ↑(f v) = 1
+⊢ ↑V1.card = V1.card
+/tmp/tmp.Olg9Wre2Kp.lean:25:49: error: unsolved goals
+V : Type u_1
+inst✝¹ : Fintype V
+inst✝ : DecidableEq V
+f : V → Fin 3
+V1 : Finset V := {v | f v = 1}
+V2 : Finset V := {v | f v = 2}
+hdisj : Disjoint V1 V2
+h1 : ∑ v ∈ V1, ↑(f v) = V1.card
+this : ∀ v ∈ V2, ↑(f v) = 2
+⊢ 2 * ↑V2.card = 2 * V2.card
+/tmp/tmp.Olg9Wre2Kp.lean:8:82: error: unsolved goals
+V : Type u_1
+inst✝¹ : Fintype V
+inst✝ : DecidableEq V
+f : V → Fin 3
+V1 : Finset V := {v | f v = 1}
+V2 : Finset V := {v | f v = 2}
+hdisj : Disjoint V1 V2
+h1 : ∑ v ∈ V1, ↑(f v) = V1.card
+h2 : ∑ v ∈ V2, ↑(f v) = 2 * V2.card
+hsub : V1 ∪ V2 ⊆ Finset.univ
+⊢ {v | f v = 1}.card + 2 * {v | f v = 2}.card ≤ ∑ v, ↑(f v)
+CHECK: FAILED (exit 1)
+

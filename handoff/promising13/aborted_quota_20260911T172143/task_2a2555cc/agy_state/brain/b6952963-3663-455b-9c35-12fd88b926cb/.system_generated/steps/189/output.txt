@@ -1,0 +1,9 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.VLUhM7ORzs.lean:7:7: error(lean.unknownIdentifier): Unknown constant `WithTop.getD`
+Finset.min_le.{u_2} {α : Type u_2} [LinearOrder α] {a : α} {s : Finset α} (as : a ∈ s) : s.min ≤ ↑a
+Finset.min_eq_top.{u_2} {α : Type u_2} [LinearOrder α] {s : Finset α} : s.min = ⊤ ↔ s = ∅
+CHECK: FAILED (exit 1)
+

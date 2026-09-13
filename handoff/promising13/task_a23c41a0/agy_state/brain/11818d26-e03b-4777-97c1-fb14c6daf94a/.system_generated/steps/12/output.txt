@@ -1,0 +1,2 @@
+Created file file:///tmp/agyhome.qfVsPi/.gemini/antigravity-cli/brain/11818d26-e03b-4777-97c1-fb14c6daf94a/prompt_draft.md with requested content.
+If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.

@@ -1,0 +1,22 @@
+
+The command exited with code 0.
+Output:
+Acyclic.lean		   EdgeLabeling.lean   Partition.lean
+AdjMatrix.lean		   Ends		       Paths.lean
+Basic.lean		   Extremal	       Prod.lean
+Bipartite.lean		   Finite.lean	       Regularity
+Cayley.lean		   Finsubgraph.lean    Star.lean
+Circulant.lean		   FiveWheelLike.lean  StronglyRegular.lean
+Clique.lean		   Girth.lean	       Subgraph.lean
+Coloring		   Hall.lean	       Sum.lean
+Coloring.lean		   Hamiltonian.lean    Trails.lean
+CompleteMultipartite.lean  Hasse.lean	       Triangle
+ConcreteColorings.lean	   IncMatrix.lean      Tutte.lean
+Connectivity		   Init.lean	       UnitDistance
+Copy.lean		   LapMatrix.lean      UniversalVerts.lean
+Dart.lean		   LineGraph.lean      VertexCover.lean
+DegreeSum.lean		   Maps.lean	       Walk
+DeleteEdges.lean	   Matching.lean       Walks
+Density.lean		   Metric.lean
+Diam.lean		   Operations.lean
+

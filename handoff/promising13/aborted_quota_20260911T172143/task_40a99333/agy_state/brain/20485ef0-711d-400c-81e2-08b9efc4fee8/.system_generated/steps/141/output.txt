@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Order 9 completed: 6969 graphs checked. NO counterexamples!
+

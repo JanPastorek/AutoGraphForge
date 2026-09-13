@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+Finset.inf_le.{u_2, u_3} {α : Type u_2} {β : Type u_3} [SemilatticeInf α] [OrderTop α] {s : Finset β} {f : β → α}
+  {b : β} (hb : b ∈ s) : s.inf f ≤ f b
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

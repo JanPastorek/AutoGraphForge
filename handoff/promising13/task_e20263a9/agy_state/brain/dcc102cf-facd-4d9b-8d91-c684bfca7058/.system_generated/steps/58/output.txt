@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Testing small graphs...
+No counterexamples in graph atlas (up to 7 vertices)!
+

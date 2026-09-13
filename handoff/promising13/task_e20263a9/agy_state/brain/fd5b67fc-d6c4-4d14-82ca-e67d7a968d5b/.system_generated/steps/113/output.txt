@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+/usr/lib/modules/5.14.0-503.14.1.el9_5.x86_64/kernel/net/wireless/cfg80211.ko.xz
+/usr/lib/modules/5.14.0-611.49.1.el9_7.x86_64/kernel/net/wireless/cfg80211.ko.xz
+/usr/lib64/libjbig85.so.2.1
+/usr/src/kernels/5.14.0-503.14.1.el9_5.x86_64/include/net/cfg80211-wext.h
+/usr/src/kernels/5.14.0-503.14.1.el9_5.x86_64/include/net/cfg80211.h
+/usr/src/kernels/5.14.0-503.14.1.el9_5.x86_64/include/net/cfg802154.h
+/usr/src/kernels/5.14.0-611.49.1.el9_7.x86_64/include/net/cfg80211-wext.h
+/usr/src/kernels/5.14.0-611.49.1.el9_7.x86_64/include/net/cfg80211.h
+/usr/src/kernels/5.14.0-611.49.1.el9_7.x86_64/include/net/cfg802154.h
+

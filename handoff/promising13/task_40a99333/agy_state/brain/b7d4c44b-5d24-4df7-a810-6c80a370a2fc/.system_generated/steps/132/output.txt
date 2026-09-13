@@ -1,0 +1,114 @@
+
+The command exited with code 0.
+Output:
+200: Thus $\{f(u):u\in V(G)\}\subseteq \{0,1,c\}$.
+201: In particular, the minimum weight of $c$-SDF of $G$ is well-defined.
+202: \end{remark}
+203: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+204: 
+205: The minimum weight of a $c$-SDF of $G$, denoted by $\gamma ^{c}(G)$, is called the {\it $c$-self-domination number} of $G$.
+206: A $c$-SDF $f$ of $G$ with $w(f)=\gamma ^{c}(G)$ is called a {\it $\gamma ^{c}$-function} of $G$.
+207: Considering Remark~\ref{remark1},
+208: \begin{align}
+209: \mbox{$\{f(u):u\in V(G)\}\subseteq \{0,1,c\}$ for a $\gamma ^{c}$-function $f$ of a graph $G$.}\label{01c}
+210: \end{align}
+211: 
+212: We show that $c$-self-domination is a common generalization of domination, total domination and Roman domination.
+213: 
+214: \begin{prop}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+215: \label{prop1.1}
+216: Let $G$ be a graph.
+217: Then the following hold.
+218: \begin{enumerate}
+219: \item[{\upshape(i)}]
+220: $\gamma ^{1}(G)=\gamma (G)$,
+221: \item[{\upshape(ii)}]
+222: $\gamma ^{\infty }(G)=\gamma _{t}(G)$, and
+223: \item[{\upshape(iii)}]
+224: $\gamma ^{\frac{1}{2}}(G)=\frac{1}{2}\gamma _{R}(G)$.
+225: \end{enumerate}
+226: \end{prop}
+227: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+228: \proof
+229: \begin{enumerate}
+230: \item[{\upshape(i)}]
+231: For a dominating set $S$ of $G$ with $|S|=\gamma (G)$, the function $f_{1}:V(G)\rightarrow \mathbb{R}^{+}$ with
+232: $$
+233: f_{1}(u)=
+234: \begin{cases}
+235: 1, & u\in S;\\
+236: 0, & u\notin S
+237: \end{cases}
+238: $$
+239: is a $1$-SDF of $G$ with $w(f_{1})=|S|$, and hence $\gamma ^{1}(G)\leq w(f_{1})=|S|=\gamma (G)$.
+240: 
+241: Let $f$ be a $\gamma ^{1}$-function of $G$.
+242: Then by (\ref{01c}), $\{f(u):u\in V(G)\}\subseteq \{0,1\}$.
+243: Hence the set $S_{1}:=\{u\in V(G):f(u)=1\}$ is a dominating set of $G$ with $|S_{1}|=w(f)$.
+244: Thus $\gamma (G)\leq |S_{1}|=w(f)=\gamma ^{1}(G)$.
+245: 
+246: Consequently, $\gamma ^{1}(G)=\gamma (G)$.
+247: 
+248: \item[{\upshape(ii)}]
+249: If $G$ has an isolated vertex, then it is clear that $\gamma ^{\infty }(G)=\infty =\gamma _{t}(G)$.
+250: Thus we may assume that $G$ has no isolated vertices.
+251: For a total dominating set $S$ of $G$ with $|S|=\gamma _{t}(G)$, the function $f_{2}:V(G)\rightarrow \mathbb{R}^{+}$ with
+252: $$
+253: f_{2}(u)=
+254: \begin{cases}
+255: 1, & u\in S;\\
+256: 0, & u\notin S
+257: \end{cases}
+258: $$
+259: is an $\infty $-SDF of $G$ with $w(f_{2})=|S|$, and hence $\gamma ^{\infty }(G)\leq w(f_{2})=|S|=\gamma _{t}(G)$.
+260: 
+261: Let $f$ be a $\gamma ^{\infty }$-function of $G$.
+262: Since the function assigning $1$ to all vertices of $G$ is an $\infty $-SDF of $G$, we have $\gamma ^{\infty }(G)<\infty $, and hence $f$ does not use $\infty $.
+263: This together with (\ref{01c}) implies that $\{f(u):u\in V(G)\}\subseteq \{0,1\}$.
+264: Hence the set $S_{2}:=\{u\in V(G):f(u)=1\}$ is a total dominating set of $G$ with $|S_{2}|=w(f)$.
+265: Thus $\gamma _{t}(G)\leq |S_{2}|=w(f)=\gamma ^{\infty }(G)$.
+266: 
+267: Consequently, $\gamma ^{\infty }(G)=\gamma _{t}(G)$.
+268: 
+269: \item[{\upshape(iii)}]
+270: For a Roman dominating function $f$ of $G$ with $w(f)=\gamma _{R}(G)$, the function $f_{3}:V(G)\rightarrow \mathbb{R}^{+}$ with $f_{3}(u)=\frac{1}{2}f(u)~(u\in V(G))$ is a $\frac{1}{2}$-SDF of $G$ with $w(f_{3})=\frac{1}{2}w(f)$, and hence $\gamma ^{\frac{1}{2}}(G)\leq w(f_{3})=\frac{1}{2}w(f)=\frac{1}{2}\gamma _{R}(G)$.
+271: 
+272: Let $f'$ be a $\gamma ^{\frac{1}{2}}$-function of $G$.
+273: Then by (\ref{01c}), $\{f'(u):u\in V(G)\}\subseteq \{0,1,\frac{1}{2}\}$.
+274: Hence the function $f'_{3}:V(G)\rightarrow \{0,1,2\}$ with $f'_{3}(u)=2f'(u)~(u\in V(G))$ is a Roman dominating function of $G$ with $w(f'_{3})=2w(f')$.
+275: Thus $\gamma _{R}(G)\leq w(f'_{3})=2w(f')=2\gamma ^{\frac{1}{2}}(G)$.
+276: 
+277: Consequently, $\gamma ^{\frac{1}{2}}(G)=\frac{1}{2}\gamma _{R}(G)$.
+278: \qed
+279: \end{enumerate}
+280: 
+281: 
+282: 
+283: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+284: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+285: \subsection{Main results}\label{sec1.2}
+286: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+287: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+288: 
+289: By Proposition~\ref{prop1.1}, $c$-self-domination can continuously fill in the gaps among three invariants: domination, total domination and Roman domination.
+290: On the other hand, some results concerning such invariants have been proved via different techniques.
+291: Thus the study of $c$-self-domination for $c\geq \frac{1}{2}$ may give essential boundaries of them.
+292: As the initial research for the goal, we focus on the following known upper bounds.
+293: 
+294: \begin{Thm}[Ore~\cite{O}]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+295: \label{ThmA}
+296: Let $G$ be a connected graph of order $n\geq 2$.
+297: Then $\gamma (G)\leq \frac{1}{2}n$.
+298: \end{Thm}
+299: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+300: 
+301: \begin{Thm}[Cockayne et al.~\cite{CDH}]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+302: \label{ThmB}
+303: Let $G$ be a connected graph of order $n\geq 3$.
+304: Then $\gamma _{t}(G)\leq \frac{2}{3}n$.
+305: \end{Thm}
+306: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+307: 
+308: \begin{Thm}[Chambers et al.~\cite{CKPW}]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+309: \label{ThmC}
+

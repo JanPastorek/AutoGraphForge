@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Title: ['A note on total domination and 2-rainbow domination in graphs']
+DOI: 10.1016/j.dam.2014.11.002
+

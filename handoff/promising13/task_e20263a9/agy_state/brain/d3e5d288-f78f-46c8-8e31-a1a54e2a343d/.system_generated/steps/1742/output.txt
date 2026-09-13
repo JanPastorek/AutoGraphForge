@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+rad + 1 <= W is ALWAYS true for ALL graphs and ALL RDFs!
+

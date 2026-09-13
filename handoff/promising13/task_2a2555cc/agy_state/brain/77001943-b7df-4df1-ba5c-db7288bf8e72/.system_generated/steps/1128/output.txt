@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+COUNTEREXAMPLE TO CLAIM: n=8, k=4, s=(2, 4, 5, 6)
+  u=2, max_dist=5
+  u=4, max_dist=5
+  u=5, max_dist=4
+  u=6, max_dist=4
+

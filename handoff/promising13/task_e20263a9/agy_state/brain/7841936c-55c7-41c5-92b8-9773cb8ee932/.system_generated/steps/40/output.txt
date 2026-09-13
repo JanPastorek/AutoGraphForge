@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Indeed, rad(G) <= weight - 1 for the minimum weight RDF implies rad(G) <= weight - 1 for ALL RDFs!
+

@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+No counterexamples among random general graphs on n=7, 8!
+

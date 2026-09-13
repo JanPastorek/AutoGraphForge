@@ -1,0 +1,13 @@
+The search for ""total domination number" "at most the Roman domination number" OR "total domination number is at most the Roman domination number"" returned the following summary:
+The relationship between the total domination number, denoted by $\gamma_t(G)$, and the Roman domination number, denoted by $\gamma_R(G)$, is a known result in graph theory. Specifically, for any graph $G$ (with no isolated vertices to ensure the total domination number is well-defined), the following inequality holds:
+
+$$\gamma_t(G) \le \gamma_R(G)$$
+
+Research indicates that the Roman domination number is often greater than or equal to the total domination number[1][2][3]. This inequality is frequently cited in studies exploring bounds for various domination parameters in graphs[3]. 
+
+It is worth noting that while $\gamma_t(G) \le \gamma_R(G)$, these parameters are distinct from others like the weak Roman domination number, which may be incomparable to the total domination number[1].
+
+Sources:
+[1] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGmGZERfCehzeCwujKSNu2PaDVumyLTz6cA3sOB9W2-6V_wCd21VL7tNNelNf8q05esQva0vnXqq9TgQN0viLtUvZZXQheUNcx39nAs-CcINcImoH5z57y70a40XbAWKlh51DsIP19kdejTC1HpFWPPrOW076sNEWHsU_GUyPFVNwBQWLhH5Y67cjzVu1c=)
+[2] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGmGZERfCehzeCwujKSNu2PaDVumyLTz6cA3sOB9W2-6V_wCd21VL7tNNelNf8q05esQva0vnXqq9TgQN0viLtUvZZXQheUNcx39nAs-CcINcImoH5z57y70a40XbAWKlh51DsIP19kdejTC1HpFWPPrOW076sNEWHsU_GUyPFVNwBQWLhH5Y67cjzVu1c=)
+[3] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGmGZERfCehzeCwujKSNu2PaDVumyLTz6cA3sOB9W2-6V_wCd21VL7tNNelNf8q05esQva0vnXqq9TgQN0viLtUvZZXQheUNcx39nAs-CcINcImoH5z57y70a40XbAWKlh51DsIP19kdejTC1HpFWPPrOW076sNEWHsU_GUyPFVNwBQWLhH5Y67cjzVu1c=)

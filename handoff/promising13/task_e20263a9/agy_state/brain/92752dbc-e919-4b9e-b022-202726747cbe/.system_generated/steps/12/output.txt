@@ -1,0 +1,9 @@
+{"name":".venv","isDir":true}
+{"name":"benchmark","isDir":true}
+{"name":"config.py","sizeBytes":"21872"}
+{"name":"handoff","isDir":true}
+{"name":"lean_project","isDir":true}
+{"name":"pipeline","isDir":true}
+{"name":"tools","isDir":true}
+
+Summary: This directory contains 6 subdirectories and 1 files.

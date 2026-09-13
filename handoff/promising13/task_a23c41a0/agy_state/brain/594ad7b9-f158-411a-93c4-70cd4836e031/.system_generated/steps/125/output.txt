@@ -1,0 +1,4 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Order/TypeTags.lean","LineNumber":13,"LineContent":"In this file we define `WithBot` and `WithTop`."}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Order/TypeTags.lean","LineNumber":31,"LineContent":"instance WithTop.instRepr [Repr α] : Repr (WithTop α) :="}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Order/TypeTags.lean","LineNumber":40,"LineContent":"@[to_dual (attr := coe, match_pattern) /-- The canonical map from `α` into `WithTop α` -/]"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Order/TypeTags.lean","LineNumber":58,"LineContent":"/-- Recursor for `WithTop` using the preferred forms `⊤` and `↑a`. -/]"}

@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+1535 /tmp/agyhome.NWyWnj/.gemini/antigravity-cli/brain/f458c9cf-488d-4cd8-8365-7c4e4b16e3f9/.system_generated/logs/transcript.jsonl
+

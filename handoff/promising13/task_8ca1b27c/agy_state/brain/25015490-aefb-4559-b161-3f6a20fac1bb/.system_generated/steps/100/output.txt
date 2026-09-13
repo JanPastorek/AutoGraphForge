@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+drwxr-xr-x 5 japake298 domain users 4096 Aug  6 10:56 /mnt/home/japake298/project/GraphConjecturing/lean_project
+

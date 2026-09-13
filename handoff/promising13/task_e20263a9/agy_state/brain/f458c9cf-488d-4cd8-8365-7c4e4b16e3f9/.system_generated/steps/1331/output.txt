@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+k_counts for w < n and |V_2| >= 2: Counter({1: 151399, 2: 111})
+

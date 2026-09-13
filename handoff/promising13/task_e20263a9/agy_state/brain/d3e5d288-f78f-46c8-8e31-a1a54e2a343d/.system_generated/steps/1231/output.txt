@@ -1,0 +1,4 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/test_weight2.lean","LineNumber":80,"LineContent":"lemma radius_le_one_of_adj_all {V : Type} [Fintype V] [DecidableEq V]"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/test_weight2.lean","LineNumber":278,"LineContent":"    exact radius_le_one_of_adj_all G hnt u h_all"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/test_full.lean","LineNumber":359,"LineContent":"lemma radius_le_one_of_adj_all {V : Type} [Fintype V] [DecidableEq V]"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/test_full.lean","LineNumber":418,"LineContent":"    exact radius_le_one_of_adj_all G hnt u h_all"}

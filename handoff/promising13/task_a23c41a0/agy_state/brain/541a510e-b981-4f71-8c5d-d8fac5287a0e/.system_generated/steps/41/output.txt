@@ -1,0 +1,44 @@
+
+The command exited with code 0.
+Output:
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ order ≤ (2 · edge_cover_number)
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasEdgeCover G → GraphCalc.order G ≤ 2 * GraphCalc.edgeCoverNumber G
+
+lemma card_le_two_mul_card_of_isEdgeCoverFinset {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj] (s : Finset (Sym2 V))
+    (h : GraphCalc.IsEdgeCoverFinset G s) :
+    Fintype.card V ≤ 2 * s.card := by
+  have hcov : (Finset.univ : Finset V) ⊆ s.biUnion Sym2.toFinset := by
+    intro v _
+    rcases h v with ⟨e, he, hv⟩
+    exact Finset.mem_biUnion.mpr ⟨e, he, Sym2.mem_toFinset.mpr hv⟩
+  have hcard : Fintype.card V ≤ (s.biUnion Sym2.toFinset).card := by
+    rw [← Finset.card_univ]
+    exact Finset.card_le_card hcov
+  have hbound : (s.biUnion Sym2.toFinset).card ≤ s.card * 2 := by
+    apply Finset.card_biUnion_le_card_mul
+    intro e _
+    rw [Sym2.card_toFinset]
+    split_ifs <;> omega
+  omega
+
+lemma test_top_getD (n : ℕ) : ((⊤ : WithTop ℕ).getD n) = n := rfl
+lemma test_coe_getD (n k : ℕ) : (((k : WithTop ℕ)).getD n) = k := rfl
+
+theorem prove_a23c41a0 : Candidate := by
+  sorry
+
+theorem refute_a23c41a0 : ¬ Candidate := by
+  sorry
+

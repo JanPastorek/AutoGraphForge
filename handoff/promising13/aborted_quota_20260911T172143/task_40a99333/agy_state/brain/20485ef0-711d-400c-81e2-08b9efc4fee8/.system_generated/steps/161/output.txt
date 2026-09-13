@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Finished checking all atlas graphs where gamma_t = 2*gamma. All have gamma_R >= gamma_t!
+

@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+Running simulated annealing to maximize gamma_t - gamma_R...
+n=6: max difference (gamma_t - gamma_R) achieved is 0 (gt=2, gr=2)
+n=7: max difference (gamma_t - gamma_R) achieved is 0 (gt=4, gr=4)
+n=8: max difference (gamma_t - gamma_R) achieved is 0 (gt=4, gr=4)
+n=9: max difference (gamma_t - gamma_R) achieved is 0 (gt=4, gr=4)
+n=10: max difference (gamma_t - gamma_R) achieved is 0 (gt=4, gr=4)
+

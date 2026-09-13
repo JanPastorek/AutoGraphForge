@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+and the total domination number  
+number~\cite{kn:chellali,kn:fujita3,kn:furuya,kn:wu,kn:wu2}, 
+\bibitem{kn:fujita3}Fujita,~S. and M.~Furuya, 
+\bibitem{kn:fujita4}Fujita,~S. and M.~Furuya, 
+\bibitem{kn:fujita}Fujita,~S., M.~Furuya and C.~Magnant, 
+\bibitem{kn:fujita2}Fujita,~S., M.~Furuya and C.~Magnant, 
+\bibitem{kn:furuya}Furuya,~M., 
+A note on total domination and 2-rainbow domination in graphs, 
+

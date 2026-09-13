@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+Finset.min.{u_2} {α : Type u_2} [LinearOrder α] (s : Finset α) : WithTop α
+Finset.min_le.{u_2} {α : Type u_2} [LinearOrder α] {a : α} {s : Finset α} (as : a ∈ s) : s.min ≤ ↑a
+Finset.le_min.{u_2} {α : Type u_2} [LinearOrder α] {m : WithTop α} {s : Finset α} (st : ∀ a ∈ s, m ≤ ↑a) : m ≤ s.min
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

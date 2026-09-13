@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Checked all graphs up to n=7: gamma_t(G) <= weight(f) holds for EVERY Roman dominating function f!
+

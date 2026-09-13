@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+(Finset.range 5).min : WithTop ℕ
+WithTop.untopD.{u_1} {α : Type u_1} (d : α) (x : WithTop α) : α
+Option.getD (Finset.range 5).min : ℕ → ℕ
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

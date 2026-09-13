@@ -1,0 +1,32 @@
+
+The command exited with code 0.
+Output:
+Bounds on weak roman and 2-rainbow domination numbers
+https://doi.org/10.1016/j.dam.2014.06.016
+Averaging 2-rainbow domination and Roman domination
+https://doi.org/10.1016/j.dam.2016.01.021
+Trees with equal total domination and 2-rainbow domination numbers
+https://doi.org/10.2298/fil1802599s
+Averaging $2$-Rainbow Domination and Roman Domination
+https://doi.org/10.48550/arxiv.1507.04899
+On 2-Rainbow Domination of Generalized Petersen Graphs P(ck,k)
+https://doi.org/10.3390/math11102271
+Total 2-Rainbow Domination in Graphs
+https://doi.org/10.3390/math10122059
+On 2-rainbow domination number of functigraph and its complement
+https://doi.org/10.7494/opmath.2020.40.5.617
+The k-Rainbow Domination Number of Cn□Cm
+https://doi.org/10.3390/math7121153
+The k -rainbow reinforcement numbers in graphs
+https://doi.org/10.1016/j.dam.2016.09.043
+Rainbow domination and related problems on some classes of perfect graphs
+https://doi.org/10.48550/arxiv.1502.07492
+Domination parameters with number 2: interrelations and algorithmic consequences
+https://doi.org/10.48550/arxiv.1511.00410
+On rainbow domination of cubic graphs
+https://doi.org/10.48550/arxiv.2403.07538
+On cubic rainbow domination regular graphs
+https://doi.org/10.48550/arxiv.2410.10662
+A necessary and sufficient condition for the existence of a properly coloured $f$-factor in an edge-coloured graph
+https://doi.org/10.48550/arxiv.2311.09042
+

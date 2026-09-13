@@ -1,0 +1,5 @@
+Title: Lower bounds for the total (distance) 𝑘-domination number of a graph
+
+The full content of the article at https://arxiv.org/html/2406.08770 has been saved to: /tmp/agyhome.8pgH3g/.gemini/antigravity-cli/brain/b6952963-3663-455b-9c35-12fd88b926cb/.system_generated/steps/161/content.md
+
+You can use the view_file tool to read specific sections if needed.

@@ -1,0 +1,2 @@
+You have 1 active subagent(s):
+[{"role":"Pipeline Orchestrator","type":"teamwork_preview_pipeline","conversationId":"1bd5f6a1-2439-4296-890c-56437c0dca61","transcript":"file:///tmp/agyhome.MTsSlP/.gemini/antigravity-cli/brain/1bd5f6a1-2439-4296-890c-56437c0dca61/.system_generated/logs/transcript.jsonl","state":"running","stateDetail":"run_command: Test proof in scratch_check.lean"}]

@@ -1,0 +1,13 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.ymCykRkHzY.lean:230:4: error: Type mismatch
+  Finset.mem_singleton_self v
+has type
+  v ∈ {v}
+but is expected to have type
+  u✝ ∈ {u✝}
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

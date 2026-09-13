@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Testing various families and random graphs...
+Successfully checked 1781 graphs, 0 counterexamples found!
+

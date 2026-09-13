@@ -1,0 +1,8 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.wlEGfusaDm.lean:9:2: error: Invalid alternative name `h`: Expected `hf`
+/tmp/tmp.wlEGfusaDm.lean:8:2: error: Alternative `hf` has not been provided
+CHECK: FAILED (exit 1)
+

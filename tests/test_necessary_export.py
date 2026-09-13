@@ -14,7 +14,7 @@ from pipeline import lean_export as le
 
 COLS = ["order", "size", "independence_number", "domination_number", "slater",
         "clique_number", "maximum_degree", "minimum_degree",
-        "zero_forcing_number", "radius",
+        "zero_forcing_number", "radius", "burning_number",
         "tree", "cubic", "subcubic", "K_4_free", "connected", "cograph",
         "claw_free", "planar", "chordal", "nontrivial"]
 
@@ -59,7 +59,7 @@ def test_renders_rational_coefficients():
 @pytest.mark.parametrize("statement,why", [
     ("((2 · independence_number) < order) ⇒ ¬planar", "class not formalized"),
     ("((2 · independence_number) < order) ⇒ ¬chordal", "class not formalized"),
-    ("(radius < order) ⇒ ¬tree", "invariant not formalized"),
+    ("(burning_number < order) ⇒ ¬tree", "invariant not formalized"),
     ("((2 · independence_number) < order) ⇒ order ≤ size", "conclusion not a class"),
     ("((tree) ∧ (cubic)) ⇒ order ≤ size", "class-conditioned shape"),
     ("order ≤ size", "not an implication"),

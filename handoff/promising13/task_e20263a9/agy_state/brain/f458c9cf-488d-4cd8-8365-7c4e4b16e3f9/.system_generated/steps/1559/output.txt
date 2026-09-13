@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+All Roman dominating functions on paths up to P_8 satisfy rad + 1 <= W!
+

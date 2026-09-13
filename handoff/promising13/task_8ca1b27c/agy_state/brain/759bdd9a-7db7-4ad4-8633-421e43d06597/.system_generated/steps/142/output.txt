@@ -1,0 +1,10 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.oJkmgAXrC5.lean:56:2: error: `dsimp` made no progress
+/tmp/tmp.oJkmgAXrC5.lean:64:8: warning: declaration uses `sorry`
+'prove_8ca1b27c' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'refute_8ca1b27c' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

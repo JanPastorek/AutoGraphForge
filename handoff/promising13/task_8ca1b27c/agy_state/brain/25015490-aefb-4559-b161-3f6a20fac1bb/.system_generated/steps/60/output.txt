@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+total 24
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 16:05 .
+drwxr-xr-x 6 japake298 domain users 4096 Sep 11 11:22 ..
+-r-xr-xr-x 1 japake298 domain users 2824 Sep 11 16:24 agy_home.sh
+-r-xr-xr-x 1 japake298 domain users 2182 Sep 11 15:46 check.sh
+-rwxr-xr-x 1 japake298 domain users 1998 Sep 11 16:06 guard.sh
+-r-xr-xr-x 1 japake298 domain users 3776 Sep 11 16:13 sandbox.sh
+

@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+No counterexample found up to n=35 in random samples!
+

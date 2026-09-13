@@ -1,0 +1,7 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.vyHtw2CokJ.lean:21:20: error(lean.unknownIdentifier): Unknown constant `SimpleGraph.Walk.induction_concat`
+CHECK: FAILED (exit 1)
+

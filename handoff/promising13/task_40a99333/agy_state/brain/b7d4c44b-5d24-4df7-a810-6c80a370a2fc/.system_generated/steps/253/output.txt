@@ -1,0 +1,12 @@
+Task: b7d4c44b-5d24-4df7-a810-6c80a370a2fc/task-251
+Status: DONE
+Log: /tmp/agyhome.XMOFQj/.gemini/antigravity-cli/brain/b7d4c44b-5d24-4df7-a810-6c80a370a2fc/.system_generated/tasks/task-251.log
+Log output:
+LINT: ok
+/tmp/tmp.8n2PPFwYzo.lean:14:4: error: Expected type must not contain free variables
+  ⟨2, ⋯⟩ = 0 → ∃ u, G.Adj v u ∧ ⟨2, ⋯⟩ = 2
+
+Hint: Use the `+revert` option to automatically clean up and revert free variables
+CHECK: FAILED (exit 1)
+
+Last progress: 0s ago

@@ -1,0 +1,5 @@
+
+The command exited with code 1.
+Output:
+which: no geng in (/tmp/agyhome.NWyWnj/.gemini/antigravity-cli/bin:/usr/bin:/bin)
+

@@ -1,0 +1,35 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.3OJ5iiI0Pp.lean:119:38: error: Application type mismatch: The argument
+  hfu
+has type
+  f u = 1
+but is expected to have type
+  1 = 1
+in the application
+  ⟨Finset.mem_univ u, hfu⟩
+/tmp/tmp.3OJ5iiI0Pp.lean:121:39: error: Application type mismatch: The argument
+  hfu
+has type
+  f u = 2
+but is expected to have type
+  2 = 2
+in the application
+  ⟨Finset.mem_univ u, hfu⟩
+/tmp/tmp.3OJ5iiI0Pp.lean:135:43: error: Type mismatch
+  add_le_add_left hX_card V2.card
+has type
+  X.card + V2.card ≤ V1.card + V2.card + V2.card
+but is expected to have type
+  V2.card + X.card ≤ V2.card + (V1.card + V2.card)
+/tmp/tmp.3OJ5iiI0Pp.lean:134:30: error: Type mismatch
+  add_le_add_left Finset.card_image_le ?m.523
+has type
+  (Finset.image ?m.521 ?m.520).card + ?m.523 ≤ Finset.card ?m.520 + ?m.523
+but is expected to have type
+  V2.card + (Finset.image nbr X).card ≤ V2.card + X.card
+'totalDom_le_romanDom' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

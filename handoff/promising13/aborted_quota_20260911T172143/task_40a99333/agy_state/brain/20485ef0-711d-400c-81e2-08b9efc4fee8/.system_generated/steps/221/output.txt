@@ -1,0 +1,11 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.98pAAt9fDe.lean:56:6: error: Unexpected syntax
+  fin_cases f v
+'test_min_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'minCard_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'romanWeight_eq' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

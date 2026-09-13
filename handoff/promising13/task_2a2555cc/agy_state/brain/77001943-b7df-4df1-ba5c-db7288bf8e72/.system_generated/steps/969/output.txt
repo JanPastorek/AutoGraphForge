@@ -1,0 +1,7 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.p40jUX0ELO.lean:9:22: error(lean.unknownIdentifier): Unknown identifier `not_top_le_coe`
+CHECK: FAILED (exit 1)
+

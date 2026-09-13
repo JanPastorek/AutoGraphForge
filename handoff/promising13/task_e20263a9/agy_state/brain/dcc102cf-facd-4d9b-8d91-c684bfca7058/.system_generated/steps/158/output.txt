@@ -1,0 +1,13 @@
+
+The command exited with code 1.
+Output:
+Traceback (most recent call last):
+  File "<string>", line 30, in <module>
+  File "<class 'networkx.utils.decorators.argmap'> compilation 78", line 3, in argmap_generalized_petersen_graph_75
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/networkx/utils/backends.py", line 551, in _call_if_no_backends_installed
+    return self.orig_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/networkx/generators/small.py", line 829, in generalized_petersen_graph
+    raise NetworkXError(f" Got {n=} {k=}. Need 1 <= k <= n/2")
+networkx.exception.NetworkXError:  Got n=3 k=2. Need 1 <= k <= n/2
+

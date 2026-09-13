@@ -1,0 +1,15 @@
+
+The command exited with code 0.
+Output:
+Running Z3 for W=2, 3, 4, 5...
+UNSAT for n=3, W=2
+UNSAT for n=4, W=2
+UNSAT for n=5, W=2
+UNSAT for n=6, W=2
+UNSAT for n=7, W=2
+UNSAT for n=8, W=2
+UNSAT for n=9, W=2
+UNSAT for n=10, W=2
+UNSAT for n=11, W=2
+SAT for n=4, W=3! edges=[(1, 2), (2, 3)], f=[1, 0, 2, 0]
+

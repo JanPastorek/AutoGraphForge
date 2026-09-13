@@ -53,6 +53,12 @@ SUPPORTED: Dict[str, str] = {
     # tools/lean_differential.py before being listed.
     "connected_zero_forcing_number": "GraphCalc.connectedZeroForcingNumber G",
     "vertex_cover_number":            "GraphCalc.vertexCoverNumber G",
+    "total_domination_number":       "GraphCalc.totalDominationNumber G",
+    "edge_cover_number":             "GraphCalc.edgeCoverNumber G",
+    "sub_total_domination_number":   "GraphCalc.subTotalDominationNumber G",
+    "roman_domination_number":       "GraphCalc.romanDominationNumber G",
+    "double_roman_domination_number": "GraphCalc.doubleRomanDominationNumber G",
+    "radius":                        "GraphCalc.radius G",
 }
 
 # class column → decidable predicate in the computable layer.
@@ -114,6 +120,13 @@ _PREAMBLE = ("import Mathlib\n"
 PARTIAL_INVARIANTS = {
     "connected_zero_forcing_number": "HasConnectedZeroForcingNumber",
     "total_zero_forcing_number":     "HasTotalZeroForcingNumber",
+    # graphcalc raises rather than returning a number on these; `minCard` /
+    # `minUpTo` would silently read 0 (resp. n), so the statement must be
+    # scoped to the graphs the conjecture actually spoke about.
+    "total_domination_number":       "HasTotalDominationNumber",
+    "edge_cover_number":             "HasEdgeCover",
+    "sub_total_domination_number":   "HasSubTotalDominationNumber",
+    "radius":                        "HasRadius",
 }
 
 

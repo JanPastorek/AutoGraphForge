@@ -1,0 +1,39 @@
+
+The command exited with code 0.
+Output:
+For a function $f:V(G)\rightarrow \mathbb{R}^{+}\cup \{0,\infty \}$, the {\it weight} $w(f)$ of $f$ is defined by $w(f)=\sum _{u\in V(G)}f(u)$.
+Let $c\in \mathbb{R}^{+}\cup \{\infty \}$.
+A function $f:V(G)\rightarrow \mathbb{R}^{+}\cup \{0,\infty \}$ is a {\it $c$-self dominating function} (or {\it $c$-SDF}) of $G$ if for each $u\in V(G)$, $f(u)\geq c$ or $\max\{f(v):v\in N_{G}(u)\}\geq 1$.
+Then the following proposition holds.
+
+\begin{prop}[Furuya~\cite{F1}]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{prop1.1}
+Let $c\in \mathbb{R}^{+}\cup \{\infty \}$, and let $G$ be a graph.
+If $f$ is a $c$-SDF of $G$, then there exists a $c$-SDF $g$ of $G$ such that $w(g)\leq w(f)$ and $g(u)\in \{0,1,c\}$ for all $u\in V(G)$.
+\end{prop}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+It follows from Proposition~\ref{prop1.1} that the minimum weight of a $c$-SDF of $G$ is well-defined.
+The minimum weight of a $c$-SDF of $G$, denoted by $\gamma ^{c}(G)$, is called the {\it $c$-self domination number} of $G$.
+%A $c$-SDF $f$ of $G$ with $w(f)=\gamma ^{c}(G)$ is called a {\it $\gamma ^{c}$-function} of $G$.
+Note that $\gamma ^{1}(G)=\gamma (G)$ and $\gamma ^{\infty }(G)=\gamma _{t}(G)$ for all graphs $G$ (see \cite{F1}).
+Furthermore, the $\frac{1}{2}$-self domination number is equal to the half of the Roman domination number defined in Subsection~\ref{sec1.1}.
+Thus self domination concept is a common generalization of three well-studied invariants.
+
+In this paper, our main aim is to analyze a behavior of the $c$-self domination number in Erd\H{o}s-R\'{e}nyi model random graphs $G(n,p)$ on $[n]:=\{1,2,\ldots ,n\}$.
+For $p\in (0,1)$ and $n\in \mathbb{Z}^{+}\setminus \{1\}$, let $a_{p}(n)=\log _{1/(1-p)}\frac{n}{\log _{1/(1-p)}n\ln n}$.
+Then the following are known.
+
+\begin{Thm}[Wieland and Godbole~\cite{WG}]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{ThmA}
+For $p\in (0,1)$, $\gamma (G(n,p))\in \{\lfloor a_{p}(n) \rfloor +1,\lfloor a_{p}(n) \rfloor +2\}$ with probability that tend to $1$ as $n\rightarrow \infty $.
+\end{Thm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{Thm}[Bonato and Wang~\cite{BW}]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{ThmB}
+For $p\in (0,1)$, $\gamma _{t}(G(n,p))\in \{\lfloor a_{p}(n) \rfloor +1,\lfloor a_{p}(n) \rfloor +2\}$ with probability that tend to $1$ as $n\rightarrow \infty $.
+\end{Thm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+

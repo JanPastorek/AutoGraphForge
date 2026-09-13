@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Yes! romanWeight(f) >= romanDominationNumber(G) >= radius(G) + 1 for ALL Roman dominating functions f!
+

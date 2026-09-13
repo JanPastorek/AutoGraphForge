@@ -1,0 +1,4 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":461,"LineContent":"def romanWeight (f : V → Fin 3) : ℕ := ∑ v : V, (f v : ℕ)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":465,"LineContent":"def romanDominationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :="}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":466,"LineContent":"  (((univ.filter (IsRomanDominatingFunction G)).image romanWeight).min).getD 0"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":493,"LineContent":"/-- Total, for the same reason as `romanDominationNumber`: constant `3` works. -/"}

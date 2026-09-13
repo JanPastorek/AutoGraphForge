@@ -1,0 +1,29 @@
+The search for ""Some conjectures of Graffiti.pc on total domination" "radius"" returned the following summary:
+"Some conjectures of Graffiti.pc on total domination" is a research paper published in **Congressus Numerantium (Volume 185, 2007, pp. 81–95)** by **Ermelinda DeLaViña, Qi Liu, Ryan Pepper, Bill Waller, and Douglas B. West**[1][2][3].
+
+### Overview
+The paper presents and investigates several lower bounds on the **total domination number** of a graph that originated as conjectures from **Graffiti.pc**, a computer program developed by Ermelinda DeLaViña for automated conjecture generation in graph theory[4][5]. The research provides mathematical proofs for many of these conjectures, which often relate the total domination number to other graph invariants such as:
+*   **Radius ($r(G)$):** One of the paper's key findings is that the total domination number of a graph is at least its radius[6].
+*   **Degree and Connectivity:** The work explores how the total domination number relates to parameters like maximum degree and the number of cut-vertices[7].
+*   **Girth ($g(G)$):** The paper discusses specific conjectures, such as one suggesting that for a connected graph $G$ that is not a tree, the total domination number $t(G) \geq (g(G)+1)/\delta'(G)$ (where $\delta'(G)$ is the minimum degree)[8].
+
+### Context in Graph Theory
+*   **Automated Conjecturing:** The paper is part of a broader body of work in the field of automated discovery, where software like Graffiti and its successor, Graffiti.pc, are used to identify non-trivial inequalities between graph invariants[9][5].
+*   **Related Work:** The same research group has published extensively on related invariants, including the standard domination number, independence number, and their relationships with the radius of a graph[2][10][11]. For instance, a related paper by some of the same authors in *Discussiones Mathematicae Graph Theory* (2010) similarly examines lower bounds for the standard domination number, noting that it is at least two-thirds of the radius[2][12].
+
+The paper serves as a significant reference in the study of total domination and remains frequently cited in research concerning automated conjecturing and distance-based graph invariants[13][10].
+
+Sources:
+[1] [google.lu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE7Ud4tb9oxdnHC94hut-a3gucieagZy-XymO0XFZiP4P9BB9CnIP-feRTqjBbnbNDuQxP7nDE7hiJN3ajWfNE33K4TfJxeu5iRkfeMI3k580OzsaND7t6ofGkaaGY9AtGK6pA7uq961jfqvasqwPzOew==)
+[2] [uz.zgora.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF_kBnR30Vhc-ZcfN0_c5lQxHfo21LUV-PpYWb-6QH1WohKjri5iOlLgKArXbsfGD0AYyBvj4x9awwgcco_Ul78CZ-58YIcbVjc8bxxBt_iEcuEKOVdGi0nn_ClLWig-DqCyei7HTwgXNf9Ubay7Kk=)
+[3] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFm1v2P2bGETmtyS1zawBx71TsWZ8bEdkGX-PdqazVC_oSGkBSI3qmEQvRakY8XD5Zwpnyx4BGG81JP9H0lBRnF4sx2cyesMaE1368DOw7rJN3Pf1ir_CjU)
+[4] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFY2dsBa_k64Gj_XWfwu3rEzpQkUKm_2aTrvCoJJM_hmfhDuPQnLyQyUOohhZnGJVc3hpEqgohVjemdTBKn2wCwo3SA3nYB5L8VR3FkzijXl3-NvUc-j4m8SRECy7BXkZvgVcKg-aB56TReOb0lQn0v67rJpQ1-Ic0p9LsW9_QE986Widj6kasDQR1YyzAcGHhfmB1I8ss9Qxa0-Q==)
+[5] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFKDAO0k1fmptzYi6PUMiUBuGU_gSuu2mA3PJVe47rnsWAmpZemuiVbJpHaD5TlRl_lJ_58-kpuqP5IBEXcWknJIkV6fUfh4QVTBU8sUsgbOT21ADwPF3TYpXicy7KtLiqkhWSuSLjrsXzpmdX7VMgA47XmW5na_mdx3mRvi4d-WA==)
+[6] [icm.edu.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFmWPYK6N_vCv4XYuD4PiLHZjcr_IPYpJXMMdQTKcd69O8F9OGmUmnkF8FamncXfmneJbNIiv06Q0MJJWzH9v5jGHoJzA8nwOdJ2gAa_4NDqgK0qdJq0zWGhrrOuM6XoCwsPG8pDD8EUFmn2ADWC9Nm90rQr8PhvFuYER70BPoViMuo6Z4Nu4jA4hl8gDUWYJiqccB49UQa7oyNP0fs7qqPzV6FeA==)
+[7] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEvhbEK_1NJ9ZuW7pQSzYPjq0_leHrZinHx-Qz_O9vzJh9-noub_X1gaPNOHrL97wZkqudTGWynO4oqPFbxfkExJcQOxYok3ExFZB3KB36NGG0N1yq96QHSjA3BTeAHD9Db2PD0OglbO2v10HVCmAXhd5XN_S-qHbuP49ay1A==)
+[8] [illinois.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQENQL25vEThxhkbBXr1DKypbbvry3-_-i9Yo_6Z3l8ocz_POwyD4A6TxIznvZNmQ8O5s1_hSOn4Zf8bfHR8Rjdmgj8hOGJ5Vw4zB_H8urbnDk2nHnqykuPXLhFcEKBi_aTOF3DthsGa)
+[9] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHPqxLdgFn0ez5Y1O_Q2QeB8MncihXCF8S8gDl4aIQneo_p-RloBVBglltsDNmMqRw7rO9DZ6IhS1CXu74rd657ranH6NHsg5iq43sM8jBw_Y_7nZ2ygdWmqQ==)
+[10] [google.lu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE7Ud4tb9oxdnHC94hut-a3gucieagZy-XymO0XFZiP4P9BB9CnIP-feRTqjBbnbNDuQxP7nDE7hiJN3ajWfNE33K4TfJxeu5iRkfeMI3k580OzsaND7t6ofGkaaGY9AtGK6pA7uq961jfqvasqwPzOew==)
+[11] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQETbISCd85qGWCd0FXpvI08IG5tF0bLVTVws6q_vPajuYhn7Gp76TuFSypcDICOc_PsrY5paP2oTiHJZEe-xVc0alR9Ixrv6V_6D1T9IHniFY3YUWsSkE4E8eW8AlH1pHDhLh0XEn3O0M4PxJwl)
+[12] [eudml.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHqVtt3Dm5pSNKqSG4MTVkHOqR2AQoTUqRl89bk10_dU6LTiNTA8zw4ADrxPnZftRVowv6yQjahlqZQAymQ1wGAl__Jf8vbP2_TuPDPHYnhCPiM)
+[13] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFKDAO0k1fmptzYi6PUMiUBuGU_gSuu2mA3PJVe47rnsWAmpZemuiVbJpHaD5TlRl_lJ_58-kpuqP5IBEXcWknJIkV6fUfh4QVTBU8sUsgbOT21ADwPF3TYpXicy7KtLiqkhWSuSLjrsXzpmdX7VMgA47XmW5na_mdx3mRvi4d-WA==)

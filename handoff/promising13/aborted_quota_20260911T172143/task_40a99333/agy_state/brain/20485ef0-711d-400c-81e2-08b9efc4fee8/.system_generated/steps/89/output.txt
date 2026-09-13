@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Searching all connected graphs of order 8...
+

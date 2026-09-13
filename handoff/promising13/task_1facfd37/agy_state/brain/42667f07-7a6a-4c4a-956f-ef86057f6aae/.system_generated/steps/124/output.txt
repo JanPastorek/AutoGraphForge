@@ -1,0 +1,15 @@
+Task: 42667f07-7a6a-4c4a-956f-ef86057f6aae/task-120
+Status: DONE
+Log: /tmp/agyhome.ORAQte/.gemini/antigravity-cli/brain/42667f07-7a6a-4c4a-956f-ef86057f6aae/.system_generated/tasks/task-120.log
+Log output:
+LINT: ok
+/tmp/tmp.IY5HmBTNw7.lean:53:2: error: Invalid alternative name `none`: Expected `bot` or `coe`
+/tmp/tmp.IY5HmBTNw7.lean:55:2: error: Invalid alternative name `some`: Expected `bot` or `coe`
+/tmp/tmp.IY5HmBTNw7.lean:52:2: error: Alternative `bot` has not been provided
+/tmp/tmp.IY5HmBTNw7.lean:52:2: error: Alternative `coe` has not been provided
+/tmp/tmp.IY5HmBTNw7.lean:83:8: warning: declaration uses `sorry`
+'prove_1facfd37' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'refute_1facfd37' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+
+Last progress: 0s ago

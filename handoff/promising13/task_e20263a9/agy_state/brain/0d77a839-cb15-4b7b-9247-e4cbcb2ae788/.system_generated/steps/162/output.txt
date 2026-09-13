@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+theorem IsTrail.length_le_card_edgeFinset [Fintype G.edgeSet] {u v : V}
+lemma IsHamiltonian.length_eq (hp : p.IsHamiltonian) : p.length = Fintype.card α - 1 :=
+lemma IsHamiltonian.length_support (hp : p.IsHamiltonian) : p.support.length = Fintype.card α := by
+theorem card_set_walk_length_eq (u v : V) (n : ℕ) :
+

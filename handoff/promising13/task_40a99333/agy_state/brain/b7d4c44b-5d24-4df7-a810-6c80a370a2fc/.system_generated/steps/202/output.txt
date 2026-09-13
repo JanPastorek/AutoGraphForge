@@ -1,0 +1,14 @@
+Task: b7d4c44b-5d24-4df7-a810-6c80a370a2fc/task-199
+Status: RUNNING
+Log: /tmp/agyhome.XMOFQj/.gemini/antigravity-cli/brain/b7d4c44b-5d24-4df7-a810-6c80a370a2fc/.system_generated/tasks/task-199.log
+Log output:
+<truncated 2135 lines>
+nanops.py:1214:        (np.min, 1),
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/pandas/tests/test_register_accessor.py:68:        assert o.mine.prop == "item"
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/pandas/tests/test_register_accessor.py:79:        assert s.mine.obj is s
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/pandas/tests/test_register_accessor.py:81:        assert s.mine.prop == "item"
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/pandas/tests/test_register_accessor.py:82:        assert s.mine.method() == "item"
+grep: /mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/pandas/util/version/__pycache__/__init__.cpython-311.pyc: binary file matches
+grep: /mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/pillow.libs/libbrotlicommon-785b7a00.so.1.2.0: binary file matches
+
+Last progress: 0s ago

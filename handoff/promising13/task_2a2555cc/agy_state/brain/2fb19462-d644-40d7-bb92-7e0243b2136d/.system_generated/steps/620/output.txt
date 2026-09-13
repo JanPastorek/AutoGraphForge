@@ -1,0 +1,2 @@
+You have 1 active subagent(s):
+[{"role":"Pipeline Conductor","type":"teamwork_preview_pipeline","conversationId":"c45df74f-9e07-4b20-a5cb-389bcf364aaa","transcript":"file:///tmp/agyhome.wwbf9z/.gemini/antigravity-cli/brain/c45df74f-9e07-4b20-a5cb-389bcf364aaa/.system_generated/logs/transcript.jsonl","state":"errored","stateDetail":"generating and executing: RESOURCE_EXHAUSTED (code 429): Individual quota reached. Please upgrade your subscription to increase your limits. Resets in 4h16m2s."}]

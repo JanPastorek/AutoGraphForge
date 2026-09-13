@@ -1,0 +1,46 @@
+
+The command exited with code 0.
+Output:
+ 
+Many other papers establish bounds and relations, eg,  
+between the $2$-rainbow domination number 
+and the total domination number  
+or the (weak) roman domination 
+number~\cite{kn:chellali,kn:fujita3,kn:furuya,kn:wu,kn:wu2}, 
+or study edge- or vertex critical graphs with respect to 
+rainbow domination~\cite{kn:rad}, or obtain results for special 
+graphs such as paths, cycles, graphs with given radius, and 
+the generalized Petersen 
+graphs~\cite{kn:ali,kn:fujita4,kn:shao,kn:stepien,kn:stepien2,kn:tong,%
+kn:wang,kn:xavier,kn:xu}. 
+
+\bigskip 
+
+Pai and Chiu develop   
+an exact algorithm and a heuristic for $3$-rainbow domination. 
+In~\cite{kn:pai} they present the results of some experiments.  
+Let us mention that the $k$-rainbow domination number may be 
+computed, via~\eqref{eqn3}, 
+========================================
+
+\bibitem{kn:fujita2}Fujita,~S., M.~Furuya and C.~Magnant, 
+General bounds on rainbow domination numbers, 
+{\em Graphs and Combinatorics\/}, Published online December 2013. 
+
+\bibitem{kn:furuya}Furuya,~M., 
+A note on total domination and 2-rainbow domination in graphs, 
+{\em Discrete Applied Mathematics\/}, November 2014. 
+
+\bibitem{kn:hartnell}Hartnell,~B. and D.~Rall, 
+On dominating the Cartesian product of a graph and $K_2$, 
+{\em Discussiones Mathematicae Graph Theory\/} {\bf 24} (2004), 
+pp.~389--402. 
+
+\bibitem{kn:meierling}Meierling,~D., S.~Sheikholeslami, L.~Volkmann, 
+Nordhaus-Gaddum bounds on the $k$-rainbow domatic number of a graph, 
+{\em Applied Mathematics Letters\/} {\bf 24} (2011), pp.~1758--1761. 
+
+\bibitem{kn:pai}Pai,~K. and W.~Chiu, 
+%exact algorithm
+========================================
+

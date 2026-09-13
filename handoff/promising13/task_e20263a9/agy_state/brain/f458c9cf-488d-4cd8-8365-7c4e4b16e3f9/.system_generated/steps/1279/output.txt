@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+ALL Roman dominating functions satisfy radius + 1 <= romanWeight(f)!
+

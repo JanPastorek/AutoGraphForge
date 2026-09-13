@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Running fast check on random graphs...
+Checked 35000 random graphs. All satisfied gamma_t <= gamma_R!
+

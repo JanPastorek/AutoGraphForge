@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Paths and cycles up to 30 tested.
+

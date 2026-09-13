@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Data/Finset/Max.lean:111:protected def min (s : Finset α) : WithTop α :=
+
+

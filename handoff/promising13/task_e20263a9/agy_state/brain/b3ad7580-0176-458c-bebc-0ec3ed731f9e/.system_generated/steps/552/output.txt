@@ -1,0 +1,2 @@
+Successfully killed 3 subagent(s) and their descendants.
+Killed roles: Lean Proof Worker 1, Lean Proof Worker 2, Lean Proof Worker 3

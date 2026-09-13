@@ -1,0 +1,4 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/Challenge_e20263a9.lean","LineNumber":534,"LineContent":"        by_cases hrad3 : GraphCalc.radius G ≤ 3"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/Challenge_e20263a9.lean","LineNumber":536,"LineContent":"        · push Not at hrad3"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/test_skel.lean","LineNumber":534,"LineContent":"        by_cases hrad3 : GraphCalc.radius G ≤ 3"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/test_skel.lean","LineNumber":536,"LineContent":"        · push_neg at hrad3"}

@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+total 184
+drwxr-xr-x 2 japake298 domain users  4096 Jun 17 17:14 .
+drwxr-xr-x 6 japake298 domain users  4096 Aug  4 22:39 ..
+-rw-r--r-- 1 japake298 domain users  2550 Jun 17 17:14 README.md
+-rw-r--r-- 1 japake298 domain users 33142 Jun 17 17:14 conjecturing.py
+-rw-r--r-- 1 japake298 domain users 98184 Jun 17 17:14 expressions
+-rw-r--r-- 1 japake298 domain users   436 Jun 17 17:14 run.sh
+-rw-r--r-- 1 japake298 domain users 10228 Jun 17 17:14 run_conjecturing.sage
+-rw-r--r-- 1 japake298 domain users  6344 Jun 17 17:14 run_property_conjecturing.sage
+-rw-r--r-- 1 japake298 domain users  7287 Jun 17 17:14 run_property_conjecturing.sage.py
+

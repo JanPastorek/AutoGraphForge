@@ -1,0 +1,2 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/LeanProject/GraphInvariants.lean","LineNumber":164,"LineContent":"-- `radius` is mathlib's (`SimpleGraph.radius : ℕ∞`, the minimum eccentricity);"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/LeanProject/GraphInvariants.lean","LineNumber":165,"LineContent":"-- the exporter reads it as `(G.radius).toNat`. On a disconnected graph it is"}

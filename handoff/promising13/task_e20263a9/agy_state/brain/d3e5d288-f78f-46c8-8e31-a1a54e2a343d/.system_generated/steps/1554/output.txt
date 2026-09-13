@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+P_2: radius=1, gamma=1
+P_3: radius=1, gamma=1
+P_4: radius=2, gamma=2
+P_5: radius=2, gamma=2
+P_6: radius=3, gamma=2
+P_7: radius=3, gamma=3
+P_8: radius=4, gamma=3
+P_9: radius=4, gamma=3
+P_10: radius=5, gamma=4
+P_11: radius=5, gamma=4
+P_12: radius=6, gamma=4
+P_13: radius=6, gamma=5
+P_14: radius=7, gamma=5
+

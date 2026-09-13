@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+No counterexample in Graph Atlas up to n=7.
+

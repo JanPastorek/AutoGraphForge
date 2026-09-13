@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+Finset.notMem_empty.{u_1} {α : Type u_1} (a : α) : a ∉ ∅
+SimpleGraph.irrefl.{u} {V : Type u} (G : SimpleGraph V) {v : V} : ¬G.Adj v v
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+
+
+

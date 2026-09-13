@@ -1,0 +1,8 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.zK18ibCOI4.lean:332:31: error: `simp` made no progress
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

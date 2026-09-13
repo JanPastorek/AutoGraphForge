@@ -1,0 +1,7 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.tbO5wmtBEd.lean:48:8: error(lean.unknownIdentifier): Unknown constant `Finset.subset_antisymm`
+CHECK: FAILED (exit 1)
+

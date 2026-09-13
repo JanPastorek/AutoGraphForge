@@ -1,0 +1,17 @@
+The search for ""Lower bounds for the total" "k-domination number of a graph" arxiv" returned the following summary:
+The paper you are likely looking for is **"Lower bounds for the total (distance) k-domination number of a graph"** by **Randy Davila**, which was indexed on arXiv in June 2024 (arXiv:2406.08770)[1][2][3].
+
+### Overview of the Paper
+*   **Topic:** The paper explores the "total distance $k$-domination number" of a graph, denoted as $\gamma_{t,k}(G)$[3]. A total distance $k$-dominating set is a set $S \subseteq V(G)$ such that every vertex in the graph is within distance $k$ of some vertex in $S$ *other than itself*[3].
+*   **Key Contribution:** The author notes that while there are many results for standard distance domination, there has been a relative lack of well-known lower bounds for the *total* $k$-domination variant[4][5]. This work establishes several new lower bounds and demonstrates how existing lower bounds for the total domination number can be generalized to the total distance $k$-domination number[3].
+*   **Context:** This research falls under the field of Combinatorics (math.CO)[2][6].
+
+You can find the paper on the arXiv repository under the identifier **arXiv:2406.08770**[2][6].
+
+Sources:
+[1] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGjqIBVPfZgjmfHS1LUAjLyJ7qLcn9kt9MEGcVTJkvxRHuYx2OYJ8DEm3jNKrhFtxGn9yl3mJQMZrT2bnNqw4_6lhtjfAHohN0NwdSrjEaE2cSKf2pT)
+[2] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF4kJjFomTrGKKi6ASSmtJ_i4-m9MG3sQpt5Z4RQq5HotE3ZZV7k8JicmJkAngnwMVmeQsC8vvYnpY1jG6L34RmBAPR23TAJ6sNj038rMfGmw_mcN1erOFukJQYvQGN0WpOAV7N64rbkJ_1J2XM0h8=)
+[3] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEwpH6uSKRed-e9IF23t-lNobDS-QjI2Y17XG4zEyy74iz6Wo5s39BbeE49EpV-U_5tiMNNp7l2lD1j6cziMb0hmVlG4_TxcP-HWg1nkAnFCy3RD3c4)
+[4] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEXIjTwqI12h6W6Oe-HxEnVB6Y4j8tKny55Fa3muLY-eAxOOKrkoRSL0-u_wuf6G5nS-4oKEhQBljmEW9NRwSsI1a_dKN9MqlqyZe6S0g58jxhbS54FClUB4L0p2trtzHgIwipAXaKrF3RqV3S5rVthuOxow0M6Npuci1JQ1meP84jaI_HpS-GEhMmUlnqL6Glcw98j2r_XKSGJA1R7M_Bj-Q==)
+[5] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEXIjTwqI12h6W6Oe-HxEnVB6Y4j8tKny55Fa3muLY-eAxOOKrkoRSL0-u_wuf6G5nS-4oKEhQBljmEW9NRwSsI1a_dKN9MqlqyZe6S0g58jxhbS54FClUB4L0p2trtzHgIwipAXaKrF3RqV3S5rVthuOxow0M6Npuci1JQ1meP84jaI_HpS-GEhMmUlnqL6Glcw98j2r_XKSGJA1R7M_Bj-Q==)
+[6] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHjzL6CH3kbLVsAv6gV7npVwKzh-BDSA2xT_8hFb9DJJ5RrmpJNcF_MrOZKu1rYv7WVXPXUqKBXByZ2XmnIHR1hWvKeSAGZKkcv9yHjDnM6irZtA6pg1aBqLpCr76cfgvJHoJD4m0mv1Ql4BUc8TzqL)

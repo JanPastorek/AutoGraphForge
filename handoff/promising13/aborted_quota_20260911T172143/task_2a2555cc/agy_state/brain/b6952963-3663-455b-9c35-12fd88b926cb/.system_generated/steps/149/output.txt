@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Checked all graphs n<=8: in EVERY minimum TDS, at least one vertex has ecc <= |S|!
+

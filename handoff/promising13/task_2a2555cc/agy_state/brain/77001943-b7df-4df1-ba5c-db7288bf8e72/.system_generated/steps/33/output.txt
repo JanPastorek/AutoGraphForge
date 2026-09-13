@@ -1,0 +1,26 @@
+
+The command exited with code 0.
+Output:
+P_2: rad=1, gamma_t=2
+C_2: rad=1, gamma_t=2
+P_3: rad=1, gamma_t=2
+C_3: rad=1, gamma_t=2
+P_4: rad=2, gamma_t=2
+C_4: rad=2, gamma_t=2
+P_5: rad=2, gamma_t=3
+C_5: rad=2, gamma_t=3
+P_6: rad=3, gamma_t=4
+C_6: rad=3, gamma_t=4
+P_7: rad=3, gamma_t=4
+C_7: rad=3, gamma_t=4
+P_8: rad=4, gamma_t=4
+C_8: rad=4, gamma_t=4
+P_9: rad=4, gamma_t=5
+C_9: rad=4, gamma_t=5
+P_10: rad=5, gamma_t=6
+C_10: rad=5, gamma_t=6
+P_11: rad=5, gamma_t=6
+C_11: rad=5, gamma_t=6
+P_12: rad=6, gamma_t=6
+C_12: rad=6, gamma_t=6
+

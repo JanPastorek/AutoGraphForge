@@ -1,0 +1,41 @@
+
+The command exited with code 0.
+Output:
+grep: /mnt/home/japake298/project/GraphConjecturing/pipeline/__pycache__/known_relations.cpython-311.pyc: binary file matches
+grep: /mnt/home/japake298/project/GraphConjecturing/pipeline/__pycache__/lean_disproof.cpython-311.pyc: binary file matches
+grep: /mnt/home/japake298/project/GraphConjecturing/pipeline/__pycache__/lean_export.cpython-311.pyc: binary file matches
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:60:    "roman_domination_number", "double_roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:142:    "domination_number >= 1/2 * roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:143:    "domination_number >= 1/3 * double_roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:169:    "roman_domination_number <= 2 * domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:180:    "domination_number <= roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:181:    "domination_number <= double_roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:199:    "roman_domination_number >= domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:200:    "double_roman_domination_number >= roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:201:    "roman_domination_number >= slater",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:202:    "double_roman_domination_number >= slater",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:203:    "roman_domination_number <= double_roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:204:    "roman_domination_number <= 2 domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:205:    "roman_domination_number <= 2 independent_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:206:    "roman_domination_number <= 2 total_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:207:    "roman_domination_number <= 2 connected_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:208:    "double_roman_domination_number <= 3 domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:209:    "double_roman_domination_number <= 3 independent_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:210:    "double_roman_domination_number <= 3 total_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:211:    "double_roman_domination_number <= 3 connected_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:212:    "double_roman_domination_number >= 2 domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:220:    "domination_number >= 1/2 roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:221:    "independent_domination_number >= 1/2 roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:222:    "total_domination_number >= 1/2 roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:223:    "connected_domination_number >= 1/2 roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:276:    "double_roman_domination_number <= 3 restrained_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:277:    "double_roman_domination_number <= 3 outer_connected_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:278:    "double_roman_domination_number <= 2 two_rainbow_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:280:    "restrained_domination_number >= 1/2 roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:282:    "restrained_domination_number >= 1/3 double_roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py:287:    "domination_number <= 1/2 double_roman_domination_number",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_export.py:46:    "roman_domination_number":       "G.romanDominationNumber",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_export.py:47:    "double_roman_domination_number": "G.doubleRomanDominationNumber",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py:59:    "roman_domination_number":       "GraphCalc.romanDominationNumber G",
+/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py:60:    "double_roman_domination_number": "GraphCalc.doubleRomanDominationNumber G",
+

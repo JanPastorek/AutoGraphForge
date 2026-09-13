@@ -1,0 +1,27 @@
+
+The command exited with code 0.
+Output:
+/tmp/agyhome.8pgH3g/.gemini/antigravity-cli
+total 80
+drwx------ 13 japake298 domain users  4096 Sep 11 16:55 .
+drwx------  4 japake298 domain users    43 Sep 11 16:54 ..
+drwxr-xr-x  2 japake298 domain users    56 Sep 11 16:55 annotations
+-rw-------  1 japake298 domain users  1676 Sep 11 16:55 antigravity-oauth-token
+drwxr-xr-x  2 japake298 domain users    42 Sep 11 11:14 bin
+drwxr-xr-x  3 japake298 domain users    50 Sep 11 16:55 brain
+drwxr-xr-x  3 japake298 domain users    53 Sep 11 11:14 builtin
+drwxr-xr-x  2 japake298 domain users    90 Sep 11 16:55 cache
+-rw-r--r--  1 japake298 domain users  4096 Sep 11 16:54 conversation_summaries.db
+-rw-r--r--  1 japake298 domain users 32768 Sep 11 16:54 conversation_summaries.db-shm
+-rw-r--r--  1 japake298 domain users 20632 Sep 11 16:54 conversation_summaries.db-wal
+drwxr-xr-x  2 japake298 domain users   155 Sep 11 16:55 conversations
+drwxr-xr-x  2 japake298 domain users    62 Sep 11 16:54 crashes
+-rw-------  1 japake298 domain users    36 Sep 11 16:54 installation_id
+-rw-------  1 japake298 domain users   503 Sep 11 16:54 jetski_state.pbtxt
+drwxr-xr-x  2 japake298 domain users    28 Sep 11 16:54 knowledge
+-rw-r--r--  1 japake298 domain users     0 Sep 11 16:54 last_check.timestamp
+drwxr-xr-x  2 japake298 domain users    55 Sep 11 16:55 presence
+drwxr-xr-x  2 japake298 domain users     6 Sep 11 16:55 scratch
+-rw-------  1 japake298 domain users   516 Sep 11 16:54 settings.json
+drwxr-xr-x  2 japake298 domain users    51 Sep 11 16:55 updater
+

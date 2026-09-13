@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+protected def Finset.min.{u_2} : {α : Type u_2} → [LinearOrder α] → Finset α → WithTop α :=
+fun {α} [LinearOrder α] s => s.inf WithTop.some
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

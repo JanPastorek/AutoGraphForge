@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+task-100.log  task-213.log  task-236.log  task-259.log	task-276.log
+task-111.log  task-224.log  task-245.log  task-264.log	task-54.log
+task-160.log  task-229.log  task-254.log  task-269.log	task-73.log
+

@@ -1,0 +1,7 @@
+
+The command exited with code 1.
+Output:
+Traceback (most recent call last):
+  File "<string>", line 28, in <module>
+NameError: name 'n' is not defined. Did you mean: 'nx'?
+

@@ -1,0 +1,50 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.pXShCw6AM1.lean:286:18: error(lean.unknownIdentifier): Unknown identifier `card_ballWithin_add`
+/tmp/tmp.pXShCw6AM1.lean:285:44: error: unsolved goals
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+v : V
+hrad : HasRadius G
+k m : ℕ
+h : Fintype.card V ≤ (ballWithin G k v).card + m
+⊢ ballWithin G (k + m) v = Finset.univ
+/tmp/tmp.pXShCw6AM1.lean:312:48: error(lean.unknownIdentifier): Unknown identifier `u`
+/tmp/tmp.pXShCw6AM1.lean:332:11: error(lean.unknownIdentifier): Unknown constant `Finset.card_sdiff_add_card_eq`
+/tmp/tmp.pXShCw6AM1.lean:334:42: error: Type mismatch
+  Eq.symm (Finset.mem_filter.mp hx).right
+has type
+  1 = ↑(f x)
+but is expected to have type
+  ↑(f x) = ?m.305 x
+/tmp/tmp.pXShCw6AM1.lean:335:4: error: `simp` made no progress
+/tmp/tmp.pXShCw6AM1.lean:362:6: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  g ≥ 0
+  e ≥ 0
+  d ≥ 1
+  d - e ≥ 0
+  c ≥ 1
+  c - d ≥ 2
+  c - g ≤ -1
+  b ≥ 0
+  b - c ≤ -1
+  a ≥ 0
+  a - d ≤ 1
+  a + c - d ≥ 2
+  a + b - d ≥ 1
+where
+ a := ↑(ballWithin G 1 u).card
+ b := ↑(∑ v with ↑(f v) = 1, ↑(f v))
+ c := ↑(romanWeight f - 1)
+ d := ↑(Fintype.card V - 1)
+ e := ↑(eccentricity G u)
+ g := ↑(minUpTo (Fintype.card V) fun k => ballWithin G k u = Finset.univ)
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+@Finset.card_sdiff : ∀ {α : Type u_1} {s t : Finset α} [inst : DecidableEq α], (t \ s).card = t.card - (s ∩ t).card
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+MR3320720}
+M.~Furuya.
+\newblock A note on total domination and 2-rainbow domination in graphs.
+\newblock {\em Discrete Appl. Math.}, 184:229--230, 2015.
+
+\bibitem{GHKM2003}
+M.~Gairing, S.~Hedetniemi, P.~Kristiansen, and A.~McRae.
+\newblock Self-stabilizing algorithms for $\{k\}$-domination.
+
+

@@ -1,0 +1,209 @@
+
+The command exited with code 0.
+Output:
+<truncated 1 lines>
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_1facfd37.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ independence_number ≤ edge_cover_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasEdgeCover G → GraphCalc.indepNum G ≤ GraphCalc.edgeCoverNumber G
+
+theorem prove_1facfd37 : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_2a2555cc.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ radius ≤ total_domination_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasRadius G → GraphCalc.HasTotalDominationNumber G → GraphCalc.radius G ≤ GraphCalc.totalDominationNumber G
+
+theorem prove_2a2555cc : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_39fd4057.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: ((nontrivial) ∧ (bipartite)) ⇒ edge_cover_number ≤ independence_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsBipartiteClass G → GraphCalc.IsNontrivialClass G → GraphCalc.HasEdgeCover G → GraphCalc.edgeCoverNumber G ≤ GraphCalc.indepNum G
+
+theorem prove_39fd4057 : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_40a99333.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ total_domination_number ≤ roman_domination_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasTotalDominationNumber G → GraphCalc.totalDominationNumber G ≤ GraphCalc.romanDominationNumber G
+
+theorem prove_40a99333 : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_63ce884f.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ (roman_domination_number + 1) ≤ double_roman_domination_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.romanDominationNumber G + 1 ≤ GraphCalc.doubleRomanDominationNumber G
+
+theorem prove_63ce884f : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_8ca1b27c.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ 2 ≤ sub_total_domination_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasSubTotalDominationNumber G → 2 ≤ GraphCalc.subTotalDominationNumber G
+
+theorem prove_8ca1b27c : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_9968b18e.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: ((nontrivial) ∧ (bipartite)) ⇒ edge_cover_number ≤ annihilation_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsBipartiteClass G → GraphCalc.IsNontrivialClass G → GraphCalc.HasEdgeCover G → GraphCalc.edgeCoverNumber G ≤ GraphCalc.annihilationNumber G
+
+theorem prove_9968b18e : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_9e476a83.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ 2 ≤ total_domination_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasTotalDominationNumber G → 2 ≤ GraphCalc.totalDominationNumber G
+
+theorem prove_9e476a83 : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_a23c41a0.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ order ≤ (2 · edge_cover_number)
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasEdgeCover G → GraphCalc.order G ≤ 2 * GraphCalc.edgeCoverNumber G
+
+theorem prove_a23c41a0 : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_aa3292c1.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ sub_total_domination_number ≤ (2 · slater)
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasSubTotalDominationNumber G → GraphCalc.subTotalDominationNumber G ≤ 2 * GraphCalc.slaterNumber G
+
+theorem prove_aa3292c1 : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_e20263a9.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ (radius + 1) ≤ roman_domination_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasRadius G → GraphCalc.radius G + 1 ≤ GraphCalc.romanDominationNumber G
+
+theorem prove_e20263a9 : Candidate := by
+
+==> /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_fbfcd99b.lean <==
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ sub_total_domination_number ≤ roman_domination_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+    ∀ {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj],
+      GraphCalc.IsNontrivialClass G → GraphCalc.HasSubTotalDominationNumber G → GraphCalc.subTotalDominationNumber G ≤ GraphCalc.romanDominationNumber G
+
+theorem prove_fbfcd99b : Candidate := by
+

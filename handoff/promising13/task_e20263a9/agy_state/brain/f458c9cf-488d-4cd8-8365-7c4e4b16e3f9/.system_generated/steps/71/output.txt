@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Checking if a vertex-transitive or circulant graph can have rad + 1 > gamma_R...
+

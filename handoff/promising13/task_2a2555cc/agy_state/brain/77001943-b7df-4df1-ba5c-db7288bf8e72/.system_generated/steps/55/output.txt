@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+Done random trees n=8
+Done random trees n=9
+Done random trees n=10
+Done random trees n=11
+Done random trees n=12
+Done random trees n=13
+Done random trees n=14
+Done random trees n=15
+Done random trees n=16
+

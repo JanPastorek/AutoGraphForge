@@ -1,0 +1,8 @@
+{"name":"Challenge_9e476a83.lean","sizeBytes":"579"}
+{"name":"agy.log","sizeBytes":"29034"}
+{"name":"agy_output.txt","sizeBytes":"677"}
+{"name":"preflight.log","sizeBytes":"451"}
+{"name":"reference","isDir":true}
+{"name":"solved","isDir":true}
+
+Summary: This directory contains 2 subdirectories and 4 files.

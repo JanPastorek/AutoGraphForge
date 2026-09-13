@@ -1,0 +1,19 @@
+
+The command exited with code 0.
+Output:
+TITLE: On the roots of total domination polynomial of graphs
+SUMMARY: Let $G = (V, E)$ be a simple graph of order $n$. The total dominating set of $G$ is a subset $D$ of $V$ that every vertex of $V$ is adjacent to some vertices of $D$. The total domination number of $G$
+----------------------------------------
+TITLE: The Extreme Spin of the Black Hole in Cygnus X-1
+SUMMARY: The compact primary in the X-ray binary Cygnus X-1 was the first black hole to be established via dynamical observations. We have recently determined accurate values for its mass and distance, and for
+----------------------------------------
+TITLE: Constraining the quasar population with the broad-line width distribution
+SUMMARY: We measure the width of the MgII $\lambda2799$ line in quasar spectra from the SDSS, 2QZ and 2SLAQ surveys and, by invoking an unnormalised virial mass estimator, relate the scatter in line width to t
+----------------------------------------
+TITLE: The universal rotation curve of dwarf disk galaxies
+SUMMARY: We use the concept of the spiral rotation curves universality to investigate the luminous and dark matter properties of the dwarf disc galaxies in the local volume (size $\sim11$ Mpc). Our sample incl
+----------------------------------------
+TITLE: The R136 star cluster dissected with Hubble Space Telescope/STIS. I. Far-ultraviolet spectroscopic census and the origin of HeII 1640 in young star clusters
+SUMMARY: We introduce a HST/STIS stellar census of R136a, the central ionizing star cluster of 30 Doradus. We present low resolution far-ultraviolet STIS/MAMA spectroscopy of R136 using 17 contiguous 52x0.2 ar
+----------------------------------------
+

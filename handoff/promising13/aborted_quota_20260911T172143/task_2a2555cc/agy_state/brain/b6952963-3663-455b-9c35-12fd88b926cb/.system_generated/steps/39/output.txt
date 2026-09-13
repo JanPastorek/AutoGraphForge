@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+Checked 23 trees on n=8
+Checked 47 trees on n=9
+Checked 106 trees on n=10
+Checked 235 trees on n=11
+Checked 551 trees on n=12
+

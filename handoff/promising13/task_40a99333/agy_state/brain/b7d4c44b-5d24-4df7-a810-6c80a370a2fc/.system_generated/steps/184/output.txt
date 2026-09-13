@@ -1,0 +1,10 @@
+Task: b7d4c44b-5d24-4df7-a810-6c80a370a2fc/task-182
+Status: RUNNING
+Log: /tmp/agyhome.XMOFQj/.gemini/antigravity-cli/brain/b7d4c44b-5d24-4df7-a810-6c80a370a2fc/.system_generated/tasks/task-182.log
+Log output:
+LINT: ok
+GraphCalc.totalDominationNumber.{u_1} {V : Type u_1} [Fintype V] (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ
+GraphCalc.romanDominationNumber.{u_1} {V : Type u_1} [Fintype V] [DecidableEq V] (G : SimpleGraph V)
+  [DecidableRel G.Adj] : ℕ
+
+Last progress: 1s ago

@@ -1,0 +1,27 @@
+The search for ""Mobaraky" "Sheikholeslami" "diam(G) + 1" OR "diam(G) +" OR "rad(G)"" returned the following summary:
+The researchers **B. P. Mobaraky** and **S. M. Sheikholeslami** have co-authored several papers concerning graph domination parameters, most notably "Bounds on Roman domination numbers of graphs" (2008)[1][2].
+
+In their work on Roman domination and its variants, they frequently explore bounds related to graph invariants such as the **diameter (diam(G))**, **radius (rad(G))**, and **girth (g(G))**[3][4][5].
+
+### Key Contextual Connections
+*   **"diam(G) + 1":** In several studies involving Roman domination and its subdivision numbers, expressions involving the diameter are used to establish lower or upper bounds. For example, researchers often analyze paths or structures where the diameter plays a critical role in the minimum weight of a dominating function[6][4]. 
+*   **"rad(G)":** The radius (rad(G)) is frequently discussed alongside the diameter (diam(G)) in the context of centering vertices and establishing bounds on domination parameters in connected graphs[5].
+*   **Primary Publication:** Their most cited work, *"Bounds on Roman domination numbers of graphs"* (Matematički Vesnik, 2008), establishes foundational inequalities for the Roman domination number ($\gamma_R(G)$)[1][2][7].
+*   **Other Related Works:** They have also published research on:
+    *   **Roman domination subdivision numbers** (often in collaboration with A. Khodkar)[8][9][10].
+    *   **Restrained weak Roman domination numbers**[1][11].
+
+If you are looking for a specific theorem or inequality involving these terms, it is likely contained within their 2008 paper or their subsequent research on graph subdivision numbers, where diameter-based bounds are most prevalent[8][9].
+
+Sources:
+[1] [rsmams.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGTYEGhLQZj8Sxn8Ns84gTxqEPC-CiNmS-kLFvxRYCmBL-MqXnZEZMSDSKcHGQvqhWYXjzVN6U0sqeL8HeC5YgPKKBDG0pENbFqIoZAXLuGe3od-rxdPjgqkl5LzmcbVHgXzu5ui65xOQ9RzN7inws4ObvSFsLFD9Aru6NxyUjN7BhQusd1Grs7TkpTu5dD-m15cBL_bKK2UnEAMFBowiBYVCP3bP3crcHjjEJHeR_5Idg=)
+[2] [sanu.ac.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEQG2hj5xyYJUpMdLnt5xyTHL9oF7Puz1yOq0JDgTuNIkMFdyvTkZJ7Kj2NmN3byk4-fGbM42law1ctYWvAVaxHpgOkbToiurHHMdLSh9DTIQh2vNZD2aghg5zK63Qe2m_KOb6IEXGhex4weW-SG8iq0w==)
+[3] [usthb.dz](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH4pqs-3kT-E2smSPDtm-xoRPnshiraQfcOc9ijyLm_hO6h45LphJ8oLu0E-flVccX7-oF6pfik26hUfmOS8P7Bd9ByGXRypA9drN-_KT1hC4HwiABQFRQqyqYVl6rUgJwgXWGj8TgKQrzZDvcVxuadM7j2qmZG6HSyX2cElDPgb-AQ9GaZ9Q==)
+[4] [unm.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFHq6Az5894yJvOz-p5P39OtU85hXi0rUoii87FFMb1LL-m3h9jdBxAofyscFnGJOyRSce4c4tjit3xAxqc2340V3wjKdJCMR99jzbLzF2LunYCOcIYwLyTtRn4EZC4cY1CuVpOUTIT9RTYZJpcmSwmWFdiT89yIp6Bjj4=)
+[5] [usthb.dz](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH4pqs-3kT-E2smSPDtm-xoRPnshiraQfcOc9ijyLm_hO6h45LphJ8oLu0E-flVccX7-oF6pfik26hUfmOS8P7Bd9ByGXRypA9drN-_KT1hC4HwiABQFRQqyqYVl6rUgJwgXWGj8TgKQrzZDvcVxuadM7j2qmZG6HSyX2cElDPgb-AQ9GaZ9Q==)
+[6] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFMqnkxzNJ54ZUhpBMoFDjaJ5pCU08SGE7Q3Ri_C3HPMpOPAP_oHfUxztO3wFb7S3K1LXZQjU3etqtIh-IDoAJYBHbBMm3BnHQCP9j5bCzSAcnipMojtf2SnQu015R7ZLFIgYzT22GTAzCe_QmvipWu1EcNPMmyQnJRpesaCMkAvbh-caR9X-_GBept-GYPbmYRQlQWIA==)
+[7] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEtVswj4k_n54Jo4710N9tZs6-YXk6wmlegn1PINz_jVgnhPMsLRve5oXBCglSMUppAXmeN3alW8VSfXtwP9M8ytT04t5NC6POlyyvOcwq8h6krPsjafzsTGw==)
+[8] [tandfonline.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHu8muBSQdrxV-gTR9CiRzdJdWIL0JKsObyp-bnKuPNQFJ_xdlnPn1Bz_ti1_TuGGL61xKgag29CuLVHQqtbt261sIqqNveT7NlDMW3Xmd41M19NA3ORGp43cT1z01DlbDCC1xW3D8Tv1VSvu6gqWOXyGsj0QJmfW8=)
+[9] [combinatorialpress.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH2q-hH2C4El8cZR2Wqu2qq_TbPGwIf_3pylD2HZ6pJmCweYX1g3EmlEHyvIT4_GJDMSHJQ5jFKEAmmkQS3KP_XwcRgjnJ_GXTlbz2-_nRcNyYPv9Jqb0dmYbLUPKiLGKpeR9G4mHTyaoY8XOeMIXItF-KwIN9u2FE4ck0yF0H2a-r0Kwk=)
+[10] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG6WBRH3pJpfOt1wrPfB9OzxAzmPgH9ILM19oJ7axXG1UMD_a4IyDCAFmRU6-3x7JnZJEPd0Nc_ACBgcKEjfxDDfeJzOBcHJIItD4rBFGHIjCj6xuawP9DP2-hsgZWSF9mRuwA08gm1cU8oWtx57dNut3zbIl7tiSnA0Q==)
+[11] [rsmams.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGTYEGhLQZj8Sxn8Ns84gTxqEPC-CiNmS-kLFvxRYCmBL-MqXnZEZMSDSKcHGQvqhWYXjzVN6U0sqeL8HeC5YgPKKBDG0pENbFqIoZAXLuGe3od-rxdPjgqkl5LzmcbVHgXzu5ui65xOQ9RzN7inws4ObvSFsLFD9Aru6NxyUjN7BhQusd1Grs7TkpTu5dD-m15cBL_bKK2UnEAMFBowiBYVCP3bP3crcHjjEJHeR_5Idg=)

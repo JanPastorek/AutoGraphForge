@@ -1,0 +1,6 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":47,"LineContent":"  ((univ.powerset.filter p).image Finset.card).min.getD 0"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":63,"LineContent":"  (((range (n + 1)).filter p).min).getD n"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":130,"LineContent":"  (((univ.powersetCard k).image (fun s =\u003e ∑ v ∈ s, G.degree v)).min).getD 0"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":466,"LineContent":"  (((univ.filter (IsRomanDominatingFunction G)).image romanWeight).min).getD 0"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":496,"LineContent":"    doubleRomanWeight).min).getD 0"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/reference/GraphInvariantsComputable.lean","LineNumber":514,"LineContent":"  ((univ.image (eccentricity G)).min).getD 0"}

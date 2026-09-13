@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+total 24
+drwxr-xr-x 5 japake298 domain users 4096 Sep 12 01:28 .
+drwxr-xr-x 5 japake298 domain users 4096 Sep 11 20:47 ..
+-rw-r--r-- 1 japake298 domain users 1984 Sep 11 20:42 ORIGINAL_REQUEST.md
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 20:42 sentinel
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 20:48 teamwork_preview_pipeline_1
+drwxr-xr-x 2 japake298 domain users 4096 Sep 12 01:28 teamwork_preview_pipeline_gen2
+

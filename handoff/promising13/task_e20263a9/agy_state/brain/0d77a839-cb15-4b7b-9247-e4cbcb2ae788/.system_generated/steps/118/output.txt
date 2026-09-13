@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+<truncated 1 lines>
+grep: /mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/build/lib/lean/LeanProject/GraphInvariantsComputable.olean: binary file matches
+/mnt/home/japake298/project/GraphConjecturing/lean_project/LeanProject/GraphInvariantsComputable.lean:503:def ballWithin (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ → V → Finset V
+/mnt/home/japake298/project/GraphConjecturing/lean_project/LeanProject/GraphInvariantsComputable.lean:506:      let B := ballWithin G k v
+/mnt/home/japake298/project/GraphConjecturing/lean_project/LeanProject/GraphInvariantsComputable.lean:511:  minUpTo (Fintype.card V) (fun k => ballWithin G k v = univ)
+/mnt/home/japake298/project/GraphConjecturing/lean_project/LeanProject/GraphInvariantsComputable.lean:519:  ∀ v : V, ballWithin G (Fintype.card V) v = univ
+

@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+n=8, path diff=-1
+n=9, path diff=-1
+n=10, path diff=-1
+n=11, path diff=-2
+n=12, path diff=-1
+n=13, path diff=-2
+n=14, path diff=-2
+No counterexample found via local search.
+

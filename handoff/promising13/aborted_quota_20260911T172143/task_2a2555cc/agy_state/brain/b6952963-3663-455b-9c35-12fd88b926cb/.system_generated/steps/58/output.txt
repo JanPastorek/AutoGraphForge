@@ -1,0 +1,23 @@
+The search for ""rad(G) \le \gamma_t(G)" OR "rad(G) \le \gamma_t" OR "radius(G) \le \gamma_t(G)" OR "\text{rad}(G) \le \gamma_t(G)"" returned the following summary:
+The inequality **$\text{rad}(G) \le \gamma_t(G)$** is a known relationship in graph theory for certain classes of graphs, though it is not a universal inequality for all graphs[1][2][3].
+
+### Context and Definitions
+*   **$\text{rad}(G)$ (Radius):** The minimum eccentricity of any vertex in the graph, where eccentricity is the maximum distance from a vertex to any other vertex in the graph[1][2][4].
+*   **$\gamma_t(G)$ (Total Domination Number):** The minimum cardinality of a set $S \subseteq V(G)$ such that every vertex in the graph (including those in $S$) is adjacent to at least one vertex in $S$[5][6][3]. This is only defined for graphs without isolated vertices[5][3].
+
+### Relationship
+While there is no general inequality $\text{rad}(G) \le \gamma_t(G)$ that holds for all graphs $G$, this relationship is frequently explored in research concerning bounds on domination parameters[2][7]. 
+
+*   **Research Context:** Studies often examine the relationship between distance-based parameters (like radius and diameter) and domination-based parameters (like the domination number $\gamma(G)$ or total domination number $\gamma_t(G)$) to establish tight bounds[1][2][7].
+*   **Specific Bounds:** In many standard graph families (such as trees or specific constrained graphs), researchers derive inequalities relating these values[1][7]. If you are looking for this specific inequality, it likely appears in the context of a particular class of graphs (e.g., chordal graphs, bipartite graphs, or graphs with specific minimum degree constraints)[2][7].
+
+If you are referencing a specific theorem or paper, it may be helpful to verify if the inequality is stated for a restricted family of graphs, as $\gamma_t(G)$ and $\text{rad}(G)$ behave differently across broader graph categories[2][3].
+
+Sources:
+[1] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE7OuFfVSnY8Ez2aUoPuySB6bPp6rFIALhkdrF8_Lc4tu8yej4qZIBdD1r_0SxTAgGZNVy-AYLJa8CsKBdk44Bnq2UMDQ4etOzBOesFoGFlDv-4z2ahEmcjv3KEFiX5AwKwXrUzO4W-JLEL6b6yxVS7pNj0mNMj2a8HI2b8R1rrt5Ndoa4GXQ==)
+[2] [amazonaws.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMBSZkbmRPN4LMylmX5TtCUQAHf2Vw44LofRB8ryfHgvkkXitJUD8miHxDlJGuhIvwkbLEcgvGPXwXV33CrB6pfu6c4naUVzGRopmP8Nmxb4IWf7r3WlRoidTL6Gjldjk1IOixk0nwAmrIHhq3GfhrPaUc76YCO37BG79rz8hL)
+[3] [wolfram.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHo6rimmqmcNwTr6IMQCsyUmNev_XhPtxOXmrZbmPhHYcT16l-mdLKjnHXAir6tuUFdEDOZRiR81ylYBGrjw3is7Kdxz4u2uuQRoeox1zSP9eeWziAC5Qoo4k9HJW8kPLgx0Dygg9O4ubCBUUzG)
+[4] [georgiasouthern.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFSTAk9d4XQ7s8bkPnRRf-jgwjt9KEWffzi0XgipyH4Ggo-kHSh9jSdoZ3UMS2c3J2M4JMqqtfrTmF1vMfQCjN2dX5MiK9l8bse9y3XADfxdx2eVQ-j8MFdirGPal5DQ1MzUqdsejE57k-ZS4cefVaqbM4M9OCsAP4hD4z9JaeynreIZRBs34AfekaAhA==)
+[5] [uz.zgora.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEphBVj0P3kXUdh_dilx0ARS_3mGysvbSYGzTOp10H-zTOiIe-hCGxFeOXpMqtyht3QSDz_YtTDIBtM1AbToDdFMSb9hMuHGCyJtQkdvk2kABktXZmZIonPeXl-4t7F2miP5qNF53brdP5x)
+[6] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH1Y4oDQdHfki9MKepz3SlIh1O5Lr7m6RRfkpXPiFiwyPX8RAHJHTGrviutn6p4roEgl16NM7JxLnYGlkDJMddKldXhd9-7--FwZGlICBxvJs4PzFhlLwxP)
+[7] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFhp8Vlgv39FSpT5kauv-Xeo6CpQBCleJlagaJGT_TFAeozo1xqGlc_yiGWmyftY2ceAuWvI5I0OIJFCofGiXCNFBAcpws_hmES041cyJwxuPczQpjLGGh6XMldiVfabCGo4g==)

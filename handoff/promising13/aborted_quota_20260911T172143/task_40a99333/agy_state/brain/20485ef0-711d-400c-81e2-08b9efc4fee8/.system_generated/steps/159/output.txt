@@ -1,0 +1,7 @@
+
+The command exited with code 1.
+Output:
+Traceback (most recent call last):
+  File "<string>", line 43, in <module>
+TypeError: unsupported operand type(s) for &: 'set' and 'int'
+

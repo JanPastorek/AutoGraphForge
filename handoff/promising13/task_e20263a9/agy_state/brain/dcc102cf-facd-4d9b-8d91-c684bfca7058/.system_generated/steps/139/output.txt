@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Mathematical fact: ecc(u1) <= 3 for ANY connected graph with k=2, m=0!
+

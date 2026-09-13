@@ -1,0 +1,27 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+/tmp/tmp.3xEfNFwHTd.lean:13:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+/tmp/tmp.3xEfNFwHTd.lean:22:10: error(lean.unknownIdentifier): Unknown constant `Finset.not_mem_empty`
+/tmp/tmp.3xEfNFwHTd.lean:28:10: error: Function expected at
+  G.loopless
+but this term has type
+  Std.Irrefl G.Adj
+
+Note: Expected a function because this term is being applied to the argument
+  x
+/tmp/tmp.3xEfNFwHTd.lean:48:128: error(lean.unknownIdentifier): Unknown identifier `b`
+/tmp/tmp.3xEfNFwHTd.lean:49:42: error(lean.unknownIdentifier): Unknown identifier `b`
+'card_ge_two_of_totalDominatingSet' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'totalDominationNumber_ge_two' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+
+
+

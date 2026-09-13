@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+stdout:
+ /tmp/tmpbnndibnd.lean:4:7: error(lean.unknownIdentifier): Unknown constant `Finset.min_eq_none`
+Finset.min_eq_top.{u_2} {α : Type u_2} [LinearOrder α] {s : Finset α} : s.min = ⊤ ↔ s = ∅
+Finset.min_of_mem.{u_2} {α : Type u_2} [LinearOrder α] {s : Finset α} {a : α} (h : a ∈ s) : ∃ b, s.min = ↑b
+/tmp/tmpbnndibnd.lean:7:7: error(lean.unknownIdentifier): Unknown constant `Finset.Nonempty.min_mem`
+
+stderr:
+ 
+

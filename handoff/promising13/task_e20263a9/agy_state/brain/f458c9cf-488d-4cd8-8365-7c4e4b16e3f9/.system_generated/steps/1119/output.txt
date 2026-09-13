@@ -1,0 +1,25 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.Q5qrSFWwPT.lean:20:4: error: Tactic `apply` failed: could not unify the conclusion of `@Finset.mem_union_right`
+  ?a ∈ ?s ∪ ?t
+with the goal
+  w ∈ insert u ({u}.biUnion fun u => {w | G.Adj u w})
+
+Note: The full type of `@Finset.mem_union_right` is
+  ∀ {α : Type ?u.32} [inst : DecidableEq α] {t : Finset α} {a : α} (s : Finset α), a ∈ t → a ∈ s ∪ t
+
+case inr
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+u : V
+h : ∀ (w : V), w = u ∨ G.Adj u w
+w : V
+hadj : G.Adj u w
+⊢ w ∈ insert u ({u}.biUnion fun u => {w | G.Adj u w})
+CHECK: FAILED (exit 1)
+

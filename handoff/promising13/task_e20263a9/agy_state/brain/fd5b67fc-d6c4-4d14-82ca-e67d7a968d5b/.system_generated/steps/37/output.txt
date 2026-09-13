@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+Testing trees...
+Testing random graphs...
+Done search.
+

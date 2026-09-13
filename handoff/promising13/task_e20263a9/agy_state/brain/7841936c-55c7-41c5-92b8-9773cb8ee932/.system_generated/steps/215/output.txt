@@ -1,0 +1,16 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.JRRGOeKufi.lean:41:2: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  c ≥ 0
+  0 ≤ b ≤ 1
+  b - c ≥ 0
+  a ≥ 2
+where
+ a := ↑(Fintype.card V)
+ b := ↑(∑ v, ↑(f v))
+ c := ↑↑(Fintype.card V)
+CHECK: FAILED (exit 1)
+

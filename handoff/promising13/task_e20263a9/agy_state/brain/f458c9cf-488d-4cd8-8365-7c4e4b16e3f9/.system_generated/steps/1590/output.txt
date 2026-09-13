@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+P_8: rad=4
+P_8: W=6, f=(0, 2, 0, 0, 2, 0, 0, 2), no v in c2 has 1 + compl + 1 <= W!
+P_9: rad=4
+P_9: W=6, f=(0, 2, 0, 0, 2, 0, 0, 2, 0), no v in c2 has 1 + compl + 1 <= W!
+P_10: rad=5
+P_10: W=7, f=(0, 2, 0, 0, 2, 0, 0, 2, 0, 1), no v in c2 has 1 + compl + 1 <= W!
+

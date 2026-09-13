@@ -1,0 +1,2 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Data/Multiset/Powerset.lean","LineNumber":199,"LineContent":"theorem mem_powersetCardAux {n} {l : List α} {s} : s ∈ powersetCardAux n l ↔ s ≤ ↑l ∧ card s = n :="}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Data/Multiset/Powerset.lean","LineNumber":269,"LineContent":"theorem mem_powersetCard {n : ℕ} {s t : Multiset α} : s ∈ powersetCard n t ↔ s ≤ t ∧ card s = n :="}

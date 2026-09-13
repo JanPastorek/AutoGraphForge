@@ -1,0 +1,25 @@
+
+The command exited with code 0.
+Output:
+total 20
+drwxr-xr-x 4 japake298 domain users 4096 Sep 11 20:42 .
+drwxr-xr-x 5 japake298 domain users 4096 Sep 11 20:47 ..
+-rw-r--r-- 1 japake298 domain users 1984 Sep 11 20:42 ORIGINAL_REQUEST.md
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 20:42 sentinel
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 20:48 teamwork_preview_pipeline_1
+-rw-r--r-- 1 japake298 domain users 1984 Sep 11 20:42 .agents/ORIGINAL_REQUEST.md
+
+.agents/sentinel:
+total 16
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 20:42 .
+drwxr-xr-x 4 japake298 domain users 4096 Sep 11 20:42 ..
+-rw-r--r-- 1 japake298 domain users 1482 Sep 11 20:42 BRIEFING.md
+-rw-r--r-- 1 japake298 domain users 1360 Sep 11 20:42 handoff.md
+
+.agents/teamwork_preview_pipeline_1:
+total 16
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 20:48 .
+drwxr-xr-x 4 japake298 domain users 4096 Sep 11 20:42 ..
+-rw-r--r-- 1 japake298 domain users 1204 Sep 11 20:48 BRIEFING.md
+-rw-r--r-- 1 japake298 domain users  770 Sep 11 20:47 progress.md
+

@@ -1,0 +1,12 @@
+The search for ""arxiv.org" "gamma_t(G) \ge \text{rad}(G)" OR "\gamma_t(G) \ge rad(G)" OR "total domination number" "radius" proof" returned the following summary:
+The inequality $\gamma_t(G) \geq \text{rad}(G)$ (often denoted as $\gamma_t(G) \geq \text{rad}(G)$ or similar notation) for a connected graph $G$ with at least two vertices is a known result in graph theory[1].
+
+Specifically, research indicates that for a connected graph $G$ of order $n \ge 2$:
+*   **Lower Bound:** The radius of the graph, $\text{rad}(G)$, provides a lower bound for the total domination number, $\gamma_t(G)$[1]. That is, $\gamma_t(G) \ge \text{rad}(G)$[1].
+*   **Reference:** This result is cited in literature as **Theorem 2.15** (e.g., in works discussing total domination parameters)[1]. Further characterizations regarding the cases of equality for this bound are also available in such texts (e.g., Theorem 2.16)[1].
+
+For detailed proofs and further context, you may look for textbooks or surveys on total domination in graphs, such as those by Haynes, Henning, or similar authors in the field of domination theory, which frequently contain these foundational inequalities[1][2].
+
+Sources:
+[1] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFyQGU2XJlR9ZSmv0HdJUvNkJXnxmCmgxWL-tnz5ZbLU6C3Nqd1J9hQlJz4yjeaKTtFm1UuQhFc7pPVyrPvvI89E8apJS8n7Hu_SNV0flYUInMfA17DK_JYxvte8JcwZmGGQsmyq4AjbaHcvvWjUxrsVmYvYTBWXVhc6g==)
+[2] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGKnrdvbQ9g7dhIo7zKWzxcoS_gAtl86EkR8m-GgD9817gyHPFGjlIlK-GrFPQhW0DrPZZazbItThxTDgZWdzC28m8ApLlhjRjtzEdq1WV6_rTtkTe-rD715UaGQkmauv3ILqG7G9U_n5GRBIfFxt_R-4CdrS0PQlxrUD9mF21oJzS0mw6eBFnntVLxicmZDy-MeVZPbjFBq9NADf0zTuboGbtLkr4mQvOc9AVn5NKZY6bRI0rMWd4Hl5rDZk5ImYuG6g==)

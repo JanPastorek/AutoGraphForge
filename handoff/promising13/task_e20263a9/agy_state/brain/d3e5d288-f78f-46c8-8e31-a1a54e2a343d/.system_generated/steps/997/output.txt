@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+japake2+   33667  100  0.0  44804 36864 pts/0    Rs+  01:29   0:42 /mnt/home/japake298/project/GraphConjecturing/.venv/bin/python -u -c  import networkx as nx import itertools  atlas = nx.graph_atlas_g()  checked = 0 found_u_count = 0 for G in atlas:     n = G.number_of_nodes()     if n < 2 or not nx.is_connected(G): continue     nodes = list(G.nodes())     for f_tuple in itertools.product([0, 1, 2], repeat=n):         f = dict(zip(nodes, f_tuple))         valid = True         for v in nodes:             if f[v] == 0:                 if not any(f[u] == 2 for u in G.neighbors(v)):                     valid = False                     break         if valid:             w = sum(f_tuple)             # check if there exists u in nodes with ecc(u) <= w - 1             # or even u in S (where f(u) == 2)?             eccs = nx.eccentricity(G)             rad = nx.radius(G)             # does there exist any node with ecc <= w - 1?             # since rad = min(ecc), this is literally equivalent to rad <= w - 1!             if rad > w - 1:                 print(f"NO! rad={rad}, w={w}")                 exit(0)     checked += 1 print(f"Checked {checked} graphs. In 100% of cases, rad <= w - 1!") 
+japake2+   33882  0.0  0.0   4676  2048 pts/1    Ss+  01:29   0:00 bash -c sleep 10 && ps aux | grep 33667
+japake2+   33885  0.0  0.0   3892  2048 pts/1    S+   01:30   0:00 grep 33667
+

@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+fun s => s.max : Finset ℕ → WithBot ℕ
+fun s => s.min : Finset ℕ → WithTop ℕ
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

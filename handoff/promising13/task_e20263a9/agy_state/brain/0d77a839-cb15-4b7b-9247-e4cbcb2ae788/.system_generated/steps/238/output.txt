@@ -1,0 +1,53 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/scratch.lean. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -254,6 +254,47 @@
+   obtain ⟨p, hp⟩ := h w
+   exact mem_ballWithin_of_walk_le G p hp
+ 
++lemma card_ballWithin_add {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] (v : V)
++    (hrad : GraphCalc.HasRadius G) (k m : ℕ) :
++    ballWithin G (k + m) v = Finset.univ ∨ (ballWithin G k v).card + m ≤ (ballWithin G (k + m) v).card := by
++  induction m with
++  | zero => right; omega
++  | succ m ih =>
++    cases ih with
++    | inl h_univ =>
++      left
++      have hsub := ballWithin_subset_succ G (k + m) v
++      rw [h_univ] at hsub
++      ext x
++      exact ⟨fun _ => Finset.mem_univ x, fun _ => hsub (Finset.mem_univ x)⟩
++    | inr h_card =>
++      by_cases hne : ballWithin G (k + m) v = Finset.univ
++      · left
++        have hsub := ballWithin_subset_succ G (k + m) v
++        rw [hne] at hsub
++        ext x
++        exact ⟨fun _ => Finset.mem_univ x, fun _ => hsub (Finset.mem_univ x)⟩
++      · right
++        have hstep := card_ballWithin_succ_of_ne_univ G (k + m) v hrad hne
++        omega
++
++lemma ballWithin_eq_univ_of_card_add {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] (v : V)
++    (hrad : GraphCalc.HasRadius G) (k m : ℕ)
++    (h : Fintype.card V ≤ (ballWithin G k v).card + m) :
++    ballWithin G (k + m) v = Finset.univ := by
++  have h_cases := card_ballWithin_add G v hrad k m
++  cases h_cases with
++  | inl h_univ => exact h_univ
++  | inr h_card =>
++    by_contra hc
++    have h_ssub : ballWithin G (k + m) v ⊂ Finset.univ := Finset.ssubset_univ_iff.mpr hc
++    have h_lt := Finset.card_lt_card h_ssub
++    rw [Finset.card_univ] at h_lt
++    omega
++
++
+ 
+ 
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

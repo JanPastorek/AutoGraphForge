@@ -1,0 +1,115 @@
+
+The command exited with code 0.
+Output:
+110: `s.min'`. -/
+111: protected def min (s : Finset α) : WithTop α :=
+112:   inf s (↑)
+113: 
+114: theorem min_eq_inf_withTop (s : Finset α) : s.min = inf s (↑) :=
+115:   rfl
+116: 
+117: @[simp]
+118: theorem min_empty : (∅ : Finset α).min = ⊤ :=
+119:   rfl
+120: 
+121: @[simp]
+122: theorem min_insert {a : α} {s : Finset α} : (insert a s).min = min (↑a) s.min :=
+123:   fold_insert_idem
+124: 
+125: @[simp]
+126: theorem min_singleton {a : α} : Finset.min {a} = (a : WithTop α) := by
+127:   rw [← insert_empty_eq]
+128:   exact min_insert
+129: 
+130: lemma min_pair (a b : α) :
+131:     Finset.min {a, b} = min (↑a) (↑b) := by
+132:   simp
+133: 
+134: theorem min_of_mem {s : Finset α} {a : α} (h : a ∈ s) : ∃ b : α, s.min = b :=
+135:   let ⟨b, h, _⟩ := WithTop.le_iff_forall.1 (inf_le (α := WithTop α) h) _ rfl; ⟨b, h⟩
+136: 
+137: theorem min_of_nonempty {s : Finset α} (h : s.Nonempty) : ∃ a : α, s.min = a :=
+138:   let ⟨_, h⟩ := h
+139:   min_of_mem h
+140: 
+141: @[simp]
+142: theorem min_eq_top {s : Finset α} : s.min = ⊤ ↔ s = ∅ := by
+143:   simp [Finset.min, eq_empty_iff_forall_notMem]
+144: 
+145: theorem mem_of_min {s : Finset α} : ∀ {a : α}, s.min = a → a ∈ s :=
+146:   @mem_of_max αᵒᵈ _ s
+147: 
+148: theorem min_le {a : α} {s : Finset α} (as : a ∈ s) : s.min ≤ a :=
+149:   inf_le as
+150: 
+151: theorem notMem_of_coe_lt_min {a : α} {s : Finset α} (h : ↑a < s.min) : a ∉ s :=
+152:   mt min_le h.not_ge
+153: 
+154: theorem min_le_of_eq {s : Finset α} {a b : α} (h₁ : b ∈ s) (h₂ : s.min = a) : a ≤ b :=
+155:   WithTop.coe_le_coe.mp <| h₂.ge.trans (min_le h₁)
+156: 
+157: theorem notMem_of_lt_min {s : Finset α} {a b : α} (h₁ : a < b) (h₂ : s.min = ↑b) : a ∉ s :=
+158:   Finset.notMem_of_coe_lt_min <| (WithTop.coe_lt_coe.mpr h₁).trans_eq h₂.symm
+159: 
+160: theorem min_union {s t : Finset α} : (s ∪ t).min = s.min ⊓ t.min := inf_union
+161: 
+162: @[gcongr]
+163: theorem min_mono {s t : Finset α} (st : s ⊆ t) : t.min ≤ s.min :=
+164:   inf_mono st
+165: 
+166: protected theorem le_min {m : WithTop α} {s : Finset α} (st : ∀ a : α, a ∈ s → m ≤ a) : m ≤ s.min :=
+167:   Finset.le_inf st
+168: 
+169: @[simp]
+170: protected theorem le_min_iff {m : WithTop α} {s : Finset α} : m ≤ s.min ↔ ∀ a ∈ s, m ≤ a :=
+171:   Finset.le_inf_iff
+172: 
+173: @[simp]
+174: protected theorem min_eq_bot [OrderBot α] {s : Finset α} : s.min = ⊥ ↔ ⊥ ∈ s :=
+175:   Finset.max_eq_top (α := αᵒᵈ)
+176: 
+177: /-- Given a nonempty finset `s` in a linear order `α`, then `s.min' H` is its minimum, as an
+178: element of `α`, where `H` is a proof of nonemptiness. Without this assumption, use instead `s.min`,
+179: taking values in `WithTop α`. -/
+180: def min' (s : Finset α) (H : s.Nonempty) : α :=
+181:   inf' s H id
+182: 
+183: /-- Given a nonempty finset `s` in a linear order `α`, then `s.max' H` is its maximum, as an
+184: element of `α`, where `H` is a proof of nonemptiness. Without this assumption, use instead `s.max`,
+185: taking values in `WithBot α`. -/
+186: def max' (s : Finset α) (H : s.Nonempty) : α :=
+187:   sup' s H id
+188: 
+189: variable (s : Finset α) (H : s.Nonempty) {x : α}
+190: 
+191: theorem min'_mem : s.min' H ∈ s :=
+192:   mem_of_min <| by simp only [Finset.min, min', id_eq, coe_inf', Function.comp_def]
+193: 
+194: theorem min'_le (x) (H2 : x ∈ s) : s.min' ⟨x, H2⟩ ≤ x :=
+195:   min_le_of_eq H2 (WithTop.coe_untop _ _).symm
+196: 
+197: theorem le_min' (x) (H2 : ∀ y ∈ s, x ≤ y) : x ≤ s.min' H :=
+198:   H2 _ <| min'_mem _ _
+199: 
+200: theorem isLeast_min' : IsLeast (↑s) (s.min' H) :=
+201:   ⟨min'_mem _ _, min'_le _⟩
+202: 
+203: @[simp]
+204: theorem le_min'_iff {x} : x ≤ s.min' H ↔ ∀ y ∈ s, x ≤ y :=
+205:   le_isGLB_iff (isLeast_min' s H).isGLB
+206: 
+207: /-- `{a}.min' _` is `a`. -/
+208: @[simp]
+209: theorem min'_singleton (a : α) : ({a} : Finset α).min' (singleton_nonempty _) = a := by simp [min']
+210: 
+211: theorem max'_mem : s.max' H ∈ s :=
+212:   mem_of_max <| by simp only [max', Finset.max, id_eq, coe_sup', Function.comp_def]
+213: 
+214: theorem le_max' (x) (H2 : x ∈ s) : x ≤ s.max' ⟨x, H2⟩ :=
+215:   le_max_of_eq H2 (WithBot.coe_unbot _ _).symm
+216: 
+217: theorem max'_le (x) (H2 : ∀ y ∈ s, y ≤ x) : s.max' H ≤ x :=
+218:   H2 _ <| max'_mem _ _
+219: 
+220: theorem isGreatest_max' : IsGreatest (↑s) (s.max' H) :=
+

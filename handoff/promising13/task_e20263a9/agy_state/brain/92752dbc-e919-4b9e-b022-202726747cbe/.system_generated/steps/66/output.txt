@@ -1,0 +1,29 @@
+The search for ""radius + 1" "roman domination"" returned the following summary:
+In graph theory, the terms **"radius + 1"** and **"Roman domination"** are often discussed in the context of bounding parameters or analyzing graph properties[1][2].
+
+While there is no single "radius + 1" theorem for Roman domination, these concepts intersect in several common research areas:
+
+*   **Bounds involving Radius:** Researchers frequently compare the **Roman domination number ($\gamma_R(G)$)** with other graph invariants, such as the **radius ($\text{rad}(G)$)** and diameter[3][1][2]. Studies often seek to establish sharp upper or lower bounds on $\gamma_R(G)$ in terms of the radius or other structural parameters[3][4][5].
+*   **Distance-based Domination:** The "radius + 1" terminology appears in literature related to **distance-k domination** or **$r$-hop domination**[6], where the focus is on dominating vertices within a certain distance ($r$)[7][1]. In some contexts, specific bounds are derived for graphs where the domination or Roman domination relates to the radius of the graph plus a small constant (like +1)[7][8].
+*   **Unit Disk Graphs:** In unit disk graphs, problems are often framed using disks of **radius 1**[9][10][11]. Roman domination in these graphs is a well-studied topic where the geometry (the "radius" of the disks used for covering) directly influences the complexity and approximation algorithms for the Roman domination number[10][12][11].
+*   **Codes with Covering Radius:** Roman domination is sometimes linked to coding theory, where codes have a **covering radius**[13][14]. A code with covering radius 1 is a classic object of study[13][15][14], and its properties are occasionally compared to Roman dominating sets or similar structures[13][16].
+
+If you are looking for a specific theorem or paper (e.g., a bound stating $\gamma_R(G) \le \text{rad}(G) + 1$ for a certain class of graphs), it is likely found in works comparing domination parameters[1] or studying specialized graph families like trees or bipartite graphs[7][3].
+
+Sources:
+[1] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH31ZasuBdlJs2hhYpQ05AcvwfmEvP_ux0jE2idqOY6dd1csFiFeCsX3K79UJNVxny4QIkhbecu48DTGU562BmQDIKgywj-Qlxy7qIqum9zln428-_B4M-CcF8eofwvyb4Opw==)
+[2] [dergipark.org.tr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGfWgJjfdTRop9GvciaB0MDPOXy2bI-CAvCcAwBT5NkgwE-UgAp76QeD6xWNG6dAEK4tijcy5Zsiqh6CCTiVNkDZR68w71rR_iQhZltmTKBohhima59lOi2tJ93R4Or0XoMRWIKNffEcRF5aPmIcQ==)
+[3] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGWp7WPTg1UbShh9beGTAZG1Pq7x6SpN-NTN4WSm79x6ktNSwchA44bzk67yNGhTSZ1khNNNGaKYFuIoM-Lea5TjofOJqK4uCBDKbJWCnRYTZ_yBzSZnUmL8T9D3fRAY4OioREmy92ejuoZ2XxXyJHnTRU-lFmB9h9RcO4H_KgCohys)
+[4] [mdpi.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHDKYr0J1oUKNTC3a4dUdkBlj2R6CNrqU-H323zWhajjJSHPDyNyGHtSJRYjmvrSv6NX7ctr6Z8TRrm7sc24BWevcw9eNZs5YF-lvz7OomE3EYc1W-1-JZdEgXDUQ==)
+[5] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFy-5gCL69zsCF9UqNd9u4NhnPBn8_lE7o5qRLuwkwJjeTumiCjnD2H-eP_e0PIeNaRSrSJwNlcKAaBTDv95E_OtN1Busxcx8WAL2tsLd1GkJDE-DnTQG1fLPS46wP4d-jgBAHRlcGPSV-67dKRg_mXK7apwq-allPN)
+[6] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGVDzuQS3IPHIODKTl3MmeSqQ_H2avW43NdbYtpUe6nXPWjTfgTLKZBMMJNK_0MVOP0U-aL-vpzmTiIzPnUS0JYPkuWwwwbcflL6bhmQjy_MD9XaadT)
+[7] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHPZ33Gb5qgRG9XVjQSzYeQ9DVnbpD0xyQG0lNYU6gdy6vhCQirHSZFJtj-SPUgJdSytajxPX-5jjVGkc5zJMF7MqSP9xo82cwBDlE0MvEpULGDsMo-Sv2g-BOT9kqfLYBTPhhsr9zW4xD82Ti9suW-bFUkVXFkSY8PAGlQyMTY_8xI1q1bgcT370W_kQJsIsAsDzYKBjeJefwzrOCajn0M9KH81w==)
+[8] [bgtc.be](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHGmaFs_dDLbPDDAbduR3N4UXP2AbARnt_BhtRAvKsa-blNMpTD5PT_9309A48wm0UkOXC83au3Oa1ujZ5hy8EvDwnEp1ISTIjyewZDD4lUMA==)
+[9] [azaruniv.ac.ir](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHSFFfJm9rqpM1lpSx_izQN7uHcO2MB_w27yHyoUNcXBz76infp7D4krYZbqA19fSruWfphk9xxtuiMlMQpqOk3h5rA2PVS6j1aHVZMH6dAwOTid-xTnIfk9M1WOZsjdtcgc25LZAqml8STPyHiseZxSzxclu-nYYIVzFnrVf-mRDh3QHBdoCk=)
+[10] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH9J68hvchcDwUvwM5APiPy8lb3gzO3kalO7DC8LROqRZ9uNfGekdnINTGXDa6QF8WoeHUz4O0eMAIVqaBqPXqvZKWwWru5Tku3k3CvcyvC3mS1pTNG)
+[11] [cnrs.fr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFccTwZln9yjCvBmF4PlNwYct3qMkh4vYl-_tKOTu6Q5Pf6tXc3SXFni9u8ui52beStMZwip2XEKvRZtsTG_N5_OxEj5H65QrHBu3XT4JGgvUSa5PDEDl2pSLJh7CtjMlxYhlzKZR49OA==)
+[12] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH9J68hvchcDwUvwM5APiPy8lb3gzO3kalO7DC8LROqRZ9uNfGekdnINTGXDa6QF8WoeHUz4O0eMAIVqaBqPXqvZKWwWru5Tku3k3CvcyvC3mS1pTNG)
+[13] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFjLXCwwLbXvZIQOeDqi-bvkrSMWSQ-MEQbLHXjhZttWpbq1l2pFGWwXdrSm-_2j1YWyu67OoLyqQDvyaP8pKuWRd_N4wf0kwudU8QOl1iOT4v3NS9e7ps2FoVBlBYRjAC0AoBVIYUOqWkHUb7lWzAWO_xbkYPRxz8zWYj77-1nnHtgQqN6aLWsiwB_)
+[14] [agh.edu.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGEghkIVRTrBMr-0HulstztwU96tMfRQn9rnRBgDw6j3trssKjxfPBhH0p0kGmWUaYLHD-o98O83Li2qYqDBu_Jrxy6jLO50jIrDE9dxQzyH9Rbzsj6Xkb-DTDgrF3ukg==)
+[15] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE2x_cTihTbgu69ZBAvZxSI0d1jb5AK2zTwz9GFCKienbgdbqJwWoYTWSrF9NpXRVgctpVY9mOZxFMrLUOXFFslwCwTTMd5etm0_rnVhEG4RzBYGqYlc9Z-p_1SlUtM1ua_1eHreu6ciZ0cjzY5SKn3qeqsry59UmrJS-x8qbHiH7f2Ao0EtP3Y)
+[16] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFjLXCwwLbXvZIQOeDqi-bvkrSMWSQ-MEQbLHXjhZttWpbq1l2pFGWwXdrSm-_2j1YWyu67OoLyqQDvyaP8pKuWRd_N4wf0kwudU8QOl1iOT4v3NS9e7ps2FoVBlBYRjAC0AoBVIYUOqWkHUb7lWzAWO_xbkYPRxz8zWYj77-1nnHtgQqN6aLWsiwB_)

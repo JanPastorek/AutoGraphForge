@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Testing circulant graphs up to 15...
+No counterexample up to 15!
+

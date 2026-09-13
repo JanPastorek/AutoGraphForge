@@ -1,0 +1,15 @@
+
+The command exited with code 0.
+Output:
+n=2: checked 1 trees, all rad <= td
+n=3: checked 1 trees, all rad <= td
+n=4: checked 2 trees, all rad <= td
+n=5: checked 3 trees, all rad <= td
+n=6: checked 6 trees, all rad <= td
+n=7: checked 11 trees, all rad <= td
+n=8: checked 23 trees, all rad <= td
+n=9: checked 47 trees, all rad <= td
+n=10: checked 106 trees, all rad <= td
+n=11: checked 235 trees, all rad <= td
+n=12: checked 551 trees, all rad <= td
+

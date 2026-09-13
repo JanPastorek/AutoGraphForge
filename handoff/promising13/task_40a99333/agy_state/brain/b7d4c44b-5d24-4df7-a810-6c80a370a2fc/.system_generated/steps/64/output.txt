@@ -1,0 +1,230 @@
+
+The command exited with code 0.
+Output:
+<truncated 1 lines>
+\newblock {\em Ann. Univ. Sci. Budapest. E\"{o}tv\"{o}s Sect. Math.},
+  2:133--138, 1959.
+
+\bibitem{MR519066}
+M.~R. Garey and D.~S. Johnson.
+\newblock {\em Computers and {I}ntractability}.
+\newblock W. H. Freeman and Co., San Francisco, Calif., 1979.
+\newblock A guide to the theory of NP-completeness, A Series of Books in the
+  Mathematical Sciences.
+
+\bibitem{hp-2013}
+A.~Hansberg and R.~Pepper.
+\newblock On {$k$}-domination and {$j$}-independence in graphs.
+\newblock {\em Discrete Appl. Math.}, 161(10-11):1472--1480, 2013.
+
+\bibitem{haha-96}
+F.~Harary and T.~W. Haynes.
+\newblock Nordhaus-{G}addum inequalities for domination in graphs.
+\newblock {\em Discrete Math.}, 155(1-3):99--105, 1996.
+\newblock Combinatorics (Acireale, 1992).
+
+\bibitem{hh-2000}
+F.~Harary and T.~W. Haynes.
+\newblock Double domination in graphs.
+\newblock {\em Ars Combin.}, 55:201--213, 2000.
+
+\bibitem{hr-2004}
+B.~L. Hartnell and D.~F. Rall.
+\newblock On dominating the {C}artesian product of a graph and {$K_2$}.
+\newblock {\em Discuss. Math. Graph Theory}, 24(3):389--402, 2004.
+
+\bibitem{hhs2}
+T.~W. Haynes, S.~T. Hedetniemi, and P.~J. Slater, editors.
+\newblock {\em Domination in {G}raphs. {A}dvanced {T}opics}, volume 209 of {\em
+  Monographs and Textbooks in Pure and Applied Mathematics}.
+\newblock Marcel Dekker, Inc., New York, 1998.
+
+\bibitem{hhs-1998}
+T.~W. Haynes, S.~T. Hedetniemi, and P.~J. Slater, editors.
+\newblock {\em Fundamentals of {D}omination in {G}raphs}, volume 208 of {\em
+  Monographs and Textbooks in Pure and Applied Mathematics}.
+\newblock Marcel Dekker, Inc., New York, 1998.
+
+\bibitem{hs-1998}
+T.~W. Haynes and P.~J. Slater.
+\newblock Paired-domination in graphs.
+\newblock {\em Networks}, 32(3):199--206, 1998.
+
+\bibitem{MR2500476}
+S.~M. Hedetniemi, S.~T. Hedetniemi, R.~C. Laskar, L.~Markus, and P.~J. Slater.
+\newblock Disjoint dominating sets in graphs.
+\newblock In {\em Discrete mathematics}, volume~7 of {\em Ramanujan Math. Soc.
+  Lect. Notes Ser.}, pages 87--100. Ramanujan Math. Soc., Mysore, 2008.
+
+\bibitem{MR3220299}
+S.~T. Hedetniemi, R.~R. Rubalcaba, P.~J. Slater, and M.~Walsh.
+\newblock Few compare to the great {R}oman empire.
+\newblock {\em Congr. Numer.}, 217:129--136, 2013.
+
+\bibitem{MR1991720}
+M.~A. Henning and S.~T. Hedetniemi.
+\newblock Defending the {R}oman {E}mpire---a new strategy.
+\newblock {\em Discrete Math.}, 266(1-3):239--251, 2003.
+
+\bibitem{hk-2010}
+M.~A. Henning and A.~P. Kazemi.
+\newblock {$k$}-tuple total domination in graphs.
+\newblock {\em Discrete Appl. Math.}, 158(9):1006--1011, 2010.
+
+\bibitem{MR2558608}
+M.~A. Henning, C.~L{\"o}wenstein, and D.~Rautenbach.
+\newblock Remarks about disjoint dominating sets.
+\newblock {\em Discrete Math.}, 309(23-24):6451--6458, 2009.
+
+\bibitem{hy-2010}
+M.~A. Henning and A.~Yeo.
+\newblock Strong transversals in hypergraphs and double total domination in
+  graphs.
+\newblock {\em SIAM J. Discrete Math.}, 24(4):1336--1355, 2010.
+
+\bibitem{MR3055232}
+M.~A. Henning and A.~Yeo.
+\newblock 2-colorings in {$k$}-regular {$k$}-uniform hypergraphs.
+\newblock {\em European J. Combin.}, 34(7):1192--1202, 2013.
+
+\bibitem{HYbook}
+M.~A. Henning and A.~Yeo.
+\newblock {\em Total {D}omination in {G}raphs}.
+\newblock Springer Monographs in Mathematics. Springer, New York, 2013.
+
+\bibitem{hl-2009}
+X.~Hou and Y.~Lu.
+\newblock On the {$\{k\}$}-domination number of {C}artesian products of graphs.
+\newblock {\em Discrete Math.}, 309(10):3413--3419, 2009.
+
+\bibitem{ns-2013}
+N.~John and S.~Suen.
+\newblock Graph products and integer domination.
+\newblock {\em Discrete Math.}, 313(3):217--224, 2013.
+
+\bibitem{MR2546895}
+B.~K. Jose and Z.~Tuza.
+\newblock Hypergraph domination and strong independence.
+\newblock {\em Appl. Anal. Discrete Math.}, 3(2):347--358, 2009.
+
+\bibitem{MR2024938}
+R.~Klasing and C.~Laforest.
+\newblock Hardness results and approximation algorithms of {$k$}-tuple
+  domination in graphs.
+\newblock {\em Inform. Process. Lett.}, 89(2):75--83, 2004.
+
+\bibitem{kr-13}
+M.~Krzywkowski.
+\newblock On trees with double domination number equal to 2-domination number
+  plus one.
+\newblock {\em Houston J. Math.}, 39(2):427--440, 2013.
+
+\bibitem{Kulli-2014}
+V.~R. Kulli.
+\newblock Inverse domination and inverse total domination in digraphs.
+\newblock {\em International Journal of Advanced Research in Computer Science
+  \& Technology}, 2(1):106--109, 2014.
+
+\bibitem{lh-2009}
+N.~Li and X.~Hou.
+\newblock On the total {$\{k\}$}-domination number of {C}artesian products of
+  graphs.
+\newblock {\em J. Comb. Optim.}, 18(2):173--178, 2009.
+
+\bibitem{lc-2012}
+C.-H. Liu and G.~J. Chang.
+\newblock Roman domination on $2$-connected graphs.
+\newblock {\em SIAM J. Discrete Math.}, 26(1):193--205, 2012.
+
+\bibitem{MR3097071}
+C.-H. Liu and G.~J. Chang.
+\newblock Roman domination on strongly chordal graphs.
+\newblock {\em J. Comb. Optim.}, 26(3):608--619, 2013.
+
+\bibitem{MR2646135}
+C.~L{\"o}wenstein and D.~Rautenbach.
+\newblock Pairs of disjoint dominating sets and the minimum degree of graphs.
+\newblock {\em Graphs Combin.}, 26(3):407--424, 2010.
+
+\bibitem{MR2967224}
+P.~Pavli{\v{c}} and J.~{\v{Z}}erovnik.
+\newblock Roman domination number of the {C}artesian products of paths and
+  cycles.
+\newblock {\em Electron. J. Combin.}, 19(3):Paper 19, 37, 2012.
+
+\bibitem{pps-2012}
+M.~Pilipczuk, M.~Pilipczuk, and R.~{\v{S}}krekovski.
+\newblock Some results on {V}izing's conjecture and related problems.
+\newblock {\em Discrete Appl. Math.}, 160(16-17):2484--2490, 2012.
+
+\bibitem{MR2960327}
+D.~Pradhan.
+\newblock Algorithmic aspects of {$k$}-tuple total domination in graphs.
+\newblock {\em Inform. Process. Lett.}, 112(21):816--822, 2012.
+
+\bibitem{rad-2011}
+N.~J. Rad.
+\newblock Critical concept for 2-rainbow domination in graphs.
+\newblock {\em Australas. J. Combin.}, 51:49--60, 2011.
+
+\bibitem{sala-96}
+E.~Sampathkumar and L.~P. Latha.
+\newblock Strong weak domination and domination balance in a graph.
+\newblock {\em Discrete Math.}, 161(1-3):235--242, 1996.
+
+\bibitem{Schrijver03}
+A.~Schrijver.
+\newblock {\em Combinatorial Optimization. {P}olyhedra and Efficiency (3
+  volumes)}, volume~24 of {\em Algorithms and Combinatorics}.
+\newblock Springer--Verlag, Berlin, 2003.
+
+\bibitem{MR2725878}
+W.~Shang, X.~Wang, and X.~Hu.
+\newblock Roman domination and its variants in unit disk graphs.
+\newblock {\em Discrete Math. Algorithms Appl.}, 2(1):99--105, 2010.
+
+\bibitem{sly-2014}
+Z.~Shao, M.~Liang, C.~Yin, X.~Xu, P.~Pavli{\v{c}}, and J.~{\v{Z}}erovnik.
+\newblock On rainbow domination numbers of graphs.
+\newblock {\em Inform. Sci.}, 254:225--234, 2014.
+
+\bibitem{st-1999}
+I.~Stewart.
+\newblock Defend the roman empire!
+\newblock {\em Sci. Am.}, 281:136--139, 1999.
+
+\bibitem{srt-2013}
+T.~K. {\v{S}}umenjak, D.~F. Rall, and A.~Tepeh.
+\newblock Rainbow domination in the lexicographic product of graphs.
+\newblock {\em Discrete Appl. Math.}, 161(13-14):2133--2141, 2013.
+
+\bibitem{MR1851303}
+V.~V. Vazirani.
+\newblock {\em Approximation {A}lgorithms}.
+\newblock Springer-Verlag, Berlin, 2001.
+
+\bibitem{MR708153}
+L.~A. Wolsey.
+\newblock An analysis of the greedy algorithm for the submodular set covering
+  problem.
+\newblock {\em Combinatorica}, 2(4):385--393, 1982.
+
+\bibitem{wx-2010}
+Y.~Wu and H.~Xing.
+\newblock Note on 2-rainbow domination and {R}oman domination in graphs.
+\newblock {\em Appl. Math. Lett.}, 23(6):706--709, 2010.
+
+\bibitem{zel-1988}
+B.~Zelinka.
+\newblock Total domatic number of cacti.
+\newblock {\em Math. Slovaca}, 38(3):207--214, 1988.
+
+\bibitem{zel-1998}
+B.~Zelinka.
+\newblock Domatic numbers of graphs and their variants: a survey.
+\newblock In {\em Domination in graphs}, volume 209 of {\em Monogr. Textbooks
+  Pure Appl. Math.}, pages 351--377. Dekker, New York, 1998.
+
+\end{thebibliography}
+
+

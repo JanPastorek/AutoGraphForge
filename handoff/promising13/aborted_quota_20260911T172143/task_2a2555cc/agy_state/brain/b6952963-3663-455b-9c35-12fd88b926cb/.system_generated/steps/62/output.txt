@@ -1,0 +1,14 @@
+The search for ""Theorem 2.15" "If G is a connected graph of order at least two, then" "total domination"" returned the following summary:
+The theorem you are referring to is:
+
+**"If $G$ is a connected graph of order at least two, then $\gamma_t(G) \geq \text{rad}(G)$."**[1][2][3]
+
+This result is identified as **Theorem 2.15** in the literature on total domination in graphs (specifically cited in works such as those by DeLaVina et al.[1][2]). In this inequality:
+*   $\gamma_t(G)$ denotes the **total domination number** of the graph $G$[4].
+*   $\text{rad}(G)$ denotes the **radius** of the graph $G$[2].
+
+Sources:
+[1] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHOmOG2N8zCsYx0IcvcA8npAru_JysksRcitg5OrzMr9UCew09Iy8gRdD1Y5khNEWuu0mWs4sKH1dEcVA_YvD7pm599IX2ZiiDWiZxDGFkxqHTy5kMvO57D_bep1HkDNOD6HY4MlNyaZjXFsKh-E8eiZrDNIiC3OkIbZQ==)
+[2] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHOmOG2N8zCsYx0IcvcA8npAru_JysksRcitg5OrzMr9UCew09Iy8gRdD1Y5khNEWuu0mWs4sKH1dEcVA_YvD7pm599IX2ZiiDWiZxDGFkxqHTy5kMvO57D_bep1HkDNOD6HY4MlNyaZjXFsKh-E8eiZrDNIiC3OkIbZQ==)
+[3] [jomardpublishing.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFt9zxvHwPmBtoCbTsH8_vof5JMz1sUhJrHjyF3FeYWNHZIS4K28x_C0YQqu7FGBOwgGDE5xnvoKPNvKvDdAJGMaQ71QVmV5fC4h5au5egZVTptk2_0kHTTCnAt9RoRUBqhVCOQGnFw1F2LOvMzgd5M8UwZl9k175PhMMDpw69WFBx9c0xzXv8=)
+[4] [bibliotekanauki.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGGuMS70IiVOSMKOoclV1l2eCpyZBRHjzMmmxtodB3ehdenrCrI9XsDKAAGDLOX7OqksR8AU-PONmOD7yci4KmZcw_fhnmo6HStVkl4AJLiZahAsM79iUdhf3Jge6Q2r_Ye3gXWg1A=)

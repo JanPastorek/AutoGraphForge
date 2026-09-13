@@ -1,0 +1,9 @@
+[
+ {
+  "id": "a23c41a0",
+  "statement": "(nontrivial) \u21d2 order \u2264 (2 \u00b7 edge_cover_number)",
+  "label": "open",
+  "status": "resolved",
+  "direction": "prove"
+ }
+]

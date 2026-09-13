@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+Length: 8977 Magic: b'\x1f\x8b\x08\x08\xdf\xd0\xa8U\x04\x03'
+Gzip decompressed len: 34066
+Fujita and Furuya (Difference between 2-rainbow domination and Roman domination in graphs, 
+\begin{theorem}[Fujita and Furuya \cite{fufu}]\label{theoremaverage1}
+Theorem \ref{theorem1} confirms a conjecture of Fujita and Furuya (Conjecture 2.11 in \cite{fufu}).
+S. Fujita and M. Furuya, Difference between 2-rainbow domination and Roman domination in graphs, Discrete Applied Mathematics 161 (2013) 806-812.
+

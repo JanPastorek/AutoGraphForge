@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+P_6: W=4, f=(0, 2, 0, 0, 2, 0), min_ecc_2=4 > W - 1!
+

@@ -1,0 +1,7 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.5A1au8oB9r.lean:9:2: error: `exact?` could not close the goal. Try `apply?` to see partial suggestions.
+CHECK: FAILED (exit 1)
+

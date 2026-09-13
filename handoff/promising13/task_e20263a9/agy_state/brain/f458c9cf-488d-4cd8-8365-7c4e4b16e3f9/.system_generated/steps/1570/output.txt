@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Found (w, k) witness for EVERY Roman dominating function with |V_2| >= 2 on P_5..P_8!
+

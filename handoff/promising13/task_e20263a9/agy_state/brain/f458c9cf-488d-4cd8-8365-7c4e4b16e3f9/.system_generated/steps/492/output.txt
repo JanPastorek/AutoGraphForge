@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+['', '/usr/lib64/python311.zip', '/usr/lib64/python3.11', '/usr/lib64/python3.11/lib-dynload', '/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages', '/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages']
+

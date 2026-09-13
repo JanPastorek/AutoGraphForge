@@ -1,0 +1,21 @@
+The search for ""Bounds on Roman domination numbers of graphs" "Mobaraky" "Sheikholeslami" "diameter"" returned the following summary:
+The paper **"Bounds on Roman domination numbers of graphs"** by **B.P. Mobaraky** and **S.M. Sheikholeslami** was published in the journal ***Matematički Vesnik***, Volume 60, Issue 4, in **2008** (pages 247–253)[1][2][3].
+
+### Summary of the Paper
+*   **Topic:** The authors investigate the Roman domination number ($\gamma_R(G)$) of a graph $G$[1][4].
+*   **Key Results:** The paper provides **lower and upper bounds** for the Roman domination number in terms of fundamental graph parameters, specifically the **diameter** and the **girth** of the graph[1][5]. 
+*   **Specific Finding:** For example, the paper establishes that if a graph $G$ has a diameter of two, then $\gamma_R(G)$ is bounded by a specific value[6].
+
+This work is frequently cited in subsequent research regarding Roman domination in graph theory[7][8][9], including studies that later improved these bounds for specific classes of graphs (such as graphs with a minimum degree $\delta(G) \geq 2$)[10][5].
+
+Sources:
+[1] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYU-NJRA_hr5XlADzJIKCcGtBL9LVYOogmN2lweUQY01Bh3RsTysAbFW_qPqjFoBMKUjvZhjtR78TD2VUz2kcRSvjDfS7zaZAyeqy7K0j44VMKNxRp7_vnIJ_6SvkQt96NNs6AxJ7PUh1t5IHBZ-Wk9eQNz83wmxCW4jdiXvQPQ38aGfWkR0Q90JoWsZjT9QmLXQANow==)
+[2] [math.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG7S-PYA9cfmMRG8JAgSoy9_f69OdrkQ1WYe4mhR8zE6j8pqqvfiEv75fa06YbXKibxu035E3MvF4OJ7pQi0XRJQY8G85LV_fYh6AdlUZqE6XTZJuvgDKDlgdRCOgO9ZDSAJz_-ew8=)
+[3] [math.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG7S-PYA9cfmMRG8JAgSoy9_f69OdrkQ1WYe4mhR8zE6j8pqqvfiEv75fa06YbXKibxu035E3MvF4OJ7pQi0XRJQY8G85LV_fYh6AdlUZqE6XTZJuvgDKDlgdRCOgO9ZDSAJz_-ew8=)
+[4] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYU-NJRA_hr5XlADzJIKCcGtBL9LVYOogmN2lweUQY01Bh3RsTysAbFW_qPqjFoBMKUjvZhjtR78TD2VUz2kcRSvjDfS7zaZAyeqy7K0j44VMKNxRp7_vnIJ_6SvkQt96NNs6AxJ7PUh1t5IHBZ-Wk9eQNz83wmxCW4jdiXvQPQ38aGfWkR0Q90JoWsZjT9QmLXQANow==)
+[5] [dokumen.pub](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFdSaGqMmivc02wHEwVKSr5XC_nRbUQN6zMHNLP78CJDPNo8bsmH6R5Wp0eSnVsZca3LrqgFo4iRFZc4aItypXMa31q1Ze0smgyZYNh-ESe-z2KudnbdKLRl8aAdssxSnmqKSQGUH5TmumCXDIMRn9sh6r-Z9KW30Qn0RUeP1ggMjjiZxlGp6vsbGFtCq1upq-WdvvMMGdH0iYiCtHsXe1kB_wm5HiPfSIWBJMee7s21j9S5cI1x7OMMvZ5qN3bAlw=)
+[6] [sanu.ac.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFdjx-UCH3y2RO7l5Pf1nY718KyeRJaLzUeMMsyXcSgN0H3yApLRyvOjLY-CYIfZpdRiIVzy0v3M8u-UAgxWUeibJ5C82m_UHYsVN1Qjmrbn98Rq69xCNlWQo2ot5i6OJColR-Yk4q_TN0A-qux8OvtLA==)
+[7] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH2aGrWD6asGoqLP_5jI_Eb1ShWHY-0m7ojTePM4771Yx2PSUbfK6xkxBIByusRVtZgIgqgYworyBNSyI9s9x_1LRk9WonW1pV9MjSHYeE99patkowYCy9kAg==)
+[8] [d-nb.info](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE830-hB4kC6iZOXfYhcwf84CfD4Ulbrc4lE3VLAMEhW5mIMhDcuAGbWFBx7bfF8MuXGfgyAL_qAFmH3OWucYnVL6YjU2ix9XS5NiuGhwk3sXLepQHL)
+[9] [mdpi.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE-Q26b4xNu9Zrp133ZXcYuFaKin-Zwd6-ZkUdk83ZCjzVOVf5Eaq4u9pGixhbLdQgEjArQ6b4g6McpWidQ1UXQ27INTIASUDSsSnLFlLAfPmM_Zc7Otf2yEsadKso=)
+[10] [sanu.ac.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEH01grhnMTDMEKA9P91QVRVQk5nM5_PZ8A9EJwFlPOMIor0OwGGV6ZLgRfgG5qKi01N7_7m6F8gkulEURQgqNwna4E5GHSm7KJI_KL2Y4E38f5swrwZZDq1bXhQ_AFwaPcPJyayIlRCxnXQpPRlU3b_RFY)

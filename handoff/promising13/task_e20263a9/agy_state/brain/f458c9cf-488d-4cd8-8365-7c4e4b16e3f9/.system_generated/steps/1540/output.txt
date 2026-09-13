@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Theoretical max radius when V = N[z1] U N[z2]:
+

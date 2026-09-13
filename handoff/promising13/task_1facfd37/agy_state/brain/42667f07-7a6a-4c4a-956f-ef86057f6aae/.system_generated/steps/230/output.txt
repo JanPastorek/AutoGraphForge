@@ -1,0 +1,2 @@
+Created file file:///tmp/agyhome.ORAQte/.gemini/antigravity-cli/brain/42667f07-7a6a-4c4a-956f-ef86057f6aae/prompt_draft.md with requested content.
+If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.

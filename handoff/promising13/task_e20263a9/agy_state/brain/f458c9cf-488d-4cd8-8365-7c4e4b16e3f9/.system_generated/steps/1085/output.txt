@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Checked 995 graphs. In 100% of cases, rad <= w - 1!
+

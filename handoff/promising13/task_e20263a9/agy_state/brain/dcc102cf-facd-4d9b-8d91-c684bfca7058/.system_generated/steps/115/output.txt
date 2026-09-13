@@ -1,0 +1,1 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/conjecturing/run_property_conjecturing.sage.py","LineNumber":43,"LineContent":"        for G in graphs.nauty_geng(\"{} -c\".format(n)):"}

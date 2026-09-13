@@ -1,0 +1,10 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.8n2PPFwYzo.lean:14:4: error: Expected type must not contain free variables
+  ⟨2, ⋯⟩ = 0 → ∃ u, G.Adj v u ∧ ⟨2, ⋯⟩ = 2
+
+Hint: Use the `+revert` option to automatically clean up and revert free variables
+CHECK: FAILED (exit 1)
+

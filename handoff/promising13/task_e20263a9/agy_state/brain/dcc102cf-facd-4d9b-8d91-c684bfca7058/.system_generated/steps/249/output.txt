@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+/tmp/test_lemma2.lean:16:4: error: Expected type must not contain free variables
+  2 = 0 → ∃ u, G.Adj v u ∧ (fun x => 2) u = 2
+
+Hint: Use the `+revert` option to automatically clean up and revert free variables
+Exit: 1
+

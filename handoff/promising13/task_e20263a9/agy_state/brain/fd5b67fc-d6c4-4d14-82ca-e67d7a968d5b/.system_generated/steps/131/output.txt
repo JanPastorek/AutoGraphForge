@@ -1,0 +1,19 @@
+The search for ""Mobaraky" "Sheikholeslami" "\gamma_R(G) \ge"" returned the following summary:
+The research paper **"Bounds on Roman domination numbers of graphs"** by **B.P. Mobaraky and S.M. Sheikholeslami** (published in *Matematicki Vesnik*, 60, 2008, pp. 247–253)[1][2][3] investigates various lower and upper bounds for the Roman domination number, denoted by $\gamma_R(G)$[4][1].
+
+While the specific mathematical inequality starting with $\gamma_R(G) \ge$ depends on the graph class or parameters (such as diameter or girth) being discussed in the paper, their work commonly establishes bounds related to these graph invariants[4][1][5].
+
+If you are looking for a specific theorem or inequality from this paper, it is likely one of the following types of results presented by the authors:
+*   **Bounds in terms of order and other parameters:** The paper frequently relates $\gamma_R(G)$ to the order of the graph ($n$), the diameter, or the girth ($g(G)$)[4][1][5].
+*   **Relations to the domination number:** The authors discuss the relationship between the Roman domination number $\gamma_R(G)$ and the standard domination number $\gamma(G)$[1].
+
+For the exact inequality, you may wish to consult the text of the *Matematicki Vesnik* article[2][3] or their related work on Roman domination subdivision numbers[6][7].
+
+Sources:
+[1] [sanu.ac.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFD8rSsq6FLoprTTsNrg13usmPsVY_HPGQpMTmUaYnfgshN9tL4pC6e63KsF6zNJpyVX9Ewr-pabfNvGcoNYA6sstU7-Z18W6EZH5TZdqDvPCI9aDMFB56BAKf8cNVIKzCz_LvNXXyozkIhmBUyWM8Z)
+[2] [dagstuhl.de](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGkTPWfqA4A6dcxWfV4GoVpRFTGozE2CfTONmSTLfloXITv2xS8d6Peq-JIigexbuvYBRbQVk-Y2ylRN9q1RQBhZ3VlS4BwU972jrmp4mxx_BJr7AciYZBQz0g8r7_xWoo4Wq5Mr479dnruur1rTJpNOVh84AV32i9fgJw=)
+[3] [bg.ac.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG3mzwliAgWzrdb3q1P6mfQDQwtznkOv2OSS8_pN9c9E94tqjq38LAHO1ytpJFXX1HVFdxplsjGxyUU5E45c2NNZFXajWYJBJ44nlu_Y0KFrVm2HEn4-h22eTQKNyWhr9e97rXzzfYLg1PVsibkOdM=)
+[4] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFRcVpg-j2C4gOcWJIkm0L9jwQEwFxjhPgQcSXI0qHrxKA408mbL1t8iqpW0W93lnbv8Z8lbkQ7AIdZORCfutjNa-ImbXxU_B1pUAt2yxmFsQyFaLxLl95HPqWqkS5oQiLI9abhjzmEK2U_ndIy7Ml5ZYdhi-mAGazBpuXjFILDWR-1AfxfBSXXYhcfO2Qgmp6KWwl2)
+[5] [unm.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFXwUyjsSvBiutAWOkr1c5DIImNwZLLZm7NchPk2I-TqdK_5vsz-QPFSkXkDApDPEat9Pcq9zomI2Nj8Pe5Sfr3PYCQ1Hcaj2Umvg4iGJ3BAigUGMMQYLpYeB_o8bWlllhbOPu-ZJOLggJnG6VLoFUkS6viCURoZMM-8Q==)
+[6] [tandfonline.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF7Vxt0MHpLDwS45P2zQVVE3Wf5FpeSF3T3cViH6l9Vvp5moTc9kIfVvKxPHTgo4J6fBTrV_-Bd3FZNInwRb3DRvheN6EH9hz8kdCEJC2xBH8hr-s63694DBKfkBleXNb00upTjkGXb-qyjOxwBpgB6x_D_IciGfg==)
+[7] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGllTfCQC_Pokd5SQruAnxeaEOcRJT2AiLgEteifoMxa15gT-a8KsIA7ExF5-bNKmKX_9V8YUOSue9Frd2CT5avBIHcpSmByhPg7H0JuLT-cdy1DmHUWnaYGui3x0PM5kY2qoHAVM0b0Pug6aPT_90PFTVAVZQTGbtB)

@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+Tree n=8, rad=4, rad+1=5, gamma_R=6
+Tree n=9, rad=4, rad+1=5, gamma_R=6
+Tree n=10, rad=5, rad+1=6, gamma_R=7
+Tree n=11, rad=5, rad+1=6, gamma_R=8
+

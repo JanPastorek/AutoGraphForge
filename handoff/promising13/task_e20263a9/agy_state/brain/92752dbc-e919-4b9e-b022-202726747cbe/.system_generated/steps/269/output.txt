@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+stdout:
+ 
+stderr:
+ 
+rc: 0
+

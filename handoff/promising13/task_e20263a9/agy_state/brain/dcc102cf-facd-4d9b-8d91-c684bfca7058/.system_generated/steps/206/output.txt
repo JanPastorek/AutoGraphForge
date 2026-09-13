@@ -1,0 +1,20 @@
+
+The command exited with code 0.
+Output:
+.
+./solved
+./reference
+./reference/GraphInvariantsComputable.lean
+./Challenge_e20263a9.lean
+./preflight.log
+./agy_output.txt
+./agy.log
+./.agents
+./.agents/ORIGINAL_REQUEST.md
+./.agents/sentinel_1
+./.agents/sentinel_1/BRIEFING.md
+./.agents/teamwork_preview_pipeline_1
+./.agents/teamwork_preview_pipeline_1/progress.md
+./ORIGINAL_REQUEST.md
+./.swarm_blackboard_e20263a9_20260911_144940.md
+

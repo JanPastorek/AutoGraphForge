@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Testing random general graphs n=7, 8...
+No counterexample found in random general graphs n=7, 8.
+

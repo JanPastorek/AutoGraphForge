@@ -1,0 +1,27 @@
+
+The command exited with code 0.
+Output:
+The 3-Rainbow Domination Number of the Cartesian Product of Cycles
+We have studied the k-rainbow domination number of C n □ C m for k ≥ 4 (Gao et al. 2019), in which we present the 3-rainbow domination number of C n □ C m , which should be bounded above by the four-r
+------------------------------
+General upper bounds on independent k-rainbow domination
+Abstract A function f : V ( G ) → 2 [ k ] is an independent k -rainbow dominating function of a graph G if { x ∣ f ( x ) ≠ 0 } is an independent set of G and for every vertex x with f ( x ) = 0 , we h
+------------------------------
+On 2-rainbow domination of generalized Petersen graphs
+Abstract Let γ r 2 ( G ) be the 2-rainbow domination number of a graph G . In our work, we solve an open question for 2-rainbow domination number of general Petersen graphs P ( n , k ) . In addition, 
+------------------------------
+Upper bound on 3-rainbow domination in graphs with minimum degree 2
+Abstract Let k ≥ 1 be an integer, and let G be a graph. A function f : V ( G ) → 2 { 1 , … , k } is a k -rainbow dominating function of G if every vertex x ∈ V ( G ) with f ( x ) = ∅ satisfies ⋃ y ∈ N
+------------------------------
+Domination parameters with number : Interrelations and algorithmic consequences
+In this paper, we study the most basic domination invariants in graphs, in which number 2 is intrinsic part of their definitions. We classify them upon three criteria, two of which give the following 
+------------------------------
+Rainbow domination and related problems on some classes of perfect graphs
+Let \(k \in \mathbb {N}\) and let G be a graph. A function \(f: V(G) \rightarrow 2^{[k]}\) is a rainbow function if, for every vertex x with \(f(x)=\varnothing \), \(f(N(x)) =[k]\), where [k] denotes 
+------------------------------
+Rainbow Domination in Graphs
+------------------------------
+Trees with equal total domination and 2-rainbow domination numbers
+A 2-rainbow dominating function (2RDF) of a graph G is a function f : V(G) → P({1, 2}) such that for each v ∈ V(G) with f (v) = ∅we have⋃u∈N(v) f (u) = {1, 2}. For a 2RDF f of a graph G, the weight w(
+------------------------------
+

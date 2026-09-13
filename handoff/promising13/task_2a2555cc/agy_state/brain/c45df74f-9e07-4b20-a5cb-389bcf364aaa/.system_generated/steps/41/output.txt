@@ -1,0 +1,4 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":18,"LineContent":"such pair is a `¬∀ …` theorem whose proof is \"evaluate both sides on this graph\""}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":151,"LineContent":"class that could be *stated* in an exported theorem but never refuted on a"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":177,"LineContent":"theorem isVertexCoverFinset_iff (G : SimpleGraph V) [DecidableRel G.Adj]"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":341,"LineContent":"theorem isTreeClass_iff (G : SimpleGraph V) [DecidableRel G.Adj] :"}

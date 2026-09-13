@@ -1,0 +1,7 @@
+{"name":".system_generated","isDir":true}
+{"name":".user_uploaded","isDir":true}
+{"name":"prompt_draft.md","sizeBytes":"2644"}
+{"name":"prompt_draft.md.metadata.json","sizeBytes":"247"}
+{"name":"scratch","isDir":true}
+
+Summary: This directory contains 3 subdirectories and 2 files.

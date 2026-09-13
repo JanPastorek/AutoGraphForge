@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Testing...
+Tested 995 connected graphs from atlas. None violated rad + 1 <= rd.
+

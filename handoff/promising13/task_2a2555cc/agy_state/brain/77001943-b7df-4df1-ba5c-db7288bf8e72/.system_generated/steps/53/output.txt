@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Total graphs in atlas: 1253
+Checked 995 connected graphs in atlas. No counterexample!
+

@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+47:  ((univ.powerset.filter p).image Finset.card).min.getD 0
+59:  (((range (n + 1)).filter p).max).getD 0
+63:  (((range (n + 1)).filter p).min).getD n
+83:  (((univ.powerset.filter (IsIndependentFinset G)).image Finset.card).max).getD 0
+95:  (((univ.powerset.filter (IsCliqueFinset G)).image Finset.card).max).getD 0
+130:  (((univ.powersetCard k).image (fun s => ∑ v ∈ s, G.degree v)).min).getD 0
+134:  (((univ.powersetCard k).image (fun s => ∑ v ∈ s, G.degree v)).max).getD 0
+466:  (((univ.filter (IsRomanDominatingFunction G)).image romanWeight).min).getD 0
+496:    doubleRomanWeight).min).getD 0
+514:  ((univ.image (eccentricity G)).min).getD 0
+

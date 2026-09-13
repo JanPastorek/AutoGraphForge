@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+100% SUCCESS: Checked 1153940 pairs of (G, f). In ALL of them, exists (v, k) with k + |V \ B_k(v)| + 1 <= w!
+

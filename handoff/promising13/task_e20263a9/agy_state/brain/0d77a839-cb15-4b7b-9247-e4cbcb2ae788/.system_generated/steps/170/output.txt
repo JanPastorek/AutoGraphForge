@@ -1,0 +1,21 @@
+
+The command exited with code 0.
+Output:
+395:   infer_instance
+396: 
+397: theorem IsPath.length_lt [Fintype V] {u v : V} {p : G.Walk u v} (hp : p.IsPath) :
+398:     p.length < Fintype.card V := by
+399:   rw [Nat.lt_iff_add_one_le, ← length_support]
+400:   exact hp.support_nodup.length_le_card
+401: 
+402: lemma IsPath.getVert_injOn {p : G.Walk u v} (hp : p.IsPath) :
+403:     Set.InjOn p.getVert {i | i ≤ p.length} := by
+404:   intro n hn m hm hnm
+405:   induction p generalizing n m with
+406:   | nil => simp_all
+407:   | @cons v w u h p ihp =>
+408:     simp only [length_cons, Set.mem_setOf_eq] at hn hm hnm
+409:     by_cases hn0 : n = 0 <;> by_cases hm0 : m = 0
+410:     · lia
+411:     · simp only [hn0, getVert_zero, Walk.getVert_cons p h hm0] at hnm
+

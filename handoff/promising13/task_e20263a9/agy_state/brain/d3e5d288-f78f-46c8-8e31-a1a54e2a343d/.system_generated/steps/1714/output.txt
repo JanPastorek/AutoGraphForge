@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+k=1: rad <= 1, 2k = 2, rad + 1 = 2 <= 2k
+k=2: rad <= 3, 2k = 4, rad + 1 = 4 <= 2k
+k=3: rad <= 4, 2k = 6, rad + 1 = 5 <= 2k
+k=4: rad <= 6, 2k = 8, rad + 1 = 7 <= 2k
+

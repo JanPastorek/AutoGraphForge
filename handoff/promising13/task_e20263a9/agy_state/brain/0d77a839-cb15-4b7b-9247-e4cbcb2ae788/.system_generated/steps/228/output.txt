@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/scratch.lean. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -250,7 +250,7 @@
+     (h : ∀ w : V, ∃ p : G.Walk v w, p.length ≤ k) :
+     ballWithin G k v = Finset.univ := by
+   ext w
+-  simp only [Finset.mem_univ, true_iff]
++  simp only [Finset.mem_univ, iff_true]
+   obtain ⟨p, hp⟩ := h w
+   exact mem_ballWithin_of_walk_le G p hp
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

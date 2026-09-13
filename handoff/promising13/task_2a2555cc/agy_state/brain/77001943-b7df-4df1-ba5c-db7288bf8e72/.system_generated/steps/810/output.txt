@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+total 8
+drwx------ 3 japake298 domain users 100 Sep 11 20:35 .
+drwx------ 9 japake298 domain users 200 Sep 11 20:38 ..
+-r--r--r-- 1 japake298 domain users 171 Sep 11 16:04 .agf_env
+-r--r--r-- 1 japake298 domain users 919 Sep 11 15:41 .agf_lean_path
+drwx------ 3 japake298 domain users  60 Sep 11 20:35 promising13
+

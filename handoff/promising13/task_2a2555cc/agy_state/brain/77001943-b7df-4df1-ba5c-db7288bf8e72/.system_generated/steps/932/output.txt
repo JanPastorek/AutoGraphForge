@@ -1,0 +1,9 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+Finset.min.{u_2} {α : Type u_2} [LinearOrder α] (s : Finset α) : WithTop α
+/tmp/tmp.XyfqQ5GARx.lean:7:7: error(lean.unknownIdentifier): Unknown constant `Finset.min_le_of_mem`
+Finset.le_min.{u_2} {α : Type u_2} [LinearOrder α] {m : WithTop α} {s : Finset α} (st : ∀ a ∈ s, m ≤ ↑a) : m ≤ s.min
+CHECK: FAILED (exit 1)
+

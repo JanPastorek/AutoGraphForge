@@ -1,0 +1,10 @@
+{"name":".agents","isDir":true}
+{"name":"Challenge_2a2555cc.lean","sizeBytes":"627"}
+{"name":"ORIGINAL_REQUEST.md","sizeBytes":"1984"}
+{"name":"agy.log","sizeBytes":"62678"}
+{"name":"agy_output.txt","sizeBytes":"371"}
+{"name":"preflight.log","sizeBytes":"451"}
+{"name":"reference","isDir":true}
+{"name":"solved","isDir":true}
+
+Summary: This directory contains 3 subdirectories and 5 files.

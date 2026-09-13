@@ -1,0 +1,14 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.SxhdEx6vqj.lean:18:2: error: Invalid alternative name `none`: Expected `top` or `coe`
+/tmp/tmp.SxhdEx6vqj.lean:21:2: error: Invalid alternative name `some`: Expected `top` or `coe`
+/tmp/tmp.SxhdEx6vqj.lean:17:2: error: Alternative `top` has not been provided
+/tmp/tmp.SxhdEx6vqj.lean:17:2: error: Alternative `coe` has not been provided
+/tmp/tmp.SxhdEx6vqj.lean:33:2: error: Invalid alternative name `none`: Expected `top` or `coe`
+/tmp/tmp.SxhdEx6vqj.lean:36:2: error: Invalid alternative name `some`: Expected `top` or `coe`
+/tmp/tmp.SxhdEx6vqj.lean:32:2: error: Alternative `top` has not been provided
+/tmp/tmp.SxhdEx6vqj.lean:32:2: error: Alternative `coe` has not been provided
+CHECK: FAILED (exit 1)
+

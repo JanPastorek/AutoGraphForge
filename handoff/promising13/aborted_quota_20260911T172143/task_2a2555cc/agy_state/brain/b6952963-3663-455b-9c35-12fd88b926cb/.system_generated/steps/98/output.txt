@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+total 4
+drwx------ 3 japake298 domain users   60 Sep 11 16:54 .
+drwx------ 9 japake298 domain users  200 Sep 11 16:55 ..
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 11:13 challenges_promising13
+

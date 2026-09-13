@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+/tmp/tmp.AHNaXFzI2g.lean:48:4: warning: 'change Option.getD (Finset.min _) 0 = b' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+'card_ge_two_of_totalDominatingSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'totalDominationNumber_ge_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+
+
+

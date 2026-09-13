@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+{'is_oa': True, 'oa_status': 'bronze', 'oa_url': 'https://www.sciencedirect.com/science/article/pii/S0166218X14004879/pdf', 'any_repository_has_fulltext': False}
+

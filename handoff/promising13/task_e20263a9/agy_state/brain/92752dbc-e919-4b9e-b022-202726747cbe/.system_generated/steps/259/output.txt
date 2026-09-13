@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+stdout:
+ /tmp/tmplkadbj4o.lean:4:7: error(lean.unknownIdentifier): Unknown constant `Finset.min_mem`
+/tmp/tmplkadbj4o.lean:5:7: error(lean.unknownIdentifier): Unknown constant `Finset.mem_of_min_eq_coe`
+
+stderr:
+ 
+

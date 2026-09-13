@@ -1,0 +1,11 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.i7Dqi77y8x.lean:228:2: error: Invalid alternative name `nil`: Expected `Hnil` or `Hconcat`
+/tmp/tmp.i7Dqi77y8x.lean:231:2: error: Invalid alternative name `concat`: Expected `Hnil` or `Hconcat`
+/tmp/tmp.i7Dqi77y8x.lean:227:2: error: Alternative `Hnil` has not been provided
+/tmp/tmp.i7Dqi77y8x.lean:227:2: error: Alternative `Hconcat` has not been provided
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

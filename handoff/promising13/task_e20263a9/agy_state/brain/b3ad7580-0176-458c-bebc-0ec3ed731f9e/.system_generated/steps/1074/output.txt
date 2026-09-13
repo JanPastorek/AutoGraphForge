@@ -1,0 +1,1 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/LeanProject/GraphInvariantsComputable.lean","LineNumber":503,"LineContent":"def ballWithin (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ → V → Finset V"}

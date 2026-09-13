@@ -1,0 +1,50 @@
+
+Encountered error in step execution: context canceled
+Output:
+<truncated 2575 lines>
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1077:@make_xp_test_case(ndimage.minimum_position)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1083:    output = ndimage.minimum_position(input)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1087:@make_xp_test_case(ndimage.minimum_position)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1093:    output = ndimage.minimum_position(input)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1097:@make_xp_test_case(ndimage.minimum_position)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1105:        output = ndimage.minimum_position(input, labels)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1109:@make_xp_test_case(ndimage.minimum_position)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1117:        output = ndimage.minimum_position(input, labels, 2)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1121:@make_xp_test_case(ndimage.minimum_position)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1129:        output = ndimage.minimum_position(input, labels,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1221:@make_xp_test_case(ndimage.extrema, ndimage.minimum, ndimage.maximum,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1222:                   ndimage.minimum_position, ndimage.maximum_position)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1230:        output2 = ndimage.minimum(input, labels=labels)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1232:        output4 = ndimage.minimum_position(input,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1239:@make_xp_test_case(ndimage.extrema, ndimage.minimum, ndimage.maximum,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1240:                   ndimage.minimum_position, ndimage.maximum_position)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1248:        output2 = ndimage.minimum(input, labels=labels,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1252:        output4 = ndimage.minimum_position(input,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1259:@make_xp_test_case(ndimage.extrema, ndimage.minimum, ndimage.maximum,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1260:                   ndimage.minimum_position, ndimage.maximum_position)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1272:        output2 = ndimage.minimum(input,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1277:        output4 = ndimage.minimum_position(input,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1289:@make_xp_test_case(ndimage.extrema, ndimage.minimum, ndimage.maximum,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1290:                   ndimage.minimum_position, ndimage.maximum_position)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1302:        output2 = ndimage.minimum(input, labels, xp.asarray([1, 2]))
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1304:        output4 = ndimage.minimum_position(input, labels,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1434:                   ndimage.median, ndimage.minimum, ndimage.maximum)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/tests/test_measurements.py:1451:    min = ndimage.minimum(a, labels=lbl, index=xp.asarray([1, 2]))
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_filters.py:308:    `numpy.min` as the callable; `uniform_filter` instead of this function with
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_filters.py:1673:    _nd_image.min_or_max_filter1d(input, size, axis, output, mode, cval,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_filters.py:1730:    _nd_image.min_or_max_filter1d(input, size, axis, output, mode, cval,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_filters.py:1818:        _nd_image.min_or_max_filter(input, footprint, structure, output,
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_filters.py:1865:    >>> result = ndimage.minimum_filter(ascent, size=20)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:534:    lo = index.min()
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:659:            labels.min() < 0 or labels.max() > labels.size):
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:934:            result += [vals.min()]
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:936:            result += [positions[vals == vals.min()][0]]
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:971:            labels.min() < 0 or labels.max() > labels.size):
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:1089:    >>> ndimage.minimum(a, labels=labels, index=np.arange(1, labels_nb + 1))
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:1091:    >>> ndimage.minimum(a)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:1093:    >>> ndimage.minimum(a, labels=labels)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:1293:    >>> ndimage.minimum_position(a)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:1295:    >>> ndimage.minimum_position(b)
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:1301:    >>> ndimage.minimum_position(a, label, index=np.arange(1, pos+1))
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/scipy/ndimage/_measurements.py:1305:    >>> ndimage.minimum_position(b, label, index=np.arange(1, pos+1))
+

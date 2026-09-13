@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+Header ends at char: 464
+Occurrences of sorry: 1
+  Line 65:   sorry
+Check admit: NONE found (clean)
+Check axiom: NONE found (clean)
+Check native_decide: NONE found (clean)
+Check namespace: NONE found (clean)
+Check section: NONE found (clean)
+Check variable: NONE found (clean)
+Check notation: NONE found (clean)
+Check macro: NONE found (clean)
+Check syntax: NONE found (clean)
+Check IO: NONE found (clean)
+

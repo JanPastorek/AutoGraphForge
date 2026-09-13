@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+proved in \cite{MR3320720} and the inequality ${\tilde\gamma}_{w2}\leq\gamma_R$ in \cite{wx-2010}.
+  & $\Hasse$~\cite{MR3320720}
+  $\Hasse$~\cite{wx-2010}
+

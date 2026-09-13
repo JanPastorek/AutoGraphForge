@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+All 235 trees on n=11 passed.
+All 551 trees on n=12 passed.
+All 1301 trees on n=13 passed.
+All 3159 trees on n=14 passed.
+All 7741 trees on n=15 passed.
+

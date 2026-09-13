@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Time taken for some order 7 graphs: 0.471923828125
+

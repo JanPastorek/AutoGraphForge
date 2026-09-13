@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+['connected', 'bipartite', 'chordal', 'cubic', 'eulerian', 'planar', 'regular', 'subcubic', 'tree', 'K_4_free', 'triangle_free', 'claw_free', 'cograph', 'order', 'size', 'maximum_degree', 'minimum_degree', 'diameter', 'radius', 'clique_number', 'chromatic_number', 'independence_number', 'vertex_cover_number', 'matching_number', 'triameter', 'slater', 'annihilation_number', 'residue', 'harmonic_index', 'domination_number', 'total_domination_number', 'independent_domination_number', 'min_maximal_matching_number', 'spectral_radius', 'largest_laplacian_eigenvalue', 'second_largest_adjacency_eigenvalue', 'zero_forcing_number']
+Violations in graph_data: 0
+

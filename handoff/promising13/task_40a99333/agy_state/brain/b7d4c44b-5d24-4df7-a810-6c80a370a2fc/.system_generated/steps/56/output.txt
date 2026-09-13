@@ -1,0 +1,163 @@
+
+The command exited with code 0.
+Output:
+<truncated 42 lines>
+892: only if for every graph $G$ for which both $\rho(G)$ and $\rho'(G)$ are well defined, it holds that $\rho(G)\le \rho'(G)$.
+893: The relations represented in this figure will be used often in our
+894: proofs of upper bounds for the parameters in terms of functions of
+895: other parameters, and in the proofs that these bounds are sharp.
+896: 
+897: \begin{figure}[h!]
+898: \begin{center}
+899:   \includegraphics[width=0.5\textwidth]{Hasse_all.pdf}
+900: \caption{Hasse diagram of the relation $\le$ among various
+901: domination parameters.} \label{fig:Hasse}
+902: \end{center}
+903: \end{figure}
+904: 
+905: 
+906: \begin{prp}\label{prp:Hasse-relations}
+907: For any two parameters $\rho$ and $\rho'$ in the Hasse diagram on
+908: Fig.~\ref{fig:Hasse},
+909: $\rho$ is below $\rho'$ in the diagram if
+910: and only if $\rho\le \rho'$.
+911: \end{prp}
+912: 
+913: \begin{proof}
+914: Here, we will only argue the `only if' direction of the proof, that is, if
+915: $\rho$ is below $\rho'$ in the diagram then $\rho\le \rho'$.
+916: The other direction will follow from results in Section~\ref{sec:sharp}.
+917: 
+918: Clearly, it suffices to verify the statement only for the `covering' pairs $(\rho, \rho')$ in the diagram, that is, pairs such that
+919: $\rho$ is immediately below $\rho'$ in the diagram -- the inequalities for all the remaining pairs follow by transitivity.
+920: The inequality $\gama\leq \gamawtwo$ can be proved by observing that if
+921: $f:V(G)\to\{0,1,2\}$ is a minimum weight weak $2$-dominating function of $G$,
+922: then the set $f^{-1}(\{1,2\})$ is a dominating set of $G$
+923: of total size $|f^{-1}(1)|+|f^{-1}(2)|\le f(V)= \gamawtwo(G)$.
+924: Similarly, if $f:V(G)\to\{0,1,2\}$ is a minimum weight $\{2\}$-dominating function of $G$,
+925: then the set $f^{-1}(\{1,2\})$ is a total dominating set of $G$
+926: of total size $|f^{-1}(1)|+|f^{-1}(2)|\le f(V)= \gamasettwo(G)$. This implies the inequality
+927: $\gamat\le \gamasettwo$. The inequality $\gamma_t\leq{\tilde\gamma}_{w2}$ was
+928: proved in \cite{MR3320720} and the inequality ${\tilde\gamma}_{w2}\leq\gamma_R$ in \cite{wx-2010}.
+929: 
+930: If $f$ is a dominating function of $G$, then $2f$ is a Roman dominating function of $G$ (cf.~\cite{cdhh-2004,MR1991720}). Hence,
+931:     for every graph $G$, it holds $\gamaR(G) \le 2\gama(G) = \rgamasettwo(G)$, which establishes the relation
+932: $\gamaR\le \rgamasettwo$ in the diagram.
+933: 
+934: That every rainbow parameter is above its original counterpart
+935: is a direct consequence of definitions. Similarly, all other inequalities represented in the diagram $\mathcal H$
+936: can be easily derived just by looking at the definitions of parameters.
+937: \end{proof}
+938: 
+939: 
+940: %%%%%%%%%%%% TABLEs 1 and 2
+941: 
+942: In Table \ref{table-bounds} we summarize the bounds relating
+943: any two of the $13$ considered parameters, or the fact that there is no bound. We will
+944: give the necessary proofs of upper bounds in Section
+945: \ref{sec:proofs-bounds} and summarize them in Table \ref{table-proofs}.
+946: All the bounds are sharp, as will be shown in Section
+947: \ref{sec:sharp}, which will also contain the proofs of
+948: nonexistence of bounds between certain pairs of parameters.
+949: The families proving the nonexistence of a bound and the examples showing
+950: sharpness are summarized in Tables~\ref{table-families} and~\ref{table-sharp}
+951: (on p.~\pageref{table-families} and~\pageref{table-sharp}), respectively.
+952: 
+953: %\begin{table}[h!]
+954: \begin{sidewaystable}
+955: \centering { \small
+956: \renewcommand{\arraystretch}{1.4}
+957: \tabcolsep=0.125cm
+958: \begin{tabular}{|c|c||c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+959:   \hline
+960: \multicolumn{2}{|c||}{\multirow{2}{*}{$\rho\le f(\rho')$}} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13\\
+961: \hhline{~~-------------}
+962: \multicolumn{2}{|c||}{} &  $\gamma$ & $\gamat$ & $\gamawtwo$ & $\gamasettwo$ & $\gamatsettwo$ & $\gamatwo$ & $\gamaxtwo$ & $\gamatxtwo$   & $\rgamawtwo$ & $\rgamatwo$ & $\rgamaxtwo$ & $\rgamatxtwo$ &  $\gamaR$   \\
+963: \hline\hline
+964:   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+965:   1 & $\gama$
+966: & $=$ & $\gamat$ & $\gamawtwo$ & $\gamasettwo-1$ & $\gamatsettwo-1$ &
+967: $\gamatwo$ &  $\gamaxtwo-1$ & $\gamatxtwo-1$
+968:   & $\rgamawtwo$ & $\rgamatwo$ & $\frac{1}{2}\rgamaxtwo$ & $\frac{1}{2}\rgamatxtwo$ &
+969:   $\gamaR-1$\,$^*$    \\
+970: \hline
+971: 
+972:   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+973:   2 & $\gamat$
+974: 
+975: & $2\gama$ & $=$ & $\frac{3\gamawtwo-1}{2}$ & $\gamasettwo$ &
+976: $\gamatsettwo-1$ & $\frac{3\gamatwo-1}{2}$ & $\gamaxtwo$ &
+977: $\gamatxtwo-1$
+978:   & $\rgamawtwo$ & $\rgamatwo$ & $\rgamaxtwo$ & $\frac{1}{2}\rgamatxtwo$ &
+979:   $\gamaR$   \\
+980:   \hline
+981: 
+982: 
+983:   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+984:   3 & $\gamawtwo$
+985: 
+986: &  $2\gama$ & $2\gamat$ & $=$ & $\gamasettwo$ & $\gamatsettwo$ &
+987: $\gamatwo$ & $\gamaxtwo$ & $\gamatxtwo$
+988:   & $\rgamawtwo$ & $\rgamatwo$ & $\rgamaxtwo$ & $\rgamatxtwo$ & $\gamaR$   \\
+989: 
+990: \hline
+991: 
+992:   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+993:   4 & $\gamasettwo$
+994:  & $2\gama$ & $2\gamat$ & $2\gamawtwo-1$\,$^*$    & $=$ & $\gamatsettwo$ & $2\gamatwo-1$\,$^*$     & $\gamaxtwo$ & $\gamatxtwo$ &
+995:   $2\rgamawtwo-1$\,$^*$  & $2\rgamatwo-1$\,$^*$    & $\rgamaxtwo$ & $\rgamatxtwo$ & $2\gamaR-2$\,$^*$    \\
+996: \hline
+997: 
+998: 
+999:   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+1000:   5 & $\gamatsettwo$
+1001:  & $4\gama$ & $2\gamat$ & $2\gamawtwo$  & $2\gamasettwo$ &  $=$  & $2\gamatwo$ & $2\gamaxtwo$ & $\gamatxtwo$
+1002:   & $2\rgamawtwo$ & $2\rgamatwo$ & 2$\rgamaxtwo$ & $\rgamatxtwo$ & $2\gamaR$\\
+1003: \hline
+1004: 
+1005: 
+1006:   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+1007:   6 & $\gamatwo$
+1008: 
+1009:  &  \nof& \nof& \nof & \nof & \nof & $=$ & $\gamaxtwo$ & $\gamatxtwo$
+1010:   &\nof &  $\rgamatwo$  & $\rgamaxtwo$ & $\rgamatxtwo$ & \nof\\
+1011: \hline
+1012: 
+1013: 
+1014:   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+1015:   7 & $\gamaxtwo$
+1016: 
+1017:  & \nof&\nof & \nof & \nof & \nof & $2\gamatwo-1$ & $=$  & $\gamatxtwo$
+1018:   &\nof & $2\rgamatwo-1$  & $\rgamaxtwo$ & $\rgamatxtwo$ & \nof\\
+1019: \hline
+1020: 
+1021:   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+1022:   8 & $\gamatxtwo$
+1023:  & \nof&\nof & \nof & \nof & \nof & $3\gamatwo-2$ & $2\gamaxtwo-1$  &  $=$
+1024:   &\nof  &  $3\rgamatwo-2$  & $2\rgamaxtwo-1$ & $\rgamatxtwo$ & \nof\\
+1025: 
+1026:  \hline
+1027: 9 & $\rgamawtwo$ & $2\gama$ & $2\gamat$  &  $2\gamawtwo-2$ & $2\gamasettwo-2$ &$2\gamatsettwo-2$ & $2\gamatwo-2$ & $2\gamaxtwo-2$ & $2\gamatxtwo-2$ & $=$ &  $\rgamatwo$  & $\rgamaxtwo$ & $\rgamatxtwo$ & $\gamaR$\\
+1028: \hline
+1029:   10 & $\rgamatwo$
+1030:  &  \nof&\nof & \nof & \nof & \nof & \nof & \nof & \nof
+1031:   &\nof &  $=$  & $\rgamaxtwo$ & $\rgamatxtwo$ & \nof\\
+1032: \hline
+1033:   11 & $\rgamaxtwo$
+1034:  &  \nof&\nof & \nof & \nof & \nof & \nof &\nof &\nof
+1035:   &\nof & $2\rgamatwo$ & $=$   & $\rgamatxtwo$ & \nof\\
+1036: \hline
+1037:   12 & $\rgamatxtwo$
+1038:  &  \nof&\nof & \nof & \nof & \nof &\nof  & \nof&\nof
+1039:   &\nof &  \nof&\nof & $=$    & \nof\\
+1040: \hline
+1041:   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+1042:   13 & $\gamaR$ & $2\gama$ & $2\gamat$ & $2\gamawtwo-1$ & $2\gamasettwo-2$ & $2\gamatsettwo-2$ & $2\gamatwo-1$
+1043:    & $2\gamaxtwo-2$& $2\gamatxtwo-2$& $\frac{3}{2}\rgamawtwo$ & $\frac{3}{2}\rgamatwo$ & $\rgamaxtwo$ & $\rgamatxtwo$& $=$ \\
+1044:   \hline
+1045: \end{tabular}
+1046: } \caption{Upper bounds for several domination parameters in terms
+1047: of others. The entry in row indexed by parameter $\rho$ and in
+1048: column indexed by parameter $\rho'$ represents either that $\rho$
+1049: is not bounded from above by any function of $\rho'$ (in this case
+

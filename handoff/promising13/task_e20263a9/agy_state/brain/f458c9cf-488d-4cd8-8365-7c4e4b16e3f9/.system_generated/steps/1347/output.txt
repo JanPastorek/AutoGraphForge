@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+v_types for k=1 working vertex: Counter({0: 73722, 2: 48418, 1: 29259})
+

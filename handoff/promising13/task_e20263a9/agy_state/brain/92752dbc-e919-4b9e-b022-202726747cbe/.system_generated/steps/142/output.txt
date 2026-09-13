@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Total cases where NO vertex in V2 has ecc + 1 <= w: 1
+

@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Found for v=3, k=3: ball_card=7, compl=3, val=7 <= W=7
+

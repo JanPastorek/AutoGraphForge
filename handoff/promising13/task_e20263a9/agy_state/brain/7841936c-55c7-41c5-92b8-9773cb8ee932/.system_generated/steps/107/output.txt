@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+Total RDFs tested: 5208
+Failures of rad + 1 <= W: 0
+Failures of exists u in S with ecc(u) <= W - 1: 1
+

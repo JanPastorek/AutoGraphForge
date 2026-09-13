@@ -1,0 +1,36 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.S8IFpfQFSz.lean:322:16: error: don't know how to synthesize implicit argument `s`
+  @Finset.sum_le_sum V ℕ Nat.instAddCommMonoid Nat.instPreorder (fun v => 1) (fun v => ↑(f v)) ?m.87
+    IsOrderedAddMonoid.toAddLeftMono fun v x => h_ge1 v
+context:
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+f : V → Fin 3
+hf : IsRomanDominatingFunction G f
+h_no2 : ∀ (v : V), ↑(f v) ≠ 2
+h_no0 : ∀ (v : V), ↑(f v) ≠ 0
+h_ge1 : ∀ (v : V), 1 ≤ ↑(f v)
+⊢ Finset V
+/tmp/tmp.S8IFpfQFSz.lean:322:41: error(lean.inferBinderTypeFailed): Failed to infer binder type
+/tmp/tmp.S8IFpfQFSz.lean:322:7: error: failed to infer `have` declaration type
+/tmp/tmp.S8IFpfQFSz.lean:310:48: error: unsolved goals
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+f : V → Fin 3
+hf : IsRomanDominatingFunction G f
+h_no2 : ∀ (v : V), ↑(f v) ≠ 2
+h_no0 : ∀ (v : V), ↑(f v) ≠ 0
+h_ge1 : ∀ (v : V), 1 ≤ ↑(f v)
+⊢ Fintype.card V ≤ ∑ v, ↑(f v)
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

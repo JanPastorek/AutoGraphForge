@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+'card_ge_two_of_totalDominatingSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'totalDominationNumber_ge_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'prove_9e476a83' depends on axioms: [propext, Classical.choice, Quot.sound]
+'agf_verify_prove' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+
+
+

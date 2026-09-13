@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+ELAN_HOME=/mnt/home/japake298/.elan
+LEAN=/mnt/home/japake298/.elan/bin/lean
+

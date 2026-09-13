@@ -1,0 +1,30 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.qKDr00If3r.lean:366:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  v
+in the target expression
+  u ∈ ballWithin G 1 u
+
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+hrad : HasRadius G
+hnt : IsNontrivialClass G
+f : V → Fin 3
+hf : IsRomanDominatingFunction G f
+u : V
+hu2 : ↑(f u) = 2
+h_unique : ∀ (v : V), ↑(f v) = 2 → v = u
+v : V
+hv : v ∈ Finset.univ ∧ v ∉ ballWithin G 1 u
+h_not_in : v ∉ ballWithin G 1 u
+hvu : v = u
+hu_in : u ∈ ballWithin G 1 u
+⊢ False
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

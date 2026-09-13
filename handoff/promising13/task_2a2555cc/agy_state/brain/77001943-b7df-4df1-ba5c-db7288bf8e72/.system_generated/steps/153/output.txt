@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+Center: u_1 ecc: 8
+Center: w_1 ecc: 8
+Radius: 8
+

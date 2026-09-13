@@ -1,0 +1,5 @@
+{"name":".agf_env","sizeBytes":"171"}
+{"name":".agf_lean_path","sizeBytes":"919"}
+{"name":"promising13","isDir":true}
+
+Summary: This directory contains 1 subdirectories and 2 files.

@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+n=2: max radius = 1
+n=3: max radius = 1
+n=4: max radius = 2
+n=5: max radius = 2
+n=6: max radius = 3
+n=7: max radius = 3
+n=8: max radius = 4
+

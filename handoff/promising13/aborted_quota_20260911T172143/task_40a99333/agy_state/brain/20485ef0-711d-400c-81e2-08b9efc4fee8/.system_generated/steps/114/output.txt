@@ -1,0 +1,33 @@
+
+The command exited with code 0.
+Output:
+Pages: 11
+TWMS J. App. and Eng. Math. V.12, N.2, 2022, pp. 445-455
+TOTAL ROMAN DOMINATION NUMBER OF GRAPHS
+D. K. THAKKAR 1, S. M. BADIYANI 1, §
+Abstract. In this paper a characterization of minimal total roman dominating func-
+tions has been proved. It has also been proved that if v is a pendant vertex and its
+neighbor u is not a pendant vertex then f(v) = 0 or 1 for any minimal total roman dom-
+inating function f. The operation of vertex removal has been considered. A necessary
+and suﬃcient condition under which the total roman domination number increases (un-
+der this operation) has been proved. Similarly a necessary and suﬃcient condition has
+been proved under which the total roman domination number decreases. Some examples
+has been given with miscellaneous results. We characterize those graphs for which the
+total roman domination number is equal to the number of vertices of the graph.
+Keywords: Total Dominating Set, Total Roman Dominating Function, Total Roman
+Domination Number, Minimal Total Roman Dominating Function, Minimum Total Ro-
+man Dominating Function.
+AMS Subject Classiﬁcation: (2010), 05C69.
+1. Introduction
+Total domination in graphs is one of most prominent topic of domination theory which
+was studied by Cockayne E. J., Hedetniemi S.T. and Dawes R. M. in [4]. A previous
+survey on total domination in graphs can also be found in [9]. Recently, another concept of
+domination theory called roman domination have made a rapid progress and was studied
+by several authors [6,7,10,11,12]. In the year 2004, Cockayne E. J., Dreyer P. A., Jr.
+Hedetniemi, S. M. and Hedetniemi, S. T. in [5] studied the graph theoretic properties
+of this variant of domination number of a graph. By combining these two concepts, a
+stronger concept called total roman domination was introduced and studied by [1] in 2016
+and later on Amjai J., Sheikholeslami S. M., et.al. proved several results on bounds for
+total roman domination number and total roman domination number of trees in [2,3]. A
+litera
+

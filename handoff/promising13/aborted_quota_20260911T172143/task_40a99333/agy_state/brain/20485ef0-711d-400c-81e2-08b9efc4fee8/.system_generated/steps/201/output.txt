@@ -1,0 +1,18 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.hE7eqLXcQP.lean:23:4: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  c ≥ 0
+  b ≥ 0
+  a ≥ 0
+  a - b ≤ 0
+  a - c ≥ 1
+where
+ a := ↑K
+ b := ↑(Option.getD s.min 0)
+ c := ↑(Option.getD (↑m) 0)
+'test_min_le' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

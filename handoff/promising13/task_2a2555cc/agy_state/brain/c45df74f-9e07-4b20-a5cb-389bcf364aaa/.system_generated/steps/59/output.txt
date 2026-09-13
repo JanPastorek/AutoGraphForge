@@ -1,0 +1,4 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":503,"LineContent":"def ballWithin (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ → V → Finset V"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":506,"LineContent":"      let B := ballWithin G k v"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":511,"LineContent":"  minUpTo (Fintype.card V) (fun k =\u003e ballWithin G k v = univ)"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/reference/GraphInvariantsComputable.lean","LineNumber":519,"LineContent":"  ∀ v : V, ballWithin G (Fintype.card V) v = univ"}

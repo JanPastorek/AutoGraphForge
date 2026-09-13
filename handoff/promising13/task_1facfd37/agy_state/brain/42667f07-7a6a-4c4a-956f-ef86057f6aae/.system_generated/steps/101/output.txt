@@ -1,0 +1,16 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.ILMuAYgogB.lean:6:97: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Membership ?m.7 (WithBot α)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+/tmp/tmp.ILMuAYgogB.lean:7:7: error(lean.unknownIdentifier): Unknown constant `WithBot.getD`
+Option.getD.{u_1} {α : Type u_1} (opt : Option α) (dflt : α) : α
+/tmp/tmp.ILMuAYgogB.lean:9:97: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Membership ?m.7 (WithTop α)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+CHECK: FAILED (exit 1)
+

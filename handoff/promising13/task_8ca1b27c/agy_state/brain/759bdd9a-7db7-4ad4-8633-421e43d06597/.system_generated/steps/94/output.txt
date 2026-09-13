@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+/tmp/tmp.J6oXzFs2Un.lean:6:6: warning: declaration uses `sorry`
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

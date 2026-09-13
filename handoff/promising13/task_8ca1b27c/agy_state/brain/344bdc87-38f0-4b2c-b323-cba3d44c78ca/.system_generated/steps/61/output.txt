@@ -1,0 +1,5 @@
+{"name":"BRIEFING.md","sizeBytes":"2117"}
+{"name":"DISPATCH.md","sizeBytes":"1413"}
+{"name":"progress.md","sizeBytes":"1228"}
+
+Summary: This directory contains 0 subdirectories and 3 files.

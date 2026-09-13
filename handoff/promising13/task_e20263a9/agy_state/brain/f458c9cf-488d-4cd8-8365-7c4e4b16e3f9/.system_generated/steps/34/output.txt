@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+Testing n=2, total possible edge subsets = 2
+n=2: checked 1 connected graphs, no counterexample.
+Testing n=3, total possible edge subsets = 8
+n=3: checked 4 connected graphs, no counterexample.
+Testing n=4, total possible edge subsets = 64
+n=4: checked 38 connected graphs, no counterexample.
+Testing n=5, total possible edge subsets = 1024
+n=5: checked 728 connected graphs, no counterexample.
+Testing n=6, total possible edge subsets = 32768
+n=6: checked 26704 connected graphs, no counterexample.
+

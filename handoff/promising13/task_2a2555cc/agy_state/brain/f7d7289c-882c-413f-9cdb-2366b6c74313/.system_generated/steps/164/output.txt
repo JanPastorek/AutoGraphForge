@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+10000 random connected graphs verified: rad <= td always!
+

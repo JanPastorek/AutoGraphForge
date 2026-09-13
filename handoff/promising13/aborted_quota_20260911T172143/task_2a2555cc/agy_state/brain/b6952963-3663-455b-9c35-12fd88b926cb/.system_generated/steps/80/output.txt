@@ -1,0 +1,17 @@
+The search for ""arxiv" "spanning tree" "rad(G) \le rad(T)" "total" "domination"" returned the following summary:
+The query appears to relate to research on graph theory, specifically involving **spanning trees**, **radius** (often denoted as $\text{rad}(G)$), and **total domination** numbers.
+
+While a single paper containing the exact string `"rad(G) <= rad(T)"` alongside "total domination" was not directly identified in the search, several key results in this area of graph theory address the relationships between graph parameters and their spanning trees:
+
+*   **Total Domination and Spanning Trees:** It is a known result in graph theory that the total domination number of a connected graph is related to the total domination number of its spanning trees[1]. Research has explored various bounds and relationships between domination parameters of a graph $G$ and those of a spanning tree $T$ contained within $G$[2][1].
+*   **Radius and Spanning Trees:** The radius of a graph, $\text{rad}(G)$, is the minimum eccentricity of any vertex in $G$. When considering a spanning tree $T$ of $G$, it is generally true that $\text{rad}(G) \le \text{rad}(T)$, as any path in $G$ has a corresponding distance property, and $T$ (being a subgraph) can only increase or maintain the distances between vertices compared to $G$.
+*   **Contextual Literature:** Research on these topics is frequently published in journals such as *Discrete Mathematics*[3][4], *Discrete Applied Mathematics*[4], and on platforms like **arXiv**[3][5][2][1].
+
+If you are looking for a specific theorem or paper, it may be helpful to check recent surveys on "total domination in graphs"[3][1] or literature specifically discussing "spanning tree radius" and "total domination" together, as these parameters are often studied in the context of bounding graph invariants.
+
+Sources:
+[1] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHXeW7bJhR3VQmGJbhH-nbjsp-pJ9mw9W0kBKJ9h940NtoGXN6AB_gviLRmPEI_6w71XrCZ9HMlWxI6ijnUjBM_XYpToED29JeV0-A-rJkgOhOEiwwn3FWi)
+[2] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGxZfEcsGXZQxzLnGJQBP6GFHWoEc4kO1WjqF0ufxdngQ10ul3Yt4F4y21J6CHOu-jv8-6FiXQEl-8_AJhCZoVOVjydK27QpiluTHLWsbxOa6b7YOxIQiI=)
+[3] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQExqCbJiCokOBT1wd88MlOZBGvNnH3XhRBtl6OgMzyk_1FBfic0jOP9FeTvqqSkZBoreyz5Emz6lIQKVOXnJ5vqQ2qFJTgoTtxEXfFfu9T4wPDFg_gQ1wk8)
+[4] [ejgta.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEG35RW0oPhXuqhOg4raMmJmNT4tAOhq76rutYzZv_Ydq0o09ioUk_gq-hJNX2Y02Z1vKTv36YTsMMXq0PUc62Yj8ibmK9Tj9p8UXfh2L3dFdtGhcSOFdQ9NKi46_FTkub11drOMB7DGTWJjMc=)
+[5] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEMNRVahXyzpQkt2jB0Wl_gZLyMsRnCCErMt06R4Z6RYjMQ978G2WOLTyT01mqsc9bF5B2F8804JE3lD8BKy8o5Po9DhyIsHZ3LiTjjz00GaVA743G7B6y5)

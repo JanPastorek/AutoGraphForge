@@ -1,0 +1,13 @@
+
+The command exited with code 0.
+Output:
+total 48
+drwxr-xr-x 4 japake298 domain users  4096 Sep 11 16:54 .
+drwx------ 3 japake298 domain users    60 Sep 11 16:54 ..
+-rw-r--r-- 1 japake298 domain users   633 Sep 11 16:54 Challenge_40a99333.lean
+-rw-r--r-- 1 japake298 domain users 24541 Sep 11 16:55 agy.log
+-rw-r--r-- 1 japake298 domain users     0 Sep 11 16:54 agy_output.txt
+-rw-r--r-- 1 japake298 domain users   451 Sep 11 16:54 preflight.log
+drwxr-xr-x 2 japake298 domain users  4096 Sep 11 16:54 reference
+drwxr-xr-x 2 japake298 domain users  4096 Sep 11 16:54 solved
+

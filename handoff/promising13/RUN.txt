@@ -1,0 +1,6 @@
+REF_SHA=bc814955677149209da4cbae13f7127315ede46c999cf91e6d6d8bb1164100d9
+PROBE_JOB=84830
+ARRAY_JOB=84835
+COLLECT_JOB=PENDING
+RETRY_ARRAY_JOB=84856
+QUOTA_NOTE=individual quota exhausted 17:18, resets ~20:26 CEST; starved tasks archived in handoff/promising13/aborted_quota_20260911T172143

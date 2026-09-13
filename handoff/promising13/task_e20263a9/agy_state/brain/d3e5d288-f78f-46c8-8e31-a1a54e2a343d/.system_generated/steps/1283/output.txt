@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+No tree with rad >= 4 and rdn <= 4!
+

@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Found tex file: 2-domination.tex, length 164906
+

@@ -1,0 +1,8 @@
+Found 7 results
+promising13
+promising13/task_e20263a9
+promising13/task_e20263a9/Challenge_e20263a9.lean
+promising13/task_e20263a9/reference
+promising13/task_e20263a9/reference/GraphInvariantsComputable.lean
+promising13/task_e20263a9/scratch.lean
+promising13/task_e20263a9/solved

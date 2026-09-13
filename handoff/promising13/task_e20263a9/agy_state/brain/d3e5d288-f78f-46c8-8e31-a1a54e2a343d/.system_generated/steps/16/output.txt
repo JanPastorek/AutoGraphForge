@@ -1,0 +1,15 @@
+The following changes were made by the replace_file_content tool to: /tmp/agyhome.NWyWnj/.gemini/antigravity-cli/brain/d3e5d288-f78f-46c8-8e31-a1a54e2a343d/prompt_draft.md. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -1,7 +1,7 @@
+ # Teamwork Project Prompt — Draft
+ 
+-> Status: Ready for launch — awaiting user approval
+-> Goal: Craft prompt → get user approval → delegate to teamwork_preview
++> Status: Launched
++> Goal: Settle graph-theory conjecture in Lean 4
+ > Requested team: Standard proof pipeline
+ 
+ Settle an open graph-theory conjecture in Lean 4 (`(nontrivial) ⇒ (radius + 1) ≤ roman_domination_number`) by either proving or refuting it with a kernel-checked proof.
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

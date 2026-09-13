@@ -1,0 +1,54 @@
+
+The command exited with code 0.
+Output:
+Total domination in graphs
+https://doi.org/10.1002/net.3230100304
+Total Domination in Graphs
+https://doi.org/10.1007/978-1-4614-6525-6
+A survey of selected recent results on total domination in graphs
+https://doi.org/10.1016/j.disc.2007.12.044
+On the Algorithmic Complexity of Total Domination
+https://doi.org/10.1137/0605040
+Total domination of graphs and small transversals of hypergraphs
+https://doi.org/10.1007/s00493-007-2020-3
+k -tuple total domination in graphs
+https://doi.org/10.1016/j.dam.2010.01.009
+Graphs with large total domination number
+https://doi.org/10.1002/1097-0118(200009)35:1<21::aid-jgt3>3.0.co;2-f
+Total domination number of grid graphs
+https://doi.org/10.1016/s0166-218x(01)00297-9
+Signed total domination in graphs
+https://doi.org/10.1016/j.disc.2003.06.002
+Locating-total domination in graphs
+https://doi.org/10.1016/j.dam.2012.04.004
+Signed Total Domination Nnumber of a Graph
+https://doi.org/10.1023/a:1013782511179
+Secure domination and secure total domination in graphs
+https://doi.org/10.7151/dmgt.1405
+A note on total domination
+https://doi.org/10.1016/0012-365x(84)90145-6
+Locating-total domination in claw-free cubic graphs
+https://doi.org/10.1016/j.disc.2012.06.024
+Total Domination in Categorical Products of Graphs
+https://doi.org/10.7151/dmgt.1257
+The diameter of total domination vertex critical graphs
+https://doi.org/10.1016/j.disc.2004.05.010
+On the Total Domination Number of Cartesian Products of Graphs
+https://doi.org/10.1007/s00373-004-0586-8
+Total domination and open packing in some chemical graphs
+https://doi.org/10.1007/s10910-018-0877-6
+Total domination in graphs with minimum degree three
+https://doi.org/10.1002/(sici)1097-0118(200005)34:1<9::aid-jgt2>3.0.co;2-o
+Total domination in interval graphs
+https://doi.org/10.1016/0020-0190(86)90112-2
+On matching and total domination in graphs
+https://doi.org/10.1016/j.disc.2006.10.024
+Domination and total domination on asteroidal triple-free graphs
+https://doi.org/10.1016/s0166-218x(99)00128-6
+The 4/5 upper bound on the game total domination number
+https://doi.org/10.1007/s00493-015-3316-3
+Bounds on the locating-total domination number of a tree
+https://doi.org/10.1016/j.dam.2010.12.025
+Total domination in interval graphs
+https://doi.org/10.1016/0020-0190(86)90022-0
+

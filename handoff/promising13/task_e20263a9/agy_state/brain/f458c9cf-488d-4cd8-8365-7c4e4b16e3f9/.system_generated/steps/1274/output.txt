@@ -1,0 +1,15 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+def GraphCalc.romanDominationNumber.{u_1} : {V : Type u_1} →
+  [Fintype V] → [DecidableEq V] → (G : SimpleGraph V) → [DecidableRel G.Adj] → ℕ :=
+fun {V} [Fintype V] [DecidableEq V] G [DecidableRel G.Adj] =>
+  Option.getD
+    (Finset.image GraphCalc.romanWeight (Finset.filter (GraphCalc.IsRomanDominatingFunction G) Finset.univ)).min 0
+def GraphCalc.IsRomanDominatingFunction.{u_1} : {V : Type u_1} →
+  (G : SimpleGraph V) → [DecidableRel G.Adj] → (V → Fin 3) → Prop :=
+fun {V} G [DecidableRel G.Adj] f => ∀ (v : V), f v = 0 → ∃ u, G.Adj v u ∧ f u = 2
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

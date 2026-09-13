@@ -1,0 +1,34 @@
+The search for ""radius" "roman domination" "rad(G)"" returned the following summary:
+In graph theory, the terms **radius**, **Roman domination number**, and **rad(G)** are defined as follows:
+
+### 1. Radius, rad(G)
+The **radius** of a graph $G$, denoted by **$\text{rad}(G)$**, is defined as the minimum eccentricity among all vertices in the graph[1][2]. 
+*   **Eccentricity $\epsilon(u)$:** For a vertex $u$, this is the maximum distance from $u$ to any other vertex $v$ in the graph ($ \epsilon(u) = \max_{v \in V} d(u, v) $)[3][2].
+*   **Mathematical Definition:** $\text{rad}(G) = \min \{ \epsilon(u) : u \in V(G) \}$[1][4].
+*   A vertex $v$ is called a **central vertex** (or center) if its eccentricity is equal to the radius of the graph[5][4].
+
+### 2. Roman Domination Number, $\gamma_R(G)$
+**Roman domination** is a graph-theoretical model based on a historical military strategy[6]. 
+*   **Roman Dominating Function (RDF):** A function $f: V \to \{0, 1, 2\}$ such that every vertex $u$ with $f(u) = 0$ is adjacent to at least one vertex $v$ with $f(v) = 2$[3][7][8].
+*   **Roman Domination Number:** The weight of an RDF is the sum of the values assigned to all vertices ($\sum_{v \in V} f(v)$)[3][9]. The Roman domination number, denoted as **$\gamma_R(G)$**, is the minimum weight among all possible Roman dominating functions on the graph $G$[3][10].
+
+### Relationship in Literature
+Research often investigates the relationship between these parameters[11]. For example:
+*   Some studies compare the Roman domination number with the radius of a graph to establish bounds[12][11].
+*   The radius is also used in specific graph parameters like "Global Distance Roman Domination," where the bounds for the domination number are often expressed in terms of $\text{rad}(G)$ (e.g., cases where the value changes based on whether a distance $k$ is greater than or equal to the radius)[13][14].
+
+Sources:
+[1] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGayuL2Osj8a2jYvEhI5IYmPI4qRwEpn-RsATE5S42tF5zOCm4wwiklaNpgCCl9qqEvGWUTEvKEONpPw-TsqEwHTszTmN7ahEpUeMRHoGyLLXffJtBjZQCS258hZYoKW5e7etEQbFenRg==)
+[2] [worldscientific.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQETQQ1KPKX97q2iUeGcrfc0p_v8sRODn7-3F-fFnju40mNGvTBwk01X3koOntYI0MyZzn91OSQ9OeA-LhIDozZBq3Sl45LO-m8F_MmeIkB8dDQGjijtnUxDa5nJgUbPsm8y4hAdw700vEcm6GptaEM-tgvXspyR4Uvngim2BxKs2CCCZZNVLg==)
+[3] [dergipark.org.tr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHdThdf-5RuMbzh4vCwQVb-E2QGeU8r5sT5XnwB4d9LTB7KiZd2VBU07a1V0TBGXaXTjmreYblx969UsJgTNuT2B8qBCM8xF2FmBUKdW6t2TXERd7ob-wgk9wk-134idSvFSV7NScwNTnh5jkPXM2g=)
+[4] [uct.ac.za](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG2lRwRpwmuBhCUi2Lmep1_tgZkpbixhqjbbJ5awssOpx5HvK17PtI3JBQJbaXuhiuc54vdz1YpbsZtdWkYLWIC2oY6I0J5Gvww83ROYPONkQBed5n1LoEtKQLS9pBAIjoWJHj9Sti69qq9bWMwKKZHrshEtgAZNhDu5bNIqZMh-wIKWm25)
+[5] [isikun.edu.tr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGwAEFHN4CR9Jw9UdhWyF0VF4vMujBHuUzb3iOX-AqeQcHvzO7Og3YNGNc-MWGGtnbEKCfSoloF7t50Wseo47J93mfXhwa5Tlz3ICO73lF4djziSsX-KMt4Hg58B1bH0v-UYbU1VECnLh2lcYd06OdMdCEQN12cmA==)
+[6] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFOpHlcCqOiUUUFXO-Y-852nQmszRgX5TAIt0baPH2FUBNN3GSES1MDb2wz32P2XrDwaMNymvozZbl5IpCxjfggQiortr9MVzx0V5j_cfzo0Mb6Td-G-yeOQHRMoO99gDcgoIm5gZjLbJNBpZHtUyIwVdgfJSTFiAGd-2UmahV2Q0XOng==)
+[7] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHMJDgFdtMV5hrgrYwER6rdgedlLN5553z4D4i2xUxQlKZynQ2IgbVatuM9cCbBNzZiblvYWF9ckndzHjw_fvXVmJJKFLUy9eMnmTSC7jBCmw4vh3SJw8RZIB_yojFXcizyHlq0V1j0TS6swa7MRt2MFWNX5JwTWV9DIp2LRIkIT3vGz-MvsAZJxKD-JANgzPikXQ==)
+[8] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFOpHlcCqOiUUUFXO-Y-852nQmszRgX5TAIt0baPH2FUBNN3GSES1MDb2wz32P2XrDwaMNymvozZbl5IpCxjfggQiortr9MVzx0V5j_cfzo0Mb6Td-G-yeOQHRMoO99gDcgoIm5gZjLbJNBpZHtUyIwVdgfJSTFiAGd-2UmahV2Q0XOng==)
+[9] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGayuL2Osj8a2jYvEhI5IYmPI4qRwEpn-RsATE5S42tF5zOCm4wwiklaNpgCCl9qqEvGWUTEvKEONpPw-TsqEwHTszTmN7ahEpUeMRHoGyLLXffJtBjZQCS258hZYoKW5e7etEQbFenRg==)
+[10] [dergipark.org.tr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHdThdf-5RuMbzh4vCwQVb-E2QGeU8r5sT5XnwB4d9LTB7KiZd2VBU07a1V0TBGXaXTjmreYblx969UsJgTNuT2B8qBCM8xF2FmBUKdW6t2TXERd7ob-wgk9wk-134idSvFSV7NScwNTnh5jkPXM2g=)
+[11] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5q_14n2KFz32k0FmPhatpfOFm625syYjv6MK0SpGXfpREErqazSCXio6YomVk3o5k89m0EQATE5GF0h9dLCCtd2aT-3Ih9JTZAnd41e9YgGJpJCJpPbYaHu-9qmMIayZi1N4=)
+[12] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5q_14n2KFz32k0FmPhatpfOFm625syYjv6MK0SpGXfpREErqazSCXio6YomVk3o5k89m0EQATE5GF0h9dLCCtd2aT-3Ih9JTZAnd41e9YgGJpJCJpPbYaHu-9qmMIayZi1N4=)
+[13] [ejpam.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGayuL2Osj8a2jYvEhI5IYmPI4qRwEpn-RsATE5S42tF5zOCm4wwiklaNpgCCl9qqEvGWUTEvKEONpPw-TsqEwHTszTmN7ahEpUeMRHoGyLLXffJtBjZQCS258hZYoKW5e7etEQbFenRg==)
+[14] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcPdI4iCYnP_Cj4YzFf-BehZpRD1T1yfdXnk_9v_aY1oU1JTMEpp4ySTXzSUYG8eHrho_8Gipci6x7H6yeMU_IRhv_KgsLUjqEYJuqDnbvGIZXUpJie9JqvC0FGRTD6aE6bhlJuPnNmk1766hQNAW8NhZxkumwyxx3MR4tbWJXQbU7EGlJKV7vkFXkxmYCyAE61OS5Mf4z-jHOeycw9gc=)

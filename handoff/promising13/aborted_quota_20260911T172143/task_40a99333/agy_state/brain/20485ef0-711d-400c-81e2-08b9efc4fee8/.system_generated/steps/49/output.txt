@@ -1,0 +1,38 @@
+The search for ""total domination number" "roman domination number"" returned the following summary:
+In graph theory, both **total domination number** and **roman domination number** are parameters related to the concept of dominating sets, representing different strategies for covering or "defending" a graph[1][2][3].
+
+### Total Domination Number
+The **total domination number**, denoted by $\gamma_t(G)$, is defined as the minimum cardinality (number of vertices) of a **total dominating set**[4][5].
+*   **Definition:** A set $S$ of vertices in a graph $G = (V, E)$ is a total dominating set if every vertex in $V$ (including those in $S$) is adjacent to at least one vertex in $S$[5][6].
+*   **Key Constraint:** Unlike standard domination, where vertices in the set can dominate themselves, total domination requires every vertex to have a *distinct* neighbor in the set[5]. Consequently, graphs with isolated vertices do not have a total dominating set[5][7].
+
+### Roman Domination Number
+The **roman domination number**, denoted by $\gamma_R(G)$, is a weighted variation of the domination problem[2][8].
+*   **Definition:** It is the minimum total weight of a **Roman dominating function** $f: V \to \{0, 1, 2\}$[2][8].
+*   **Function Rule:** The function must satisfy the condition that every vertex $v$ with $f(v) = 0$ is adjacent to at least one vertex $u$ with $f(u) = 2$[8][9]. 
+*   **Conceptual Origin:** The concept is famously motivated by a *Scientific American* article, "Defend the Roman Empire!"[8]. It models a scenario where locations (vertices) are either:
+    *   Unsecured ($f(v)=0$)[8]
+    *   Secured by one legion ($f(v)=1$)[8]
+    *   Secured by two legions ($f(v)=2$), allowing one legion to be sent to an adjacent unsecured location without leaving the original vertex unprotected[8].
+
+### Summary of Differences
+| Feature | Total Domination | Roman Domination |
+| :--- | :--- | :--- |
+| **Mathematical Basis** | Cardinality of a vertex set[5] | Total weight of a function labeling[2] |
+| **Labels/Values** | Binary (In set / Not in set) | Discrete $\{0, 1, 2\}$[8] |
+| **Primary Goal** | Every vertex must have a neighbor in $S$[5] | Every $0$-vertex must be adjacent to a $2$-vertex[8] |
+
+Research also explores hybrid variants, such as **total Roman domination**, which combines the requirements of both concepts[10][11].
+
+Sources:
+[1] [emergentmind.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFaucFiyddctJSxa7K7v1t8GPWtAO4w1NnJHAoTyipMq8QlXrreOiqGzQ-S7k9nQl8pwpybDwzR3-oxVxTwqmnAQPMDhQZe2MJ_CseyNPZs-H9o7_JNyG5PsSnS1iE-Lt1dc69gYKSCNBggFou5npQZew==)
+[2] [emergentmind.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH8foRoKPrUiQ6LrVoOtNKa10_IiecWzpiPDY17wVPwhlnTb3KS0HeMNxRjbbIZH8beONZ4zlgB7Vdp9q-cF0Q9E1J5k10tv16kQyAwTH_scjaBt56hb2_dCI3jEWMUpWWTwB0DC8ypS3Sw1BfrZK7QbA==)
+[3] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF5CbYnp5i63W-dwZ39F8b-p5vxUIECIzCwHOODIhIFy-NGnBEki2cEHHzn2VbQzmmBZDVHpdVhTyLleUkRGpObuJ7FcYFN7DKXM6q8HIUu77ZwLuw19XmJ8ZhueL0gpq7OelQ=)
+[4] [wolfram.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEMZnpcHivWsIyuOyfpvEAHARIappX9swzgQ7QK1scBumsg4z9khPpq0VhDaftampze-GUQyrX_S6IRaIUAsE-Tkrl5C24smPEl_g72t6qJ7runRrRvhbNuFcWg2qPHx6jdReU9gwbmm5HgnXBJCA==)
+[5] [uz.zgora.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGzmw1L0O1OwIGFaPfUPDPFrgatUYx0FsTMFdqewMJUpCv3RdfCOoEp8dgPUXK36tfj-AX63Og-otlvea7N0hB2fOft4-9e-O_3jU8HoFdrn_06VaJq_X4yr_PfPjAGcG5ZxR2XEYBvzuQokA==)
+[6] [wikipedia.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzsrV15N_I4fHWfxZGFH1MNVka3JpSmToZbE7p_VC_N5Ictnhd7XK5erIciwpUa0D4CfCB57teBuq9_o-dvscvfRzQI-PkpiPKKCbk4OTmpX5z6TOfQSTyhjvByUVCvzLnwQ==)
+[7] [mdpi.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFqBEaCFVs6BopSj9QR6MOwIT6n6iNbXk49pGAhHWwTGWZjx5WzyST2_wAivhjeoLf_FPwBxviOrcSQo09aitd4bZuxg4XFks9UBgrwUGthRHhkVdA1a_zakMfCfHI=)
+[8] [aip.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG-WnmASROO3wZdPlFMeVUrUB62nCQkAV_qKCdxSRH9UYMO4sshtDqDv3aYTqGIvEiW797qt9aJiuzzMlDK6iMnbnUFZMIiQ7sQUsKd3qBrsXKq6gby3TLHQieRpYFTWpuR-ZYw2LC8Zxa5qmT3YmYGLWjpbgIfZ3eERporTsieZcV-gEk_jm4HlFxX5wfts6fb)
+[9] [isikun.edu.tr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHEfbxYmStIy8q_p9R-ftHwlagobXFzzOYzlKb6ppL3GLwNS-N1fgOk3s-spm3rmcZcGClK3nELM9xD_X4cxS5qwNxK84R2ygUbMlFWo4YDNscchHqozK5VCTVvzPDn2j13w8Ar0F35plq_wg8QZhCwZK4BXJYTaQ==)
+[10] [isikun.edu.tr](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHEfbxYmStIy8q_p9R-ftHwlagobXFzzOYzlKb6ppL3GLwNS-N1fgOk3s-spm3rmcZcGClK3nELM9xD_X4cxS5qwNxK84R2ygUbMlFWo4YDNscchHqozK5VCTVvzPDn2j13w8Ar0F35plq_wg8QZhCwZK4BXJYTaQ==)
+[11] [ui.ac.ir](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHdiTB1ZInTLLHm2ukIMfXiiycqF0GJFaW5td9QAROUs1G3UyygW1sHpshX1N7093AZGXKZ3Z8LyoHDDBMjc-WybBVb6NssbxHppu4Y3bVlYMHHqrw2y2EJm6FVUC-NNC1noudXri2B7JeNE7ny-QAqtYYaqym5KHFbDD1gKg==)

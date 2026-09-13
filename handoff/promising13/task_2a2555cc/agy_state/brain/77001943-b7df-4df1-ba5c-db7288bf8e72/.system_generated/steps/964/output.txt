@@ -1,0 +1,10 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.C46pFnCPSN.lean:7:2: error: Invalid alternative name `none`: Expected `top` or `coe`
+/tmp/tmp.C46pFnCPSN.lean:10:2: error: Invalid alternative name `some`: Expected `top` or `coe`
+/tmp/tmp.C46pFnCPSN.lean:6:2: error: Alternative `top` has not been provided
+/tmp/tmp.C46pFnCPSN.lean:6:2: error: Alternative `coe` has not been provided
+CHECK: FAILED (exit 1)
+

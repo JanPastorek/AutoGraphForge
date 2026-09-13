@@ -1,0 +1,33 @@
+The search for ""total domination" "radius" "eccentricity" "Henning" "Yeo" "Proof"" returned the following summary:
+The relationship between **total domination number**, **radius**, and **eccentricity** is a subject explored in graph theory, notably in the work of **Michael A. Henning and Anders Yeo**, particularly in their monograph *Total Domination in Graphs* (2013)[1][2][3].
+
+### Key Concepts
+*   **Total Domination Number ($\gamma_t(G)$):** The minimum cardinality of a set $S \subseteq V(G)$ such that every vertex in $G$ is adjacent to at least one vertex in $S$[4][3]. A total dominating set exists if and only if the graph has no isolated vertices[3].
+*   **Eccentricity and Radius:** The eccentricity of a vertex $v$, denoted $ecc_G(v)$, is the maximum distance between $v$ and any other vertex in the graph. The **radius** of $G$, $rad(G)$, is the minimum eccentricity among all vertices of $G$[4][5][6].
+
+### Relevant Bounds and Proofs
+Research by Henning, Yeo, and others has established various lower bounds for the total domination number in terms of the radius of a graph[1][7].
+
+*   **Radius Lower Bound:** For a connected graph $G$ of order $n \ge 2$ without isolated vertices, a known bound is:
+    $$\gamma_t(G) \ge rad(G)$$
+    This is often cited in literature discussing distance-based domination parameters[1][7].
+*   **Generalizations:** This result has been generalized to the **total $k$-domination number** ($\gamma_{t,k}(G)$). Recent work (e.g., Davila et al.) provides a proof for the lower bound:
+    $$\gamma_{t,k}(G) \ge \frac{1}{k} rad(G)$$
+    The proof typically involves considering a spanning tree $T$ of $G$, noting that $rad(G) \le rad(T)$, and using the properties of trees and diameters to establish the inequality[1][8].
+
+### Further Reading
+*   **Monograph:** *Total Domination in Graphs* by Michael A. Henning and Anders Yeo (Springer Monographs in Mathematics, 2013) is the primary reference for these and other results concerning total domination[1][9][10].
+*   **Papers:** Various papers by Haynes, Henning, and Yeo explore diameter-two critical graphs, bounds on domination parameters, and related topics in discrete mathematics[11][1].
+
+Sources:
+[1] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGer4vdeNCMV6xRoeQ4z7OBBLI2_NaC6dWqpPfcGi4AHUH9uEUXmjy6CeySN9WKu0FGIz5iVc5mTvIcfMLtoud29Q4JGAWB2Ljrbv2lnuJIG-wV8PMu)
+[2] [wmich.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFgXkdbJ2KAUW33p0v7uC6xpM724pz5SuZRm-rObVel64HhQnixhJKyWNZd_oMbpFrMxMnP5gxyHgWM05FkOn80FSUDjYJJfliSlZsWsoTolVcS6osPEqqm2KmMXtC2JYtJU0KRmZTh3cqgZAoFQomqU2Z_fWXoeoQrO_9nSXQ3qkMvJRGJeHdPMhE=)
+[3] [the-ica.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFdz8GXPIPOM39S9Ar8vkSNWTcO532oo3z_bGBb3xX1AdzcF4-r08qIcE0iINMfJU4mkXTrymmal_vPQ4H7iA2NMup4drwiHASWfQYvx7iwMxtJoFYTu1O876PEaOfXSCkJzd33UPtAKHa9Z6BPwFKKL5WhohE2LG49aw==)
+[4] [the-ica.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFdz8GXPIPOM39S9Ar8vkSNWTcO532oo3z_bGBb3xX1AdzcF4-r08qIcE0iINMfJU4mkXTrymmal_vPQ4H7iA2NMup4drwiHASWfQYvx7iwMxtJoFYTu1O876PEaOfXSCkJzd33UPtAKHa9Z6BPwFKKL5WhohE2LG49aw==)
+[5] [ucalgary.ca](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG16qS3fvCpVsnKJmTmUMZ05Z7cJzvQ704juKYQyNS3kk1Wye0Y_P8V5dMNsk3ueGutC4j37ToZxrX3ZY9gZV6AmZbBS0nWDO3p8AHJSLgmrqH6rtpsL90mgWtu1fdLwvSuKst2zHwvfF5LtRKXYEV5)
+[6] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuSsk-Aw2I3LX2iie6Teh3v9XSebaAfQMYncjSHtLAVS8sjy0OrEQBOPvmU6jW-0mumJjkiff02PD7PMs5MdNofK-dXVRSgrRLWr1gIIvdpCHAqIWqYuo1dRh9xAmJj1POQIm4up2TghZwGlr-c3IJaPcvLIU08eGlw0fmVa8VH_0Rn5vUptsW)
+[7] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGhE_E8EkMR0OxYDqFuzn9656-IkQVvgV0giwiKFdniwEPWcdERJtTcf7W41X-ofcZcgEPSp4Eo4elwqxZo53lE2V5E16zEonfcC2cdoiAGYDrwj9qB4W66xteofZMN3NUH3rmxzFhggcIANGFe_Sv49DfXqeHIJNAX)
+[8] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGer4vdeNCMV6xRoeQ4z7OBBLI2_NaC6dWqpPfcGi4AHUH9uEUXmjy6CeySN9WKu0FGIz5iVc5mTvIcfMLtoud29Q4JGAWB2Ljrbv2lnuJIG-wV8PMu)
+[9] [mdpi-res.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHnX8WVS6yQo1i9Y3Tud7u66-mw7F0H61Rw0i3tG7YHsl5rrPVVPdjrwRb7rgd5RYRUqR6h84Kt1jZT-Inw5N6drtTjmIyth-L9SSVyUrWG0aD6klGwWV2-MgwCTyz16yPz_qjcjMaB6vjwt8FVjmWmT1Bd81Jg7zseWZN3sPtuIs9huH1r8-xz3-P9ktwwbiGR)
+[10] [wmich.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFgXkdbJ2KAUW33p0v7uC6xpM724pz5SuZRm-rObVel64HhQnixhJKyWNZd_oMbpFrMxMnP5gxyHgWM05FkOn80FSUDjYJJfliSlZsWsoTolVcS6osPEqqm2KmMXtC2JYtJU0KRmZTh3cqgZAoFQomqU2Z_fWXoeoQrO_9nSXQ3qkMvJRGJeHdPMhE=)
+[11] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGhE_E8EkMR0OxYDqFuzn9656-IkQVvgV0giwiKFdniwEPWcdERJtTcf7W41X-ofcZcgEPSp4Eo4elwqxZo53lE2V5E16zEonfcC2cdoiAGYDrwj9qB4W66xteofZMN3NUH3rmxzFhggcIANGFe_Sv49DfXqeHIJNAX)

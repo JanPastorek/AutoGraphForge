@@ -1,0 +1,5 @@
+{"name":"ORIGINAL_REQUEST.md","sizeBytes":"2480"}
+{"name":"sentinel_1","isDir":true}
+{"name":"teamwork_preview_pipeline_1","isDir":true}
+
+Summary: This directory contains 2 subdirectories and 1 files.

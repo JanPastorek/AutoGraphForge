@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+w=2, k=2: compl=1, k+compl+1=4 <= W=4
+w=2, k=3: compl=0, k+compl+1=4 <= W=4
+w=3, k=2: compl=1, k+compl+1=4 <= W=4
+w=3, k=3: compl=0, k+compl+1=4 <= W=4
+

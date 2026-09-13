@@ -1,0 +1,10 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.yJNvE1vAcL.lean:11:2: error: Invalid alternative name `none`: Expected `top` or `coe`
+/tmp/tmp.yJNvE1vAcL.lean:13:2: error: Invalid alternative name `some`: Expected `top` or `coe`
+/tmp/tmp.yJNvE1vAcL.lean:10:2: error: Alternative `top` has not been provided
+/tmp/tmp.yJNvE1vAcL.lean:10:2: error: Alternative `coe` has not been provided
+CHECK: FAILED (exit 1)
+

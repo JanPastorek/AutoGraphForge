@@ -1,0 +1,15 @@
+
+The command exited with code 0.
+Output:
+Total tight graphs found: 623
+2 rad= 1 rdn= 2 edges= [(0, 1)]
+3 rad= 1 rdn= 2 edges= [(0, 1), (0, 2)]
+3 rad= 1 rdn= 2 edges= [(0, 1), (0, 2), (1, 2)]
+4 rad= 1 rdn= 2 edges= [(0, 3), (1, 3), (2, 3)]
+4 rad= 2 rdn= 3 edges= [(0, 1), (0, 3), (1, 2)]
+4 rad= 1 rdn= 2 edges= [(0, 3), (1, 2), (1, 3), (2, 3)]
+4 rad= 2 rdn= 3 edges= [(0, 1), (0, 3), (1, 2), (2, 3)]
+4 rad= 1 rdn= 2 edges= [(0, 1), (0, 2), (0, 3), (1, 2), (2, 3)]
+4 rad= 1 rdn= 2 edges= [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
+5 rad= 1 rdn= 2 edges= [(0, 4), (1, 4), (2, 4), (3, 4)]
+

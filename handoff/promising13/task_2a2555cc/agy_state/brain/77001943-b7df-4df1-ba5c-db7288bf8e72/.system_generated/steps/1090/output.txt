@@ -1,0 +1,9 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+SimpleGraph.Walk.length_concat.{u} {V : Type u} {G : SimpleGraph V} {u v w : V} (p : G.Walk u v) (h : G.Adj v w) :
+  (p.concat h).length = p.length + 1
+/tmp/tmp.1pjdV5Yygd.lean:6:7: error(lean.unknownIdentifier): Unknown constant `SimpleGraph.Walk.reverse_induction`
+CHECK: FAILED (exit 1)
+

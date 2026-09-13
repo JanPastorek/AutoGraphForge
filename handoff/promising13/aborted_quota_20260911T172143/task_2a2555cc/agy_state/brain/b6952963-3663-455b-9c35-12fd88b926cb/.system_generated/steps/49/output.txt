@@ -1,0 +1,14 @@
+The search for ""radius" "total domination number" "rad(G) \le" OR "rad(G) <=" OR "radius(G) \le"" returned the following summary:
+In graph theory, the relationship between the total domination number, denoted as $\gamma_t(G)$, and the radius of a graph, denoted as $\text{rad}(G)$, is a well-studied topic[1][2][3].
+
+Research has established lower bounds for the total domination number in terms of the radius of the graph[1]. Specifically, it has been noted in the literature that:
+
+$$\gamma_t(G) \ge \text{rad}(G)$$
+
+This inequality appears in studies concerning lower bounds for domination parameters[1]. Furthermore, this radius-based lower bound has been generalized in various contexts, including to the total distance $k$-domination number, $\gamma_{t,k}(G)$[4][1].
+
+Sources:
+[1] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGfi1J-em0Dq1IlMCDWLnI4W2O1C0_xuIwAgRW342JTutR8Flqi_b4RyxqB1R3rLW1ul5ClLGOkzGxWLhUReCucVnHU8G4YUoIPR3j47HiKiwh_YiTE)
+[2] [shahindp.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHyXGnXhXxZu9DV8d9QVpnDZ0M5gH5SS6-hTNFnXX4Tw9f0keMpdx6Je3BANGWLh1G9JvAPm9068HC8c5k6GiK0KUTECKOz41n4xjuHN9n_o2fb3lywQBwC21x4y2iPPE5KmZcURNcfofrXkNK2)
+[3] [georgiasouthern.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHBr8QCGLFEK08qeNyup9IhUjeCmy3G4czHNmLUuky7VisSvDdtrbxfz32u5IczQTNWZuvlu2cnTSR3fYDMMFymGOVEJr6RLzJNtHP-Qoz2-2ndulXDo-nS4mkeaUTEN8fQdys7bJ0w1x7fm3HgV4umyIUzbhiFLhGFIt2uB7mt2Pz5ojXs_nt5JcO7Rg==)
+[4] [georgiasouthern.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHBr8QCGLFEK08qeNyup9IhUjeCmy3G4czHNmLUuky7VisSvDdtrbxfz32u5IczQTNWZuvlu2cnTSR3fYDMMFymGOVEJr6RLzJNtHP-Qoz2-2ndulXDo-nS4mkeaUTEN8fQdys7bJ0w1x7fm3HgV4umyIUzbhiFLhGFIt2uB7mt2Pz5ojXs_nt5JcO7Rg==)

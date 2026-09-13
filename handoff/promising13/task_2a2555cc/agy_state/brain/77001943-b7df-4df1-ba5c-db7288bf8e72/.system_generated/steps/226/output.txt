@@ -1,0 +1,9 @@
+Task: 77001943-b7df-4df1-ba5c-db7288bf8e72/task-224
+Status: RUNNING
+Log: /tmp/agyhome.wwbf9z/.gemini/antigravity-cli/brain/77001943-b7df-4df1-ba5c-db7288bf8e72/.system_generated/tasks/task-224.log
+Log output:
+LINT: ok
+GraphCalc.radius.{u_1} {V : Type u_1} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ
+GraphCalc.totalDominationNumber.{u_1} {V : Type u_1} [Fintype V] (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ
+
+Last progress: 1s ago

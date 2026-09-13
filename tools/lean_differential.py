@@ -53,6 +53,12 @@ NUMERIC = {
     "total_zero_forcing_number": "GraphCalc.totalZeroForcingNumber {G}",
     "connected_zero_forcing_number": "GraphCalc.connectedZeroForcingNumber {G}",
     "vertex_cover_number": "GraphCalc.vertexCoverNumber {G}",
+    "total_domination_number": "GraphCalc.totalDominationNumber {G}",
+    "edge_cover_number": "GraphCalc.edgeCoverNumber {G}",
+    "sub_total_domination_number": "GraphCalc.subTotalDominationNumber {G}",
+    "roman_domination_number": "GraphCalc.romanDominationNumber {G}",
+    "double_roman_domination_number": "GraphCalc.doubleRomanDominationNumber {G}",
+    "radius": "GraphCalc.radius {G}",
 }
 
 # Invariants that can be undefined: `minCard` has no witness on some graphs.
@@ -77,9 +83,16 @@ BOOLEAN = {
     "bipartite": "GraphCalc.IsBipartiteClass {G}",
 }
 
+# `maxHeartbeats 0` removes the elaborator's *time* limit; it weakens no
+# soundness check, as the kernel still rechecks the finished term. Without it
+# the default budget expires mid-evaluation and the failure is reported at a
+# line — indistinguishable from a genuine mismatch. That is not hypothetical:
+# seven `doubleRomanDominationNumber` checks were reported as DISAGREEMENTS
+# when the values were in fact never computed.
 PREAMBLE = ("import Mathlib\n"
             "import LeanProject.GraphInvariantsComputable\n\n"
-            "set_option maxRecDepth 100000\n\n")
+            "set_option maxRecDepth 100000\n"
+            "set_option maxHeartbeats 0\n\n")
 
 
 def graphs_up_to(max_n: int):
@@ -190,14 +203,40 @@ def main() -> int:
 
     # A failing `decide` *is* a disagreement. Map it back to its line so the
     # (graph, invariant) pair is named rather than just "the file failed".
-    failures = []
+    # A failing `decide` is a disagreement; a resource limit is not. Conflating
+    # them turns "the kernel could not finish" into "graphcalc is wrong", which
+    # is the more alarming claim and the false one.
+    def _exhausted(msg: str) -> bool:
+        return ("maximum number of heartbeats" in msg
+                or "maximum recursion depth" in msg
+                or "deterministic) timeout" in msg)
+
+    failures, exhausted = [], []
     for m in re.finditer(r"^.*?:(\d+):\d+: error: (.*)$", log, re.M):
         line, message = int(m.group(1)), m.group(2)
-        failures.append((next((c for c in checks if c[0] == line), None), message))
-    if ok and not failures:
-        print(f"\nAGREEMENT: all {len(checks)} checks kernel-verified — graphcalc "
-              f"and the Lean definitions coincide on every graph tested.")
-        return 0
+        entry = (next((c for c in checks if c[0] == line), None), message)
+        (exhausted if _exhausted(message) else failures).append(entry)
+    if exhausted:
+        print(f"\nNOT EVALUATED: {len(exhausted)} check(s) hit a kernel resource "
+              f"limit — no verdict either way for these:")
+        for match, message in exhausted[:10]:
+            if match:
+                _, gid, col, expected = match
+                print(f"  {gid:>10}  {col:32s} graphcalc={expected!r}")
+        print()
+    # Lean elaborates each `example` independently and reports every failure,
+    # so a run whose only errors are resource limits still *checked* all the
+    # rest. Sending it to the "did not complete" branch below claimed that none
+    # of 6,442 checks were established when 6,441 had been kernel-accepted.
+    # A run killed from outside (subprocess timeout, OOM) leaves no per-line
+    # errors, or leaves these markers, and still falls through to INCONCLUSIVE.
+    crashed = any(m in log for m in ("TimeoutExpired", "timed out after",
+                                     "Killed", "out of memory"))
+    if not failures and (ok or (exhausted and not crashed)):
+        print(f"AGREEMENT: all {len(checks) - len(exhausted)} evaluated checks "
+              f"kernel-verified — graphcalc and the Lean definitions coincide on "
+              f"every graph tested.")
+        return 0 if not exhausted else 3
     if not failures:
         # ok=False with nothing parseable is a run that never finished, not a
         # clean bill of health — saying "0 disagreements" here would be a lie.

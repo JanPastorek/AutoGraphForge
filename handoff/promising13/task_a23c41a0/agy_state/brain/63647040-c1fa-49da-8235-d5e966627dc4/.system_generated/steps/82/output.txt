@@ -1,0 +1,16 @@
+
+The command exited with code 0.
+Output:
+  "id": "a23c41a0",
+  "file": "Challenge_a23c41a0.lean",
+  "statement": "(nontrivial) \u21d2 order \u2264 (2 \u00b7 edge_cover_number)",
+  "label": "open",
+  "label_source": "audit_top100",
+  "stratum": "promising:universal",
+  "witness_g6": null,
+  "challenge_sha256": "059d6f518dc7543a46362020458dd785782bb1b16131e7c40a79753fee5edeea"
+ },
+ {
+  "id": "40a99333",
+  "file": "Challenge_40a99333.lean",
+

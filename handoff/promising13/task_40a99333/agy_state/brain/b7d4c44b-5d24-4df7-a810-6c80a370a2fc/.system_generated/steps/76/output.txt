@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+{'paperId': '6d62cf12f9d2d999077f1a5d70c801cfdf24a4cc', 'title': 'A note on total domination and 2-rainbow domination in graphs', 'openAccessPdf': {'url': 'https://www.sciencedirect.com/science/article/pii/S0166218X14004879/pdf', 'status': 'BRONZE', 'license': None, 'disclaimer': "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1016/j.dam.2014.11.002?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/j.dam.2014.11.002, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."}, 'tldr': None, 'authors': [{'authorId': '1737302', 'name': 'Michitaka Furuya'}], 'abstract': None}
+

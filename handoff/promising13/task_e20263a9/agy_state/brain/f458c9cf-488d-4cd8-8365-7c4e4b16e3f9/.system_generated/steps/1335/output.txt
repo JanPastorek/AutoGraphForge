@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+If radius >= 4, then romanWeight(f) >= 5 ALWAYS!
+

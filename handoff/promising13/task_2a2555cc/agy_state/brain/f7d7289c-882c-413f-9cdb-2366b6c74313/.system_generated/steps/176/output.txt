@@ -1,0 +1,9 @@
+{"name":"README.md","sizeBytes":"2550"}
+{"name":"conjecturing.py","sizeBytes":"33142"}
+{"name":"expressions","sizeBytes":"98184"}
+{"name":"run.sh","sizeBytes":"436"}
+{"name":"run_conjecturing.sage","sizeBytes":"10228"}
+{"name":"run_property_conjecturing.sage","sizeBytes":"6344"}
+{"name":"run_property_conjecturing.sage.py","sizeBytes":"7287"}
+
+Summary: This directory contains 0 subdirectories and 7 files.

@@ -40,6 +40,12 @@ SUPPORTED: Dict[str, str] = {
     "total_zero_forcing_number":     "G.totalZeroForcingNumber",
     "connected_zero_forcing_number": "G.connectedZeroForcingNumber",
     "vertex_cover_number":            "(G.vertexCoverNum).toNat",
+    "total_domination_number":       "G.totalDominationNumber",
+    "edge_cover_number":             "G.edgeCoverNumber",
+    "sub_total_domination_number":   "G.subTotalDominationNumber",
+    "roman_domination_number":       "G.romanDominationNumber",
+    "double_roman_domination_number": "G.doubleRomanDominationNumber",
+    "radius":                        "(G.radius).toNat",
 }
 
 # Injected binders: a finite vertex type with decidable adjacency, enough for

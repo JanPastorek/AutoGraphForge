@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+total 4
+drwx------ 5 japake298 domain users  100 Sep 11 16:44 .
+drwx------ 3 japake298 domain users   60 Sep 11 16:44 ..
+drwxr-xr-x 5 japake298 domain users 4096 Jun 25 16:12 .elan
+drwx------ 3 japake298 domain users   60 Sep 11 16:44 .local
+drwx------ 3 japake298 domain users   60 Sep 11 16:44 project
+

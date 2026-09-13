@@ -1,0 +1,7 @@
+
+The command exited with code 1.
+Output:
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+AttributeError: module 'graphcalc.graphs' has no attribute 'nx'
+

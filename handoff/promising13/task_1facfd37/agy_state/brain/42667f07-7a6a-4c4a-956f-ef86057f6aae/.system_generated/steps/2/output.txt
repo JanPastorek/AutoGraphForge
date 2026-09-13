@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+/tmp/agyhome.ORAQte/.gemini/antigravity-cli/scratch
+total 4
+drwxr-xr-x  2 japake298 domain users    6 Sep 11 16:44 .
+drwx------ 13 japake298 domain users 4096 Sep 11 16:44 ..
+

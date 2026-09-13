@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+theorem IsPath.isContained_pathGraph (hw : w.IsPath) : pathGraph (w.length + 1) ⊑ G := by
+theorem IsPath.length_lt [Fintype V] {u v : V} {p : G.Walk u v} (hp : p.IsPath) :
+lemma IsPath.getVert_eq_start_iff {i : ℕ} {p : G.Walk u w} (hp : p.IsPath) (hi : i ≤ p.length) :
+lemma IsPath.getVert_eq_end_iff {i : ℕ} {p : G.Walk u w} (hp : p.IsPath) (hi : i ≤ p.length) :
+lemma IsPath.getVert_injOn_iff (p : G.Walk u v) : Set.InjOn p.getVert {i | i ≤ p.length} ↔
+theorem IsPath.length_eq_one_of_mem_edges {p : G.Walk u v} (hp : p.IsPath) (h : s(u, v) ∈ p.edges) :
+theorem IsPath.exists_isCycle_length_le_add_of_ne {p q : G.Walk u v} (hp : p.IsPath)
+

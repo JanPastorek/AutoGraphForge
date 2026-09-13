@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+All named and circulant graphs satisfy the conjecture!
+

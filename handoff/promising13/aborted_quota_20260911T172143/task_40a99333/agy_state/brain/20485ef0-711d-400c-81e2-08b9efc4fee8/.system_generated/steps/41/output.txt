@@ -1,0 +1,7 @@
+
+The command exited with code 1.
+Output:
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+ImportError: cannot import name 'total_domination_number' from 'graphcalc.graphs.invariants.transversal_invariants' (/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/graphcalc/graphs/invariants/transversal_invariants.py)
+

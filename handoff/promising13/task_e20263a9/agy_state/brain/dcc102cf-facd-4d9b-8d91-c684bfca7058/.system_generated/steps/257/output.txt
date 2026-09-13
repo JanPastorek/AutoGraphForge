@@ -1,0 +1,18 @@
+
+The command exited with code 0.
+Output:
+/tmp/test_lemma3.lean:18:16: error(lean.unknownIdentifier): Unknown constant `Finset.min_le_of_mem`
+/tmp/test_lemma3.lean:8:55: error: unsolved goals
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+v : V
+h_mem : GraphCalc.eccentricity G v ∈ Finset.image (GraphCalc.eccentricity G) Finset.univ
+h_nonempty : (Finset.image (GraphCalc.eccentricity G) Finset.univ).Nonempty
+m : ℕ
+hm : (Finset.image (GraphCalc.eccentricity G) Finset.univ).min = ↑m
+⊢ Option.getD (↑m) 0 ≤ GraphCalc.eccentricity G v
+Exit: 1
+

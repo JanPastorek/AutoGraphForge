@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+Try this:
+  [apply] exact degree_lt_card_verts v
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

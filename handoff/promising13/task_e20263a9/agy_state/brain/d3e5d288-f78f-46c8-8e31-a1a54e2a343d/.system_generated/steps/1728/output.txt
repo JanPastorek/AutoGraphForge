@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+New max rad for 2 balls + 2 vertices: 1, n=2
+New max rad for 2 balls + 2 vertices: 2, n=4
+New max rad for 2 balls + 2 vertices: 3, n=6
+Max radius for 2 balls + 2 vertices: 3
+

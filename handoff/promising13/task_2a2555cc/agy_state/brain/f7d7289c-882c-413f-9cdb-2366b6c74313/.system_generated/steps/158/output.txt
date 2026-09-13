@@ -1,0 +1,35 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":8,"LineContent":"and **zero-forcing** families (``total_domination_number``,"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":58,"LineContent":"    \"total_domination_number\", \"connected_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":62,"LineContent":"    \"power_domination_number\", \"sub_total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":78,"LineContent":"# Tokens, longest first, so e.g. ``total_domination_number`` is preferred over a"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":123,"LineContent":"    \"If G is a connected and order_bigger_than_2 graph, then total_domination_number \u003c= order - 1\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":140,"LineContent":"    \"domination_number \u003c= total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":146,"LineContent":"    \"total_domination_number \u003e= sub_total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":147,"LineContent":"    \"total_domination_number \u003e= domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":148,"LineContent":"    \"total_domination_number \u003c= connected_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":149,"LineContent":"    \"total_domination_number \u003e= slater\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":153,"LineContent":"    \"slater \u003c= total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":192,"LineContent":"    \"power_domination_number \u003c= total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":206,"LineContent":"    \"roman_domination_number \u003c= 2 total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":210,"LineContent":"    \"double_roman_domination_number \u003c= 3 total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":219,"LineContent":"    \"domination_number \u003e= 1/2 total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":222,"LineContent":"    \"total_domination_number \u003e= 1/2 roman_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":226,"LineContent":"    \"total_domination_number \u003c= 2 domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":227,"LineContent":"    \"total_domination_number \u003c= 2 independent_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":231,"LineContent":"    \"total_domination_number \u003c= order + -1\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":240,"LineContent":"    \"sub_total_domination_number \u003c= total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":241,"LineContent":"    \"sub_total_domination_number \u003e= slater\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":248,"LineContent":"    \"independent_domination_number \u003e= 1/2 total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":284,"LineContent":"    \"slater \u003c= sub_total_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":288,"LineContent":"    \"total_domination_number \u003c= 2 edge_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":307,"LineContent":"    \"total_domination_number \u003c= 2 * edge_domination_number\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":309,"LineContent":"    \"total_domination_number \u003c= 7/9 * max_degree + 5/3\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":478,"LineContent":"    \"total_domination_number \u003c= 7/9 * max_degree + 5/3\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py","LineNumber":484,"LineContent":"    \"total_domination_number \u003c= order + -1\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/degenerate_graphs.py","LineNumber":14,"LineContent":"bounds such as ``2 \u003c= total_domination_number`` or ``2 \u003c= chromatic_number``."}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_export.py","LineNumber":43,"LineContent":"    \"total_domination_number\":       \"G.totalDominationNumber\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_export.py","LineNumber":45,"LineContent":"    \"sub_total_domination_number\":   \"G.subTotalDominationNumber\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py","LineNumber":56,"LineContent":"    \"total_domination_number\":       \"GraphCalc.totalDominationNumber G\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py","LineNumber":58,"LineContent":"    \"sub_total_domination_number\":   \"GraphCalc.subTotalDominationNumber G\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py","LineNumber":126,"LineContent":"    \"total_domination_number\":       \"HasTotalDominationNumber\","}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py","LineNumber":128,"LineContent":"    \"sub_total_domination_number\":   \"HasSubTotalDominationNumber\","}

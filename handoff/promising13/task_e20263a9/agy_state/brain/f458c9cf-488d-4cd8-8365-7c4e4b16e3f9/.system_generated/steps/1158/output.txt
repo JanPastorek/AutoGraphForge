@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Z3 already proved: NO connected graph with radius >= 4 and weight <= 4 exists!
+

@@ -1,0 +1,9 @@
+[
+ {
+  "id": "e20263a9",
+  "statement": "(nontrivial) \u21d2 (radius + 1) \u2264 roman_domination_number",
+  "label": "open",
+  "prove_log_tail": "city_le_card_pred' depends on axioms: [propext, Classical.choice, Quot.sound]\n'radius_add_one_le_card' depends on axioms: [propext, Classical.choice, Quot.sound]\n'mem_ballWithin_of_walk' depends on axioms: [propext, Classical.choice, Quot.sound]\n'mem_ballWithin_one_of_adj' depends on axioms: [propext, Classical.choice, Quot.sound]\n'mem_ballWithin_one_self' depends on axioms: [propext, Classical.choice, Quot.sound]\n'radius_add_one_le_romanWeight_of_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'card_le_romanWeight_of_no_two' depends on axioms: [propext, Classical.choice, Quot.sound]\n'ballWithin_one_eq_univ_of_adj_all' depends on axioms: [propext, Classical.choice, Quot.sound]\n'radius_le_one_of_adj_all' depends on axioms: [propext, Classical.choice, Quot.sound]\n'radius_",
+  "status": "unresolved"
+ }
+]

@@ -1,0 +1,16 @@
+
+The command exited with code 0.
+Output:
+total 32
+drwxr-xr-x 5 japake298 domain users 4096 Aug  6 10:56 .
+drwx------ 9 japake298 domain users  200 Sep 11 16:53 ..
+drwxr-xr-x 3 japake298 domain users 4096 Jun 21 15:23 .github
+-rw-r--r-- 1 japake298 domain users    7 Jun 21 15:23 .gitignore
+dr-xr-xr-x 5 japake298 domain users 4096 Jun 25 17:34 .lake
+drwxr-xr-x 2 japake298 domain users 4096 Aug  6 12:12 LeanProject
+-rw-r--r-- 1 japake298 domain users  105 Jul 29 10:26 LeanProject.lean
+-rw-r--r-- 1 japake298 domain users  489 Jun 21 15:23 README.md
+-rw-r--r-- 1 japake298 domain users 3146 Jun 21 15:25 lake-manifest.json
+-rw-r--r-- 1 japake298 domain users  363 Jun 21 15:23 lakefile.toml
+-rw-r--r-- 1 japake298 domain users   25 Jun 21 15:23 lean-toolchain
+

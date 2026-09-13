@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+rad(G) >= 5 with gamma_R <= 5 is mathematically IMPOSSIBLE!
+

@@ -1,0 +1,12 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+/tmp/tmp.2cpcg41mJ4.lean:5:7: error(lean.unknownIdentifier): Unknown constant `Finset.min_eq_none`
+/tmp/tmp.2cpcg41mJ4.lean:6:7: error(lean.unknownIdentifier): Unknown constant `Finset.min_eq_some_iff`
+Finset.le_min.{u_2} {α : Type u_2} [LinearOrder α] {m : WithTop α} {s : Finset α} (st : ∀ a ∈ s, m ≤ ↑a) : m ≤ s.min
+/tmp/tmp.2cpcg41mJ4.lean:8:7: error(lean.unknownIdentifier): Unknown constant `Finset.min_le_of_mem`
+CHECK: FAILED (exit 1)
+
+
+

@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+SimpleGraph.Walk.{u} {V : Type u} (G : SimpleGraph V) : V → V → Type u
+SimpleGraph.dist.{u_1} {V : Type u_1} (G : SimpleGraph V) (u v : V) : ℕ
+SimpleGraph.Connected.{u} {V : Type u} (G : SimpleGraph V) : Prop
+SimpleGraph.Walk.reverse.{u} {V : Type u} {G : SimpleGraph V} {u v : V} (w : G.Walk u v) : G.Walk v u
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+ID: http://arxiv.org/abs/1511.00410v3
+TITLE: Domination parameters with number 2: interrelations and algorithmic consequences
+SUMMARY: In this paper, we study the most basic domination invariants in graphs, in which number 2 is intrinsic part of their definitions. We classify them upon three criteria, two of which give the following previously studied invariants: the weak $2$-domination number, $γ_{w2}(G)$, the $2$-domination number, $γ_2(G)$, the $\{2\}$-domination number, $γ_{\{2\}}(G)$, the double domination number, $γ_{\times 2}(G)$, the total $\{2\}$-domination number, $γ_{t\{2\}}(G)$, and the total double domination number, $γ_{t\times 2}(G)$, where $G$ is a graph in which a corresponding invariant is well defined. The third criterion yields rainbow versions of the mentioned six parameters, one of which has already been well studied, and three other give new interesting parameters. Together with a special, extensively studied Roman domination, $γ_R(G)$, and two classical parameters, the domination number, $γ(G)$, and the total domination number, $γ_t(G)$, we consider 13 domination invariants in graphs $G$. In the main result of the paper we present sharp upper and lower bounds of each of the invariants in terms of every other invariant, large majority of which are new results proven in this paper. As a consequence of the main theorem we obtain some complexity results for the studied invariants, in particular regarding the existence of approximation algorithms and inapproximability bounds.
+

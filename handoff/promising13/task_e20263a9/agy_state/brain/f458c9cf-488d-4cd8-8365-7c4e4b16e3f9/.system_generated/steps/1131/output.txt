@@ -1,0 +1,66 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.EZuEciAlSx.lean:179:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+/tmp/tmp.EZuEciAlSx.lean:195:14: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ x ∈ {w, u}, ?m.241 x
+in the target expression
+  ∑ v ∈ {u, w}, ↑(f v) ≤ ∑ v, ↑(f v)
+
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+hnt : IsNontrivialClass G
+f : V → Fin 3
+hf : IsRomanDominatingFunction G f
+hw : romanWeight f ≤ 2
+u : V
+hu2 hu2_eq : ↑(f u) = 2
+w : V
+heq : ¬w = u
+h_sum : ↑(f u) ≤ ∑ x, ↑(f x)
+hsub : {u, w} ⊆ Finset.univ
+h2sub : ∑ v ∈ {u, w}, ↑(f v) ≤ ∑ v, ↑(f v)
+⊢ ↑(f u) + ↑(f w) ≤ ∑ v, ↑(f v)
+/tmp/tmp.EZuEciAlSx.lean:208:16: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ x ∈ {z, u}, ?m.364 x
+in the target expression
+  ∑ v ∈ {u, z}, ↑(f v) ≤ ∑ v, ↑(f v)
+
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+hnt : IsNontrivialClass G
+f : V → Fin 3
+hf : IsRomanDominatingFunction G f
+hw : romanWeight f ≤ 2
+u : V
+hu2 hu2_eq : ↑(f u) = 2
+w : V
+heq : ¬w = u
+h_sum : ↑(f u) ≤ ∑ x, ↑(f x)
+h_sum_pair : ↑(f u) + ↑(f w) ≤ romanWeight f
+hw0 : ↑(f w) = 0
+hw0_fin : f w = 0
+z : V
+hz_adj : G.Adj w z
+hz2 : f z = 2
+hz2_nat : ↑(f z) = 2
+hzu : ¬z = u
+hsub : {u, z} ⊆ Finset.univ
+h2sub : ∑ v ∈ {u, z}, ↑(f v) ≤ ∑ v, ↑(f v)
+⊢ ↑(f u) + ↑(f z) ≤ ∑ v, ↑(f v)
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

@@ -1,0 +1,20 @@
+
+The command exited with code 0.
+Output:
+
+theorem isChain_adj_support {u v : V} : ∀ (p : G.Walk u v), List.IsChain G.Adj p.support
+  | nil => .singleton _
+  | cons h p => isChain_adj_cons_support h p
+
+theorem isChain_dartAdj_cons_darts {d : G.Dart} {v w : V} (h : d.snd = v) (p : G.Walk v w) :
+    List.IsChain G.DartAdj (d :: p.darts) := by
+  induction p generalizing d with
+  | nil => exact .singleton _
+  | cons h' p ih => exact .cons_cons h (ih rfl)
+
+theorem isChain_dartAdj_darts {u v : V} : ∀ (p : G.Walk u v), List.IsChain G.DartAdj p.darts
+  | nil => .nil
+  -- Porting note: needed to defer `rfl` to help elaboration
+  | cons h p => isChain_dartAdj_cons_darts (by rfl) p
+
+

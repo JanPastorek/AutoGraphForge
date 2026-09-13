@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+Averaging $2$-Rainbow Domination and Roman Domination
+http://arxiv.org/abs/1507.04899v1
+Relating $2$-Rainbow Domination to Roman domination
+http://arxiv.org/abs/1512.01067v1
+

@@ -1,0 +1,10 @@
+
+The command exited with code 1.
+Output:
+Traceback (most recent call last):
+  File "<string>", line 18, in <module>
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/networkx/__init__.py", line 58, in __getattr__
+    raise AttributeError(
+AttributeError: nx.random_tree was removed in version 3.4. Use `nx.random_labeled_tree` instead.
+See: https://networkx.org/documentation/latest/release/release_3.4.html
+

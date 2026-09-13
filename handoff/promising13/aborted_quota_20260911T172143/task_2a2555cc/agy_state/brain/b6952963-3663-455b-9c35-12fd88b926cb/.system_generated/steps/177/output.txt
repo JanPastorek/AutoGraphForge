@@ -1,0 +1,6 @@
+
+The command exited with code 3.
+Output:
+LINT: REJECTED — forbidden command `variable`
+CHECK: refused to elaborate — remove the construct named above.
+

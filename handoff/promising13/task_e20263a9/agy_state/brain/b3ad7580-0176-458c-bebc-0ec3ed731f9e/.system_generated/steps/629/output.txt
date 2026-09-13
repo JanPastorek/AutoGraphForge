@@ -1,0 +1,5 @@
+{"name":"Basic.lean","sizeBytes":"21"}
+{"name":"GraphInvariants.lean","sizeBytes":"11395"}
+{"name":"GraphInvariantsComputable.lean","sizeBytes":"27292"}
+
+Summary: This directory contains 0 subdirectories and 3 files.

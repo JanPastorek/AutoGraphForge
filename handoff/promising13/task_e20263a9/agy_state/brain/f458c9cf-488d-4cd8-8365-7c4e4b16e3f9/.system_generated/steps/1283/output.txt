@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Counterexample! n=6, w=4, v2=[0, 3], eccs=[4, 4], edges=[(0, 1), (0, 5), (2, 3), (3, 4), (4, 5)]
+

@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+For ALL Roman dominating functions on all connected graphs up to n=6, min_ecc + 1 <= weight(f) HOLDS!
+

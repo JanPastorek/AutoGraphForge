@@ -1,0 +1,14 @@
+Created the following subagents:
+{
+  "conversationId": "fd5b67fc-d6c4-4d14-82ca-e67d7a968d5b",
+  "logAbsoluteUri": "file:///tmp/agyhome.NWyWnj/.gemini/antigravity-cli/brain/fd5b67fc-d6c4-4d14-82ca-e67d7a968d5b/.system_generated/logs/transcript.jsonl"
+}
+{
+  "conversationId": "92752dbc-e919-4b9e-b022-202726747cbe",
+  "logAbsoluteUri": "file:///tmp/agyhome.NWyWnj/.gemini/antigravity-cli/brain/92752dbc-e919-4b9e-b022-202726747cbe/.system_generated/logs/transcript.jsonl"
+}
+{
+  "conversationId": "dcc102cf-facd-4d9b-8d91-c684bfca7058",
+  "logAbsoluteUri": "file:///tmp/agyhome.NWyWnj/.gemini/antigravity-cli/brain/dcc102cf-facd-4d9b-8d91-c684bfca7058/.system_generated/logs/transcript.jsonl"
+}
+The subagents will send you a message when they have completed their task or require guidance. There is no need to poll for their responses.

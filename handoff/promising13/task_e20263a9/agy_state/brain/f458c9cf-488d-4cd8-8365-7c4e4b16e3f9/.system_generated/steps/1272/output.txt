@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Verified: radius + 1 <= gamma_R(G) for all connected graphs up to n=7!
+

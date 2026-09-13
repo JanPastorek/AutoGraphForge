@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+Finset.card_le_card_of_injOn.{u_1, u_2} {α : Type u_1} {β : Type u_2} {s : Finset α} {t : Finset β} (f : α → β)
+  (hf : Set.MapsTo f ↑s ↑t) (f_inj : Set.InjOn f ↑s) : s.card ≤ t.card
+Sym2.mem_iff.{u_1} {α : Type u_1} {a b c : α} : a ∈ s(b, c) ↔ a = b ∨ a = c
+SimpleGraph.mem_edgeSet.{u} {V : Type u} (G : SimpleGraph V) {v w : V} : s(v, w) ∈ G.edgeSet ↔ G.Adj v w
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

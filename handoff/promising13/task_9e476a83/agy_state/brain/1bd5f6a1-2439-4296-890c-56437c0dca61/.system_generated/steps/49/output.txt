@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/build/lib/lean:/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/Qq/.lake/build/lib/lean:/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/aesop/.lake/build/lib/lean:/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/batteries/.lake/build/lib/lean:/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/importGraph/.lake/build/lib/lean:/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/.lake/build/lib/lean:/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/plausible/.lake/build/lib/lean:/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/proofwidgets/.lake/build/lib/lean
+
+

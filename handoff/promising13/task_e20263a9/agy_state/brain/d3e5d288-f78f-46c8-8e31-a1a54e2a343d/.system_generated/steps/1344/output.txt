@@ -1,0 +1,12 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.LudhGkmmvO.lean:236:22: error(lean.unknownIdentifier): Unknown identifier `h2`
+/tmp/tmp.LudhGkmmvO.lean:492:8: warning: declaration uses `sorry`
+/tmp/tmp.LudhGkmmvO.lean:495:8: warning: declaration uses `sorry`
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'prove_e20263a9' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'refute_e20263a9' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

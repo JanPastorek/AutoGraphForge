@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+total 16
+drwxr-xr-x 2 japake298 domain users 4096 Sep 11 20:42 .
+drwxr-xr-x 4 japake298 domain users 4096 Sep 11 20:42 ..
+-rw-r--r-- 1 japake298 domain users 1482 Sep 11 20:42 BRIEFING.md
+-rw-r--r-- 1 japake298 domain users 1360 Sep 11 20:42 handoff.md
+

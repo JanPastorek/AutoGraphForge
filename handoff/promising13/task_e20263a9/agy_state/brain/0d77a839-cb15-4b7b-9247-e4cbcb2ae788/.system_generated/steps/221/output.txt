@@ -1,0 +1,20 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.TFHYS0mUHY.lean:255:2: error: Type mismatch
+  mem_ballWithin_of_walk_le G p hp
+has type
+  w ∈ ballWithin G k v
+but is expected to have type
+  w ∈ ballWithin G k v ↔ True
+/tmp/tmp.TFHYS0mUHY.lean:253:30: warning: This simp argument is unused:
+  true_iff
+
+Hint: Omit it from the simp argument list.
+  simp only [Finset.mem_univ,̵ ̵t̵r̵u̵e̵_̵i̵f̵f̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

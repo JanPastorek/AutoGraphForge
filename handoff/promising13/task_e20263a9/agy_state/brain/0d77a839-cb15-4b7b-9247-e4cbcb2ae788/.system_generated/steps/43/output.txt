@@ -1,0 +1,1 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/tools/lean_differential.py","LineNumber":59,"LineContent":"    \"roman_domination_number\": \"GraphCalc.romanDominationNumber {G}\","}

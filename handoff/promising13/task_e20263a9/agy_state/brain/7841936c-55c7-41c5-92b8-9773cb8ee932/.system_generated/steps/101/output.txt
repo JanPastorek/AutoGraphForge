@@ -1,0 +1,25 @@
+
+The command exited with code 0.
+Output:
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Paths.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Metric.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Basic.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Chord.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Counting.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Decomp.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Maps.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Operations.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Subwalks.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Traversal.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/UnitDistance/Basic.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Connectivity/Connected.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Connectivity/WalkCounting.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Connectivity/WalkDecomp.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walks/Basic.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walks/Counting.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walks/Decomp.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walks/Maps.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walks/Operations.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walks/Subwalks.lean
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walks/Traversal.lean
+

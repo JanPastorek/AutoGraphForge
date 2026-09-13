@@ -1,0 +1,26 @@
+The search for "site:math.illinois.edu/~dwest "total domination" "radius"" returned the following summary:
+The research and conjectures regarding "total domination" and "radius" hosted on Douglas West's website primarily relate to his work with the conjecturing program **Graffiti.pc**[1] and his collaborative research on graph theory[2][3].
+
+### Key References on Douglas West's Website
+*   **Graffiti.pc Conjectures:** Douglas West's page on "Some Conjectures of Graffiti.pc (2004-07)" lists several conjectures relating the total domination number $\gamma_t(G)$ to the radius $r(G)$ and the minimum degree $\delta(G)$[1]. For example:
+    *   One conjecture suggests that if $G$ is connected, then $\gamma_t(G) \geq 2r(G)/\delta(G)$[1].
+*   **Corrections:** His "Introduction to Graph Theory - corrections" page includes references to exercise clarifications involving the term "radius"[4].
+*   **Collaborative Research:** West is a co-author of papers—such as "Some Conjectures of Graffiti.pc on Total Domination"—that explore these relationships as part of a broader study of domination parameters[2][3].
+
+### Related Mathematical Context
+In the broader graph theory literature, the relationship between the total domination number $\gamma_t(G)$ and the radius $r(G)$ is a well-studied topic[5][6][7]:
+*   **Lower Bounds:** It is known that for a connected graph $G$ of order at least two, the radius provides a lower bound for the total domination number (often cited as $\gamma_t(G) \geq \text{rad}(G)$ in specific contexts or classes of graphs)[8][9].
+*   **Total Domination Polynomials:** Research also exists on the roots of total domination polynomials, where the radius of the circle containing these roots is defined in terms of the graph's order $n$ and minimum degree $\delta$[10][11].
+
+Sources:
+[1] [illinois.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEk2QN70YpNsYODBFpaBXfSKukiP7TcHPP3ldRyGu_FmbClwMSIGcDX7IJBO3dln-pnu3qC8rVQlst-rVaIt8LIDmd92ABr9b0_iZh6bqUkHcm6eszhYqB3EuFG1VPX-VDH-KsqxDIV)
+[2] [georgiasouthern.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG6_ERqBHmJzqVf18FdcMFz1akMfyQ-DhYG6m8vRmv5mXitQD3dZ52ORdvDJw-KgrLhPusCcXor1n_LbgYsreOGbk9w0BMkl1V_kcegFiy9tDV7h2kNkD57SufP6wcgZtJX0h5PeKutISSHwrP84YQM60-pfe-pUyjrymY-JMQWfMuQ6Cjm28quukDFP9o=)
+[3] [eudml.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHS9t2wC0Bh-4j3NLVMyYnt26TmLPn34C-qKXDKSsxSP_QONgifYWcq-Rs6SxpbaVF9-Ki7iJMrrzK4KKCevdLViyNdcD0DzGZ5_3eQEKKdfb9o)
+[4] [illinois.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFLW0BjBPL2s2r6-I3YWdAk4rdTmpwsf3x6dQxsp-wT18tb3bs7kfOh9yUP1DUg15SfilwT-vvSzsjUMl-gubcOq6t6bcECxETPGsZYgvJbnGFVZsw7JpM8P-WF8aQJ2-bPcna08A==)
+[5] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGtrhUSvCyt6Y3qQfVYDhgg7_R_aTDPNhVqnkau7UhmLBMFTd-vBCaDxRVqMo_0FkcmOBfxSvOZr15Ru66-XR71sGAIqLayZtKQEZHV689NgDnQae8EMLWhMkc2g3NDsez2OszB6cYQGuqubM0m-ATMQ2tYFx-BH-qTrOVciybWcS4BFyW6L-xiVHcdgOdSOwcJiFf9mASF641nTvXoTjQFsd9kwFAKO1aouyp79hmS2NDtEIhcEf0zXz2xz4Y2j0WmFQ==)
+[6] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF3iBZXrMTJx3QAJQia0NwamQJNeu9_Ky069HXHsqyVh2Dd_tYSRBuPh44zgOrQlCI0zobn9xB8atR6ZkRwm6tMW2qW1MsfaeT2oxGgBVWcGJX4r_g8_nFyVxUlFvzf3wh1IOY=)
+[7] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHNSp93s28bj3Hyu1yUUTVlVcavkDl7MgGmrHoU5Cgfry2cyh691ZRmEL_x5Y286APjBo_KIAWGXuEpCOPT9yfNCA4LPxXeoTRH9Ria7NqeZiKDpRSSmGuqjWRa253904e18U5igfw-nHnVAVViJnohNUwSGD9RDl-VmelKrQ==)
+[8] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH95WFldBgYvcRvBLvDSatocLGqnyMCz8un-9miHuBMy5v8AoFhCBjmLx-_TfPHWU0WX_zsb2NggtVO6tfIc4lXCfHrI7m2wQmZWtAEGXMJSVb9fTf9I61Wc4fhCFGNx1nT9AOfWoGELqKnuVtmDNX4nGN7sAgBQN2oNg==)
+[9] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH95WFldBgYvcRvBLvDSatocLGqnyMCz8un-9miHuBMy5v8AoFhCBjmLx-_TfPHWU0WX_zsb2NggtVO6tfIc4lXCfHrI7m2wQmZWtAEGXMJSVb9fTf9I61Wc4fhCFGNx1nT9AOfWoGELqKnuVtmDNX4nGN7sAgBQN2oNg==)
+[10] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHQn6Bc7x9Dp9X8fL8RCtbjOAcARQDdKMxA96aB6P9h_fGf0RGpWGXw4xpq0cnqotwzuvswfIaf7PP9sSL2v1-6p-NXWsc9U1NhbcqM-4SNOXeUv0OVvBuCAA==)
+[11] [ni.ac.rs](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGgwG0Dq5amgzQ0OcaEh1tA2m0qlH49YmoSxQGe4raC-ig81KcDjNd-WQrKJCNKNp5J3GHheNa4vapnsJ39hJimIF8XFwLV9zMAM7dzTHLSXG7aIAzPT4kE-qreHkBxg3EcSeExsO6sJrdpFxByzBPCMTnOSEXuh04cEYw=)

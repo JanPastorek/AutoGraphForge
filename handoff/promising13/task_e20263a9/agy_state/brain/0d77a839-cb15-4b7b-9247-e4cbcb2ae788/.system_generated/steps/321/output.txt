@@ -1,0 +1,13 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.YWhgzvuCCO.lean:332:28: error: Type mismatch
+  rfl
+has type
+  ?m.34 = ?m.34
+but is expected to have type
+  p.length = 1
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

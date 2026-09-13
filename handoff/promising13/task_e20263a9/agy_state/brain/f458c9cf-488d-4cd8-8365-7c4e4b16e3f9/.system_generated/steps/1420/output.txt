@@ -1,0 +1,18 @@
+
+The command exited with code 0.
+Output:
+total 96
+drwxr-xr-x 4 japake298 domain users  4096 Aug 14 13:12 .
+drwxr-xr-x 6 japake298 domain users  4096 Sep 11 11:22 ..
+drwxr-xr-x 2 japake298 domain users  4096 Aug  6 12:15 __pycache__
+-rw-r--r-- 1 japake298 domain users  8559 Aug  4 21:45 build_benchmark.py
+-rw-r--r-- 1 japake298 domain users  5844 Aug 14 13:18 challenge.py
+drwxr-xr-x 2 japake298 domain users  4096 Aug 20 13:26 checks
+-rw-r--r-- 1 japake298 domain users  2789 Aug  4 22:37 download_models.py
+-rw-r--r-- 1 japake298 domain users  9182 Aug  6 12:05 f16.py
+-rw-r--r-- 1 japake298 domain users  3875 Aug 14 13:12 reclassify.py
+-rw-r--r-- 1 japake298 domain users  6086 Aug  5 17:24 rescore.py
+-rw-r--r-- 1 japake298 domain users  5543 Aug  4 22:29 t0_baseline.py
+-rw-r--r-- 1 japake298 domain users  4408 Aug  6 12:05 timeout_audit.py
+-r--r--r-- 1 japake298 domain users 15815 Aug  6 12:05 w16.py
+

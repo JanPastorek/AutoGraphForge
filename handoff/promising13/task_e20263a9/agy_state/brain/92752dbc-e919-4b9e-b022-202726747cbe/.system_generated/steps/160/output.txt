@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+stdout: Finset.min.{u_2} {α : Type u_2} [LinearOrder α] (s : Finset α) : WithTop α
+
+stderr: 
+rc: 0
+

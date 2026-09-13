@@ -1,0 +1,21 @@
+
+The command exited with code 0.
+Output:
+C_3: rad=1, rad+1=2, gR=2
+C_4: rad=2, rad+1=3, gR=3
+C_5: rad=2, rad+1=3, gR=4
+C_6: rad=3, rad+1=4, gR=4
+C_7: rad=3, rad+1=4, gR=5
+C_8: rad=4, rad+1=5, gR=6
+C_9: rad=4, rad+1=5, gR=6
+C_10: rad=5, rad+1=6, gR=7
+C_11: rad=5, rad+1=6, gR=8
+C_12: rad=6, rad+1=7, gR=8
+C_13: rad=6, rad+1=7, gR=9
+C_14: rad=7, rad+1=8, gR=10
+C_15: rad=7, rad+1=8, gR=10
+C_16: rad=8, rad+1=9, gR=11
+C_17: rad=8, rad+1=9, gR=12
+C_18: rad=9, rad+1=10, gR=12
+C_19: rad=9, rad+1=10, gR=13
+

@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+Testing path graphs...
+Testing cycle graphs...
+All paths and cycles passed!
+

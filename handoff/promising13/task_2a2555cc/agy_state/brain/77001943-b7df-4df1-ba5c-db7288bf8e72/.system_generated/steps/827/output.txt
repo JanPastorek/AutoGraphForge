@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+145:  induction p <;> simp [*]
+159:theorem end_mem_support {u v : V} (p : G.Walk u v) : v ∈ p.support := by induction p <;> simp [*]
+197:  induction p generalizing d with
+226:  induction p <;> simp [*]
+233:  induction p <;> simp [*]
+247:  induction p <;> simp [*]
+251:  induction p <;> simp [*]
+271:  induction p <;> simp_all
+297:  induction p <;> aesop
+301:  induction p with
+309:  induction p with
+429:  induction p with
+437:  induction p with
+

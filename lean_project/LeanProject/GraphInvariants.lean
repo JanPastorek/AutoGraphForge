@@ -109,6 +109,63 @@ def IsConnectedZeroForcingSet (G : SimpleGraph V) [DecidableRel G.Adj] (S : Fins
 noncomputable def connectedZeroForcingNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
   sInf { k | ∃ S : Finset V, S.card = k ∧ G.IsConnectedZeroForcingSet S }
 
+/-- `s` totally dominates `G`: every vertex has a neighbour in `s` (a vertex
+does not dominate itself). -/
+def IsTotalDominatingSet (G : SimpleGraph V) (s : Finset V) : Prop :=
+  ∀ v : V, ∃ w ∈ s, G.Adj v w
+
+/-- Total domination number `γ_t(G)`. Undefined (here: `sInf ∅ = 0`) on a graph
+with an isolated vertex; the computable mirror carries an explicit definedness
+predicate, and the exporters emit it as a hypothesis. -/
+noncomputable def totalDominationNumber (G : SimpleGraph V) : ℕ :=
+  sInf { n | ∃ s : Finset V, s.card = n ∧ G.IsTotalDominatingSet s }
+
+/-- `s` is an edge cover: every vertex lies on some edge of `s`. -/
+def IsEdgeCoverFinset (G : SimpleGraph V) (s : Finset (Sym2 V)) : Prop :=
+  ↑s ⊆ G.edgeSet ∧ ∀ v : V, ∃ e ∈ s, v ∈ e
+
+/-- Edge cover number `ρ(G)`: minimum size of an edge cover. Undefined on a
+graph with an isolated vertex. -/
+noncomputable def edgeCoverNumber (G : SimpleGraph V) : ℕ :=
+  sInf { n | ∃ s : Finset (Sym2 V), s.card = n ∧ G.IsEdgeCoverFinset s }
+
+/-- Sub-total domination number: least `t` whose `t` largest degrees sum to at
+least `n` (Davila). -/
+noncomputable def subTotalDominationNumber (G : SimpleGraph V)
+    [DecidableRel G.Adj] : ℕ :=
+  sInf { t | Fintype.card V ≤ ((G.degreesDesc).take t).sum }
+
+/-- `f` is a Roman dominating function: every vertex labelled `0` has a
+neighbour labelled `2`. -/
+def IsRomanDominatingFunction (G : SimpleGraph V) (f : V → Fin 3) : Prop :=
+  ∀ v : V, f v = 0 → ∃ u : V, G.Adj v u ∧ f u = 2
+
+/-- Roman domination number `γ_R(G)`: minimum weight `Σ f v` over Roman
+dominating functions. -/
+noncomputable def romanDominationNumber (G : SimpleGraph V) : ℕ :=
+  sInf { n | ∃ f : V → Fin 3, G.IsRomanDominatingFunction f ∧ ∑ v, (f v : ℕ) = n }
+
+/-- `f` is a double Roman dominating function: a vertex labelled `0` has a
+neighbour labelled `3` or two neighbours labelled `2`, and a vertex labelled `1`
+has a neighbour labelled at least `2`. -/
+def IsDoubleRomanDominatingFunction (G : SimpleGraph V) [DecidableRel G.Adj]
+    (f : V → Fin 4) : Prop :=
+  (∀ v : V, f v = 0 →
+      (∃ u : V, G.Adj v u ∧ f u = 3) ∨
+      2 ≤ (Finset.univ.filter (fun u => G.Adj v u ∧ f u = 2)).card) ∧
+  (∀ v : V, f v = 1 → ∃ u : V, G.Adj v u ∧ 2 ≤ (f u : ℕ))
+
+/-- Double Roman domination number `γ_dR(G)`. -/
+noncomputable def doubleRomanDominationNumber (G : SimpleGraph V)
+    [DecidableRel G.Adj] : ℕ :=
+  sInf { n | ∃ f : V → Fin 4,
+    G.IsDoubleRomanDominatingFunction f ∧ ∑ v, (f v : ℕ) = n }
+
+-- `radius` is mathlib's (`SimpleGraph.radius : ℕ∞`, the minimum eccentricity);
+-- the exporter reads it as `(G.radius).toNat`. On a disconnected graph it is
+-- `⊤`, and `.toNat` sends that to `0` — which is precisely why the computable
+-- mirror carries `HasRadius` and the exporters emit it as a hypothesis.
+
 /- ── Graph-class predicates (hypotheses for conditioned conjectures) ──────── -/
 
 /-- `G` is regular (every vertex the same degree). -/

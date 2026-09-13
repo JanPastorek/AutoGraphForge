@@ -1,0 +1,10 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":101,"LineContent":"    def prove(self, conjecture: Conjecture) -\u003e ProverResponse:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":104,"LineContent":"    def prove_batch(self, conjectures: List[Conjecture]) -\u003e List[ProverResponse]:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":146,"LineContent":"    def prove(self, conjecture: Conjecture) -\u003e ProverResponse:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":235,"LineContent":"    def prove(self, conjecture: Conjecture) -\u003e ProverResponse:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":277,"LineContent":"    def prove(self, conjecture: Conjecture) -\u003e ProverResponse:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":455,"LineContent":"    def prove(self, conjecture: Conjecture) -\u003e ProverResponse:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":536,"LineContent":"    def prove(self, conjecture: Conjecture) -\u003e ProverResponse:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":707,"LineContent":"    def prove(self, conjecture: Conjecture) -\u003e ProverResponse:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":864,"LineContent":"    def prove(self, conjecture: Conjecture) -\u003e ProverResponse:"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/theorem_prover.py","LineNumber":888,"LineContent":"    def prove_batch(self, conjectures: List[Conjecture]) -\u003e List[ProverResponse]:"}

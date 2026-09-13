@@ -1,0 +1,15 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.tpKt5JMbgL.lean:367:21: error: Application type mismatch: The argument
+  hu_in
+has type
+  v ∈ ballWithin G 1 v
+but is expected to have type
+  v ∈ ballWithin G 1 u
+in the application
+  h_not_in hu_in
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

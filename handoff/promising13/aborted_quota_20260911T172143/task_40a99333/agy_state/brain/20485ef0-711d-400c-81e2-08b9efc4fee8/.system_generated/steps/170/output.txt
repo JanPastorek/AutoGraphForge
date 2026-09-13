@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Testing construction on 10,000 cases...
+SUCCESS! 10,000 random cases passed with 100% correctness!
+

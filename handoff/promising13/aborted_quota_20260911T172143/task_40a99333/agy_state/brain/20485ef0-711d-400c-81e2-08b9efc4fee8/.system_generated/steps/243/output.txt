@@ -1,0 +1,24 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.MnTTmomFVW.lean:36:45: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  1 * ?a
+in the target expression
+  V1.card * 1 = V1.card
+
+V : Type
+inst✝¹ : Fintype V
+inst✝ : DecidableEq V
+f : V → Fin 3
+V2 : Finset V := {v | f v = 2}
+V1 : Finset V := {v | f v = 1}
+h_disj : Disjoint V2 V1
+h_sub : V2 ∪ V1 ⊆ Finset.univ
+h1 : ∑ x ∈ V2, ↑(f x) + ∑ x ∈ V1, ↑(f x) ≤ ∑ v, ↑(f v)
+h_v2 : ∑ v ∈ V2, ↑(f v) = 2 * V2.card
+this : ∑ v ∈ V1, ↑(f v) = ∑ v ∈ V1, 1
+⊢ V1.card * 1 = V1.card
+'card_two_one_le_romanWeight' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

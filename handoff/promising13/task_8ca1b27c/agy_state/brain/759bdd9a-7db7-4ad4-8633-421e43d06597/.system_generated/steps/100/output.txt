@@ -1,0 +1,12 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.soukNmQOei.lean:12:26: error: Type mismatch
+  WithTop.top
+has type
+  Top (WithTop ?m.65)
+but is expected to have type
+  WithTop ℕ
+CHECK: FAILED (exit 1)
+

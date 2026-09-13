@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Done 1000 random graphs! Checked 408. No counterexample.
+

@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_8ca1b27c/.agents/sentinel_1/BRIEFING.md. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -23,6 +23,8 @@
+ 
+ ## Project Status
+ - **Phase**: in progress
++- **Cron 1 (Progress)**: 344bdc87-38f0-4b2c-b323-cba3d44c78ca/task-20
++- **Cron 2 (Liveness)**: 344bdc87-38f0-4b2c-b323-cba3d44c78ca/task-22
+ 
+ ## Routing Decision
+ - **Route**: Math / Proof
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Radius <= n // 2 always holds for connected graphs!
+

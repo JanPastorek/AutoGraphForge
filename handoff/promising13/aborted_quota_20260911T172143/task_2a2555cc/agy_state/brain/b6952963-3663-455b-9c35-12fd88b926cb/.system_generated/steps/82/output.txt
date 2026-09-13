@@ -1,0 +1,32 @@
+The search for ""gamma_t(G) \ge \text{rad}(G)" OR "gamma_t(G) \ge rad(G)" "proof" "Let S be a"" returned the following summary:
+The inequality $\gamma_t(G) \ge \text{rad}(G)$ is a known lower bound for the total domination number of a connected graph $G$ with no isolated vertices[1][2][3]. 
+
+While a single standard proof is often cited in graph theory literature (such as the work by DeLaViña et al. referenced in various surveys[1][2][3]), the phrasing "Let $S$ be a..." is the standard beginning for a proof by construction or contradiction involving a total dominating set.
+
+### Context of the Inequality
+*   **Definition:** For a connected graph $G$ with no isolated vertices, the total domination number $\gamma_t(G)$ is the minimum cardinality of a set $S \subseteq V(G)$ such that every vertex in $V(G)$ is adjacent to at least one vertex in $S$[4].
+*   **The Bound:** The inequality $\gamma_t(G) \ge \text{rad}(G)$ relates the total domination number to the radius of the graph (the minimum eccentricity among all vertices)[5][2].
+*   **Generalizations:** This result has been extended in various ways, including generalizations to the **total distance $k$-domination number** ($\gamma_{k}^t(G) \ge \text{rad}_k(G)$)[1][6][7].
+
+### Typical Proof Approach
+Proofs of this nature typically proceed by:
+1.  **Selection:** Letting $S$ be a minimum total dominating set of $G$ (i.e., $|S| = \gamma_t(G)$)[8][9][10].
+2.  **Exploitation of Structural Properties:** Using the fact that every vertex $v \in V(G)$ must have a neighbor in $S$, and every vertex $s \in S$ must have a neighbor in $S$[4][11].
+3.  **Distance Arguments:** Utilizing the distance between vertices in $S$ and the remaining vertices in $V(G)$ to show that the size of $S$ must be at least the radius of the graph[1][2]. 
+
+If you are looking for a specific proof text, it is likely found in foundational papers regarding total domination conjectures, such as those by **DeLaViña et al.** (often discussed in the context of the "Graffiti" computer program's conjectures)[1][12][13].
+
+Sources:
+[1] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGpijAjHrKPdWAqxaxkxnTclvZ-NE9YJjhUX7wapEB-0ek0G8haUGQGen79_Z4YCoct2X1JE6tQ0Lc95XD_UJ3bzbX_8XCy2eMjS-NJ4Ka9NqLKZZyyCL2w1rNgTnudrt_hzQvmUbDzqcbbSUjpG29Se5j-YPGRqLG4WrlzPJ9JHZ-HmKeuF6eOdDQhhyqnXifRaD0po5lW63iMQA==)
+[2] [icm.edu.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFuWtalaSQgQVOeV0shN44S6u8GiyOFO2eoII1V_0i636HodavXK9w5cvs8gUJNFXssf5BkiVhxuqhb4aPANjpIvTBMyvEWtoGVkVO-bwmt2tMrDJsRAvkIDE3fX0CN99h9NNWMNQdrfdZgtZdg0ofPOR5mh1ZtyH8c3vy8eZBrY308a2QDjNWqnNAEDFTs9JshnuilOQx0YhnMlE_QpmU1XoO3ZA==)
+[3] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG6_BdPahtkzssUVr9npJTdgxyeB6Qs_5oBV43tbY5fP3qecpYHjsr8UriRK7rT7zWZyUH9qHUOolDOkHY8T-tFAug7kYUv4idnoHsaACXhuGebPqwcNoXUXK0bjJE1fcqe1I5-lpjKfIttJ8ROEBvKKkRFmMQtAsRvCg==)
+[4] [emergentmind.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGEHbTG4pNvj2clbziLCxP9FnaPCw6fPc35cIg9uWyeB6ADSkUlGQ7ykCdE6pGd26d6J6mDie0vt9h2QMxToCPM9Kzy-Hv5LeBLSzU7qImvIbh9LiisL2V7TYA5N5_g6BHVq7x2qp0KAhxupygHE-AdUw==)
+[5] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGeyoVvNh3PZvLZq1ipVMtLPYahLSmlhkR_xa1I3SGda3KyNlXfO6y8sfQbOleLtyhTf4_Bl7rEDoRkx-Bnta91jkdVITA6FZTaxCgNIzU1UCMnEvR3o-auP6UInSgfZABF7QYvzf2pHmrE9uZYvO-EAurbcPx6BIkpJ3HpYmNKEeL30rnVvDb902EsjNvq0TYasc7OWTd3CN47Ajo7KWKtMMM=)
+[6] [georgiasouthern.edu](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGmRUbPCs_3Fq1CgerEKoVHrmv0k64smkfvoPjl8yVaUM9SSyaDBwvxiWBOMvnZQXahQ6OzMg4_MdEPh4qOnvbABOyobaSt9NpJ3eS7WOiDeGw039YygZTbM1GfUS_eKHVXQ_LrS9XvjTrQGCnPGoRDrWfjcQNeIgw05zT1lN421kBiWNw3zTBkbNbfz0k=)
+[7] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGeyoVvNh3PZvLZq1ipVMtLPYahLSmlhkR_xa1I3SGda3KyNlXfO6y8sfQbOleLtyhTf4_Bl7rEDoRkx-Bnta91jkdVITA6FZTaxCgNIzU1UCMnEvR3o-auP6UInSgfZABF7QYvzf2pHmrE9uZYvO-EAurbcPx6BIkpJ3HpYmNKEeL30rnVvDb902EsjNvq0TYasc7OWTd3CN47Ajo7KWKtMMM=)
+[8] [uni-lj.si](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG7OLU4CtzCygXZIjifJfZuSvIa3G5DiBVxDYEH8MnCTrAfz1LLxsRVY8upgAE5QReC8RDlo6XvajKA_nXyDyzBwAZnOhph1qRscOt4J9COgR7YqbrYI1ALnFTt7b10uDpLXBIADOsPYrHlUX71FM5s)
+[9] [sciepub.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGKw-F9n2DSOrQR__pnUah0cj7Gp5CiSH9LnHsONp02spsbABk_e4N-ZPIPIR1JGSMO1mdqWKk8Xi43C3UQNd09lqquwWDOWV2OMoAUjGJEBpgWMwxlmjHFLXIbBS-ycIYssGu-9Q==)
+[10] [bibliotekanauki.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFJAHtYrO2PoxJ44nENkKX99jsuLcsQ3JTJ9ItbiXYC-4xb-paxy-tuI4QzBl1x49cuHxRS7XFtRLYx-kAf8H77915ZFhw8-rta0nDHMzLG2mDtYAiQq-GtguRPjUXcZkpH4r33IhY=)
+[11] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHRMAE1GIbPmmchRgEZsn79gJ-yoPGf0zWUhL2dx8zJIui9jIT6kf7X1Y8BCNbAsqgnfHHivSiZ7zVdvrlq46v8w9J6FS6tlv6v3rCtz3E0yCKfEowBhHvMyVQCnRZSmEwNCqixegwrk64Z96Z7RGP0w1mqwtsGoO8rrm1U11dW-dWQCkk90kOc5pDssZA9vxAoIDL1b9oAihfj2zujX6_KWRk=)
+[12] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGpijAjHrKPdWAqxaxkxnTclvZ-NE9YJjhUX7wapEB-0ek0G8haUGQGen79_Z4YCoct2X1JE6tQ0Lc95XD_UJ3bzbX_8XCy2eMjS-NJ4Ka9NqLKZZyyCL2w1rNgTnudrt_hzQvmUbDzqcbbSUjpG29Se5j-YPGRqLG4WrlzPJ9JHZ-HmKeuF6eOdDQhhyqnXifRaD0po5lW63iMQA==)
+[13] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEk_rk0lTZ2oaZSWLIcKY0ysnICDWKU7XAjtIyIv_ProHxs0bfGyeimtYN7iguTN0Y55Szw0moBsHbz6RHT2iCEOeZWCtopoXxHQ-Vr2XRTzYix-FVSDkNnCdcMXHkfh8saoZdlksgCiEZbH4Yr4_96_rz34v4pAbVHWUjiWg==)

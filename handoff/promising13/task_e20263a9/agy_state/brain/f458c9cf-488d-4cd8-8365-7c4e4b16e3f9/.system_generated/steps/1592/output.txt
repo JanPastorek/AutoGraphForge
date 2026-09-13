@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Testing if W=4 can ever have radius >= 4...
+PROVED: when W=4, radius <= 3 ALWAYS!
+

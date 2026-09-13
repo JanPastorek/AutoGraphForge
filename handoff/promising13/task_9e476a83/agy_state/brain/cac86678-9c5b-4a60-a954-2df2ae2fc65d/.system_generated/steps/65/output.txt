@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+Return code: 1
+Stdout: 
+Stderr: warning: could not canonicalize path: '/tmp/agyhome.MTsSlP/.elan/toolchains'
+warning: could not canonicalize path: '/tmp/agyhome.MTsSlP/.elan/toolchains'
+warning: could not canonicalize path: '/tmp/agyhome.MTsSlP/.elan/toolchains'
+warning: could not canonicalize path: '/tmp/agyhome.MTsSlP/.elan/toolchains'
+warning: could not canonicalize path: '/tmp/agyhome.MTsSlP/.elan/toolchains'
+warning: could not canonicalize path: '/tmp/agyhome.MTsSlP/.elan/toolchains'
+warning: could not canonicalize path: '/tmp/agyhome.MTsSlP/.elan/toolchains'
+warning: could not canonicalize path: '/tmp/agyhome.MTsSlP/.elan/toolchains'
+warning: could not canonicalize path: '/tmp/agyhome.MTsSlP/.elan/toolchains'
+error: no default toolchain configured. run `elan default stable` to install & configure the latest Lean 4 stable release.
+
+

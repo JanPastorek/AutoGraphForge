@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Found! v=2, k=2, compl=3, val=6
+

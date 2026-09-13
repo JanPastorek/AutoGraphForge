@@ -1,0 +1,5 @@
+{"name":".system_generated","isDir":true}
+{"name":".user_uploaded","isDir":true}
+{"name":"scratch","isDir":true}
+
+Summary: This directory contains 3 subdirectories and 0 files.

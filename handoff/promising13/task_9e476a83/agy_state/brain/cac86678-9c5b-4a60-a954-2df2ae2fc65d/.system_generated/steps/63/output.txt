@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+structural_check: True 
+lint_text: True 
+sol_prove valid: True
+sol_refute valid: False
+

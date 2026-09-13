@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+P_6: diam=5 > W=4! f=(0, 2, 0, 0, 2, 0)
+P_7: diam=6 > W=5! f=(0, 2, 0, 0, 2, 0, 1)
+P_8: diam=7 > W=6! f=(0, 2, 0, 0, 2, 0, 0, 2)
+Checked diam <= W on all P_2..P_8!
+

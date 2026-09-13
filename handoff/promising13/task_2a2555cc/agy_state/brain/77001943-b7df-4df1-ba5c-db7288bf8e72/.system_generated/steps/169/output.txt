@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+Round 1: new best diff=-1 (n=11, r=5, g=6)
+Round 2: new best diff=0 (n=8, r=4, g=4)
+GA completed 4728 rounds. Best diff: 0
+

@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+New max rad: 1, n=2, edges=[(0, 1)]
+New max rad: 2, n=4, edges=[(0, 1), (0, 3), (1, 2)]
+New max rad: 3, n=6, edges=[(0, 1), (0, 5), (2, 3), (3, 4), (4, 5)]
+Max radius when covered by two closed balls: 3
+

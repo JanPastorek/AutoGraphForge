@@ -1,0 +1,62 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_8ca1b27c/Challenge_8ca1b27c.lean. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -12,8 +12,55 @@
+     (G : SimpleGraph V) [DecidableRel G.Adj],
+       GraphCalc.IsNontrivialClass G → GraphCalc.HasSubTotalDominationNumber G → 2 ≤ GraphCalc.subTotalDominationNumber G
+ 
++lemma minUpTo_ge {n : ℕ} {p : ℕ → Prop} [DecidablePred p] (h_empty : 2 ≤ n)
++    (h_elem : ∀ k ∈ (Finset.range (n + 1)).filter p, 2 ≤ k) :
++    2 ≤ GraphCalc.minUpTo n p := by
++  unfold GraphCalc.minUpTo
++  cases h : ((Finset.range (n + 1)).filter p).min with
++  | top =>
++    exact h_empty
++  | coe k =>
++    exact h_elem k (Finset.mem_of_min h)
++
++lemma largestDegreeSum_zero {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] :
++    GraphCalc.largestDegreeSum G 0 = 0 := by
++  unfold GraphCalc.largestDegreeSum
++  simp
++  rfl
++
++lemma largestDegreeSum_one_lt {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] (hV : 2 ≤ Fintype.card V) :
++    GraphCalc.largestDegreeSum G 1 < Fintype.card V := by
++  unfold GraphCalc.largestDegreeSum
++  cases h : ((Finset.univ.powersetCard 1).image (fun s => ∑ v ∈ s, G.degree v)).max with
++  | bot =>
++    have : 0 < Fintype.card V := by omega
++    exact this
++  | coe m =>
++    have hm : m ∈ ((Finset.univ.powersetCard 1).image (fun s => ∑ v ∈ s, G.degree v)) :=
++      Finset.mem_of_max h
++    rcases Finset.mem_image.mp hm with ⟨s, hs, rfl⟩
++    rcases Finset.mem_powersetCard.mp hs with ⟨-, hs_card⟩
++    rcases Finset.card_eq_one.mp hs_card with ⟨v, rfl⟩
++    simp only [Finset.sum_singleton]
++    exact G.degree_lt_card_verts v
++
+ theorem prove_8ca1b27c : Candidate := by
+-  sorry
++  intro V _ _ G _ hNontrivial _hHas
++  unfold GraphCalc.IsNontrivialClass at hNontrivial
++  unfold GraphCalc.order at hNontrivial
++  unfold GraphCalc.subTotalDominationNumber
++  apply minUpTo_ge hNontrivial
++  intro k hk
++  rw [Finset.mem_filter] at hk
++  rcases hk with ⟨-, hpk⟩
++  by_contra! hlt
++  interval_cases k
++  · rw [largestDegreeSum_zero] at hpk
++    omega
++  · have hlt1 := largestDegreeSum_one_lt G hNontrivial
++    omega
+ 
+ theorem refute_8ca1b27c : ¬ Candidate := by
+   sorry
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

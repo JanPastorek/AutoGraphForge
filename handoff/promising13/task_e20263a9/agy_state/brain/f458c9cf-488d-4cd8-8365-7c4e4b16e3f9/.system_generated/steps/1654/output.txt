@@ -1,0 +1,124 @@
+
+The command exited with code 0.
+Output:
+101:   | inl huv => simp [huv]
+102:   | inr huv =>
+103:     cases eq_or_ne (G.edist v w) ⊤ with
+104:     | inl hvw => simp [hvw]
+105:     | inr hvw =>
+106:       obtain ⟨p, hp⟩ := exists_walk_of_edist_ne_top huv
+107:       obtain ⟨q, hq⟩ := exists_walk_of_edist_ne_top hvw
+108:       rw [← hp, ← hq, ← Nat.cast_add, ← Walk.length_append]
+109:       exact edist_le _
+110: 
+111: theorem edist_comm : G.edist u v = G.edist v u := by
+112:   rw [edist_eq_sInf, ← Set.image_univ, ← Set.image_univ_of_surjective Walk.reverse_surjective,
+113:     ← Set.image_comp, Set.image_univ, Function.comp_def]
+114:   simp_rw [Walk.length_reverse, ← edist_eq_sInf]
+115: 
+116: lemma exists_walk_of_edist_eq_coe {k : ℕ} (h : G.edist u v = k) :
+117:     ∃ p : G.Walk u v, p.length = k :=
+118:   have : G.edist u v ≠ ⊤ := by rw [h]; exact ENat.coe_ne_top _
+119:   have ⟨p, hp⟩ := exists_walk_of_edist_ne_top this
+120:   ⟨p, Nat.cast_injective (hp.trans h)⟩
+121: 
+122: lemma edist_ne_top_iff_reachable : G.edist u v ≠ ⊤ ↔ G.Reachable u v := by
+123:   refine ⟨reachable_of_edist_ne_top, fun h ↦ ?_⟩
+124:   by_contra hx
+125:   simp only [edist, iInf_eq_top, ENat.coe_ne_top] at hx
+126:   exact h.elim hx
+127: 
+128: /--
+129: The extended distance between vertices is equal to `1` if and only if these vertices are adjacent.
+130: -/
+131: @[simp]
+132: theorem edist_eq_one_iff_adj : G.edist u v = 1 ↔ G.Adj u v := by
+133:   refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
+134:   · obtain ⟨w, hw⟩ := exists_walk_of_edist_ne_top <| by rw [h]; simp
+135:     exact w.adj_of_length_eq_one <| Nat.cast_eq_one.mp <| h ▸ hw
+136:   · exact le_antisymm (edist_le h.toWalk) (Order.one_le_iff_pos.mpr <| edist_pos_of_ne h.ne)
+137: 
+138: lemma edist_le_one_iff_adj_or_eq : G.edist u v ≤ 1 ↔ G.Adj u v ∨ u = v := by
+139:   by_cases huv : u = v
+140:   · simp [huv]
+141:   · simp only [huv, or_false]
+142:     have h : 0 < G.edist u v := edist_pos_of_ne huv
+143:     rw [(Order.one_le_iff_pos.mpr h).ge_iff_eq']
+144:     exact edist_eq_one_iff_adj
+145: 
+146: lemma edist_eq_two_iff {u v : V} :
+147:     G.edist u v = 2 ↔ u ≠ v ∧ ¬ G.Adj u v ∧ (G.commonNeighbors u v).Nonempty := by
+148:   refine ⟨fun h ↦ ⟨?_, ?_, ?_⟩, fun h ↦ le_antisymm ?_ ?_⟩
+149:   · simp +decide [← G.edist_eq_zero_iff.not (b := u = v), h]
+150:   · simp +decide [← edist_eq_one_iff_adj, h]
+151:   · obtain ⟨w, hw⟩ := exists_walk_of_edist_eq_coe h
+152:     use w.getVert 1
+153:     suffices w.getVert 1 ∈ G.commonNeighbors (w.getVert 0) (w.getVert w.length) by simpa
+154:     refine hw ▸ G.mem_commonNeighbors.mp ?_
+155:     exact ⟨w.adj_getVert_succ (by simp [hw]), (w.adj_getVert_succ (by simp [hw])).symm⟩
+156:   · obtain ⟨w, hw⟩ := h.2.2
+157:     rw [mem_commonNeighbors] at hw
+158:     have := (Walk.cons hw.1 <| .cons hw.2.symm .nil).edist_le
+159:     simp_all
+160:   · by_contra
+161:     simp_all [Order.le_one_iff]
+162: 
+163: lemma two_lt_edist_iff {u v : V} :
+164:     2 < G.edist u v ↔ u ≠ v ∧ ¬ G.Adj u v ∧ (G.commonNeighbors u v) = ∅ := by
+165:   refine ⟨fun h ↦ ?_, fun h ↦ lt_of_le_of_ne ?_ (Ne.symm ?_)⟩
+166:   · have hn : u ≠ v := fun hc ↦ by simp [hc] at h
+167:     have : ¬ G.Adj u v := fun hc ↦ by simp +decide [edist_eq_one_iff_adj.mpr hc] at h
+168:     use hn, this
+169:     by_contra! hc
+170:     simp [edist_eq_two_iff.mpr ⟨hn, this, hc⟩] at h
+171:   · rw [← one_add_one_eq_two]
+172:     refine Order.add_one_le_of_lt <| lt_of_le_of_ne ?_ ?_
+173:     <;> grind [Order.one_le_iff_pos, pos_iff_ne_zero, edist_eq_zero_iff, edist_eq_one_iff_adj]
+174:   · simp_all [edist_eq_two_iff]
+175: 
+176: lemma edist_bot_of_ne (h : u ≠ v) : (⊥ : SimpleGraph V).edist u v = ⊤ := by
+177:   rwa [ne_eq, ← reachable_bot.not, ← edist_ne_top_iff_reachable.not, not_not] at h
+178: 
+179: lemma edist_bot [DecidableEq V] : (⊥ : SimpleGraph V).edist u v = (if u = v then 0 else ⊤) := by
+180:   by_cases h : u = v <;> simp [h, edist_bot_of_ne]
+181: 
+182: lemma edist_top_of_ne (h : u ≠ v) : (⊤ : SimpleGraph V).edist u v = 1 := by
+183:   simp [h]
+184: 
+185: lemma edist_top [DecidableEq V] : (⊤ : SimpleGraph V).edist u v = (if u = v then 0 else 1) := by
+186:   by_cases h : u = v <;> simp [h]
+187: 
+188: /-- Supergraphs have smaller or equal extended distances to their subgraphs. -/
+189: @[gcongr]
+190: theorem edist_anti {G' : SimpleGraph V} (h : G ≤ G') :
+191:     G'.edist u v ≤ G.edist u v := by
+192:   by_cases hr : G.Reachable u v
+193:   · obtain ⟨_, hw⟩ := hr.exists_walk_length_eq_edist
+194:     rw [← hw, ← Walk.length_map (.ofLE h)]
+195:     apply edist_le
+196:   · exact edist_eq_top_of_not_reachable hr ▸ le_top
+197: 
+198: end edist
+199: 
+200: section dist
+201: 
+202: /--
+203: The distance between two vertices is the length of the shortest walk between them.
+204: If no such walk exists, this uses the junk value of `0`.
+205: -/
+206: noncomputable def dist (u v : V) : ℕ :=
+207:   (G.edist u v).toNat
+208: 
+209: variable {G} {u v w : V}
+210: 
+211: theorem dist_eq_sInf : G.dist u v = sInf (Set.range (Walk.length : G.Walk u v → ℕ)) :=
+212:   ENat.iInf_toNat
+213: 
+214: @[grind =]
+215: lemma Reachable.coe_dist_eq_edist (h : G.Reachable u v) : G.dist u v = G.edist u v :=
+216:   ENat.coe_toNat <| edist_ne_top_iff_reachable.mpr h
+217: 
+218: protected theorem Reachable.exists_walk_length_eq_dist (hr : G.Reachable u v) :
+219:     ∃ p : G.Walk u v, p.length = G.dist u v :=
+220:   dist_eq_sInf ▸ Nat.sInf_mem (Set.range_nonempty_iff_nonempty.mpr hr)
+

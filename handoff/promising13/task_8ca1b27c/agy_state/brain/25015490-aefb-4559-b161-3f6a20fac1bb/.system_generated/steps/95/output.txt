@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+/tmp/tmp.B8OFVn0Vqo.lean:65:8: warning: declaration uses `sorry`
+'agf_verify_prove' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit code: 0
+

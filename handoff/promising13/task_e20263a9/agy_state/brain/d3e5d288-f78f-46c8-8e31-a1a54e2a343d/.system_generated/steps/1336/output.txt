@@ -1,0 +1,20 @@
+Found 19 results
+Challenge_e20263a9.lean
+reference/GraphInvariantsComputable.lean
+scratch.lean
+scratch_goal.lean
+scratch_rdn.lean
+scratch_test.lean
+test_ball.lean
+test_branch.lean
+test_card.lean
+test_card_bound.lean
+test_card_bound2.lean
+test_clean_unique.lean
+test_fix.lean
+test_full.lean
+test_merge.lean
+test_prove.lean
+test_unique_two.lean
+test_weight.lean
+test_weight2.lean

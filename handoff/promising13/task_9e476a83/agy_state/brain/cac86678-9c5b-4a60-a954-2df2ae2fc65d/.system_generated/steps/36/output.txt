@@ -1,0 +1,8 @@
+
+The command exited with code 128.
+Output:
+fatal: not a git repository (or any parent up to mount point /mnt/home/japake298/project/GraphConjecturing/handoff/promising13)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+fatal: not a git repository (or any parent up to mount point /mnt/home/japake298/project/GraphConjecturing/handoff/promising13)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+

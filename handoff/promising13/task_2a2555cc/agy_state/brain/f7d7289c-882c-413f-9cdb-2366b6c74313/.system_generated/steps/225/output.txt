@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+FOR ALL CONNECTED GRAPHS UP TO N=9: RADIUS <= N // 2 ALWAYS!
+

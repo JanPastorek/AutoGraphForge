@@ -1,0 +1,8 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.mcoyIzezyU.lean:6:7: error(lean.unknownIdentifier): Unknown constant `Finset.min_eq_some_iff`
+/tmp/tmp.mcoyIzezyU.lean:7:7: error(lean.unknownIdentifier): Unknown constant `Finset.min_def`
+CHECK: FAILED (exit 1)
+

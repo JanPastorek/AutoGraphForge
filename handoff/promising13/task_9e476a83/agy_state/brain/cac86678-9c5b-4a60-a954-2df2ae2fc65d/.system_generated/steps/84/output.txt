@@ -1,0 +1,26 @@
+
+The command exited with code 0.
+Output:
+397-
+398-instance (G : SimpleGraph V) [DecidableRel G.Adj] (s : Finset V) :
+399-    Decidable (IsTotalDominatingSet G s) := by
+400-  unfold IsTotalDominatingSet; infer_instance
+401-
+402:def totalDominationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+403-  minCard (IsTotalDominatingSet G)
+404-
+405-/-- Undefined on a graph with an isolated vertex: nothing dominates it, so not
+406-even `univ` is a total dominating set and `minCard` would read `0`. graphcalc
+407-raises there rather than returning a number. -/
+41-graphcalc reports "undefined". A conjecture `Z_c + 2 ≤ 2 * Z_t` then became
+42-`2 ≤ 0` and was refutable with no mathematical content.
+43-
+44-Any new invariant built on `minCard` must either prove `univ` satisfies its
+45-predicate, or expose a `Has…` witness predicate below and be exported under it. -/
+46:def minCard (p : Finset V → Prop) [DecidablePred p] : ℕ :=
+47-  ((univ.powerset.filter p).image Finset.card).min.getD 0
+48-
+49-/-- Some subset satisfies `p`: exactly the precondition `minCard` needs for its
+50-value to mean "the least cardinality" rather than "there were none". -/
+51-def HasWitness (p : Finset V → Prop) [DecidablePred p] : Prop :=
+

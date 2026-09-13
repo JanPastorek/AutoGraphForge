@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Basic.lean:54:inductive Walk : V → V → Type u
+

@@ -1,0 +1,13 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_8ca1b27c.lean","LineNumber":15,"LineContent":"theorem prove_8ca1b27c : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_9e476a83.lean","LineNumber":15,"LineContent":"theorem prove_9e476a83 : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_1facfd37.lean","LineNumber":15,"LineContent":"theorem prove_1facfd37 : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_e20263a9.lean","LineNumber":15,"LineContent":"theorem prove_e20263a9 : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_2a2555cc.lean","LineNumber":15,"LineContent":"theorem prove_2a2555cc : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_a23c41a0.lean","LineNumber":15,"LineContent":"theorem prove_a23c41a0 : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_40a99333.lean","LineNumber":15,"LineContent":"theorem prove_40a99333 : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_39fd4057.lean","LineNumber":15,"LineContent":"theorem prove_39fd4057 : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_63ce884f.lean","LineNumber":15,"LineContent":"theorem prove_63ce884f : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_9968b18e.lean","LineNumber":15,"LineContent":"theorem prove_9968b18e : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_fbfcd99b.lean","LineNumber":15,"LineContent":"theorem prove_fbfcd99b : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_aa3292c1.lean","LineNumber":15,"LineContent":"theorem prove_aa3292c1 : Candidate := by"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_1bc2a7b5.lean","LineNumber":15,"LineContent":"theorem prove_1bc2a7b5 : Candidate := by"}

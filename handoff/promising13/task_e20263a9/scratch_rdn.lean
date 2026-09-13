@@ -1,0 +1,67 @@
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+open SimpleGraph
+open GraphCalc
+
+lemma two_le_romanWeight {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj]
+    (hnt : GraphCalc.IsNontrivialClass G) (f : V → Fin 3)
+    (hf : GraphCalc.IsRomanDominatingFunction G f) :
+    2 ≤ GraphCalc.romanWeight f := by
+  unfold GraphCalc.romanWeight
+  unfold GraphCalc.IsNontrivialClass at hnt
+  unfold GraphCalc.order at hnt
+  by_contra hc
+  have h_le1 : ∑ v : V, (f v : ℕ) ≤ 1 := by omega
+  have h_no2 : ∀ v : V, (f v : ℕ) ≠ 2 := by
+    intro v hv
+    have h_mem := Finset.single_le_sum (fun u _ => Nat.zero_le (f u : ℕ)) (Finset.mem_univ v)
+    rw [hv] at h_mem
+    omega
+  have h_no0 : ∀ v : V, (f v : ℕ) ≠ 0 := by
+    intro v hv
+    have h_f0 : f v = 0 := by
+      ext
+      exact hv
+    obtain ⟨u, _, hu2⟩ := hf v h_f0
+    have hu2_nat : (f u : ℕ) = 2 := by
+      rw [hu2]
+      rfl
+    exact h_no2 u hu2_nat
+  have h_ge1 : ∀ v : V, 1 ≤ (f v : ℕ) := by
+    intro v
+    have h0 := h_no0 v
+    omega
+  have h_sum_ge : ∑ v : V, 1 ≤ ∑ v : V, (f v : ℕ) :=
+    Finset.sum_le_sum (fun v _ => h_ge1 v)
+  rw [Finset.sum_const, nsmul_eq_mul, mul_one] at h_sum_ge
+  rw [Finset.card_univ] at h_sum_ge
+  have h2 : 2 ≤ ∑ v : V, (f v : ℕ) := hnt.trans h_sum_ge
+  omega
+
+lemma two_le_romanDominationNumber {V : Type} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj]
+    (hnt : GraphCalc.IsNontrivialClass G) :
+    2 ≤ GraphCalc.romanDominationNumber G := by
+  unfold GraphCalc.romanDominationNumber
+  let S := (Finset.univ.filter (GraphCalc.IsRomanDominatingFunction G)).image GraphCalc.romanWeight
+  have hconst : (fun _ : V => (2 : Fin 3)) ∈ Finset.univ.filter (GraphCalc.IsRomanDominatingFunction G) := by
+    rw [Finset.mem_filter]
+    refine ⟨Finset.mem_univ _, ?_⟩
+    intro v hv
+    have h20 : (2 : Fin 3) ≠ 0 := by decide
+    exact False.elim (h20 hv)
+  have hSne : S.Nonempty := by
+    use GraphCalc.romanWeight (fun _ : V => (2 : Fin 3))
+    apply Finset.mem_image_of_mem
+    exact hconst
+  obtain ⟨m, hm⟩ := Finset.min_of_nonempty hSne
+  rw [hm]
+  dsimp
+  have hmem : m ∈ S := Finset.mem_of_min hm
+  rw [Finset.mem_image] at hmem
+  obtain ⟨f, hf, rfl⟩ := hmem
+  rw [Finset.mem_filter] at hf
+  exact two_le_romanWeight G hnt f hf.2
+

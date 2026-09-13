@@ -1,0 +1,7 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.uIsgq6Cs1b.lean:8:0: error: invalid 'import' command, it must be used in the beginning of the file
+CHECK: FAILED (exit 1)
+

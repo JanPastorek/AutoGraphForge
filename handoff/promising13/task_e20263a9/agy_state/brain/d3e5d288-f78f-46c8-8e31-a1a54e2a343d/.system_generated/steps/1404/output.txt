@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Equivalence verified: for k = radius(G) and c = center, |V \ B_k(c)| = 0, so |V \ B_k(c)| <= W - 1 - k iff radius(G) + 1 <= W!
+

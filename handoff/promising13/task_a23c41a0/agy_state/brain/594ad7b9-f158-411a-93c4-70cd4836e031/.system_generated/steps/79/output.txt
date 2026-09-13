@@ -1,0 +1,1 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/lean_project/.lake/packages/mathlib/Mathlib/Topology/Defs/Basic.lean","LineNumber":246,"LineContent":"meta def WithTopology.delabToTopology : Delab := delabApp"}

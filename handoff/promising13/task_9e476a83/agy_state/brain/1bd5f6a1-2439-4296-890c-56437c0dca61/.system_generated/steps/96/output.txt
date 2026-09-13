@@ -1,0 +1,14 @@
+Task: 1bd5f6a1-2439-4296-890c-56437c0dca61/task-94
+Status: DONE
+Log: /tmp/agyhome.MTsSlP/.gemini/antigravity-cli/brain/1bd5f6a1-2439-4296-890c-56437c0dca61/.system_generated/tasks/task-94.log
+Log output:
+LINT: ok
+/tmp/tmp.eaCNRB2MuI.lean:64:8: warning: declaration uses `sorry`
+'card_ge_two_of_totalDominatingSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'totalDominationNumber_ge_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'prove_9e476a83' depends on axioms: [propext, Classical.choice, Quot.sound]
+'refute_9e476a83' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+
+Last progress: 0s ago

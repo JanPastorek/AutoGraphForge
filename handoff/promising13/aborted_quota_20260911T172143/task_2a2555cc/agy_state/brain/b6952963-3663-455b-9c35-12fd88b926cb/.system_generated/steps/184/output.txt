@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+(range 5).min : WithTop ℕ
+WithTop.{u_2} (α : Type u_2) : Type u_2
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

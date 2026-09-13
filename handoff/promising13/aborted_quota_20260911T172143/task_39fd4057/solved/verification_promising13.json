@@ -1,0 +1,8 @@
+[
+ {
+  "id": "39fd4057",
+  "statement": "((nontrivial) \u2227 (bipartite)) \u21d2 edge_cover_number \u2264 independence_number",
+  "label": "open",
+  "status": "unresolved"
+ }
+]

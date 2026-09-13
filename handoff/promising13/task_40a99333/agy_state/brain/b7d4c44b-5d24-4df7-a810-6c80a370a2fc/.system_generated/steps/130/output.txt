@@ -1,0 +1,18 @@
+
+The command exited with code 0.
+Output:
+108: Michitaka Furuya\footnote{\texttt{e-mail:michitaka.furuya@gmail.com}} \vs{5}\\
+127: Then $\gamma ^{1}(G)$, $\gamma ^{\infty }(G)$ and $\gamma ^{\frac{1}{2}}(G)$ are equal to the domination number, the total domination number and the half of the Roman domination number of $G$, respectively.
+134: self-domination, domination, total domination, Roman domination.
+174: For a graph $G$ without isolated vertices, the minimum cardinality of a total dominating set of $G$, denoted by $\gamma _{t}(G)$, is called the {\it total domination number} of $G$.
+175: The total domination number is typically defined for only graphs without isolated vertices.
+177: The concept of total domination was introduced in \cite{CDH}, and has been actively studied (see a book~\cite{HY}).
+185: From a mathematical point of view, Roman domination concept seems to be more artificial than original domination and total domination.
+186: However, by the following reasons, we can interpret Roman domination as a natural extension of domination and total domination.
+212: We show that $c$-self-domination is a common generalization of domination, total domination and Roman domination.
+289: By Proposition~\ref{prop1.1}, $c$-self-domination can continuously fill in the gaps among three invariants: domination, total domination and Roman domination.
+1191: In this paper, our aim is to find essential boundaries among domination, total domination and Roman domination.
+1282: Total domination in graphs,
+1306: M.~Furuya,
+1322: Total domination in graphs,
+

@@ -1,0 +1,17 @@
+
+The command exited with code 0.
+Output:
+\newtheorem{definition}{Definition}[section]
+%\newcommand{\qed}{\hfill ~$\square$\bigskip}
+%\newcommand{\proof}{\noindent{\bf Proof.} }
+\newcommand{\todo}[1]{{\tiny\color{red}$\scriptscriptstyle\circ$}%
+\newcommand{\PP}{\ensuremath{\mathsf{P}}\xspace}
+\newcommand{\NP}{\ensuremath{\mathsf{NP}}\xspace}
+\newcommand{\W}[1]{\ensuremath{\mathsf{W[#1]}}\xspace}
+\def\slika #1{\begin{center}\hskip 0.2mm\epsffile{#1}\end{center}}
+\newcommand{\cp}{\,\square\,}
+\newcommand{\comment}[1]{\ $[\![${\normalsize #1}$]\!]$ \ }
+\newcommand{\thin}{\mbox{thin}}
+\newcommand{\pthin}{\mbox{pthin}}
+\newcommand{\nof}{$\neg{\exists f}$}
+

@@ -1,0 +1,25 @@
+The search for ""Roman Domination" "radius" trapezoid graph ijsdr" returned the following summary:
+The research article titled **"Comparison of Roman domination number, Total domination number and distance-2 domination number with radius of a trapezoid graph TG"**, published in the *International Journal of Scientific Development and Research* (IJSDR) in January 2021 (Volume 6, Issue 1), investigates the relationships between these specific graph parameters[1][2].
+
+### Key Findings and Concepts
+*   **Graph Class:** The study focuses on **trapezoid graphs**, which are intersection graphs of trapezoids defined by two horizontal lines ($L_1$ and $L_2$)[3][4].
+*   **Objective:** The paper compares the **Roman domination number**, **total domination number**, and **distance-2 domination number** against the **radius** of the graph[1][5]. 
+*   **Relationship:** One of the specific results mentioned in the paper is the proof that the Roman domination number of a trapezoid graph is greater than its radius[2]. For instance, in an example provided in the study, a graph with a radius of 3 was found to have a Roman domination number of 5 (satisfying the $5 > 3$ relationship)[2].
+*   **Definitions:**
+    *   **Roman Domination Number ($\gamma_{Rom}(G)$):** The minimum weight of a Roman dominating function on a graph[6].
+    *   **Radius (rad(G)):** The minimum eccentricity among all vertices in the graph, representing the distance from the "most central" vertex to the farthest vertex[7][8].
+    *   **Total Domination Number ($\gamma_t(G)$):** The minimum cardinality of a set of vertices such that every vertex in the graph is adjacent to at least one vertex in the set[9].
+
+This work contributes to the broader field of domination in graphs, where researchers often seek to establish bounds and inequalities between different domination-related parameters and structural metrics like the radius and diameter[1][10].
+
+Sources:
+[1] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH63LSluN2g6TQ-_OkHYMvMU8U2i4qmcyVxXTW6Xs0mJQSjGZfDf5Zj0MAyyu2UOpmEwpH6YfwCjHh2AVqeDvReDQjDnCnaP8k9sg8JxRn2cGFZfsht69sowZNgSju0t8FhB8k=)
+[2] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH63LSluN2g6TQ-_OkHYMvMU8U2i4qmcyVxXTW6Xs0mJQSjGZfDf5Zj0MAyyu2UOpmEwpH6YfwCjHh2AVqeDvReDQjDnCnaP8k9sg8JxRn2cGFZfsht69sowZNgSju0t8FhB8k=)
+[3] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH63LSluN2g6TQ-_OkHYMvMU8U2i4qmcyVxXTW6Xs0mJQSjGZfDf5Zj0MAyyu2UOpmEwpH6YfwCjHh2AVqeDvReDQjDnCnaP8k9sg8JxRn2cGFZfsht69sowZNgSju0t8FhB8k=)
+[4] [kemdiktisaintek.go.id](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFrHjXqfwPh_JCXPVjCKyjA-JGVqHn59UT4RVqZ4AJTXN6xp1tiNwvm6_jQyWp2JKw31LRoCYfq0kiBuY3FB_rCHumGSqUg5GMWnB8_wuqal3rlJPs5WAgnK-va8X6eORZ0KkytHf61R9jN4eky9w76n4mKjeNTdaWWoDAMOttPxRtkHdsnoOVYpJlvr9_VRQm0BaxizrqsgKs-nkm-xtfMcW05S60t_11s2FHWGCPLhXUjPIw97wWzetsKAk9eC2rTxZDlBsYVkyGjNalIoPLdow==)
+[5] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH63LSluN2g6TQ-_OkHYMvMU8U2i4qmcyVxXTW6Xs0mJQSjGZfDf5Zj0MAyyu2UOpmEwpH6YfwCjHh2AVqeDvReDQjDnCnaP8k9sg8JxRn2cGFZfsht69sowZNgSju0t8FhB8k=)
+[6] [worldscientific.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHI1oWyDumCC4uIAE59OE9a1O5X5y9aMULp53ffDccM0Eba9Mnx8HPPxf71DICAEhkZNFO3rvwXtgg4vPsqMB9SnWkJ7T1KGDBVwQ5eFg9BrFz6_42YaxqDb_2hCyFHdbvmjx_guVMacUhQPWnx3s17Cv6064JvamtTVkzJYflKaGu-rBcCPA==)
+[7] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEQzjsmSy0B1KFlX1VZPEzxA5DhaE885VUPKVcKpiqJYDbAq2TOaaZu0ctO549dEtZiANDGaeW0yaJ0ecC8TGbl9pwL4-CLkHHZFulABp1ilA22-7WE3Qr_VQ_oBHg-7JAwItWdhgpoNO183wjUDyZQS_q-KcdnHyL4m7OEamIrCY8KOdGfg6rOtWDFpvifw6oG40mM9yOaICK8NpQTOPCpW1EbfhQMjqaFH_cD54APUZ6aaPrLGQLxSiC4zTVqnjQawwALt3l7Y9hcdyOjRSf959GeVBwbRsMwfd_K0utiaQALYWkElQ==)
+[8] [docswell.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELRqlSVq3CQKhex3pNp4ehyvPEAYmW0o9-YYzeoeAiDC_sSCgM7bHKLN_5DTsgwCc0me_3znDS8wl7XNEMtXPP9hdp_E1EfAanNlXaUdB5bIkc8phTG6rwIsG9lIa2LGTMPUwgFIWEGAt4dlNGXaQkWA==)
+[9] [ijsdr.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH63LSluN2g6TQ-_OkHYMvMU8U2i4qmcyVxXTW6Xs0mJQSjGZfDf5Zj0MAyyu2UOpmEwpH6YfwCjHh2AVqeDvReDQjDnCnaP8k9sg8JxRn2cGFZfsht69sowZNgSju0t8FhB8k=)
+[10] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHQQcxGuJIsusbijkHY6i2Xrzz5Br9gxxUIdzWgLu8Rzn8L-C4E2r2JtfkeZDY5_VYz1BsjUXgYsJdKOwO2ee83nUfpLu5Xll0HV421SOQEHpatNnyeU-N-JMISrQzfaMogWgQFn_fQLiBqRcDuZKVe2100v7eD0v67PiraMvYef0fBfl_ekLkH9X_2bMn40Pudplwtg6fjtQdsaswSnhhr)

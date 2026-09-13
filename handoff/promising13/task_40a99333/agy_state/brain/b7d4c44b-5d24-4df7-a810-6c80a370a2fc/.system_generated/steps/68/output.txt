@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+riant is well defined. The third criterion yields rainbow versions of the mentioned six parameters,
+one of which has already been well studied,
+and three other give new interesting parameters. Together with a special, extensively studied Roman
+domination, $\gamaR(G)$, and two classical parameters, the domination number, $\gamma(G)$,
+and the total d
+==================================================
+

@@ -1,0 +1,14 @@
+
+The command exited with code 1.
+Output:
+Starting wide graph search...
+Traceback (most recent call last):
+  File "<string>", line 55, in <module>
+  File "<class 'networkx.utils.decorators.argmap'> compilation 43", line 4, in argmap_is_connected_39
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/networkx/utils/backends.py", line 551, in _call_if_no_backends_installed
+    return self.orig_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/home/japake298/project/GraphConjecturing/.venv/lib64/python3.11/site-packages/networkx/algorithms/components/connected.py", line 205, in is_connected
+    raise nx.NetworkXPointlessConcept(
+networkx.exception.NetworkXPointlessConcept: Connectivity is undefined for the null graph.
+

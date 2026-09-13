@@ -1,0 +1,39 @@
+
+The command exited with code 0.
+Output:
+113: and three other give new interesting parameters. Together with a special, extensively studied Roman
+241: but does not directly fit into the above frame. Nevertheless, the so-called {\em Roman domination},
+243: and is conceptually relevant also to our study. In the condition of the Roman dominating function,
+245: while there is no such restriction for the vertices with weight $1$ and $2$.  Beside Roman domination,
+253: restrictions (such as paired domination~\cite{hs-1998}, independent Roman domination~\cite{atr-2012},
+723: \noindent{\bf Roman domination.}
+726: % Roman domination
+733: Let $G=(V,E)$ be a graph. A {\em Roman dominating function of $G$} is a function $\boldsymbol{f:V\to\{0,1,2\}}$
+736: The {\em Roman domination number of $G$} is denoted by
+738: all Roman dominating functions $f$ of $G$.
+742: As already mentioned in the introduction, the concept of Roman domination was introduced
+747: % rainbow Roman domination
+750: Defining the rainbow Roman domination number in the obvious way does not lead to a new graph parameter:
+751: it coincides with the Roman domination number.
+865:  Roman domination & $\gamaR$ & $f:V\to\{0,1,2\}$ & $\exists w\sim v: f(w)= 2$ & if $f(v) = 0$  \\ \hline
+930: If $f$ is a dominating function of $G$, then $2f$ is a Roman dominating function of $G$ (cf.~\cite{cdhh-2004,MR1991720}). Hence,
+1271: %at least one edge, let $f$ be a minimum weight Roman dominating
+1674: Note that $g$ is a Roman dominating function of $G$ of total
+1686: Note that $g$ is a Roman dominating function of $G$ of total
+1963: Let $f:V(G)\to\{0,1,2\}$ be a minimum weight Roman dominating
+1968: and $f(v)=1$ to $f(v)=0$ yields a Roman dominating function of
+2297: %\textcolor{red}{Since $\rgamawtwo(K_n^{**})\leq\gamaR(K_n^{**})$ (see Table \ref{table-bounds})}, it suffices to show that the Roman domination number of $K_n^{**}$ is at least $2n-2$.
+2298: %Let $f$ be a minimum weight Roman dominating functions of $K_n^{**}$,
+2306: %$f'(u)=0=f'(u')$, and $f'(x)=f(x)$ for all $x\notin\{v,u,u'\}$ is a Roman dominating
+2308: %strictly smaller than that of $f$, a contradiction. \textcolor{red}{If $f(u')=0$, then $f(u)=2$, because otherwise the function $f':\to\{0,1,2\}$, where $f'(u)=0$ and $f'(x)=f(x)$ for all $x\neq u$ would be a Roman dominating function with weight smaller than $f(V(K_n^{**}))$. Consequently, the function $f':\to\{0,1,2\}$ defined as $f'(v)=f(u)$, $f'(u)=0$ and $f'(x)=f(x)$ for all $x\notin\{u,v\}$ is a Roman dominating function with weight at most $f(V(K_n^{**}))$ and with the weight over all triangle vertices
+2313: %%the weight on $u$ to $v$ yields a Roman dominating function, which contradicts the initial
+2503: $S(K_{1,n})^-$, is a Roman dominating function of the graph.
+2552: On the other hand, we will now show that the Roman domination
+2560: Among all minimum weight Roman
+2573: Then, $f(s')\le 1$, since otherwise a Roman dominating function
+2578: a Roman dominating function $g$ of the same weight as $f$ and such
+2583: If both neighbors of $s$ have positive $f$-weight, then a Roman
+2588: this case, we could obtain a Roman dominating function $g$ of the
+2598: $0$ without violating the constraints of Roman domination. A Roman dominating function $g$ of weight at most that of $f$ and
+2855:   \item The \NP-completeness of Roman domination ($\displaystyle{\gamma}\!\:_R$) was proved by Dreyer in~\cite{MR2701485}. (The problem was already claimed to be \NP-complete in~\cite{cdhh-2004}, referring to a private communication with A.A.~McRae.)
+

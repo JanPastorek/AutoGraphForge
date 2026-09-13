@@ -1,0 +1,9 @@
+The search for ""If G is a connected graph of order at least two, then" "\gamma_t(G) \ge \text{rad}(G)" OR "\gamma_t(G) \ge rad(G)"" returned the following summary:
+The inequality relating the total domination number $\gamma_t(G)$ and the radius $\text{rad}(G)$ of a connected graph $G$ is:
+
+$$\gamma_t(G) \ge \text{rad}(G)$$
+
+This result is documented in graph theory literature (e.g., Theorem 2.15 in various texts on total domination) for connected graphs of order at least two[1].
+
+Sources:
+[1] [scribd.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGVWJmZNKsZtH-OXhAc71-zc-YY5qdlzlQ3zaWn5rZnlxZYrwKNEViR0hc40wGWbzGAbVFRAK2Fx2sZMz2a9d72e-8nFajciM4bgLiEaqgYBqOCGnkRejTOHwu3ITTQHyuKMTv1hXHtUontE2hfWMR68YfkMmOB8Lx-1A==)

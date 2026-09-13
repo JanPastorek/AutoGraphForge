@@ -1,0 +1,24 @@
+
+The command exited with code 0.
+Output:
+TOTAL ROMAN DOMINATION NUMBER OF GRAPHS
+and suﬃcient condition under which the total roman domination number increases (un-
+been proved under which the total roman domination number decreases. Some examples
+total roman domination number is equal to the number of vertices of the graph.
+total roman domination number and total roman domination number of trees in [2,3]. A
+we consider the eﬀect of removing a vertex on the total roman domination number of the
+roman domination number increases when this operation is performed. Similarly, we
+prove a necessary and suﬃcient condition under which the total roman domination number
+vertexv fromG. The total roman domination number of the graphG is denoted asγtR(G),
+D. K. THAKKAR, S. M. BADIYANI: TOTAL ROMAN DOMINATION NUMBER OF GRAPHS 447
+D. K. THAKKAR, S. M. BADIYANI: TOTAL ROMAN DOMINATION NUMBER OF GRAPHS 449
+D. K. THAKKAR, S. M. BADIYANI: TOTAL ROMAN DOMINATION NUMBER OF GRAPHS 451
+5. Vertex Removal and Total Roman Domination Number
+roman domination number increases when a vertex is removed from the graph.
+D. K. THAKKAR, S. M. BADIYANI: TOTAL ROMAN DOMINATION NUMBER OF GRAPHS 453
+roman domination number decreases when a vertex is removed from the graph.
+Remark 5.7. i) Consider cycle Cn withn – vertices. The total roman domination number
+roman domination number is n− 1. Thus for any vertex v of Cn, γtR(Cn−v)<γ tR(Cn).
+D. K. THAKKAR, S. M. BADIYANI: TOTAL ROMAN DOMINATION NUMBER OF GRAPHS 455
+[12] Thakkar D. K. and Badiyani S. M., (2017), On the Roman Domination Number of Graphs, Interna-
+

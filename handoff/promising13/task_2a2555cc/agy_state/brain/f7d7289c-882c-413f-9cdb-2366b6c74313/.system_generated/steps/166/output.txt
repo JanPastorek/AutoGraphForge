@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+FOR ALL CONNECTED GRAPHS (n<=8) AND ALL TOTAL DOMINATING SETS S: THERE ALWAYS EXISTS v with dist(v, S) <= |S| - 1!
+

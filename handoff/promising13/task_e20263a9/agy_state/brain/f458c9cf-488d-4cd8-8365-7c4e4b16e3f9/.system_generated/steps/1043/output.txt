@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Atlas contains 1253 graphs.
+All 995 connected graphs in Atlas (up to n=7) checked. ZERO COUNTEREXAMPLES!
+

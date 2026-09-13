@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+Max radius for n=2 is 1
+Max radius for n=3 is 1
+Max radius for n=4 is 2
+Max radius for n=5 is 2
+Max radius for n=6 is 3
+Max radius for n=7 is 3
+

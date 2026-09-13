@@ -1,0 +1,15 @@
+
+The command exited with code 0.
+Output:
+sub_total_domination_number 2
+domination_number 2
+total_domination_number 2
+independent_domination_number 2
+outer_connected_domination_number 2
+roman_domination_number 3
+double_roman_domination_number 5
+two_rainbow_domination_number 3
+three_rainbow_domination_number 4
+restrained_domination_number 2
+power_domination_number 1
+

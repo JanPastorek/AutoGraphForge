@@ -1,0 +1,2 @@
+You have 1 active subagent(s):
+[{"role":"Swarm Orchestrator","type":"teamwork_preview_orchestrator","conversationId":"b3ad7580-0176-458c-bebc-0ec3ed731f9e","transcript":"file:///tmp/agyhome.NWyWnj/.gemini/antigravity-cli/brain/b3ad7580-0176-458c-bebc-0ec3ed731f9e/.system_generated/logs/transcript.jsonl","state":"running"}]

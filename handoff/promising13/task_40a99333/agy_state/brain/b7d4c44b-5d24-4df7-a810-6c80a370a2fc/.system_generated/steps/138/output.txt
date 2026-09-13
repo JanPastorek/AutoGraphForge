@@ -1,0 +1,16 @@
+
+The command exited with code 0.
+Output:
+bibitem{F}
+M.~Furuya,
+A characterization of trees based on edge-deletion and its applications for domination-type invariants,
+preprint.
+
+\bibitem{HHS1}
+T.W.~Haynes, S.T.~Hedetniemi and P.J.~Slater,
+Fundamentals of Domination in Graphs,
+Marcel Dekker, Inc. New York (1998).
+
+\bibitem{HHS2}
+
+

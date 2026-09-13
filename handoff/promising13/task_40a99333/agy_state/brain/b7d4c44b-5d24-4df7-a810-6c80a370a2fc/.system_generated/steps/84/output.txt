@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+best_oa_location: {'endpoint_id': None, 'evidence': 'deprecated', 'host_type': 'publisher', 'is_best': True, 'license': None, 'oa_date': '2014-11-22', 'pmh_id': None, 'repository_institution': None, 'updated': 'deprecated', 'url': 'https://www.sciencedirect.com/science/article/pii/S0166218X14004879/pdf', 'url_for_landing_page': 'https://doi.org/10.1016/j.dam.2014.11.002', 'url_for_pdf': 'https://www.sciencedirect.com/science/article/pii/S0166218X14004879/pdf', 'version': 'publishedVersion'}
+

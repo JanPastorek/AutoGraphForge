@@ -1,0 +1,18 @@
+
+The command exited with code 0.
+Output:
+total 52
+drwxr-xr-x 2 japake298 domain users 4096 Aug 20 13:26 .
+drwxr-xr-x 4 japake298 domain users 4096 Aug 14 13:12 ..
+-rw-r--r-- 1 japake298 domain users 2123 Aug  6 12:16 empty_graph_gap.py
+-rw-r--r-- 1 japake298 domain users 1777 Aug  6 13:23 guard_holds.py
+-rw-r--r-- 1 japake298 domain users 2141 Aug 14 13:21 guards_hold.py
+-rw-r--r-- 1 japake298 domain users  783 Aug 20 13:26 known_count.py
+-rw-r--r-- 1 japake298 domain users 1302 Aug  6 13:54 lean_health.py
+-rw-r--r-- 1 japake298 domain users 2390 Aug  6 11:03 post_restore.py
+-rw-r--r-- 1 japake298 domain users 1870 Aug  6 11:01 rebuild_leanproject.py
+-rw-r--r-- 1 japake298 domain users 1616 Aug  6 11:41 reverify_known.py
+-rw-r--r-- 1 japake298 domain users 1704 Aug  6 12:02 reverify_one.py
+-rw-r--r-- 1 japake298 domain users 1468 Aug  4 23:30 w16_sanity.py
+-rw-r--r-- 1 japake298 domain users 1932 Aug  5 09:56 why_failing.py
+

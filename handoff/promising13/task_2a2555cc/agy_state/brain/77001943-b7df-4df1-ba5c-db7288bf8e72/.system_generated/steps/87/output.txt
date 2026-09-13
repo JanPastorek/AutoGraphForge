@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/txgraffiti/example_data/expressive_graph_data.csv: total 335, violations 0
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/txgraffiti/example_data/graph_data_old.csv: total 335, violations 0
+/mnt/home/japake298/project/GraphConjecturing/.venv/lib/python3.11/site-packages/txgraffiti/example_data/graph_data_old2.csv: total 340, violations 0
+

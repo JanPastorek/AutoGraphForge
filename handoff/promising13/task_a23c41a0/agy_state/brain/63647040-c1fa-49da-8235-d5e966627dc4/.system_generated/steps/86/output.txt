@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+structural_check: True 
+prove_sol is not None: True
+refute_sol is not None: False
+

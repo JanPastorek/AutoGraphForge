@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+Small domination-type invariants in random graphs
+http://arxiv.org/abs/1906.11743v1
+A continuous generalization of domination-like invariants
+http://arxiv.org/abs/2101.04349v1
+

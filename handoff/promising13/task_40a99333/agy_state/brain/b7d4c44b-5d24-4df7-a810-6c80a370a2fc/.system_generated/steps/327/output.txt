@@ -1,0 +1,28 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.TjB2mcCxHU.lean:134:4: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  h ≥ 0
+  g ≥ 0
+  e ≥ 0
+  d ≥ 0
+  d - e ≥ 0
+  c ≥ 0
+  c + e - g ≥ 0
+  b ≥ 0
+  b + c - d ≥ 0
+  b + 2*c - h ≤ -1
+  a ≥ 0
+where
+ a := ↑(GraphCalc.romanDominationNumber G)
+ b := ↑V1.card
+ c := ↑V2.card
+ d := ↑X.card
+ e := ↑(Finset.image nbr X).card
+ g := ↑(V2 ∪ Finset.image nbr X).card
+ h := ↑S.card
+'totalDom_le_romanDom' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

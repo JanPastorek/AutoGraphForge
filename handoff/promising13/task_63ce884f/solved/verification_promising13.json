@@ -1,0 +1,8 @@
+[
+ {
+  "id": "63ce884f",
+  "statement": "(nontrivial) \u21d2 (roman_domination_number + 1) \u2264 double_roman_domination_number",
+  "label": "open",
+  "status": "unresolved"
+ }
+]

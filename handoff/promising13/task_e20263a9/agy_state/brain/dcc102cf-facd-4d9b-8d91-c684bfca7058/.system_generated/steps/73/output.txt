@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+Testing random connected graphs...
+10000 random connected graphs tested: no counterexample!
+

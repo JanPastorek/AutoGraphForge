@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+UNSAT for n=6, rad>=4, tdn<=3
+UNSAT for n=7, rad>=4, tdn<=3
+UNSAT for n=8, rad>=4, tdn<=3
+UNSAT for n=9, rad>=4, tdn<=3
+UNSAT for n=10, rad>=4, tdn<=3
+UNSAT for n=11, rad>=4, tdn<=3
+

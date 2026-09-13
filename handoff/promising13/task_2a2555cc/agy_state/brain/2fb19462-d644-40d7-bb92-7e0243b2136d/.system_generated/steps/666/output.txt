@@ -1,0 +1,2 @@
+You have 1 active subagent(s):
+[{"role":"Pipeline Conductor Gen2","type":"teamwork_preview_pipeline","conversationId":"f7d7289c-882c-413f-9cdb-2366b6c74313","transcript":"file:///tmp/agyhome.wwbf9z/.gemini/antigravity-cli/brain/f7d7289c-882c-413f-9cdb-2366b6c74313/.system_generated/logs/transcript.jsonl","state":"running"}]

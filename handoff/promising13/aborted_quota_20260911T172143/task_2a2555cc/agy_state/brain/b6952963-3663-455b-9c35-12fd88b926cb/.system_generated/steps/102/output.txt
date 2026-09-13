@@ -1,0 +1,33 @@
+
+The command exited with code 0.
+Output:
+total 380
+drwxr-xr-x 6 japake298 domain users  4096 Aug  4 22:39 .
+drwx------ 9 japake298 domain users   200 Sep 11 16:55 ..
+-rw-r--r-- 1 japake298 domain users    55 Jun  8 12:53 __init__.py
+drwxr-xr-x 2 japake298 domain users  4096 Sep 10 09:09 __pycache__
+-rw-r--r-- 1 japake298 domain users 10157 Jun 19 22:34 adversarial.py
+-rw-r--r-- 1 japake298 domain users  4867 Jul 30 15:21 candidate_filters.py
+-rw-r--r-- 1 japake298 domain users 28495 Aug 25 12:21 cegis.py
+-rw-r--r-- 1 japake298 domain users 16083 Jul  1 15:28 cegis_novelty.py
+-rw-r--r-- 1 japake298 domain users 19607 Aug 20 15:27 conjecture_lattice.py
+drwxr-xr-x 2 japake298 domain users  4096 Jun 17 17:14 conjecturing
+drwxr-xr-x 2 japake298 domain users  4096 Jul 29 12:39 data
+-rw-r--r-- 1 japake298 domain users  2533 Jul 31 16:10 degenerate_graphs.py
+-rw-r--r-- 1 japake298 domain users 29198 Jun 17 17:14 falsification.py
+-rw-r--r-- 1 japake298 domain users 12839 Jul  1 15:06 invariants_graphcalc.py
+-rw-r--r-- 1 japake298 domain users 23725 Jul  1 15:07 known_relations.py
+-rw-r--r-- 1 japake298 domain users 13556 Sep  9 17:17 lean_disproof.py
+-rw-r--r-- 1 japake298 domain users 11198 Sep  9 17:20 lean_export.py
+-rw-r--r-- 1 japake298 domain users  5682 Jun 24 12:03 lemma_retrieval.py
+-rw-r--r-- 1 japake298 domain users 10404 Jul 30 11:00 linear_form.py
+-rw-r--r-- 1 japake298 domain users 28289 Jul 29 13:32 novelty.py
+-rw-r--r-- 1 japake298 domain users  7788 Jul 29 10:16 proof_audit.py
+-rw-r--r-- 1 japake298 domain users  3326 Jun 19 21:58 random_models.py
+-rw-r--r-- 1 japake298 domain users 18255 Jul 31 16:10 refute_matrix.py
+-rw-r--r-- 1 japake298 domain users  4244 Jun 19 21:58 reporting.py
+drwxr-xr-x 3 japake298 domain users  4096 Aug 25 11:26 search
+-rw-r--r-- 1 japake298 domain users 14280 Jul 30 16:01 seed_corpus.py
+-rw-r--r-- 1 japake298 domain users  4662 Jun 24 12:03 symbolic_refute.py
+-r--r--r-- 1 japake298 domain users 40615 Jul 29 10:16 theorem_prover.py
+

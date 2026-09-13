@@ -1,0 +1,9 @@
+
+The command exited with code 0.
+Output:
+1906.11743 Michitaka Furuya\footnote{College of Liberal Arts and Science, Kitasato University, 1-15-1 Kitasato, Minami-ku, Sagamihara, Kanagawa 252-0373, Japan. \texttt{e-mail:michitaka.furuya@gmail.com}},
+1906.11743 \begin{prop}[Furuya~\cite{F1}]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+1906.11743 M.~Furuya,
+2101.04349 Michitaka Furuya\footnote{\texttt{e-mail:michitaka.furuya@gmail.com}} \vs{5}\\
+2101.04349 M.~Furuya,
+

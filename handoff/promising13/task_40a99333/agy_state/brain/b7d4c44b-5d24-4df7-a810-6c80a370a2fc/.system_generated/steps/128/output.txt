@@ -1,0 +1,13 @@
+
+The command exited with code 1.
+Output:
+Traceback (most recent call last):
+  File "<string>", line 9, in <module>
+  File "/usr/lib64/python3.11/tarfile.py", line 1868, in open
+    raise ReadError(f"file could not be opened successfully:\n{error_msgs_summary}")
+tarfile.ReadError: file could not be opened successfully:
+- method gz: ReadError('invalid header')
+- method bz2: ReadError('not a bzip2 file')
+- method xz: ReadError('not an lzma file')
+- method tar: ReadError('invalid header')
+

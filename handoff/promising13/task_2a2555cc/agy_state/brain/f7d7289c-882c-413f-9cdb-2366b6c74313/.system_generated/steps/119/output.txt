@@ -1,0 +1,4 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/tools/prover_eval/challenge.py","LineNumber":6,"LineContent":"    theorem prove_candidate  :   C := by sorry"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/tools/prover_eval/challenge.py","LineNumber":95,"LineContent":"           f\"theorem prove_{ident} : Candidate := by\\n  sorry\\n\\n\""}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/tools/antigravity_handoff.py","LineNumber":46,"LineContent":"    theorem prove_\u003cid\u003e  :   Candidate := by sorry"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/tools/antigravity_handoff.py","LineNumber":218,"LineContent":"    pristine = {\"prove\": f\"theorem prove_{ident} : Candidate := by\\n  sorry\","}

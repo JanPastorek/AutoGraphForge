@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "command(/tmp/agyprobe.KxVL6S/bin/marker.sh)",
+      "command(/mnt/home/japake298/project/GraphConjecturing/tools/antigravity/check.sh)",
+      "write_file(/tmp/agyprobe.KxVL6S/ws/**)",
+      "read_file(/tmp/agyprobe.KxVL6S/ws/**)",
+      "read_file(/mnt/home/japake298/project/GraphConjecturing/lean_project/LeanProject/**)"
+    ]
+  },
+  "trustedWorkspaces": [
+    "/tmp/agyprobe.KxVL6S/ws"
+  ],
+  "model": "Gemini 3.8 Flash (High)"
+}

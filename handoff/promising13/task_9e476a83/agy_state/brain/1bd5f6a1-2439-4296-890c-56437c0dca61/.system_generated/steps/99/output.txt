@@ -1,0 +1,22 @@
+
+The command exited with code 0.
+Output:
+solution_file result is None? False
+First 10 lines of solution_file:
+import Mathlib
+import LeanProject.GraphInvariantsComputable
+
+set_option maxRecDepth 10000
+
+open SimpleGraph
+
+-- Conjecture under test: (nontrivial) ⇒ 2 ≤ total_domination_number
+-- Both declarations refer to the same `Candidate`.
+abbrev Candidate : Prop :=
+Last 5 lines of solution_file:
+  intro V _ _ G _ hnt hhas
+  exact totalDominationNumber_ge_two G hnt hhas
+
+-- verifier: the target must have exactly this type
+theorem agf_verify_prove : _root_.Candidate := _root_.prove_9e476a83
+

@@ -1,0 +1,27 @@
+
+The command exited with code 0.
+Output:
+n= 2: rad= 1, gamma_t= 2, diff=1
+n= 3: rad= 1, gamma_t= 2, diff=1
+n= 4: rad= 2, gamma_t= 2, diff=0
+n= 5: rad= 2, gamma_t= 3, diff=1
+n= 6: rad= 3, gamma_t= 4, diff=1
+n= 7: rad= 3, gamma_t= 4, diff=1
+n= 8: rad= 4, gamma_t= 4, diff=0
+n= 9: rad= 4, gamma_t= 5, diff=1
+n=10: rad= 5, gamma_t= 6, diff=1
+n=11: rad= 5, gamma_t= 6, diff=1
+n=12: rad= 6, gamma_t= 6, diff=0
+n=13: rad= 6, gamma_t= 7, diff=1
+n=14: rad= 7, gamma_t= 8, diff=1
+n=15: rad= 7, gamma_t= 8, diff=1
+n=16: rad= 8, gamma_t= 8, diff=0
+n=17: rad= 8, gamma_t= 9, diff=1
+n=18: rad= 9, gamma_t=10, diff=1
+n=19: rad= 9, gamma_t=10, diff=1
+n=20: rad=10, gamma_t=10, diff=0
+n=21: rad=10, gamma_t=11, diff=1
+n=22: rad=11, gamma_t=12, diff=1
+n=23: rad=11, gamma_t=12, diff=1
+n=24: rad=12, gamma_t=12, diff=0
+

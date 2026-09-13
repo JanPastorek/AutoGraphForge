@@ -1,0 +1,6 @@
+
+The command exited with code 0.
+Output:
+177:theorem isVertexCoverFinset_iff (G : SimpleGraph V) [DecidableRel G.Adj]
+341:theorem isTreeClass_iff (G : SimpleGraph V) [DecidableRel G.Adj] :
+

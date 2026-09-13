@@ -1,0 +1,104 @@
+
+The command exited with code 0.
+Output:
+
+\noindent The definitions of $2$-rainbow domination on the one hand and Roman domination on the other hand clearly exhibit certain similarities.
+It is therefore not surprising that these notions are related.
+For later reference, we include the simple proof of the following known results.
+
+\begin{theorem}[Wu and Xing \cite{wx}, Chellali and Rad \cite{cr}, and Fujita and Furuya \cite{ff}]\label{theorembefore}
+If $G$ is a graph, then $\gamma_{r2}(G)\leq \gamma_R(G)\leq \frac{3}{2}\gamma_{r2}(G)$.
+\end{theorem}
+{\it Proof:} These inequalities follow immediately from two simple observations:
+If $g$ is a Roman dominating function of $G$, then 
+$$f:V(G)\to 2^{\{ 1,2\}}: x\mapsto
+\begin{cases}
+\emptyset & \mbox{, if $g(x)=0$,}\\
+\{ 1\} & \mbox{, if $g(x)=1$, and}\\
+\{ 1,2\} & \mbox{, if $g(x)=2$}
+\end{cases}
+$$
+is a $2$-rainbow dominating function of $G$ of weight $w(f)\leq w(g)$.
+Similarly, if $f$ is a $2$-rainbow dominating function of $G$, 
+and $|f^{-1}(\{ 1\})|\geq |f^{-1}(\{ 2\})|$, then
+$$g:V(G)\to \{ 0,1,2\}: x\mapsto
+\begin{cases}
+0 & \mbox{, if $f(x)=\emptyset$,}\\
+1 & \mbox{, if $f(x)=\{ 1\}$, and}\\
+2 & \mbox{, otherwise}
+
+\begin{theorem}\label{theorem2}
+A graph $G$ satisfies $\gamma_{r2}(H)=\gamma_R(H)$ for every induced subgraph $H$ of $G$ if and only if $G$ is $\{P_5,C_5,C_4\}$-free. 
+\end{theorem}
+{\it Proof:} Since $\gamma_{r2}(H)<\gamma_R(H)$ for every graph $H$ in $\{P_5,C_5,C_4\}$, the necessity follows immediately.
+In view of Theorem \ref{theorembefore}, 
+in order to complete the proof, 
+it suffices to show 
+that every $\{P_5,C_5,C_4\}$-free graph $G$ satisfies $\gamma_R(G)\leq \gamma_{r2}(G)$.
+Therefore, let $G$ be a $\{P_5,C_5,C_4\}$-free graph, 
+and let $f$ be a minimum $2$-rainbow dominating function of $G$
+such that $|f^{-1}(\{ 1,2\})|$ is as large as possible.
+For $F\in 2^{\{ 1,2\}}$, let $V_{F}=f^{-1}(F)$.
+Let
+$$g:V(G)\to \{ 0,1,2\}:x\mapsto
+\begin{cases}
+0 & \mbox{, if $x\in V_{\emptyset}$,}\\
+1 & \mbox{, if $x\in V_{\{ 1\}}\cup V_{\{ 2\}}$, and}\\
+2 & \mbox{, if $x\in V_{\{ 1,2\}}$}.
+\end{cases}
+$$
+Note that $w(g)=w(f)$.
+If $g$ is a Roman dominating function of $G$, 
+then $\gamma_R(G)\leq \gamma_{r2}(G)$.
+Hence, 
+A graph $G$ belongs to ${\cal G}_3\left(\gamma_{R},\frac{3}{2}\gamma_{r2}\right)$ if and only if $G$ is $\{\bar{K}_3, K_2\cup K_1\}$-free.
+\end{theorem}
+{\it Proof:}
+Since $\gamma_{r2}(\bar{K}_3)=\gamma_R(\bar{K}_3)=\gamma_{r2}(K_2\cup K_1)=\gamma_R(K_2\cup K_1)=3$, 
+the graphs in ${\cal G}_3\left(\gamma_{R},\frac{3}{2}\gamma_{r2}\right)$ are $\{\bar{K}_3, K_2\cup K_1\}$-free.
+In view of Theorem \ref{theorembefore}, 
+in order to complete the proof, it suffices to show 
+that every $\{\bar{K}_3, K_2\cup K_1\}$-free graph $G$ with $\gamma_{r2}(G)\geq 3$ 
+satisfies $\gamma_{R}(G)=\frac{3}{2}\gamma_{r2}(G)$.
+Therefore, let $G$ be a $\{\bar{K}_3, K_2\cup K_1\}$-free graph with $\gamma_{r2}(G)\geq 3$.
+Since $\gamma_{r2}(G)\geq 3$, the graph $G$ is not complete.
+Let $u$ and $v$ be two distinct vertices of $G$ that are not adjacent.
+Since $\{\bar{K}_3, K_2\cup K_1\}$-free, we obtain $N_G(u)=N_G(v)=V(G)\setminus \{ u,v\}$.
+This implies that
+$$x\mapsto
+\begin{cases}
+\{ 1\} &\mbox{, $x=u$,}\\
+\{ 2\} & \mbox{, $x=v$, and}\\
+\emptyset & \mbox{, otherwise}
+\end{cases}
+$$
+defines a $2$-rainbow dominating function of $G$ of weight $2$, which is a contradiction. $\Box$
+
+\medskip
+
+{\it Proof:} Let $G$ be a graph with $\gamma_R(G)= \frac{3}{2}\gamma_{r2}(G)$, and let $f$ be a minimum $2$-rainbow dominating function of $G$.
+
+\medskip
+
+\noindent (i) Since the inequality (\ref{e1}) 
+in the proof of Theorem \ref{theorembefore}
+is satisfied with equality, 
+we obtain $n_{\{ 1\}}=n_{\{ 2\}}$.
+Similarly, since (\ref{e2}) is satisfied with equality, 
+we obtain $n_{\{ 1,2\}}=0$.
+Since $f$ is a $2$-rainbow dominating function of $G$ and $n_{\{ 1,2\}}=0$,
+every vertex in $V_{\emptyset}$ has a neighbor in $V_{\{ 1\}}$ as well as a neighbor in $V_{\{ 2\}}$.
+
+\medskip
+
+\noindent (ii) If $v_1$ in $V_{\{ 1\}}$ is adjacent to $v_2$ in $V_{\{ 2\}}$, then 
+$$
+x\mapsto
+\begin{cases}
+0 & \mbox{, $x\in \{ v_2\}\cup V_{\emptyset}$,}\\
+1 & \mbox{, $x\in V_{\{ 2\}}\setminus \{ v_2\}$, and}\\
+2 & \mbox{, $x\in V_{\{ 1\}}$}
+\end{cases}
+$$
+defines a Roman dominating function of $G$ of weight $\frac{3}{2}\gamma_{r2}(G)-1$, which is a contradiction.
+

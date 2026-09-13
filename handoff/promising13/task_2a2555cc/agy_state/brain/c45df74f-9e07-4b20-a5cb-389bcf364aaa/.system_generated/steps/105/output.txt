@@ -1,0 +1,14 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_2a2555cc/Challenge_2a2555cc.lean. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -12,6 +12,8 @@
+     (G : SimpleGraph V) [DecidableRel G.Adj],
+       GraphCalc.IsNontrivialClass G → GraphCalc.HasRadius G → GraphCalc.HasTotalDominationNumber G → GraphCalc.radius G ≤ GraphCalc.totalDominationNumber G
+ 
++lemma test_lemma : 1 + 1 = 2 := rfl
++
+ theorem prove_2a2555cc : Candidate := by
+   sorry
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

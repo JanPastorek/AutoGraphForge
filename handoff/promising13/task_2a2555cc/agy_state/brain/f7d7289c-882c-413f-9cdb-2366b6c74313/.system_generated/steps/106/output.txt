@@ -1,0 +1,11 @@
+
+The command exited with code 0.
+Output:
+LINT: ok
+/tmp/tmp.ZkNHOjxFHU.lean:49:8: warning: declaration uses `sorry`
+/tmp/tmp.ZkNHOjxFHU.lean:54:8: warning: declaration uses `sorry`
+'prove_2a2555cc' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'refute_2a2555cc' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+

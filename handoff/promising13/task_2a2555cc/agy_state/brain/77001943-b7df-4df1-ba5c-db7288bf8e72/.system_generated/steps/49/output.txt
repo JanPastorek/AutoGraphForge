@@ -1,0 +1,14 @@
+
+The command exited with code 0.
+Output:
+total 44
+drwx------ 8 japake298 domain users   180 Sep 11 20:35 .
+drwx------ 3 japake298 domain users    60 Sep 11 20:35 ..
+drwxr-xr-x 6 japake298 domain users  4096 Aug  4 23:31 .venv
+drwx------ 3 japake298 domain users    60 Sep 11 20:35 benchmark
+-r--r--r-- 1 japake298 domain users 21872 Aug 25 11:30 config.py
+drwx------ 3 japake298 domain users   100 Sep 11 20:35 handoff
+drwxr-xr-x 5 japake298 domain users  4096 Aug  6 10:56 lean_project
+drwxr-xr-x 6 japake298 domain users  4096 Aug  4 22:39 pipeline
+drwxr-xr-x 6 japake298 domain users  4096 Sep 11 11:22 tools
+

@@ -1,0 +1,44 @@
+
+The command exited with code 0.
+Output:
+      · omega
+  have h_card_compl : (Finset.univ \ (ballWithin G 1 u)).card ≤ (Finset.univ.filter (fun v => (f v : ℕ) = 1)).card :=
+    Finset.card_le_card h_compl_subset
+  have h_card_split : Fintype.card V = (ballWithin G 1 u).card + (Finset.univ \ (ballWithin G 1 u)).card := by
+    rw [← Finset.card_univ]
+    have hsub : ballWithin G 1 u ⊆ Finset.univ := Finset.subset_univ _
+    exact (Finset.card_sdiff_add_card_eq hsub).symm
+  have h_sum_ones : (Finset.univ.filter (fun v => (f v : ℕ) = 1)).card = ∑ v ∈ Finset.univ.filter (fun v => (f v : ℕ) = 1), (f v : ℕ) := by
+    rw [Finset.sum_congr rfl (fun x hx => (Finset.mem_filter.mp hx).2.symm)]
+    simp
+  have h_sum_le : (Finset.univ.filter (fun v => (f v : ℕ) = 1)).card + 2 ≤ GraphCalc.romanWeight f := by
+    unfold GraphCalc.romanWeight
+    have hu_not_one : u ∉ Finset.univ.filter (fun v => (f v : ℕ) = 1) := by
+      rw [Finset.mem_filter]
+      push Not
+      intro _
+      omega
+    have hsub : insert u (Finset.univ.filter (fun v => (f v : ℕ) = 1)) ⊆ Finset.univ := Finset.subset_univ _
+    have h2sub : ∑ v ∈ insert u (Finset.univ.filter (fun v => (f v : ℕ) = 1)), (f v : ℕ) ≤ ∑ v : V, (f v : ℕ) :=
+      Finset.sum_le_sum_of_subset_of_nonneg hsub (fun _ _ _ => Nat.zero_le _)
+    rw [Finset.sum_insert hu_not_one, hu2] at h2sub
+    rw [h_sum_ones]
+    omega
+  have h_card_bound : Fintype.card V ≤ (ballWithin G 1 u).card + (GraphCalc.romanWeight f - 2) := by
+    rw [h_card_split]
+    omega
+  have h_ball_univ := ballWithin_eq_univ_of_card_add G u hrad 1 (GraphCalc.romanWeight f - 2) h_card_bound
+  have heq : 1 + (GraphCalc.romanWeight f - 2) = GraphCalc.romanWeight f - 1 := by omega
+  rw [heq] at h_ball_univ
+  unfold GraphCalc.IsNontrivialClass at hnt
+  unfold GraphCalc.order at hnt
+  have h_ecc_le : GraphCalc.eccentricity G u ≤ GraphCalc.romanWeight f - 1 := by
+    unfold GraphCalc.eccentricity
+    by_cases h_le_n : GraphCalc.romanWeight f - 1 ≤ Fintype.card V
+    · exact minUpTo_le (GraphCalc.romanWeight f - 1) h_le_n h_ball_univ
+    · have hradcard := eccentricity_le_card_pred G u hrad hnt
+      omega
+  have h_rad_le := radius_le_eccentricity G u
+  omega
+
+

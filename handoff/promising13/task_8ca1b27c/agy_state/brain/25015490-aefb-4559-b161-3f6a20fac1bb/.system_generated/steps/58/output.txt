@@ -1,0 +1,34 @@
+
+The command exited with code 0.
+Output:
+total 184
+drwxr-xr-x 6 japake298 domain users  4096 Sep 11 11:22 .
+drwx------ 9 japake298 domain users   200 Sep 11 16:34 ..
+drwxr-xr-x 2 japake298 domain users  4096 Sep 11 15:42 __pycache__
+drwxr-xr-x 2 japake298 domain users  4096 Sep 11 16:05 antigravity
+-r--r--r-- 1 japake298 domain users 15551 Sep 11 15:41 antigravity_handoff.py
+-rw-r--r-- 1 japake298 domain users 13433 Aug 20 15:36 audit_sample.py
+-rw-r--r-- 1 japake298 domain users  8839 Jul 29 12:39 build_class_hierarchy.py
+-rw-r--r-- 1 japake298 domain users  2290 Jul 31 16:10 build_degenerate_tier.py
+-rw-r--r-- 1 japake298 domain users  3253 Jun 28 16:03 capture_outputs.py
+-rw-r--r-- 1 japake298 domain users  4071 Jul 29 10:33 export_disproofs.py
+-rw-r--r-- 1 japake298 domain users   347 Jun 24 12:03 find_results.py
+-rw-r--r-- 1 japake298 domain users  6048 Aug 25 11:22 hard_seed_provenance.py
+-rw-r--r-- 1 japake298 domain users  2657 Aug 25 10:00 hypothesis_selectivity.py
+-rw-r--r-- 1 japake298 domain users 11860 Sep 10 09:09 lean_differential.py
+-rw-r--r-- 1 japake298 domain users 10617 Jul 30 12:42 lift_conjectures.py
+-rw-r--r-- 1 japake298 domain users  8030 Aug  4 21:42 merge_shards.py
+-rw-r--r-- 1 japake298 domain users  3767 Jun 25 16:29 precompute_battery.py
+-rw-r--r-- 1 japake298 domain users  1918 Jun 24 12:03 prove_curated.py
+-rw-r--r-- 1 japake298 domain users  3819 Jun 24 12:03 prove_demo.py
+-rw-r--r-- 1 japake298 domain users  3611 Jun 24 12:03 prove_new.py
+drwxr-xr-x 4 japake298 domain users  4096 Aug 14 13:12 prover_eval
+-rw-r--r-- 1 japake298 domain users 12052 Jul 29 10:16 prover_shim.py
+-rw-r--r-- 1 japake298 domain users  1801 Jun 28 08:37 run_prove.py
+-rw-r--r-- 1 japake298 domain users   829 Jun 27 13:54 run_prove_curated.py
+-rw-r--r-- 1 japake298 domain users  7107 Jul 30 16:02 run_shard.py
+drwxr-xr-x 2 japake298 domain users  4096 Sep 11 15:44 slurm
+-rw-r--r-- 1 japake298 domain users  3437 Jul  1 15:07 validate_known_relations.py
+-rw-r--r-- 1 japake298 domain users  4985 Jul 29 10:18 verify_proofs.py
+-rw-r--r-- 1 japake298 domain users  2542 Aug 25 09:59 witness_provenance.py
+

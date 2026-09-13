@@ -1,0 +1,15 @@
+
+The command exited with code 0.
+Output:
+/tmp/test_lemma.lean:9:2: error: Tactic `contradiction` failed
+
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+v : V
+hv : (fun x => 2) v = 0
+⊢ ∃ u, G.Adj v u ∧ (fun x => 2) u = 2
+Exit: 1
+

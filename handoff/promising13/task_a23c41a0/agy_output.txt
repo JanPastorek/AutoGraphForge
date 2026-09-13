@@ -1,0 +1,105 @@
+The project prompt draft has been assembled in [prompt_draft.md](file:///tmp/agyhome.qfVsPi/.gemini/antigravity-cli/brain/11818d26-e03b-4777-97c1-fb14c6daf94a/prompt_draft.md).
+
+> Expecting this to run as a standard proof pipeline — say so if you want it run with a very large team of agents instead.
+
+Please review the proposed prompt:
+
+```markdown
+Settle an open graph-theory conjecture in Lean 4 — prove or refute `(nontrivial) ⇒ order ≤ 2 * edge_cover_number` with a kernel-checked proof.
+
+Working directory: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_a23c41a0
+Integrity mode: development
+
+## Requirements
+
+### R1. Formally Settle Candidate Conjecture
+Replace the `sorry` in exactly one of `theorem prove_a23c41a0 : Candidate` or `theorem refute_a23c41a0 : ¬ Candidate` in `Challenge_a23c41a0.lean` in place. Leave the other theorem untouched with its `sorry`.
+
+### R2. Lean Submission and Sandbox Constraints
+- Maintain strict integrity: change nothing above the first `theorem` line (imports, options, `Candidate`).
+- Helper lemmas must be placed after `Candidate` as top-level definitions/lemmas.
+- No `sorry`, `admit`, `axiom`, `native_decide`, `namespace`, `section`, `variable`, `notation`, `macro`, `syntax`, `IO`, or metaprogramming.
+- Allowed axioms in elaborated results are strictly limited to `propext`, `Classical.choice`, and `Quot.sound`.
+- Sandbox rules: do not run `lake`; Mathlib and the parent Lean project are read-only.
+
+### R3. Summary Report
+Produce `REPORT.md` in the working directory documenting the settled direction (proven or refuted), the key mathematical idea, and the complete output from the verification script.
+
+## Verification Resources
+- Verification script: `/mnt/home/japake298/project/GraphConjecturing/tools/antigravity/check.sh Challenge_a23c41a0.lean`
+- Computable invariant reference: `reference/GraphInvariantsComputable.lean`
+
+## Acceptance Criteria
+
+### Verification & Compliance
+- [ ] `/mnt/home/japake298/project/GraphConjecturing/tools/antigravity/check.sh Challenge_a23c41a0.lean` exits with code 0.
+- [ ] Axiom audit output shows only `propext`, `Classical.choice`, and/or `Quot.sound` for the completed theorem.
+- [ ] Exactly one target theorem has its `sorry` eliminated; the unproven theorem retains its `sorry`.
+- [ ] `REPORT.md` is present in the working directory with the required sections and execution output.
+```
+
+If this looks good, reply to confirm (e.g. "Looks good, launch it") and I will delegate it immediately via `teamwork_preview`.
+The project prompt has been approved and delegated to the `teamwork_preview` subagent system.
+
+- **Conversation ID**: `541a510e-b981-4f71-8c5d-d8fac5287a0e`
+- **Execution Target**: [Challenge_a23c41a0.lean](file:///mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_a23c41a0/Challenge_a23c41a0.lean)
+- **Draft & Plan**: [prompt_draft.md](file:///tmp/agyhome.qfVsPi/.gemini/antigravity-cli/brain/11818d26-e03b-4777-97c1-fb14c6daf94a/prompt_draft.md)
+
+The teamwork agent team is now working to formally resolve the conjecture (either proving or refuting it), verify the result via `check.sh`, and generate `REPORT.md`. I will update you as soon as the team completes the task.
+An update was received from the `teamwork_preview` orchestrator:
+
+- **Routing Decision**: Dispatched to the Math / Proof pipeline (`teamwork_preview_pipeline`).
+- **Monitoring**: Active progress and liveness tracking are running.
+- **Current State**: The pipeline is executing the proof exploration, formalization, and verification in Lean 4.
+
+I am awaiting the completion and audit results from the team.
+A progress update was received from the theorem proving pipeline:
+
+- **Settled Direction**: Proven (`prove_a23c41a0` is TRUE).
+- **Current Status**: Helper lemmas connecting the edge cover bounds and `minUpTo` are being formalized.
+- **Next Steps**: Proof synthesis in [Challenge_a23c41a0.lean](file:///mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_a23c41a0/Challenge_a23c41a0.lean), followed by independent verification via `check.sh` and generation of `REPORT.md`.
+Another progress report from the theorem proving pipeline:
+
+- **Key Lemma Established**: `card_le_two_mul_card_of_isEdgeCoverFinset` has been proven without `sorry`.
+- **Current Step**: Connecting this bound to Lean's `GraphCalc.edgeCoverNumber` definition.
+- **Next Step**: Final kernel check via `check.sh` once the theorem is assembled.
+The theorem proving team has completed the proof of `prove_a23c41a0` and submitted their completion report.
+
+The orchestrator has initiated an independent, blocking verification audit (`teamwork_preview_victory_auditor`) to verify:
+1. Exact conformance with sandbox and integrity constraints.
+2. Independent execution of `/mnt/home/japake298/project/GraphConjecturing/tools/antigravity/check.sh`.
+3. Axiom audit ensuring only permitted axioms (`propext`, `Classical.choice`, `Quot.sound`) are present.
+4. Validation of [REPORT.md](file:///mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_a23c41a0/REPORT.md).
+
+I will share the final verdict and report as soon as the audit completes.
+The open graph-theory conjecture in [Challenge_a23c41a0.lean](file:///mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_a23c41a0/Challenge_a23c41a0.lean) has been settled with a verified Lean 4 proof.
+
+### Settled Direction
+**PROVEN**: `prove_a23c41a0 : Candidate`
+
+The candidate conjecture states:
+$$\text{IsNontrivialClass}(G) \implies \text{HasEdgeCover}(G) \implies \text{order}(G) \le 2 \cdot \text{edgeCoverNumber}(G)$$
+
+### Key Mathematical Idea
+1. **Edge Cover Vertex Bound**:
+   Any edge cover $s \subseteq E(G)$ satisfies $V \subseteq \bigcup_{e \in s} e$. Since each undirected edge has $|e| \le 2$ endpoints, subadditivity of cardinality gives:
+   $$|V| \le \left|\bigcup_{e \in s} e\right| \le 2 \cdot |s|$$
+2. **Analysis of `minUpTo`**:
+   `GraphCalc.edgeCoverNumber G` is computed via `GraphCalc.minUpTo (|V|) P`, which finds the minimal size $k \le |V|$ of an edge cover.
+   - If an edge cover exists at size $k \le |V|$, then $|V| \le 2k = 2 \cdot \text{edgeCoverNumber}(G)$.
+   - If no cover of size $\le |V|$ exists, `minUpTo` defaults to $|V|$, where $|V| \le 2|V|$ holds trivially.
+
+### Verification Output
+Ran `/mnt/home/japake298/project/GraphConjecturing/tools/antigravity/check.sh Challenge_a23c41a0.lean`:
+```
+LINT: ok
+/tmp/tmp.j0GzK3p8b6.lean:66:8: warning: declaration uses `sorry`
+'prove_a23c41a0' depends on axioms: [propext, Classical.choice, Quot.sound]
+'refute_a23c41a0' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+CHECK: elaborated. Allowed axioms: propext, Classical.choice, Quot.sound.
+       'sorryAx' in a list above means that theorem is unfinished.
+```
+
+- **Exit Code**: `0`
+- **Axioms for `prove_a23c41a0`**: `[propext, Classical.choice, Quot.sound]` (strictly within the allowed whitelist)
+- Detailed write-up and logs are available in [REPORT.md](file:///mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_a23c41a0/REPORT.md).

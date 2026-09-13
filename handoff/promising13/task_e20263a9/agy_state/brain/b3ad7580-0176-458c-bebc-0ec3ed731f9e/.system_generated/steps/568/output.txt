@@ -1,0 +1,52 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/scratch.lean. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -19,4 +19,46 @@
+     simp only [WithTop.coe_le_coe] at hmin
+     exact hmin
+ 
++theorem radius_le_eccentricity {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] (v : V) :
++    GraphCalc.radius G ≤ GraphCalc.eccentricity G v := by
++  unfold GraphCalc.radius
++  have hmem : GraphCalc.eccentricity G v ∈ Finset.image (GraphCalc.eccentricity G) Finset.univ := by
++    apply Finset.mem_image_of_mem
++    exact Finset.mem_univ v
++  obtain ⟨b, hb⟩ := Finset.min_of_mem hmem
++  rw [hb]
++  have hle : (Finset.image (GraphCalc.eccentricity G) Finset.univ).min ≤ ↑(GraphCalc.eccentricity G v) :=
++    Finset.min_le hmem
++  rw [hb] at hle
++  exact WithTop.coe_le_coe.mp hle
++
++lemma le_romanDominationNumber {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj] (k : ℕ)
++    (h : ∀ f : V → Fin 3, GraphCalc.IsRomanDominatingFunction G f → k ≤ GraphCalc.romanWeight f) :
++    k ≤ GraphCalc.romanDominationNumber G := by
++  unfold GraphCalc.romanDominationNumber
++  have h_ex : ∃ f : V → Fin 3, GraphCalc.IsRomanDominatingFunction G f := by
++    use (fun _ => 2)
++    intro v hv
++    dsimp at hv
++    have h_false : False := by
++      revert hv
++      decide
++    contradiction
++  rcases h_ex with ⟨f₀, hf₀⟩
++  have h_mem : GraphCalc.romanWeight f₀ ∈ (Finset.univ.filter (GraphCalc.IsRomanDominatingFunction G)).image GraphCalc.romanWeight := by
++    rw [Finset.mem_image]
++    exact ⟨f₀, Finset.mem_filter.mpr ⟨Finset.mem_univ f₀, hf₀⟩, rfl⟩
++  have h_nonempty : ((Finset.univ.filter (GraphCalc.IsRomanDominatingFunction G)).image GraphCalc.romanWeight).Nonempty :=
++    ⟨GraphCalc.romanWeight f₀, h_mem⟩
++  obtain ⟨m, hm⟩ := Finset.min_of_nonempty h_nonempty
++  rw [hm]
++  dsimp
++  have hm_in := Finset.mem_of_min hm
++  rw [Finset.mem_image] at hm_in
++  rcases hm_in with ⟨f_min, hf_min, rfl⟩
++  rw [Finset.mem_filter] at hf_min
++  exact h f_min hf_min.2
++
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

@@ -366,6 +366,161 @@ def IsCographClass (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
 instance (G : SimpleGraph V) [DecidableRel G.Adj] :
     Decidable (IsCographClass G) := by unfold IsCographClass; infer_instance
 
+/- ── sub-total domination ─────────────────────────────────────────────────── -/
+
+/-- Sub-total domination number: least `t` whose `t` largest degrees sum to
+`≥ n`.
+
+graphcalc computes this by sorting the degree sequence and scanning prefixes;
+`largestDegreeSum` is that prefix sum expressed as a maximum over `t`-subsets
+(see the note there on why sorting is not available to the kernel). -/
+def subTotalDominationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  minUpTo (Fintype.card V) (fun t => Fintype.card V ≤ largestDegreeSum G t)
+
+/-- Defined exactly when *some* prefix reaches `n`. graphcalc returns no value
+when the scan runs off the end — an edgeless graph has every degree `0`, so no
+prefix ever reaches `n` — while `minUpTo` would fall back to `n`. Monotonicity
+of `largestDegreeSum` makes the whole-graph check `t = n` sufficient. -/
+def HasSubTotalDominationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
+  Fintype.card V ≤ largestDegreeSum G (Fintype.card V)
+
+instance (G : SimpleGraph V) [DecidableRel G.Adj] :
+    Decidable (HasSubTotalDominationNumber G) := by
+  unfold HasSubTotalDominationNumber; infer_instance
+
+/- ── total domination ─────────────────────────────────────────────────────── -/
+
+/-- Every vertex has a neighbour in `s` — note `G.Adj v u` excludes `v = u`, so
+a vertex may not dominate itself. -/
+def IsTotalDominatingSet (G : SimpleGraph V) [DecidableRel G.Adj] (s : Finset V) :
+    Prop := ∀ v : V, ∃ u ∈ s, G.Adj v u
+
+instance (G : SimpleGraph V) [DecidableRel G.Adj] (s : Finset V) :
+    Decidable (IsTotalDominatingSet G s) := by
+  unfold IsTotalDominatingSet; infer_instance
+
+def totalDominationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  minCard (IsTotalDominatingSet G)
+
+/-- Undefined on a graph with an isolated vertex: nothing dominates it, so not
+even `univ` is a total dominating set and `minCard` would read `0`. graphcalc
+raises there rather than returning a number. -/
+def HasTotalDominationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
+  HasWitness (IsTotalDominatingSet G)
+
+instance (G : SimpleGraph V) [DecidableRel G.Adj] :
+    Decidable (HasTotalDominationNumber G) := by
+  unfold HasTotalDominationNumber; infer_instance
+
+/- ── edge cover ───────────────────────────────────────────────────────────── -/
+
+/-- A set of edges meeting every vertex. -/
+def IsEdgeCoverFinset (G : SimpleGraph V) [DecidableRel G.Adj]
+    (s : Finset (Sym2 V)) : Prop := ∀ v : V, ∃ e ∈ s, v ∈ e
+
+instance (G : SimpleGraph V) [DecidableRel G.Adj] (s : Finset (Sym2 V)) :
+    Decidable (IsEdgeCoverFinset G s) := by
+  unfold IsEdgeCoverFinset; infer_instance
+
+/-- Edge cover number: least `k ≤ n` such that some `k` edges meet every vertex.
+
+Searched by size over `edgeFinset`, not over its whole powerset. A minimum edge
+cover never needs more than `n - 1` edges (Gallai: `ρ = n − ν`, and `ν ≥ 1` once
+there is an edge), so bounding `k` by `n` loses nothing. It matters: the full
+powerset of `K₆`'s 15 edges is 32,768 subsets and exhausted the kernel's
+recursion depth, while the subsets of size at most 6 number 9,949. -/
+def edgeCoverNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  minUpTo (Fintype.card V)
+    (fun k => ∃ s ∈ G.edgeFinset.powersetCard k, IsEdgeCoverFinset G s)
+
+/-- Undefined exactly when some vertex is isolated — networkx raises "no edge
+cover exists" there, and `minUpTo`'s fallback would read `n`. An edge cover
+exists iff every vertex has a neighbour (take one incident edge per vertex), so
+this is stated directly instead of by a second subset search. -/
+def HasEdgeCover (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
+  ∀ v : V, ∃ u : V, G.Adj v u
+
+instance (G : SimpleGraph V) [DecidableRel G.Adj] :
+    Decidable (HasEdgeCover G) := by unfold HasEdgeCover; infer_instance
+
+/- ── Roman domination ─────────────────────────────────────────────────────── -/
+
+/-- `f : V → {0,1,2}` is a Roman dominating function when every vertex labelled
+`0` has a neighbour labelled `2`.
+
+graphcalc solves this as a MIP over binaries `x, y` with `f = x + 2y`,
+constraint `x v + y v + Σ_{u ∈ N(v)} y u ≥ 1` and exclusion `x v + y v ≤ 1`;
+that is exactly the condition below. -/
+def IsRomanDominatingFunction (G : SimpleGraph V) [DecidableRel G.Adj]
+    (f : V → Fin 3) : Prop := ∀ v : V, f v = 0 → ∃ u : V, G.Adj v u ∧ f u = 2
+
+instance (G : SimpleGraph V) [DecidableRel G.Adj] (f : V → Fin 3) :
+    Decidable (IsRomanDominatingFunction G f) := by
+  unfold IsRomanDominatingFunction; infer_instance
+
+def romanWeight (f : V → Fin 3) : ℕ := ∑ v : V, (f v : ℕ)
+
+/-- Total, not partial: the constant function `2` is always Roman dominating
+(no vertex is labelled `0`), so a witness always exists. -/
+def romanDominationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  (((univ.filter (IsRomanDominatingFunction G)).image romanWeight).min).getD 0
+
+/- ── double Roman domination ──────────────────────────────────────────────── -/
+
+/-- `f : V → {0,1,2,3}` is double Roman dominating when a vertex labelled `0`
+has either a neighbour labelled `3` or two neighbours labelled `2`, and a vertex
+labelled `1` has a neighbour labelled `≥ 2`.
+
+The first clause is written as graphcalc's linearisation
+`0.5·|N₂(v)| + |N₃(v)| ≥ 1`, but as two existentials rather than as
+`Finset.card` of a filter: "at least two neighbours labelled 2" is "two distinct
+neighbours labelled 2", and the kernel reduces a pair of quantifiers over `V`
+far more cheaply than it builds and counts a `Finset`. Written the counting way
+first, all seven order-5 checks exhausted their heartbeat budget. -/
+def IsDoubleRomanDominatingFunction (G : SimpleGraph V) [DecidableRel G.Adj]
+    (f : V → Fin 4) : Prop :=
+  (∀ v : V, f v = 0 →
+      (∃ u : V, G.Adj v u ∧ f u = 3) ∨
+      (∃ u : V, ∃ w : V, u ≠ w ∧ G.Adj v u ∧ G.Adj v w ∧ f u = 2 ∧ f w = 2)) ∧
+  (∀ v : V, f v = 1 → ∃ u : V, G.Adj v u ∧ 2 ≤ (f u : ℕ))
+
+instance (G : SimpleGraph V) [DecidableRel G.Adj] (f : V → Fin 4) :
+    Decidable (IsDoubleRomanDominatingFunction G f) := by
+  unfold IsDoubleRomanDominatingFunction; infer_instance
+
+def doubleRomanWeight (f : V → Fin 4) : ℕ := ∑ v : V, (f v : ℕ)
+
+/-- Total, for the same reason as `romanDominationNumber`: constant `3` works. -/
+def doubleRomanDominationNumber (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  (((univ.filter (IsDoubleRomanDominatingFunction G)).image
+    doubleRomanWeight).min).getD 0
+
+/- ── radius ───────────────────────────────────────────────────────────────── -/
+
+/-- Vertices within `k` steps of `v`, by iterated neighbourhood expansion.
+Distance is not available to the kernel directly (`SimpleGraph.dist` is defined
+through `sInf` over walk lengths), so it is reconstructed as reachability. -/
+def ballWithin (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ → V → Finset V
+  | 0,       v => {v}
+  | (k + 1), v =>
+      let B := ballWithin G k v
+      B ∪ B.biUnion (fun u => univ.filter (fun w => G.Adj u w))
+
+/-- Eccentricity of `v`: least `k` with every vertex within `k` steps. -/
+def eccentricity (G : SimpleGraph V) [DecidableRel G.Adj] (v : V) : ℕ :=
+  minUpTo (Fintype.card V) (fun k => ballWithin G k v = univ)
+
+def radius (G : SimpleGraph V) [DecidableRel G.Adj] : ℕ :=
+  ((univ.image (eccentricity G)).min).getD 0
+
+/-- Undefined on a disconnected graph, where some vertex never reaches all of
+`univ` and `minUpTo` would fall back to `n`. networkx raises there. -/
+def HasRadius (G : SimpleGraph V) [DecidableRel G.Adj] : Prop :=
+  ∀ v : V, ballWithin G (Fintype.card V) v = univ
+
+instance (G : SimpleGraph V) [DecidableRel G.Adj] :
+    Decidable (HasRadius G) := by unfold HasRadius; infer_instance
+
 /- ── graph construction from an explicit edge list ────────────────────────── -/
 
 /-- The graph on `Fin n` with the given edge list, symmetrised and loop-free.

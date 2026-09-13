@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+README.md	 run_conjecturing.sage
+conjecturing.py  run_property_conjecturing.sage
+expressions	 run_property_conjecturing.sage.py
+run.sh
+

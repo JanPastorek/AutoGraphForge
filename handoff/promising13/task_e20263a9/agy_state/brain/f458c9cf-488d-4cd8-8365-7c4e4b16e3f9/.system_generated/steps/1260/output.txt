@@ -1,0 +1,24 @@
+
+The command exited with code 1.
+Output:
+LINT: ok
+/tmp/tmp.99V5B2v8rS.lean:130:9: error: unknown tactic
+/tmp/tmp.99V5B2v8rS.lean:104:11: error: Tactic `unfold` failed to unfold `GraphCalc.radius` in
+  ∀ (v : V), ballWithin G (Fintype.card V) v = Finset.univ
+/tmp/tmp.99V5B2v8rS.lean:96:38: error: unsolved goals
+V : Type
+inst✝² : Fintype V
+inst✝¹ : DecidableEq V
+G : SimpleGraph V
+inst✝ : DecidableRel G.Adj
+k : ℕ
+v : V
+hrad : HasRadius G
+h : ballWithin G (k + 1) v = ballWithin G k v
+h_add : ballWithin G (k + Fintype.card V) v = ballWithin G k v
+h_sub : ballWithin G (Fintype.card V) v ⊆ ballWithin G (k + Fintype.card V) v
+h_univ : ballWithin G (Fintype.card V) v = Finset.univ
+⊢ ballWithin G k v = Finset.univ
+'radius_le_eccentricity' depends on axioms: [propext, Classical.choice, Quot.sound]
+CHECK: FAILED (exit 1)
+

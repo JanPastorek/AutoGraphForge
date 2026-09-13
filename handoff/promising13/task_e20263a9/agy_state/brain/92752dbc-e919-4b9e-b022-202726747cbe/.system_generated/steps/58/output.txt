@@ -1,0 +1,38 @@
+The search for ""diam(G)" "gamma(G)" domination number bound" returned the following summary:
+The relationship between the **diameter** ($\text{diam}(G)$) and the **domination number** ($\gamma(G)$) of a graph is a significant topic in domination theory. While there is no single simple formula that bounds $\gamma(G)$ solely by $\text{diam}(G)$ for all graphs, there are established upper bounds and specific behaviors for graphs with small diameters.
+
+### Key Insights and Bounds
+
+*   **Diameter 2 Graphs:**
+    *   For graphs with diameter 2, the domination number $\gamma(G)$ can be constrained more tightly than in general graphs.
+    *   Research has shown that for a graph $G$ of diameter 2 and order $n$, the domination number is generally bounded by $\gamma(G) \le \lfloor n/4 \rfloor$ for sufficiently large $n$ (specifically $n \ge 24$)[1].
+    *   Earlier results provided bounds of $O(n^{3/4})$, which have been improved over time to results such as $\gamma(G) \le (\frac{1}{2} + o(1))\sqrt{n \log n}$ as $n \to \infty$[2].
+*   **Diameter 3 Graphs:**
+    *   In graphs with diameter 3, it has been shown that the domination number can be as large as $\lfloor n/2 \rfloor$, but it does not exceed this value[2].
+*   **General Context:**
+    *   In the absence of diameter constraints, the most well-known general upper bound for a connected graph with no isolated vertices is $\gamma(G) \le n/2$[3][4][5].
+    *   The domination number is a fundamental graph invariant[6], and finding it is NP-complete for general graphs[3][7]. Consequently, researchers often look for bounds based on other parameters like maximum degree ($\Delta$), radius, and diameter to provide more accurate estimates for specific graph classes[3][8].
+
+### Related Concepts
+*   **Vizing's Conjecture:** This famous conjecture relates the domination number of the Cartesian product of two graphs to the product of their individual domination numbers ($\gamma(G \Box H) \ge \gamma(G)\gamma(H)$)[9][10][11]. While distinct from diameter-based bounds, it is a central theme in domination theory that often appears alongside research into diameter-constrained graphs[12][13].
+*   **Total Domination:** Similar studies exist for the total domination number ($\gamma_t(G)$), which also rely on graph structure, degrees, and diameter[14][15].
+
+For specific applications or if you are working with a particular class of graphs (e.g., planar, chordal, or regular), researchers often use more specialized bounds that incorporate the graph's structural properties, as simple diameter-based bounds can be quite loose for general graphs[16].
+
+Sources:
+[1] [semanticscholar.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGVkogoiSRAtDVI-_aOpna6kQ3j9_a_vXxWuSHQpVntONec4CgOA-8VOV70eMfsiXD0Hy1G3SncfEvXDNiS1k8CPRA6fQinm04EDj2QawmuvGbcUTe-6RAQMIkzanXpUzwVy-NHdda5iqQagYwljSTUMCdxK3_otLhrcRAQYxfckeKSguEt0-pE1pjHs852CxpSy0r8F_1eC4ygCQvAL8Z_3S00MDf11hwSq7Xl2UDP10TfzFSHkz3-Pp3m8Ydv54noS5sgAx-fi2mdZ8Y=)
+[2] [combinatorialpress.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGrXq7CPjPf3BLvhYSqFfCeZNGvFEhc7KU8UDvu0CgQgpPEmlUVnh6XcWhf0W3AsKvCaWyJaGbd9PX9vtISZQhxQZ0hXVHB70TIxFYw3ez8L64E0OGO_v5t-LYZXJCQIZvPxP1fz5lGfLIhEBih1_10ZE7TQTwFbmvatgAuchUhDpacKy8ObJZ8J2Z89fL5WE2r6SqSMyQD9IhagkBA55-ANg==)
+[3] [wolfram.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGwUOMVV7PtOzc-Z1sQbRquCxvi98KPzOnp4Evk1Sd6dEvR0tPwQTOkJkg8ztL7R1bM3Wi5ZVWPTKCSI4Uy91WbKKZM12N7U6J3344S9IA8QHIbfKF9aoEtK5uH2-k-RGa_6mB-3TaxluA=)
+[4] [uz.zgora.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHioeaduEjE5lL6qAYt-sitGESFHwR0GkkEybgzk8I0vBWzIPkfBB-FtL5BkfZcldICdLRG-e1N1_m6PmsIi2Ug_vnMZiaB0q1qYudR2V6kWY5_dmLzp5fwpYoFTRzNhI5epPLM1aRa0Ef0ow==)
+[5] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGyc_TPnbzKuS8zULrl8vvfHp74-ZznmrK2PtTg_RbenxoVivU86U_vnthzE5bddBWAlH4UEuvMh4ysrQpeM3JHF67hGGnskITG0b_SgEfRJwDd26zrJg==)
+[6] [mathoverflow.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF79cXylEpPAurfOZhnCmUK83OAb2YDa_qZU4zy3PBJm4XBNvGGSMVzI0WNKD1JzWUe9D3z_Iiaq5ab25qpBNseT7njFQZYNPMnuVMWlHuqiu6JitWztsQxZezKZ9xIq4bRePJFO0lnxCxpaSYrQ57T8SGTf10L6Dt7acjVqTQwT847e8mum-7yUyOe8hjQzgJW6fCS_Ig=)
+[7] [wolfram.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGwUOMVV7PtOzc-Z1sQbRquCxvi98KPzOnp4Evk1Sd6dEvR0tPwQTOkJkg8ztL7R1bM3Wi5ZVWPTKCSI4Uy91WbKKZM12N7U6J3344S9IA8QHIbfKF9aoEtK5uH2-k-RGa_6mB-3TaxluA=)
+[8] [amazonaws.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG9bB8p33zDGHmz6u-qs27yIyHvEJ8eNPsJhh_FDhb7arYwUN6zhid2t7jq3C6uk0lCJAh_kbKDy-DDH-OfAxMnSxRG0bR4RB622e3NzJDhogxUWCJVFxGfEPH3wGnqr46lkuCM9W1zFXAUrQM2Jpelrz_hJY49lLG8H_l4uwLzfA==)
+[9] [wikipedia.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGH0LeyckbJUeE2QRO8msTTrh3d-_U9i27iPHjtqjM6zpecLgQ4h8_nYQqmPkyoa8K9jmALRH24a8lsaocELkWsJ0qUwaXEw33y8in1B5i_bUCYsMvS2GT3Xj0KRrtsHfs5TP0jLVstW5Y=)
+[10] [uct.ac.za](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFcSVPmL-N66TdDpDTlYSUoPLMEEG9tXx_KoOPMUvOvj8F6E8FIR1hjZqHaKHyEdEgckmOwFKLUXfEEN7rsgFWxffx9grluQ1c1en8NQVpHQ0JVYXN8x1vjbeJuFxR7Mrlx_0uhufzYUYIBiloJMnqtmCwAfwK-wg==)
+[11] [fu-berlin.de](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5uYjNhRgEViT2-4G5sdPRgH9UbJo1w7ee-G5zKSok-tgyJmZlQaNSL2QeSY-SaW_pb6Xirjtifwj3DLOMbv_z9yTrZ2ktC1AqmxWBowAe9icU5BZzdstCED0r8ceh6KOEKu15S-E=)
+[12] [uni-lj.si](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGHqlPLXNPnSlPlaURzkLszoKgXQOm-WM-r0QwX7YBML4id-crr0h_d8JW0cLiDvWc_lCKaKd-3zw4Yd_OgrBIJ9QHW7FIx95HJlTiLZ5DB_V40bta_IZYpnE7O92WriF4Km4k2xErrZmWGOEhQWy4zcw==)
+[13] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEu3ORr59WjQggsacJdIVXfoq7-ZCEFDEjHLpUPyaSMiaKxvY9B29g1BKFiu8p8n_Lj6w-RvGxQ4I9bdSi1M4OKudlF4r0rplImlWZNutmb3WJ4MXq66NHlIvpZBKnlK-5gYG4KfKMqji2SrsbfkItyaFCj-mN2Gbn0vFD8_4AH)
+[14] [uni-ulm.de](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFRfhrutR8tFioRoUtMtHJWfCDwebG3eLQOp_fXbAGmIdYb9sJ1rj0PyFL86rsU-V5s_dtUe1PmsUbcAIy8eOJpy4CWaki4u1p8b8HVUivfvkUAD9nLiXyFVB59-oCw9WNRabPqPMIjwnkSt1dTUQSzlaZ0MkhRaHIUx0jYLpGtLTzRniHAJJh3-0hZp3sBTmSUQjIlFi4GpnrAHWWsWt61UkYRXxAZpMheVpC4uciHtxvOQ8oghl5cHtVfaRo=)
+[15] [combinatorics.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5ETdQEGUbDKrMksf2BOutRt4DQKIycbT-HIi8T61EL9hXW91GFcySk5HNljXLrId6evy9rZvK4vZdSkUNla5hQ15vgUEK7rUWcpQexPNc8bsi6aPMV5OtEWZdcPF9G-bxsTfqZtpAoCi9OlRKqHV9_y8eBLGLtGmPIjFf48_RXyWXQz8w)
+[16] [mathoverflow.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF79cXylEpPAurfOZhnCmUK83OAb2YDa_qZU4zy3PBJm4XBNvGGSMVzI0WNKD1JzWUe9D3z_Iiaq5ab25qpBNseT7njFQZYNPMnuVMWlHuqiu6JitWztsQxZezKZ9xIq4bRePJFO0lnxCxpaSYrQ57T8SGTf10L6Dt7acjVqTQwT847e8mum-7yUyOe8hjQzgJW6fCS_Ig=)

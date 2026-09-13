@@ -1,0 +1,11 @@
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/conjecturing/run_conjecturing.sage"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/adversarial.py"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/cegis_novelty.py"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/known_relations.py"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/novelty.py"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/random_models.py"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/refute_matrix.py"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/symbolic_refute.py"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/conjecture_lattice.py"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_export.py"}
+{"File":"/mnt/home/japake298/project/GraphConjecturing/pipeline/lean_disproof.py"}

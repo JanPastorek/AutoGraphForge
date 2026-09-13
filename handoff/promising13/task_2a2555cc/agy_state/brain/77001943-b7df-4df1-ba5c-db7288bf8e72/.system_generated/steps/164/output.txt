@@ -1,0 +1,7 @@
+
+The command exited with code 0.
+Output:
+T+1edge: diff=-1, r=3, g=4
+T+1edge: diff=0, r=4, g=4
+Done T+1edge! Best diff: 0
+

@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+If radius(G) + 1 <= gamma_R(G), then radius(G) + 1 <= romanWeight(f) for ALL Roman dominating functions!
+

@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+Max radius of 2-star graph is 3.
+

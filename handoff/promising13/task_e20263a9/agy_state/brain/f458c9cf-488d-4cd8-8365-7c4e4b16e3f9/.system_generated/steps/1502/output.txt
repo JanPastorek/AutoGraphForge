@@ -1,0 +1,5 @@
+
+The command exited with code 0.
+Output:
+All 100 random trees satisfied the conjecture!
+

@@ -1,0 +1,15 @@
+
+The command exited with code 1.
+Output:
+--- -	2026-09-11 16:46:43.811663492 +0200
++++ /mnt/home/japake298/project/GraphConjecturing/benchmark/challenges_promising13/Challenge_8ca1b27c.lean	2026-09-11 11:13:58.915294216 +0200
+@@ -12,3 +12,8 @@
+     (G : SimpleGraph V) [DecidableRel G.Adj],
+       GraphCalc.IsNontrivialClass G → GraphCalc.HasSubTotalDominationNumber G → 2 ≤ GraphCalc.subTotalDominationNumber G
+ 
++theorem prove_8ca1b27c : Candidate := by
++  sorry
++
++theorem refute_8ca1b27c : ¬ Candidate := by
++  sorry
+

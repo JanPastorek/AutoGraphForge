@@ -1,0 +1,8 @@
+
+The command exited with code 0.
+Output:
+COUNTEREXAMPLE to min_ecc_2 <= W-1 on P_6: W=4, f=(0, 2, 0, 0, 2, 0), min_ecc_2=4
+COUNTEREXAMPLE to min_ecc_2 <= W-1 on P_7: W=5, f=(0, 2, 0, 1, 0, 2, 0), min_ecc_2=5
+COUNTEREXAMPLE to min_ecc_2 <= W-1 on P_8: W=6, f=(0, 2, 0, 1, 1, 0, 2, 0), min_ecc_2=6
+Done checking P_n!
+

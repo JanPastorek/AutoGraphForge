@@ -1,0 +1,34 @@
+
+The command exited with code 0.
+Output:
+TITLE: Improved Total Domination and Total Roman Domination in Unit Disk Graphs
+SUMMARY: Let $G=(V, E)$ be a simple undirected graph with no isolated vertex. A set $D_t\subseteq V$ is a total dominating set of $G$ if $(i)$ $D_t$ is a dominating set, and $(ii)$ the set $D_t$ induces a subg
+----------------------------------------
+TITLE: Signed Total Roman Domination and Domatic Numbers: Degree Three and Complete Multipartite Graphs
+SUMMARY: Signed total Roman domination is a variant of the classic Roman domination-problem in graphs. A signed total Roman dominating function (STRD function) on a graph $G=(V,E)$ is a function $f: V \to \{-1
+----------------------------------------
+TITLE: Relating the outer-independent total Roman domination number with some classical parameters of graphs
+SUMMARY: For a given graph $G$ without isolated vertex we consider a function $f: V(G) \rightarrow \{0,1,2\}$. For every $i\in \{0,1,2\}$, let $V_i=\{v\in V(G):\; f(v)=i\}$. The function $f$ is known to be an 
+----------------------------------------
+TITLE: Total Roman Domination Edge-Critical Graphs
+SUMMARY: A total Roman dominating function on a graph $G$ is a function $% f:V(G)\rightarrow \{0,1,2\}$ such that every vertex $v$ with $f(v)=0$ is adjacent to some vertex $u$ with $f(u)=2$, and the subgraph o
+----------------------------------------
+TITLE: Variants of the Domination Number for Flower Snarks
+SUMMARY: We consider the flower snarks, a widely studied infinite family of 3--regular graphs. For the Flower snark $J_n$ on $4n$ vertices, it is trivial to show that the domination number of $J_n$ is equal to
+----------------------------------------
+TITLE: On Roman, Global and Restrained Domination in Graphs
+SUMMARY: In this paper, we present new upper bounds for the global domination and Roman domination numbers and also prove that these results are asymptotically best possible. Moreover, we give upper bounds for
+----------------------------------------
+TITLE: On the $2$-packing differential of a graph
+SUMMARY: Let $G$ be a graph of order $n(G)$ and vertex set $V(G)$. Given a set $S\subseteq V(G)$, we define the external neighbourhood of $S$ as the set $N_e(S)$ of all vertices in $V(G)\setminus S$ having at 
+----------------------------------------
+TITLE: Small domination-type invariants in random graphs
+SUMMARY: For $c\in \mathbb{R}^{+}\cup \{\infty \}$ and a graph $G$, a function $f:V(G)\rightarrow \{0,1,c\}$ is called a $c$-self dominating function of $G$ if for every vertex $u\in V(G)$, $f(u)\geq c$ or $\m
+----------------------------------------
+TITLE: A continuous generalization of domination-like invariants
+SUMMARY: In this paper, we define a new domination-like invariant of graphs. Let $\mathbb{R}^{+}$ be the set of non-negative numbers. Let $c\in \mathbb{R}^{+}-\{0\}$ be a number, and let $G$ be a graph. A func
+----------------------------------------
+TITLE: Domination parameters with number 2: interrelations and algorithmic consequences
+SUMMARY: In this paper, we study the most basic domination invariants in graphs, in which number 2 is intrinsic part of their definitions. We classify them upon three criteria, two of which give the following 
+----------------------------------------
+

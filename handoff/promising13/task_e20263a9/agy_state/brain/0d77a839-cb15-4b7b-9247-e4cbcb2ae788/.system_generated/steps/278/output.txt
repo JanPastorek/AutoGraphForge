@@ -1,0 +1,40 @@
+The following changes were made by the replace_file_content tool to: /mnt/home/japake298/project/GraphConjecturing/handoff/promising13/task_e20263a9/scratch.lean. If relevant, proactively run terminal commands to execute this code for the USER. Don't ask for permission.
+[diff_block_start]
+@@ -296,6 +296,34 @@
+     rw [Finset.card_univ] at h_lt
+     omega
+ 
++lemma radius_add_one_le_romanWeight_of_card_le {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj]
++    (hrad : GraphCalc.HasRadius G) (hnt : GraphCalc.IsNontrivialClass G)
++    (f : V → Fin 3) (hcard : Fintype.card V ≤ GraphCalc.romanWeight f) :
++    GraphCalc.radius G + 1 ≤ GraphCalc.romanWeight f :=
++  (radius_add_one_le_card G hrad hnt).trans hcard
++
++lemma card_le_romanWeight_of_no_two {V : Type} [Fintype V] [DecidableEq V]
++    (G : SimpleGraph V) [DecidableRel G.Adj]
++    (f : V → Fin 3) (hf : GraphCalc.IsRomanDominatingFunction G f)
++    (h_no2 : ∀ v : V, (f v : ℕ) ≠ 2) :
++    Fintype.card V ≤ GraphCalc.romanWeight f := by
++  unfold GraphCalc.romanWeight
++  have h_no0 : ∀ v : V, (f v : ℕ) ≠ 0 := by
++    intro v hv
++    have h_f0 : f v = 0 := by ext; exact hv
++    obtain ⟨u, _, hu2⟩ := hf v h_f0
++    have hu2_nat : (f u : ℕ) = 2 := by rw [hu2]; rfl
++    exact h_no2 u hu2_nat
++  have h_ge1 : ∀ v : V, 1 ≤ (f v : ℕ) := by
++    intro v
++    have h0 := h_no0 v
++    omega
++  have h_sum := Finset.sum_le_sum (fun v _ => h_ge1 v)
++  rw [Finset.sum_const, nsmul_eq_mul, mul_one, Finset.card_univ] at h_sum
++  exact h_sum
++
++
+ 
+ 
+ 
+[diff_block_end]
+
+Please note that the above snippet only shows the MODIFIED lines from the last change. It shows up to 3 lines of unchanged lines before and after the modified lines. The actual file contents may have many more lines not shown.

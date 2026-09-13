@@ -1,0 +1,10 @@
+
+The command exited with code 0.
+Output:
+stdout:
+ (Finset.image (fun s => s.card) Finset.univ).min : WithTop ℕ
+Option.getD (Finset.image (fun s => s.card) Finset.univ).min 0 : ℕ
+
+stderr:
+ 
+

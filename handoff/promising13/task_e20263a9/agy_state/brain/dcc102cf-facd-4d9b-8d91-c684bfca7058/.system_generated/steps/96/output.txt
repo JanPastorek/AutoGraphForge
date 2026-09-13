@@ -1,0 +1,9 @@
+Found 8 results
+Challenge_e20263a9.lean
+ORIGINAL_REQUEST.md
+agy.log
+agy_output.txt
+preflight.log
+reference
+reference/GraphInvariantsComputable.lean
+solved

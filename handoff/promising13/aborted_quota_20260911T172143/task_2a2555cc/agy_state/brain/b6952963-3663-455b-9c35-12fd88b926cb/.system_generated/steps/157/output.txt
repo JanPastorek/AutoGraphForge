@@ -1,0 +1,19 @@
+The search for ""Randy Davila" "total" "domination" "radius" arxiv" returned the following summary:
+The research concerning "total domination," "radius," and Randy Davila can be found in the paper titled **"Lower bounds for the total (distance) k-domination number of a graph,"** which is available as an arXiv preprint[1][2][3].
+
+### Key Details:
+*   **Topic:** The paper explores lower bounds for the **total distance $k$-domination number** ($\gamma_t^k(G)$) of a graph[1][3].
+*   **Radius Bound:** One of the specific contributions is the generalization of a known radius lower bound for the total domination number to the total $k$-domination number[1][2][3]. The authors state that for a connected graph $G$ of order $n \ge 2$ and $k \ge 1$:
+    $$\gamma_t^k(G) \ge \frac{1}{k} \text{rad}(G)$$
+*   **Context:** This work extends earlier results, such as those by DeLaViña et al., which established bounds for the total domination number (the $k=1$ case)[3].
+
+Randy Davila has authored or co-authored several papers on graph theory invariants, including other studies on distance domination and sub-$k$-domination numbers[4][5][6][7].
+
+Sources:
+[1] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFrmv3fe9nb2ccnqc59V2XRvW8Vg2UlQcJMejwH2Lx6QamcSesZqYIiXRklURi579Qifuhk8ScHVLhACGAbUsabPT-wmdb2ytTxmkmAicwYEEUntx3dPw==)
+[2] [arxiv.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFrmv3fe9nb2ccnqc59V2XRvW8Vg2UlQcJMejwH2Lx6QamcSesZqYIiXRklURi579Qifuhk8ScHVLhACGAbUsabPT-wmdb2ytTxmkmAicwYEEUntx3dPw==)
+[3] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGKuiSGh0Yu-2_XnSESgd_vrbPT2oMTJi60SMGzI1uP9WKzOOlWFiURvPdL0i2-3EdBMAcOdjV25HK6AjchGrL4FG2YPb-heJ3lrH0SveGdK46SLa1Nly8JN0nhJqSqxdNqyLuLgBYSoinnCt2MPl_4D10q1JUjsu3wCtZnT489AjGbmTOliopKvnrCb2J-wA4sLvePyOzikpZV7w==)
+[4] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFA_n7G7GFMvKJcF9o2jC41shYurqxAg5y0cKyUy9xZpTbK9Iwvu13wRPZDEoD2OS7u3Sdgg6iqczyRkS1frZTBYWp-pio_KqqYTmaAAgWazm0phBUBkk0zis9RADwmp_t9sF8ZpN5_ZscgwgnFQjOD2d4w84us4K4N4eB1YsFzKOOteGb78sXcQIixEVH5oG4ovT9uBdx4Mwy-3iNr_2PHbTc=)
+[5] [researchgate.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFA_n7G7GFMvKJcF9o2jC41shYurqxAg5y0cKyUy9xZpTbK9Iwvu13wRPZDEoD2OS7u3Sdgg6iqczyRkS1frZTBYWp-pio_KqqYTmaAAgWazm0phBUBkk0zis9RADwmp_t9sF8ZpN5_ZscgwgnFQjOD2d4w84us4K4N4eB1YsFzKOOteGb78sXcQIixEVH5oG4ovT9uBdx4Mwy-3iNr_2PHbTc=)
+[6] [bibliotekanauki.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE2ZPVOMOYiJoRH2suwUf88Mc2FJWgWRjDKi05tkdrmBUHHmRIIDtinRDfX4eNCrabyaBb8do2Et7lXxT6OFloBPpbTmDX3OfIQlT_uTUZjyFIS9bzBTed4ogLzcRJkoKaj26fMhQo=)
+[7] [uz.zgora.pl](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEymSNnVUqXB_Ya12tK8tIFZnANsIwCxj6v8CF6Qr5mDCeLwH4nyxX4URiUYgnXBMR7EEiLLCfqDsYqWRQ2O-aT3oMFodTZ-ER88FjVrM5z98MGDchLrM0Z1Nqw-NPiMEvpyM5NTT5Sm3IIzd16Dvw=)
