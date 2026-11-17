@@ -9,7 +9,7 @@ https://ceur-ws.org/Vol-4323/paper32.pdf
 
 https://cicm-conference.org/2026/ai4math/05-pastorek.pdf
 
-# GraphConjecturing
+# AutoGraphForge
 
 An automated graph-theory **conjecturing → refutation → formal-proof** pipeline.
 It generates candidate invariant inequalities on a small "expressible" seed of
@@ -19,9 +19,8 @@ fixed point, then exports the survivors to **Lean 4 / mathlib** and tries to
 or a larger **vLLM-served** model (**DeepSeek-Prover-V2-671B** / **OProver-32B**)
 behind a shim — every proof checked by the Lean kernel itself (no API tokens).
 
-The design is Fajtlowicz's *Graffiti* loop framed as **CEGIS**
-(counterexample-guided inductive synthesis): conjecture on a small set, refute,
-add the refuting graph back to the seed, regenerate, repeat.
+Idea is the following: Conjecture on a small set, try to refute, filter (trivialities and known), 
+add the refuting graph back to the core dataset and repeat, then try to (dis)prove.
 
 ---
 
