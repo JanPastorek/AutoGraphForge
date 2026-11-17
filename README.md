@@ -1,8 +1,12 @@
 
 Accompanying peer-reviewed published research papers and abstracts: 
+
 **Papers:**
+
 https://ceur-ws.org/Vol-4323/paper32.pdf
+
 **Conference abstracts:**
+
 https://cicm-conference.org/2026/ai4math/05-pastorek.pdf
 
 # GraphConjecturing
