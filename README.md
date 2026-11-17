@@ -11,16 +11,14 @@ https://cicm-conference.org/2026/ai4math/05-pastorek.pdf
 
 # AutoGraphForge
 
-An automated graph-theory **conjecturing → refutation → formal-proof** pipeline.
-It generates candidate invariant inequalities on a small "expressible" seed of
-graphs, refutes the false ones against tiered pools and active search until a
-fixed point, then exports the survivors to **Lean 4 / mathlib** and tries to
-**kernel-verify** them with neural provers — a local **DeepSeek-Prover-V2-7B**,
-or a larger **vLLM-served** model (**DeepSeek-Prover-V2-671B** / **OProver-32B**)
-behind a shim — every proof checked by the Lean kernel itself (no API tokens).
-
 Idea is the following: Conjecture on a small set, try to refute, filter (trivialities and known), 
 add the refuting graph back to the core dataset and repeat, then try to (dis)prove.
+
+An automated graph-theory **conjecturing → refutation → formal-proof** pipeline.
+It generates candidate invariant inequalities on a small finite core database of
+graphs, refutes the false ones against extremal examples, parametric families, and actively searched counterexamples until a
+fixed point/time runs out, then exports the survivors to **Lean 4 / mathlib** and tries to
+**kernel-verify** them with tactis and LLMs.
 
 ---
 
@@ -147,9 +145,9 @@ fallback). Other ensemble backends (`lean` tactics, `claude`, HTTP
 
 ## Configuration
 
-All knobs live in `config.py` (`Config` dataclass, env-overridable). Highlights:
+ in `config.py` (`Config` dataclass, env-overridable). Highlights:
 
-| Knob | Meaning |
+| config | Meaning |
 |---|---|
 | `cegis_rounds` | max generate→refute passes (or fixed point) |
 | `cegis_searchers` | active-search ensemble order |
@@ -216,9 +214,6 @@ tools/
 tests/                    pytest unit tests for the CEGIS core
 docs/                     CEGIS_PLAN.md (design), MIGRATION.md (legacy→CEGIS map)
 ```
-
-See **`docs/MIGRATION.md`** for the legacy→CEGIS feature map and **`docs/CEGIS_PLAN.md`**
-for the full design rationale.
 
 ---
 
